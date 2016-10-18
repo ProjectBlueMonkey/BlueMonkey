@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="BlueMonkey.Views.MainPage"
+             Title="Blue Monkey">
+  <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+    <Label Text="LOGO" />
+    <Button Text="Add Expense" Command="{Binding NavigateCommand}" CommandParameter="AddExpensePage" />
+    <Button Text="Expense List" Command="{Binding NavigateCommand}" CommandParameter="ExpenseListPage" />
+    <Button Text="Report" Command="{Binding NavigateCommand}" CommandParameter="ReportPage" />
+    <Button Text="Chart" Command="{Binding NavigateCommand}" CommandParameter="ChartPage" />
+  </StackLayout>
+</ContentPage>
