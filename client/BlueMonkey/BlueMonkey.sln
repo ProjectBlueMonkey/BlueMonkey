@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey", "BlueMonkey\BlueMonkey\BlueMonkey.csproj", "{3FD586F1-4A0F-448D-918B-5F83E1B2449C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey", "BlueMonkey\BlueMonkey.csproj", "{3FD586F1-4A0F-448D-918B-5F83E1B2449C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.Droid", "BlueMonkey\BlueMonkey.Droid\BlueMonkey.Droid.csproj", "{4A20AC8F-DFB8-43E5-9DF9-EDC8B22A1A22}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.Droid", "BlueMonkey.Droid\BlueMonkey.Droid.csproj", "{4A20AC8F-DFB8-43E5-9DF9-EDC8B22A1A22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.iOS", "BlueMonkey\BlueMonkey.iOS\BlueMonkey.iOS.csproj", "{E5BE7934-7D40-461B-992C-87FCB617CC64}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.iOS", "BlueMonkey.iOS\BlueMonkey.iOS.csproj", "{E5BE7934-7D40-461B-992C-87FCB617CC64}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.Business", "BlueMonkey.Business\BlueMonkey.Business.csproj", "{D96104F1-5356-4CDC-8655-26576AA8322B}"
 EndProject
