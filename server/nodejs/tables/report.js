@@ -11,7 +11,6 @@ table.dynamicSchema = false;
 table.columns = {
     name: "string",
     date: "date",
-    department: "string",
     userId: "string"
 };
 module.exports = table;
