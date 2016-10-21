@@ -10,9 +10,7 @@ table.perUser = true;
 table.dynamicSchema = false;
 table.columns = {
     name: "string",
-    date: "date",
-    department: "string",
     userId: "string"
 };
 module.exports = table;
-//# sourceMappingURL=report.js.map
+//# sourceMappingURL=user.js.map

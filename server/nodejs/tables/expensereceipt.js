@@ -10,7 +10,8 @@ table.perUser = true;
 table.dynamicSchema = false;
 table.columns = {
     expenseId: "string",
-    receiptUrl: "string"
+    receiptUrl: "string",
+    userId: "string"
 };
 module.exports = table;
 //# sourceMappingURL=expensereceipt.js.map

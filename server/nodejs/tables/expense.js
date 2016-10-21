@@ -15,7 +15,8 @@ table.columns = {
     longitude: "number",
     latitude: "number",
     note: "string",
-    reportId: "string"
+    reportId: "string",
+    userId: "string"
 };
 module.exports = table;
 //# sourceMappingURL=expense.js.map
