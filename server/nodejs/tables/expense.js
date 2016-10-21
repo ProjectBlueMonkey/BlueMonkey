@@ -12,8 +12,7 @@ table.columns = {
     categoryId: "string",
     amount: "number",
     date: "date",
-    longitude: "number",
-    latitude: "number",
+    location: "string",
     note: "string",
     reportId: "string",
     userId: "string"
