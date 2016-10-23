@@ -9,6 +9,7 @@ using Microsoft.Azure.Mobile.Server.Config;
 using BlueMonkey.MobileApp.DataObjects;
 using BlueMonkey.MobileApp.Models;
 using Owin;
+using BlueMonkey.MobileApp.Commons;
 
 namespace BlueMonkey.MobileApp
 {
@@ -17,6 +18,8 @@ namespace BlueMonkey.MobileApp
         public static void ConfigureMobileApp(IAppBuilder app)
         {
             HttpConfiguration config = new HttpConfiguration();
+
+            config.Filters.Add(new CustomExceptionFilterAttribute());
 
             new MobileAppConfiguration()
                 .UseDefaultConfiguration()

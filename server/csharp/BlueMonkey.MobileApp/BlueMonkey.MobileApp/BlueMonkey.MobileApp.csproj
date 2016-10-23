@@ -183,6 +183,7 @@
   <ItemGroup>
     <Compile Include="App_Start\Startup.MobileApp.cs" />
     <Compile Include="Commons\ApiControllerExtensions.cs" />
+    <Compile Include="Commons\CustomExceptionFilterAttribute.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ExpenseController.cs" />
     <Compile Include="Controllers\ExpenseReceiptController.cs" />
@@ -213,6 +214,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\bluemonkey-mobileapp - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\bluemonkey-mobileapp - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
