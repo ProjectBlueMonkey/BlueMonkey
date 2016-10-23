@@ -37,5 +37,15 @@ namespace BlueMonkey.MobileApp.Models
             modelBuilder.Entity<User>()
                 .ToTable(nameof(User));
         }
+
+        public System.Data.Entity.DbSet<BlueMonkey.MobileApp.DataObjects.Category> Categories { get; set; }
+
+        public System.Data.Entity.DbSet<BlueMonkey.MobileApp.DataObjects.Expense> Expenses { get; set; }
+
+        public System.Data.Entity.DbSet<BlueMonkey.MobileApp.DataObjects.ExpenseReceipt> ExpenseReceipts { get; set; }
+
+        public System.Data.Entity.DbSet<BlueMonkey.MobileApp.DataObjects.Report> Reports { get; set; }
+
+        public System.Data.Entity.DbSet<BlueMonkey.MobileApp.DataObjects.User> Users { get; set; }
     }
 }
