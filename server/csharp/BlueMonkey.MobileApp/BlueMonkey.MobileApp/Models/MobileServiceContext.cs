@@ -15,11 +15,27 @@ namespace BlueMonkey.MobileApp.Models
         {
         }
 
+        public DbSet<Category> Category { get; set; }
+        public DbSet<Expense> Expense { get; set; }
+        public DbSet<ExpenseReceipt> ExpenseReceipt { get; set; }
+        public DbSet<Report> Report { get; set; }
+        public DbSet<User> User { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Add(
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
+            modelBuilder.Entity<Category>()
+                .ToTable(nameof(Category));
+            modelBuilder.Entity<Expense>()
+                .ToTable(nameof(Expense));
+            modelBuilder.Entity<ExpenseReceipt>()
+                .ToTable(nameof(ExpenseReceipt));
+            modelBuilder.Entity<Report>()
+                .ToTable(nameof(Report));
+            modelBuilder.Entity<User>()
+                .ToTable(nameof(User));
         }
     }
 }
