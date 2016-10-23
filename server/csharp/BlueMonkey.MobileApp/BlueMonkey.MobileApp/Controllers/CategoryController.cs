@@ -9,6 +9,7 @@ using BlueMonkey.MobileApp.Models;
 
 namespace BlueMonkey.MobileApp.Controllers
 {
+    [Authorize]
     public class CategoryController : TableController<Category>
     {
         protected override void Initialize(HttpControllerContext controllerContext)

@@ -10,6 +10,7 @@ using BlueMonkey.MobileApp.Commons;
 
 namespace BlueMonkey.MobileApp.Controllers
 {
+    [Authorize]
     public class ExpenseController : TableController<Expense>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
