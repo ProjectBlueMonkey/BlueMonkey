@@ -158,14 +158,6 @@
       <Project>{d96104f1-5356-4cdc-8655-26576aa8322b}</Project>
       <Name>BlueMonkey.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BlueMonkey.Services.Interfaces\BlueMonkey.Services.Interfaces.csproj">
-      <Project>{fde5e109-05c0-4060-8933-daec2bfbd58e}</Project>
-      <Name>BlueMonkey.Services.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BlueMonkey.Services.Local\BlueMonkey.Services.Local.csproj">
-      <Project>{c3976e1f-48ed-44ec-be8b-b1b6b3825a94}</Project>
-      <Name>BlueMonkey.Services.Local</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BlueMonkey\BlueMonkey.csproj">
       <Name>BlueMonkey</Name>
     </ProjectReference>
