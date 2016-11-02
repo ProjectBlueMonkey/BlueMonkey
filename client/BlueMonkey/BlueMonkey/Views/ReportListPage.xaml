@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="BlueMonkey.Views.ReportListPage">
+             x:Class="BlueMonkey.Views.ReportListPage"
+             Title="Report List">
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Text="+" Command="{Binding AddReportCommand}"/>
+  </ContentPage.ToolbarItems>
 
 </ContentPage>
