@@ -5,7 +5,14 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BlueMonkey.Views.ReportPage" Title="Report">
   <ContentPage.ToolbarItems>
-    <ToolbarItem Text="+" Command="{Binding AddReportCommand}"/>
+    <ToolbarItem Text="Save" Command="{Binding SaveReportCommand}"/>
   </ContentPage.ToolbarItems>
-  
+  <ScrollView>
+    <StackLayout Padding="10">
+      <Label Text="Name"/>
+      <Entry Text="{Binding Name}"/>
+      <Label Text="Date"/>
+      <DatePicker Date="{Binding Date}"/>
+    </StackLayout>
+  </ScrollView>
 </ContentPage>

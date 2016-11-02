@@ -29,6 +29,7 @@ namespace BlueMonkey.ViewModels
         /// </summary>
         private void AddReport()
         {
+            _navigationService.NavigateAsync("ReportPage");
         }
     }
 }
