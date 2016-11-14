@@ -52,7 +52,7 @@ namespace BlueMonkey.ViewModels
 
         public async void OnNavigatedTo(NavigationParameters parameters)
         {
-            Items = await _expenseService.GetExpenses();
+            Items = await _expenseService.GetExpensesAsync();
         }
     }
 }

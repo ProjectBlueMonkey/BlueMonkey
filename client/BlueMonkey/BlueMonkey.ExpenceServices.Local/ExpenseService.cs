@@ -9,7 +9,7 @@ namespace BlueMonkey.ExpenceServices.Local
 {
     public class ExpenseService : IExpenseService
     {
-        public Task<IEnumerable<Expense>> GetExpenses()
+        public Task<IEnumerable<Expense>> GetExpensesAsync()
         {
             var list = new List<Expense>();
             for (int x = 0; x < 10; x++)

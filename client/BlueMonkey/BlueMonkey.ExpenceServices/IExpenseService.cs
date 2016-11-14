@@ -9,6 +9,6 @@ namespace BlueMonkey.ExpenceServices
 {
     public interface IExpenseService
     {
-        Task<IEnumerable<Expense>> GetExpenses();
+        Task<IEnumerable<Expense>> GetExpensesAsync();
     }
 }
