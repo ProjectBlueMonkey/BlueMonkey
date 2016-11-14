@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="Category.cs" />
     <Compile Include="Expense.cs" />
+    <Compile Include="ExpenseReceipt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report.cs" />
   </ItemGroup>
