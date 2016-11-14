@@ -38,7 +38,5 @@ namespace BlueMonkey.Business
             get { return _userId; }
             set { SetProperty(ref _userId, value); }
         }
-
-        public ObservableCollection<Expense> Expenses { get; } = new ObservableCollection<Expense>();
     }
 }
