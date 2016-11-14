@@ -8,5 +8,11 @@
   <ContentPage.ToolbarItems>
     <ToolbarItem Text="+" Command="{Binding AddReportCommand}"/>
   </ContentPage.ToolbarItems>
-
+  <ListView ItemsSource="{Binding Reports}">
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <TextCell Text="{Binding Name}"/>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView>
 </ContentPage>
