@@ -57,7 +57,7 @@ namespace BlueMonkey.ViewModels
         /// <summary>
         /// Save Report Command.
         /// </summary>
-        public DelegateCommand SaveReportCommand => null;
+        public DelegateCommand SaveReportCommand { get; }
 
         /// <summary>
         /// Initialize Instance.
@@ -68,14 +68,19 @@ namespace BlueMonkey.ViewModels
         {
             _editReport = editReport;
             _navigationService = navigationService;
-            Name = editReport.ObserveProperty(x => x.Name).ToReactiveProperty();
-            Date = editReport.ObserveProperty(x => x.Date).ToReactiveProperty();
+            Name = editReport.ToReactivePropertyAsSynchronized(x => x.Name);
+            Date = editReport.ToReactivePropertyAsSynchronized(x => x.Date);
 
             InitializeCommand = new DelegateCommand(() =>
             {
                 Expenses = editReport.SelectableExpenses.Where(x => x.IsSelected);
             });
             NavigateExpenseSelectionCommand = new DelegateCommand(() => _navigationService.NavigateAsync("ExpenseSelectionPage"));
+            SaveReportCommand = new DelegateCommand(() =>
+            {
+                _editReport.Save();
+                _navigationService.GoBackAsync();
+            });
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)

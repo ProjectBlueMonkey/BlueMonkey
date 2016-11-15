@@ -28,5 +28,10 @@ namespace BlueMonkey.Model
         /// </summary>
         /// <returns></returns>
         Task InitializeForNewReportAsync();
+        /// <summary>
+        /// Register or Update Report.
+        /// </summary>
+        /// <returns></returns>
+        Task Save();
     }
 }

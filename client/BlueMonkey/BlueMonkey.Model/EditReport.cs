@@ -61,5 +61,20 @@ namespace BlueMonkey.Model
                 _selectableExpenses.Add(new SelectableExpense(expense));
             }
         }
+
+        /// <summary>
+        /// Register or Update Report.
+        /// </summary>
+        /// <returns></returns>
+        public async Task Save()
+        {
+            await _expenseService.RegisterReport(
+                new Report
+                {
+                    Name = Name,
+                    Date = Date
+                },
+                SelectableExpenses.Where(x => x.IsSelected));
+        }
     }
 }

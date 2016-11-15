@@ -11,5 +11,6 @@ namespace BlueMonkey.ExpenceServices
     {
         Task<IEnumerable<Expense>> GetExpensesAsync();
         Task<IEnumerable<Report>> GetReportsAsync();
+        Task RegisterReport(Report report, IEnumerable<Expense> expenses);
     }
 }

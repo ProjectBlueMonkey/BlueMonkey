@@ -9,29 +9,25 @@ namespace BlueMonkey.ExpenceServices.Local
 {
     public class ExpenseService : IExpenseService
     {
-        public Task<IEnumerable<Expense>> GetExpensesAsync()
+        private readonly List<Expense> _expenses = new List<Expense>();
+        private readonly List<Report> _reports = new List<Report>();
+
+        public ExpenseService()
         {
             var random = new Random();
-            var list = new List<Expense>();
             for (int x = 0; x < 10; x++)
             {
-                list.Add(
+                _expenses.Add(
                     new Expense()
                     {
                         Name = $"Expense{x}",
-                        Amount = random.Next(1000, 10000)
+                        Amount = random.Next(1000, 20000)
                     });
             }
 
-            return Task.FromResult(list.AsEnumerable());
-        }
-
-        public Task<IEnumerable<Report>> GetReportsAsync()
-        {
-            var list = new List<Report>();
             for (int i = 0; i < 10; i++)
             {
-                list.Add(
+                _reports.Add(
                     new Report
                     {
                         Id = $"ReportId{i}",
@@ -39,8 +35,29 @@ namespace BlueMonkey.ExpenceServices.Local
                         Date = DateTime.Today - TimeSpan.FromDays(20 - i)
                     });
             }
+        }
 
-            return Task.FromResult(list.AsEnumerable());
+        public Task<IEnumerable<Expense>> GetExpensesAsync()
+        {
+            return Task.FromResult(_expenses.AsEnumerable());
+        }
+
+        public Task<IEnumerable<Report>> GetReportsAsync()
+        {
+            return Task.FromResult(_reports.AsEnumerable());
+        }
+
+        public Task RegisterReport(Report report, IEnumerable<Expense> expenses)
+        {
+            return Task.Run(() =>
+            {
+                report.Id = $"ReportId{_reports.Count}";
+                _reports.Add(report);
+                foreach (var expense in expenses)
+                {
+                    _expenses.Single(x => x.Id == expense.Id).ReportId = report.Id;
+                }
+            });
         }
     }
 }
