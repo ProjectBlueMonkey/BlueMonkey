@@ -36,7 +36,9 @@ namespace BlueMonkey.ViewModels
         /// </summary>
         private void AddReport()
         {
-            _navigationService.NavigateAsync("ReportPage");
+            var navigationParameter = new NavigationParameters();
+            navigationParameter[ReportPageViewModel.ReportIdKey] = null;
+            _navigationService.NavigateAsync("ReportPage", navigationParameter);
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)

@@ -4,12 +4,17 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Linq;
+using BlueMonkey.Business;
 using BlueMonkey.Model;
+using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
 
 namespace BlueMonkey.ViewModels
 {
-    public class ReportPageViewModel : BindableBase
+    public class ReportPageViewModel : BindableBase, INavigationAware
     {
+        public static readonly string ReportIdKey = "reportId";
         /// <summary>
         /// Model to manage the registration and change of the report.
         /// </summary>
@@ -18,6 +23,9 @@ namespace BlueMonkey.ViewModels
         /// It is a screen transition services provided by the Prism.
         /// </summary>
         private readonly INavigationService _navigationService;
+        public ReactiveProperty<string> Name { get; }
+        public ReactiveProperty<DateTime> Date { get; }
+        public ReadOnlyReactiveCollection<Expense> Expenses { get; }
         /// <summary>
         /// Save Report Command.
         /// </summary>
@@ -31,6 +39,30 @@ namespace BlueMonkey.ViewModels
         {
             _editReport = editReport;
             _navigationService = navigationService;
+            Name = editReport.ObserveProperty(x => x.Report).Select(x => x.Name).ToReactiveProperty();
+            Date = editReport.ObserveProperty(x => x.Report).Select(x => x.Date).ToReactiveProperty();
+        }
+
+        public void OnNavigatedFrom(NavigationParameters parameters)
+        {
+        }
+
+        public async void OnNavigatedTo(NavigationParameters parameters)
+        {
+            if (parameters.ContainsKey(ReportIdKey))
+            {
+                var reportId = parameters[ReportIdKey] as string;
+                if (reportId == null)
+                {
+                    // Case : New Report.
+                    await _editReport.InitializeForNewReportAsync();
+                }
+                else
+                {
+                    // Case : Update Report.
+
+                }
+            }
         }
     }
 }

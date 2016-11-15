@@ -13,6 +13,13 @@
       <Entry Text="{Binding Name}"/>
       <Label Text="Date"/>
       <DatePicker Date="{Binding Date}"/>
+      <Grid>
+        <Label Text="Name" HorizontalOptions="Start"/>
+        <Button Text="Edit" HorizontalOptions="End"/>
+      </Grid>
+      <ListView>
+        
+      </ListView>
     </StackLayout>
   </ScrollView>
 </ContentPage>
