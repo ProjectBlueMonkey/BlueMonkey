@@ -30,6 +30,11 @@ namespace BlueMonkey.ViewModels
         public ReadOnlyReactiveCollection<Expense> Expenses { get; }
 
         /// <summary>
+        /// Navigate to ExpenseSelectionPage Command.
+        /// </summary>
+        public DelegateCommand NavigateExpenseSelectionCommand { get; }
+
+        /// <summary>
         /// Save Report Command.
         /// </summary>
         public DelegateCommand SaveReportCommand => null;
@@ -44,6 +49,8 @@ namespace BlueMonkey.ViewModels
             _editReport = editReport;
             _navigationService = navigationService;
             Report = editReport.ObserveProperty(x => x.Report).ToReactiveProperty();
+
+            NavigateExpenseSelectionCommand = new DelegateCommand(() => _navigationService.NavigateAsync("ExpenseSelectionPage"));
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)

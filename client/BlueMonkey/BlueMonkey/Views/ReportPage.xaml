@@ -15,7 +15,7 @@
       <DatePicker Date="{Binding Report.Value.Date}"/>
       <Grid>
         <Label Text="Name" HorizontalOptions="Start"/>
-        <Button Text="Edit" HorizontalOptions="End"/>
+        <Button Text="Edit" HorizontalOptions="End" Command="{Binding NavigateExpenseSelectionCommand}"/>
       </Grid>
       <ListView>
         
