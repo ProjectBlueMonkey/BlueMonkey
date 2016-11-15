@@ -11,10 +11,16 @@ namespace BlueMonkey.ExpenceServices.Local
     {
         public Task<IEnumerable<Expense>> GetExpensesAsync()
         {
+            var random = new Random();
             var list = new List<Expense>();
             for (int x = 0; x < 10; x++)
             {
-                list.Add(new Expense() { Name = $"Expense{x}" });
+                list.Add(
+                    new Expense()
+                    {
+                        Name = $"Expense{x}",
+                        Amount = random.Next(1000, 10000)
+                    });
             }
 
             return Task.FromResult(list.AsEnumerable());
