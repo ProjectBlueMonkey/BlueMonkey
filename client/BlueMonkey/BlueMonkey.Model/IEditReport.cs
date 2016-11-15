@@ -12,9 +12,13 @@ namespace BlueMonkey.Model
     public interface IEditReport : INotifyPropertyChanged
     {
         /// <summary>
-        /// Target report.
+        /// Name of Report.
         /// </summary>
-        Report Report { get; }
+        string Name { get; set; }
+        /// <summary>
+        /// Date of Report.
+        /// </summary>
+        DateTime Date { get; set; }
         /// <summary>
         /// Selectable Expenses.
         /// </summary>

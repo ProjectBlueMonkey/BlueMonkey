@@ -18,15 +18,18 @@ namespace BlueMonkey.Model
         /// </summary>
         private readonly IExpenseService _expenseService;
 
-        /// <summary>
-        /// Backing store of report.
-        /// </summary>
-        private Report _report;
-
-        public Report Report
+        private string _name;
+        public string Name
         {
-            get { return _report; }
-            set { SetProperty(ref _report, value); }
+            get { return _name; }
+            set { SetProperty(ref _name, value); }
+        }
+
+        private DateTime _date;
+        public DateTime Date
+        {
+            get { return _date; }
+            set { SetProperty(ref _date, value); }
         }
 
         /// <summary>
@@ -49,11 +52,8 @@ namespace BlueMonkey.Model
 
         public async Task InitializeForNewReportAsync()
         {
-            Report =
-                new Report
-                {
-                    Date = DateTime.Today
-                };
+            Name = null;
+            Date = DateTime.Today;
             _selectableExpenses.Clear();
             var expenses = await _expenseService.GetExpensesAsync();
             foreach (var expense in expenses.Where(x => x.ReportId == null))

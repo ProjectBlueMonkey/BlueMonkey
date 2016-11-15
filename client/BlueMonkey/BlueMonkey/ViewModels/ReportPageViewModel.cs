@@ -26,10 +26,21 @@ namespace BlueMonkey.ViewModels
         /// </summary>
         private readonly INavigationService _navigationService;
 
-        public ReactiveProperty<Report> Report { get; }
-
+        /// <summary>
+        /// Name of Report.
+        /// </summary>
+        public ReactiveProperty<string> Name { get; }
+        /// <summary>
+        /// Date of Report.
+        /// </summary>
+        public ReactiveProperty<DateTime> Date { get; }
+        /// <summary>
+        /// Backing store of Expenses.
+        /// </summary>
         private IEnumerable<SelectableExpense> _expenses;
-
+        /// <summary>
+        /// Selected Expenses.
+        /// </summary>
         public IEnumerable<SelectableExpense> Expenses
         {
             get { return _expenses; }
@@ -57,7 +68,8 @@ namespace BlueMonkey.ViewModels
         {
             _editReport = editReport;
             _navigationService = navigationService;
-            Report = editReport.ObserveProperty(x => x.Report).ToReactiveProperty();
+            Name = editReport.ObserveProperty(x => x.Name).ToReactiveProperty();
+            Date = editReport.ObserveProperty(x => x.Date).ToReactiveProperty();
 
             InitializeCommand = new DelegateCommand(() =>
             {

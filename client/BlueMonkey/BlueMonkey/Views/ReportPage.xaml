@@ -14,9 +14,9 @@
   <ScrollView>
     <StackLayout Padding="10">
       <Label Text="Name"/>
-      <Entry Text="{Binding Report.Value.Name}"/>
+      <Entry Text="{Binding Name.Value}"/>
       <Label Text="Date"/>
-      <DatePicker Date="{Binding Report.Value.Date}"/>
+      <DatePicker Date="{Binding Date.Value}"/>
       <Grid>
         <Label Text="Name" HorizontalOptions="Start"/>
         <Button Text="Edit" HorizontalOptions="End" Command="{Binding NavigateExpenseSelectionCommand}"/>
