@@ -15,21 +15,25 @@ namespace BlueMonkey.ViewModels
     public class ReportPageViewModel : BindableBase, INavigationAware
     {
         public static readonly string ReportIdKey = "reportId";
+
         /// <summary>
         /// Model to manage the registration and change of the report.
         /// </summary>
         private readonly IEditReport _editReport;
+
         /// <summary>
         /// It is a screen transition services provided by the Prism.
         /// </summary>
         private readonly INavigationService _navigationService;
-        public ReactiveProperty<string> Name { get; }
-        public ReactiveProperty<DateTime> Date { get; }
+
+        public ReactiveProperty<Report> Report { get; }
         public ReadOnlyReactiveCollection<Expense> Expenses { get; }
+
         /// <summary>
         /// Save Report Command.
         /// </summary>
         public DelegateCommand SaveReportCommand => null;
+
         /// <summary>
         /// Initialize Instance.
         /// </summary>
@@ -39,8 +43,7 @@ namespace BlueMonkey.ViewModels
         {
             _editReport = editReport;
             _navigationService = navigationService;
-            Name = editReport.ObserveProperty(x => x.Report).Select(x => x.Name).ToReactiveProperty();
-            Date = editReport.ObserveProperty(x => x.Report).Select(x => x.Date).ToReactiveProperty();
+            Report = editReport.ObserveProperty(x => x.Report).ToReactiveProperty();
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)

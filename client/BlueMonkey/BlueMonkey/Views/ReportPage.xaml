@@ -10,9 +10,9 @@
   <ScrollView>
     <StackLayout Padding="10">
       <Label Text="Name"/>
-      <Entry Text="{Binding Name}"/>
+      <Entry Text="{Binding Report.Value.Name}"/>
       <Label Text="Date"/>
-      <DatePicker Date="{Binding Date}"/>
+      <DatePicker Date="{Binding Report.Value.Date}"/>
       <Grid>
         <Label Text="Name" HorizontalOptions="Start"/>
         <Button Text="Edit" HorizontalOptions="End"/>
