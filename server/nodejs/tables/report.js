@@ -7,5 +7,11 @@ table.read.access = 'authenticated';
 table.update.access = 'authenticated';
 table.delete.access = 'authenticated';
 table.perUser = true;
+table.dynamicSchema = false;
+table.columns = {
+    name: "string",
+    date: "date",
+    userId: "string"
+};
 module.exports = table;
 //# sourceMappingURL=report.js.map
