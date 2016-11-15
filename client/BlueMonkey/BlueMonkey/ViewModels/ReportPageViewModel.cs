@@ -27,7 +27,16 @@ namespace BlueMonkey.ViewModels
         private readonly INavigationService _navigationService;
 
         public ReactiveProperty<Report> Report { get; }
-        public ReadOnlyReactiveCollection<Expense> Expenses { get; }
+
+        private IEnumerable<SelectableExpense> _expenses;
+
+        public IEnumerable<SelectableExpense> Expenses
+        {
+            get { return _expenses; }
+            set { SetProperty(ref _expenses, value); }
+        }
+
+        public DelegateCommand InitializeCommand { get; }
 
         /// <summary>
         /// Navigate to ExpenseSelectionPage Command.
@@ -50,6 +59,10 @@ namespace BlueMonkey.ViewModels
             _navigationService = navigationService;
             Report = editReport.ObserveProperty(x => x.Report).ToReactiveProperty();
 
+            InitializeCommand = new DelegateCommand(() =>
+            {
+                Expenses = editReport.SelectableExpenses.Where(x => x.IsSelected);
+            });
             NavigateExpenseSelectionCommand = new DelegateCommand(() => _navigationService.NavigateAsync("ExpenseSelectionPage"));
         }
 
