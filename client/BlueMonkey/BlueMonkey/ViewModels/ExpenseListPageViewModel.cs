@@ -1,11 +1,9 @@
 ﻿using BlueMonkey.Business;
-using BlueMonkey.Services.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
-using System;
 using System.Collections.Generic;
-using System.Linq;
+using BlueMonkey.ExpenceServices;
 
 namespace BlueMonkey.ViewModels
 {
@@ -54,7 +52,7 @@ namespace BlueMonkey.ViewModels
 
         public async void OnNavigatedTo(NavigationParameters parameters)
         {
-            Items = await _expenseService.GetExpenses();
+            Items = await _expenseService.GetExpensesAsync();
         }
     }
 }

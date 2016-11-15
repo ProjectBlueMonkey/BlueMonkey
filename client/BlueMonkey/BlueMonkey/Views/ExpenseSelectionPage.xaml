@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="BlueMonkey.Views.ExpenseSelectionPage"
+             Title="Expense Selection">
+  <ListView ItemsSource="{Binding Expenses}"
+            HasUnevenRows="True">
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <ViewCell>
+          <Grid Padding="10">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+              </Grid.RowDefinitions>
+              <Label Grid.Row="0" Text="{Binding Name}"/>
+              <Label Grid.Row="1" Text="{Binding Amount}"/>
+            </Grid>
+            <Switch Grid.Column="1" IsToggled="{Binding IsSelected}" HorizontalOptions="Center"/>
+          </Grid>
+        </ViewCell>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView>
+</ContentPage>

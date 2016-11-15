@@ -1,9 +1,10 @@
-﻿using Prism.Unity;
+﻿using BlueMonkey.ExpenceServices;
+using BlueMonkey.ExpenceServices.Local;
+using BlueMonkey.Model;
+using Prism.Unity;
 using BlueMonkey.Views;
 using Xamarin.Forms;
 using Microsoft.Practices.Unity;
-using BlueMonkey.Services.Interfaces;
-using BlueMonkey.Services.Local;
 
 namespace BlueMonkey
 {
@@ -20,7 +21,9 @@ namespace BlueMonkey
 
         protected override void RegisterTypes()
         {
-            Container.RegisterType<IExpenseService, LocalExpenseService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IExpenseService, ExpenseService>(new ContainerControlledLifetimeManager());
+
+            Container.RegisterType<IEditReport, EditReport>(new ContainerControlledLifetimeManager());
 
             Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();
@@ -30,6 +33,8 @@ namespace BlueMonkey
             Container.RegisterTypeForNavigation<ReportPage>();
             Container.RegisterTypeForNavigation<ReceiptPage>();
             Container.RegisterTypeForNavigation<AddReportPage>();
+            Container.RegisterTypeForNavigation<ReportListPage>();
+            Container.RegisterTypeForNavigation<ExpenseSelectionPage>();
         }
     }
 }

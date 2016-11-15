@@ -8,7 +8,6 @@ using Android.Widget;
 using Android.OS;
 using Prism.Unity;
 using Microsoft.Practices.Unity;
-using BlueMonkey.Services.Interfaces;
 
 namespace BlueMonkey.Droid
 {

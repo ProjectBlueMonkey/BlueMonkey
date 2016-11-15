@@ -9,7 +9,7 @@
     <Label Text="LOGO" />
     <Button Text="Add Expense" Command="{Binding NavigateCommand}" CommandParameter="AddExpensePage" />
     <Button Text="Expense List" Command="{Binding NavigateCommand}" CommandParameter="ExpenseListPage" />
-    <Button Text="Report" Command="{Binding NavigateCommand}" CommandParameter="ReportPage" />
+    <Button Text="Report List" Command="{Binding NavigateCommand}" CommandParameter="ReportListPage" />
     <Button Text="Chart" Command="{Binding NavigateCommand}" CommandParameter="ChartPage" />
   </StackLayout>
 </ContentPage>

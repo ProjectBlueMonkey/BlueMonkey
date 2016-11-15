@@ -5,15 +5,15 @@
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FDE5E109-05C0-4060-8933-DAEC2BFBD58E}</ProjectGuid>
+    <ProjectGuid>{BE7E48DE-526B-4BFA-A8BB-1699FDAD1CD1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BlueMonkey.Services.Interfaces</RootNamespace>
-    <AssemblyName>BlueMonkey.Services.Interfaces</AssemblyName>
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <RootNamespace>BlueMonkey.Model</RootNamespace>
+    <AssemblyName>BlueMonkey.Model</AssemblyName>
+    <DefaultLanguage>ja-JP</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -34,15 +34,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
+    <Compile Include="EditReport.cs" />
+    <Compile Include="IEditReport.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectableExpense.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Prism, Version=6.2.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.6.2.0\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Prism.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\BlueMonkey.Business\BlueMonkey.Business.csproj">
       <Project>{d96104f1-5356-4cdc-8655-26576aa8322b}</Project>
       <Name>BlueMonkey.Business</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="IExpenseService.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <ProjectReference Include="..\BlueMonkey.ExpenceServices\BlueMonkey.ExpenceServices.csproj">
+      <Project>{4a7f6cfb-dd26-477a-b4f9-6bc8d2d5be62}</Project>
+      <Name>BlueMonkey.ExpenceServices</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

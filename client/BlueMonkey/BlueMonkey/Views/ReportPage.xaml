@@ -2,10 +2,41 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:blueMonkey="clr-namespace:BlueMonkey;assembly=BlueMonkey"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BlueMonkey.Views.ReportPage" Title="Report">
+  <ContentPage.Behaviors>
+    <blueMonkey:EventToCommandBehavior EventName="Appearing" Command="{Binding InitializeCommand}"/>
+  </ContentPage.Behaviors>
   <ContentPage.ToolbarItems>
-    <ToolbarItem Text="+" Command="{Binding AddReportCommand}"/>
+    <ToolbarItem Text="Save" Command="{Binding SaveReportCommand}"/>
   </ContentPage.ToolbarItems>
-  
+  <ScrollView>
+    <StackLayout Padding="10">
+      <Label Text="Name"/>
+      <Entry Text="{Binding Name.Value}"/>
+      <Label Text="Date"/>
+      <DatePicker Date="{Binding Date.Value}"/>
+      <Grid>
+        <Label Text="Name" HorizontalOptions="Start"/>
+        <Button Text="Edit" HorizontalOptions="End" Command="{Binding NavigateExpenseSelectionCommand}"/>
+      </Grid>
+      <ListView ItemsSource="{Binding Expenses}" HasUnevenRows="True">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto"/>
+                  <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="{Binding Name}"/>
+                <Label Grid.Column="1" Text="{Binding Amount}" HorizontalOptions="End"/>
+              </Grid>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+    </StackLayout>
+  </ScrollView>
 </ContentPage>
