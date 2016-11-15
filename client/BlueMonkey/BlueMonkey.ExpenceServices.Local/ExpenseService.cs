@@ -15,12 +15,13 @@ namespace BlueMonkey.ExpenceServices.Local
         public ExpenseService()
         {
             var random = new Random();
-            for (int x = 0; x < 10; x++)
+            for (int i = 0; i < 10; i++)
             {
                 _expenses.Add(
                     new Expense()
                     {
-                        Name = $"Expense{x}",
+                        Id = $"ExpenseId{i}",
+                        Name = $"Expense{i}",
                         Amount = random.Next(1000, 20000)
                     });
             }
