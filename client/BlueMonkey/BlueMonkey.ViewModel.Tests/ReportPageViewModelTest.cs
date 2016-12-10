@@ -64,5 +64,28 @@ namespace BlueMonkey.ViewModel.Tests
             editReport
                 .VerifySet(m => m.Name = "Update name", Times.Once);
         }
+
+        [Fact]
+        public void DateProperty()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var editReport = new Mock<IEditReport>();
+
+            var actual = new ReportPageViewModel(navigationService.Object, editReport.Object);
+
+            Assert.Equal(default(DateTime), actual.Date.Value);
+
+            // Update model.
+            editReport.Setup(m => m.Date).Returns(DateTime.Today);
+            editReport
+                .Raise(m => m.PropertyChanged += null, new PropertyChangedEventArgs("Date"));
+
+            Assert.Equal(DateTime.Today, actual.Date.Value);
+
+            // Update ViewModel.
+            actual.Date.Value = default(DateTime);
+            editReport
+                .VerifySet(m => m.Date = default(DateTime), Times.Exactly(2));
+        }
     }
 }
