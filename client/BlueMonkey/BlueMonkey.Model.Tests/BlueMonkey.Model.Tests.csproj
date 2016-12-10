@@ -87,6 +87,7 @@
   <ItemGroup>
     <Compile Include="EditReportTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectableExpenseTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
