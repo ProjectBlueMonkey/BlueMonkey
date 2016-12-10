@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,6 +54,48 @@ namespace BlueMonkey.Model.Tests
 
             Assert.False(actual.SelectableExpenses[1].IsSelected);
             Assert.Equal(expense02.Id, actual.SelectableExpenses[1].Id);
+        }
+
+        [Fact]
+        public async Task Save()
+        {
+            var expenseService = new Mock<IExpenseService>();
+            var expense01 = new Expense();
+            var expense02 = new Expense();
+            var expenses = new[] { expense01, expense02 };
+            expenseService
+                .Setup(m => m.GetExpensesAsync())
+                .ReturnsAsync(expenses);
+
+            var editReport = new EditReport(expenseService.Object);
+
+            await editReport.InitializeForNewReportAsync();
+
+            editReport.Name = "InputName";
+            var imputDate = DateTime.Today - TimeSpan.FromDays(2);
+            editReport.Date = imputDate;
+            editReport.SelectableExpenses[1].IsSelected = true;
+
+            Report savedReport = null;
+            IEnumerable<Expense> savedExpenses = null;
+            expenseService
+                .Setup(m => m.RegisterReport(It.IsAny<Report>(), It.IsAny<IEnumerable<Expense>>()))
+                .Callback<Report, IEnumerable<Expense>>((argReport, argExpenses) =>
+                {
+                    savedReport = argReport;
+                    savedExpenses = argExpenses;
+                })
+                .Returns(Task.CompletedTask);
+            
+            await editReport.Save();
+
+            Assert.NotNull(savedReport);
+            Assert.Equal("InputName", editReport.Name);
+            Assert.Equal(imputDate, editReport.Date);
+
+            Assert.NotNull(savedExpenses);
+            Assert.Equal(1, savedExpenses.Count());
+            Assert.Equal(expense02.Id, savedExpenses.First().Id);
         }
     }
 }
