@@ -107,8 +107,7 @@ namespace BlueMonkey.Model.Tests
             await editReport.InitializeForNewReportAsync();
 
             editReport.Name = "InputName";
-            var imputDate = DateTime.MinValue;
-            editReport.Date = imputDate;
+            editReport.Date = DateTime.MinValue;
             editReport.SelectableExpenses[1].IsSelected = true;
 
             Report savedReport = null;
@@ -126,7 +125,7 @@ namespace BlueMonkey.Model.Tests
 
             Assert.NotNull(savedReport);
             Assert.Equal("InputName", editReport.Name);
-            Assert.Equal(imputDate, editReport.Date);
+            Assert.Equal(DateTime.MinValue, editReport.Date);
 
             Assert.NotNull(savedExpenses);
             Assert.Equal(1, savedExpenses.Count());
