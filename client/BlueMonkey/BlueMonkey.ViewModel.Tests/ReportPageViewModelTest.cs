@@ -129,5 +129,18 @@ namespace BlueMonkey.ViewModel.Tests
             Assert.Equal(1, actual.Expenses.Count());
             Assert.Equal(expense02, actual.Expenses.First());
         }
+
+        [Fact]
+        public void NavigateExpenseSelectionCommand()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var editReport = new Mock<IEditReport>();
+
+            var actual = new ReportPageViewModel(navigationService.Object, editReport.Object);
+
+            actual.NavigateExpenseSelectionCommand.Execute();
+
+            navigationService.Verify(m => m.NavigateAsync("ExpenseSelectionPage", null, null, true));
+        }
     }
 }
