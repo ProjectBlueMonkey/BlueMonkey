@@ -156,5 +156,16 @@ namespace BlueMonkey.ViewModel.Tests
             editReport.Verify(m => m.Save(), Times.Once);
             navigationService.Verify(m => m.GoBackAsync(null, null, true), Times.Once);
         }
+
+        [Fact]
+        public void OnNavigatedFrom()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var editReport = new Mock<IEditReport>();
+
+            var actual = new ReportPageViewModel(navigationService.Object, editReport.Object);
+
+            actual.OnNavigatedFrom(null);
+        }
     }
 }
