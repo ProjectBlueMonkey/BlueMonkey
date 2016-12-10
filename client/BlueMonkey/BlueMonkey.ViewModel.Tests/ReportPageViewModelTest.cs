@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -103,7 +104,30 @@ namespace BlueMonkey.ViewModel.Tests
             Assert.PropertyChanged(actual, "Expenses", () => { actual.Expenses = expenses; });
 
             Assert.Equal(expenses, actual.Expenses);
+        }
 
+        [Fact]
+        public void InitializeCommand()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var editReport = new Mock<IEditReport>();
+
+            var expense01 = new SelectableExpense(new Expense()) { IsSelected = false };
+            var expense02 = new SelectableExpense(new Expense()) { IsSelected = true };
+            var expenses = new ObservableCollection<SelectableExpense>(new[] { expense01, expense02 });
+            editReport
+                .Setup(m => m.SelectableExpenses)
+                .Returns(new ReadOnlyObservableCollection<SelectableExpense>(expenses));
+
+            var actual = new ReportPageViewModel(navigationService.Object, editReport.Object);
+
+            Assert.Null(actual.Expenses);
+
+            actual.InitializeCommand.Execute();
+
+            Assert.NotNull(actual.Expenses);
+            Assert.Equal(1, actual.Expenses.Count());
+            Assert.Equal(expense02, actual.Expenses.First());
         }
     }
 }
