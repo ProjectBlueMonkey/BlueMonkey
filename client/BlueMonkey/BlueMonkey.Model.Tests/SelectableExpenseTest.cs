@@ -20,7 +20,7 @@ namespace BlueMonkey.Model.Tests
                     CategoryId = "CategoryId",
                     Name = "Name",
                     Amount = 123456789012345,
-                    Date = DateTime.Today,
+                    Date = DateTime.MinValue,
                     Location = "Location",
                     Note = "Note",
                     ReportId = "ReportId",

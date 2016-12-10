@@ -22,7 +22,7 @@ namespace BlueMonkey.ViewModel.Tests
             var navigationService = new Mock<INavigationService>();
             var editReport = new Mock<IEditReport>();
             editReport.Setup(m => m.Name).Returns("Name");
-            editReport.Setup(m => m.Date).Returns(DateTime.Today);
+            editReport.Setup(m => m.Date).Returns(DateTime.MinValue);
 
             var actual = new ReportPageViewModel(navigationService.Object, editReport.Object);
 
@@ -30,7 +30,7 @@ namespace BlueMonkey.ViewModel.Tests
             Assert.Equal("Name", actual.Name.Value);
 
             Assert.NotNull(actual.Date);
-            Assert.Equal(DateTime.Today, actual.Date.Value);
+            Assert.Equal(DateTime.MinValue, actual.Date.Value);
 
             Assert.Null(actual.Expenses);
 
@@ -78,11 +78,11 @@ namespace BlueMonkey.ViewModel.Tests
             Assert.Equal(default(DateTime), actual.Date.Value);
 
             // Update model.
-            editReport.Setup(m => m.Date).Returns(DateTime.Today);
+            editReport.Setup(m => m.Date).Returns(DateTime.MaxValue);
             editReport
                 .Raise(m => m.PropertyChanged += null, new PropertyChangedEventArgs("Date"));
 
-            Assert.Equal(DateTime.Today, actual.Date.Value);
+            Assert.Equal(DateTime.MaxValue, actual.Date.Value);
 
             // Update ViewModel.
             actual.Date.Value = default(DateTime);
