@@ -167,5 +167,20 @@ namespace BlueMonkey.ViewModel.Tests
 
             actual.OnNavigatedFrom(null);
         }
+
+        [Fact]
+        public void OnNavigatedToWhenNewCreation()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var editReport = new Mock<IEditReport>();
+
+            var actual = new ReportPageViewModel(navigationService.Object, editReport.Object);
+
+            var navigationParameter = new NavigationParameters();
+            navigationParameter[ReportPageViewModel.ReportIdKey] = null;
+            actual.OnNavigatedTo(navigationParameter);
+
+            editReport.Verify(m => m.InitializeForNewReportAsync(), Times.Once);
+        }
     }
 }
