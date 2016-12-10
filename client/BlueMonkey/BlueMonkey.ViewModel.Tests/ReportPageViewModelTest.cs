@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +40,29 @@ namespace BlueMonkey.ViewModel.Tests
 
             Assert.NotNull(actual.SaveReportCommand);
             Assert.True(actual.SaveReportCommand.CanExecute());
+        }
+
+        [Fact]
+        public void NameProperty()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var editReport = new Mock<IEditReport>();
+
+            var actual = new ReportPageViewModel(navigationService.Object, editReport.Object);
+
+            Assert.Null(actual.Name.Value);
+
+            // Update model.
+            editReport.Setup(m => m.Name).Returns("Name");
+            editReport
+                .Raise(m => m.PropertyChanged += null, new PropertyChangedEventArgs("Name"));
+
+            Assert.Equal("Name", actual.Name.Value);
+
+            // Update ViewModel.
+            actual.Name.Value = "Update name";
+            editReport
+                .VerifySet(m => m.Name = "Update name", Times.Once);
         }
     }
 }
