@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BlueMonkey.Business;
 using BlueMonkey.Model;
 using BlueMonkey.ViewModels;
 using Moq;
@@ -86,6 +87,23 @@ namespace BlueMonkey.ViewModel.Tests
             actual.Date.Value = default(DateTime);
             editReport
                 .VerifySet(m => m.Date = default(DateTime), Times.Exactly(2));
+        }
+
+        [Fact]
+        public void ExpensesProperty()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var editReport = new Mock<IEditReport>();
+
+            var actual = new ReportPageViewModel(navigationService.Object, editReport.Object);
+
+
+            var expenses = new SelectableExpense[] {};
+
+            Assert.PropertyChanged(actual, "Expenses", () => { actual.Expenses = expenses; });
+
+            Assert.Equal(expenses, actual.Expenses);
+
         }
     }
 }
