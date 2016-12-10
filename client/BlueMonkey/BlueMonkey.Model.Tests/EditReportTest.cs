@@ -28,6 +28,29 @@ namespace BlueMonkey.Model.Tests
         }
 
         [Fact]
+        public void NameProperty()
+        {
+            var expenseService = new Mock<IExpenseService>();
+            var actual = new EditReport(expenseService.Object);
+
+            Assert.PropertyChanged(actual, "Name", () => { actual.Name = "NewName"; });
+
+            Assert.Equal("NewName", actual.Name);
+        }
+
+        [Fact]
+        public void DateProperty()
+        {
+            var expenseService = new Mock<IExpenseService>();
+            var actual = new EditReport(expenseService.Object);
+
+            DateTime newDateTime = DateTime.Today + TimeSpan.FromDays(1);
+            Assert.PropertyChanged(actual, "Date", () => { actual.Date = newDateTime; });
+
+            Assert.Equal(newDateTime, actual.Date);
+        }
+
+        [Fact]
         public async Task InitializeForNewReportAsync()
         {
             var expenseService = new Mock<IExpenseService>();
