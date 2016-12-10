@@ -140,7 +140,21 @@ namespace BlueMonkey.ViewModel.Tests
 
             actual.NavigateExpenseSelectionCommand.Execute();
 
-            navigationService.Verify(m => m.NavigateAsync("ExpenseSelectionPage", null, null, true));
+            navigationService.Verify(m => m.NavigateAsync("ExpenseSelectionPage", null, null, true), Times.Once);
+        }
+
+        [Fact]
+        public void SaveReportCommand()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var editReport = new Mock<IEditReport>();
+
+            var actual = new ReportPageViewModel(navigationService.Object, editReport.Object);
+
+            actual.SaveReportCommand.Execute();
+
+            editReport.Verify(m => m.Save(), Times.Once);
+            navigationService.Verify(m => m.GoBackAsync(null, null, true), Times.Once);
         }
     }
 }
