@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BlueMonkey.Business;
 using BlueMonkey.ExpenceServices;
+using BlueMonkey.TimeService;
 using Moq;
 using Xunit;
 
@@ -17,7 +18,8 @@ namespace BlueMonkey.Model.Tests
         public void Constructor()
         {
             var expenseService = new Mock<IExpenseService>();
-            var actual = new EditReport(expenseService.Object);
+            var dateTimeService = new Mock<IDateTimeService>();
+            var actual = new EditReport(expenseService.Object, dateTimeService.Object);
 
             Assert.Null(actual.Name);
 
@@ -31,7 +33,8 @@ namespace BlueMonkey.Model.Tests
         public void NameProperty()
         {
             var expenseService = new Mock<IExpenseService>();
-            var actual = new EditReport(expenseService.Object);
+            var dateTimeService = new Mock<IDateTimeService>();
+            var actual = new EditReport(expenseService.Object, dateTimeService.Object);
 
             Assert.PropertyChanged(actual, "Name", () => { actual.Name = "NewName"; });
 
@@ -42,7 +45,8 @@ namespace BlueMonkey.Model.Tests
         public void DateProperty()
         {
             var expenseService = new Mock<IExpenseService>();
-            var actual = new EditReport(expenseService.Object);
+            var dateTimeService = new Mock<IDateTimeService>();
+            var actual = new EditReport(expenseService.Object, dateTimeService.Object);
 
             DateTime newDateTime = DateTime.MaxValue;
             Assert.PropertyChanged(actual, "Date", () => { actual.Date = newDateTime; });
@@ -61,8 +65,12 @@ namespace BlueMonkey.Model.Tests
                 .Setup(m => m.GetExpensesAsync())
                 .ReturnsAsync(expenses);
 
-            var dayBeforeExecution = DateTime.Today;
-            var actual = new EditReport(expenseService.Object);
+            var dateTimeService = new Mock<IDateTimeService>();
+            dateTimeService
+                .Setup(m => m.Today)
+                .Returns(DateTime.MaxValue);
+
+            var actual = new EditReport(expenseService.Object, dateTimeService.Object);
 
             await actual.InitializeForNewReportAsync();
 
@@ -70,9 +78,7 @@ namespace BlueMonkey.Model.Tests
 
             // The initial value is today.
             // Consider the case when it is the next day at the time of execution.
-            Assert.True(
-                actual.Date == dayBeforeExecution ||
-                actual.Date == DateTime.Today);
+            Assert.Equal(DateTime.MaxValue, actual.Date);
 
             Assert.NotNull(actual.SelectableExpenses);
             Assert.Equal(2, actual.SelectableExpenses.Count);
@@ -95,7 +101,8 @@ namespace BlueMonkey.Model.Tests
                 .Setup(m => m.GetExpensesAsync())
                 .ReturnsAsync(expenses);
 
-            var editReport = new EditReport(expenseService.Object);
+            var dateTimeService = new Mock<IDateTimeService>();
+            var editReport = new EditReport(expenseService.Object, dateTimeService.Object);
 
             await editReport.InitializeForNewReportAsync();
 

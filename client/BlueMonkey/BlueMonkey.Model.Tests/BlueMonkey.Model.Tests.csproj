@@ -84,6 +84,10 @@
       <Project>{BE7E48DE-526B-4BFA-A8BB-1699FDAD1CD1}</Project>
       <Name>BlueMonkey.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BlueMonkey.TimeService\BlueMonkey.TimeService.csproj">
+      <Project>{0c6dfdb3-febe-4d22-a0cb-5e3b599a9342}</Project>
+      <Name>BlueMonkey.TimeService</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EditReportTest.cs" />
