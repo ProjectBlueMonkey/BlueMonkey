@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BlueMonkey.Business;
 using BlueMonkey.ExpenceServices;
+using BlueMonkey.TimeService;
 using Prism.Mvvm;
 
 namespace BlueMonkey.Model
@@ -17,6 +18,10 @@ namespace BlueMonkey.Model
         /// IExpenseService instance.
         /// </summary>
         private readonly IExpenseService _expenseService;
+        /// <summary>
+        /// IDateTimeService instance.
+        /// </summary>
+        private readonly IDateTimeService _dateTimeService;
 
         private string _name;
         public string Name
@@ -44,16 +49,17 @@ namespace BlueMonkey.Model
         /// Initialize Instance.
         /// </summary>
         /// <param name="expenseService"></param>
-        public EditReport(IExpenseService expenseService)
+        public EditReport(IExpenseService expenseService, IDateTimeService dateTimeService)
         {
             _expenseService = expenseService;
+            _dateTimeService = dateTimeService;
             SelectableExpenses = new ReadOnlyObservableCollection<SelectableExpense>(_selectableExpenses);
         }
 
         public async Task InitializeForNewReportAsync()
         {
             Name = null;
-            Date = DateTime.Today;
+            Date = _dateTimeService.Today;
             _selectableExpenses.Clear();
             var expenses = await _expenseService.GetExpensesAsync();
             foreach (var expense in expenses.Where(x => x.ReportId == null))

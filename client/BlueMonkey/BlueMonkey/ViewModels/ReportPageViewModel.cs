@@ -62,12 +62,12 @@ namespace BlueMonkey.ViewModels
         /// <summary>
         /// Initialize Instance.
         /// </summary>
-        /// <param name="editReport"></param>
         /// <param name="navigationService"></param>
-        public ReportPageViewModel(IEditReport editReport, INavigationService navigationService)
+        /// <param name="editReport"></param>
+        public ReportPageViewModel(INavigationService navigationService, IEditReport editReport)
         {
-            _editReport = editReport;
             _navigationService = navigationService;
+            _editReport = editReport;
             Name = editReport.ToReactivePropertyAsSynchronized(x => x.Name);
             Date = editReport.ToReactivePropertyAsSynchronized(x => x.Date);
 
@@ -75,7 +75,12 @@ namespace BlueMonkey.ViewModels
             {
                 Expenses = editReport.SelectableExpenses.Where(x => x.IsSelected);
             });
-            NavigateExpenseSelectionCommand = new DelegateCommand(() => _navigationService.NavigateAsync("ExpenseSelectionPage"));
+
+            NavigateExpenseSelectionCommand = new DelegateCommand(() =>
+            {
+                _navigationService.NavigateAsync("ExpenseSelectionPage");
+            });
+
             SaveReportCommand = new DelegateCommand(() =>
             {
                 _editReport.Save();
