@@ -24,6 +24,7 @@ namespace BlueMonkey
             Container.RegisterType<IExpenseService, ExpenseService>(new ContainerControlledLifetimeManager());
 
             Container.RegisterType<IEditReport, EditReport>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IReferReport, ReferReport>(new ContainerControlledLifetimeManager());
 
             Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();
