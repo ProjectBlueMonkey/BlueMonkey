@@ -20,9 +20,13 @@ namespace BlueMonkey.Model
             Reports = new ReadOnlyObservableCollection<Report>(_reports);
         }
 
-        public Task Search()
+        public async Task Search()
         {
-            throw new NotImplementedException();
+            _reports.Clear();
+            foreach (var report in await _expenseService.GetReportsAsync())
+            {
+                _reports.Add(report);
+            }
         }
     }
 }
