@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using BlueMonkey.Business;
 using BlueMonkey.ExpenceServices;
@@ -74,6 +75,22 @@ namespace BlueMonkey.ViewModel.Tests
 
             // Make sure that no exceptions occur.
             actual.OnNavigatedFrom(null);
+        }
+
+        [Fact]
+        public void OnNavigatedTo()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var referReport = new Mock<IReferReport>();
+            referReport
+                .Setup(m => m.Reports)
+                .Returns(new ReadOnlyObservableCollection<Report>(new ObservableCollection<Report>()));
+
+            var actual = new ReportListPageViewModel(navigationService.Object, referReport.Object);
+
+            actual.OnNavigatedTo(null);
+
+            referReport.Verify(m => m.Search(), Times.Once);
         }
     }
 }
