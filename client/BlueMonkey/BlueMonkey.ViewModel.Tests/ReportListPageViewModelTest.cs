@@ -53,11 +53,18 @@ namespace BlueMonkey.ViewModel.Tests
             Assert.Equal(0, actual.Reports.Count);
 
             var report = new Report();
-            ((INotifyCollectionChanged)readOnlyReports).CollectionChanged += (sender, args) =>
-            {
-
-            };
             reports.Add(report);
+
+
+            // Wait until updated.
+            for (int i = 0; i < 1000; i++)
+            {
+                Thread.Sleep(10);
+                if (actual.Reports.Count == 1)
+                {
+                    break;
+                }
+            }
 
             Assert.Equal(1, actual.Reports.Count);
             Assert.Equal(report, actual.Reports[0]);
