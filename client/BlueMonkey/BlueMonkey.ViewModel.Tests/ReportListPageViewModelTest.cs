@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,6 +35,32 @@ namespace BlueMonkey.ViewModel.Tests
 
             Assert.NotNull(actual.AddReportCommand);
             Assert.True(actual.AddReportCommand.CanExecute());
+        }
+
+        [Fact]
+        public void ReportProperty()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var referReport = new Mock<IReferReport>();
+            var reports = new ObservableCollection<Report>();
+            var readOnlyReports = new ReadOnlyObservableCollection<Report>(reports);
+            referReport
+                .Setup(m => m.Reports)
+                .Returns(readOnlyReports);
+
+            var actual = new ReportListPageViewModel(navigationService.Object, referReport.Object);
+
+            Assert.Equal(0, actual.Reports.Count);
+
+            var report = new Report();
+            ((INotifyCollectionChanged)readOnlyReports).CollectionChanged += (sender, args) =>
+            {
+
+            };
+            reports.Add(report);
+
+            Assert.Equal(1, actual.Reports.Count);
+            Assert.Equal(report, actual.Reports[0]);
         }
 
         [Fact]
