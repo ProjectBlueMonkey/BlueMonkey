@@ -60,5 +60,20 @@ namespace BlueMonkey.ViewModel.Tests
 
             Assert.True(calledNavigationAsync);
         }
+
+        [Fact]
+        public void OnNavigatedFrom()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var referReport = new Mock<IReferReport>();
+            referReport
+                .Setup(m => m.Reports)
+                .Returns(new ReadOnlyObservableCollection<Report>(new ObservableCollection<Report>()));
+
+            var actual = new ReportListPageViewModel(navigationService.Object, referReport.Object);
+
+            // Make sure that no exceptions occur.
+            actual.OnNavigatedFrom(null);
+        }
     }
 }
