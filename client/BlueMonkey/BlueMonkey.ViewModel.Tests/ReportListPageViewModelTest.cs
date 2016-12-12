@@ -58,17 +58,6 @@ namespace BlueMonkey.ViewModel.Tests
             var report = new Report();
             reports.Add(report);
 
-
-            // Wait until updated.
-            for (int i = 0; i < 1000; i++)
-            {
-                Thread.Sleep(10);
-                if (actual.Reports.Count == 1)
-                {
-                    break;
-                }
-            }
-
             Assert.Equal(1, actual.Reports.Count);
             Assert.Equal(report, actual.Reports[0]);
         }
