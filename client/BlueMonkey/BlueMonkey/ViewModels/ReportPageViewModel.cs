@@ -81,10 +81,10 @@ namespace BlueMonkey.ViewModels
                 _navigationService.NavigateAsync("ExpenseSelectionPage");
             });
 
-            SaveReportCommand = new DelegateCommand(() =>
+            SaveReportCommand = DelegateCommand.FromAsyncHandler(async () =>
             {
-                _editReport.SaveAsync();
-                _navigationService.GoBackAsync();
+                await _editReport.SaveAsync();
+                await _navigationService.GoBackAsync();
             });
         }
 
