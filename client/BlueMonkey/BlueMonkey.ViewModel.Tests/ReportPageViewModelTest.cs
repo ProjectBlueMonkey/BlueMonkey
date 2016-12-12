@@ -153,7 +153,7 @@ namespace BlueMonkey.ViewModel.Tests
 
             actual.SaveReportCommand.Execute();
 
-            editReport.Verify(m => m.Save(), Times.Once);
+            editReport.Verify(m => m.SaveAsync(), Times.Once);
             navigationService.Verify(m => m.GoBackAsync(null, null, true), Times.Once);
         }
 

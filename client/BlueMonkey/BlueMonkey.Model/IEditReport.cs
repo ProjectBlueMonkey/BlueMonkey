@@ -32,6 +32,6 @@ namespace BlueMonkey.Model
         /// Register or Update Report.
         /// </summary>
         /// <returns></returns>
-        Task Save();
+        Task SaveAsync();
     }
 }

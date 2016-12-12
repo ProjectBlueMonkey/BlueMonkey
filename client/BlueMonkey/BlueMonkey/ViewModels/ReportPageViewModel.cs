@@ -83,7 +83,7 @@ namespace BlueMonkey.ViewModels
 
             SaveReportCommand = new DelegateCommand(() =>
             {
-                _editReport.Save();
+                _editReport.SaveAsync();
                 _navigationService.GoBackAsync();
             });
         }
