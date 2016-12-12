@@ -23,7 +23,7 @@ namespace BlueMonkey.Model.Tests
         }
 
         [Fact]
-        public async Task Search()
+        public async Task SearchAsync()
         {
             var expenseService = new Mock<IExpenseService>();
             var report = new Report();
@@ -33,7 +33,7 @@ namespace BlueMonkey.Model.Tests
                 .ReturnsAsync(reports);
 
             var actual = new ReferReport(expenseService.Object);
-            await actual.Search();
+            await actual.SearchAsync();
 
             Assert.NotNull(actual.Reports);
             Assert.Equal(1, actual.Reports.Count);

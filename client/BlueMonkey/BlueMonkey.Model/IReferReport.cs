@@ -15,6 +15,6 @@ namespace BlueMonkey.Model
     {
         ReadOnlyObservableCollection<Report> Reports { get; }
 
-        Task Search();
+        Task SearchAsync();
     }
 }

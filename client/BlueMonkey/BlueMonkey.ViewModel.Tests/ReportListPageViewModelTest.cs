@@ -128,7 +128,7 @@ namespace BlueMonkey.ViewModel.Tests
 
             actual.OnNavigatedTo(null);
 
-            referReport.Verify(m => m.Search(), Times.Once);
+            referReport.Verify(m => m.SearchAsync(), Times.Once);
         }
     }
 }

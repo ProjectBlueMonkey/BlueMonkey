@@ -51,7 +51,7 @@ namespace BlueMonkey.ViewModels
 
         public void OnNavigatedTo(NavigationParameters parameters)
         {
-            _referReport.Search();
+            _referReport.SearchAsync();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace BlueMonkey.Model
             Reports = new ReadOnlyObservableCollection<Report>(_reports);
         }
 
-        public async Task Search()
+        public async Task SearchAsync()
         {
             _reports.Clear();
             foreach (var report in await _expenseService.GetReportsAsync())
