@@ -14,6 +14,7 @@ using BlueMonkey.Model;
 using BlueMonkey.ViewModels;
 using Moq;
 using Prism.Navigation;
+using Reactive.Bindings;
 using Xunit;
 
 namespace BlueMonkey.ViewModel.Tests
@@ -41,7 +42,7 @@ namespace BlueMonkey.ViewModel.Tests
         [Fact]
         public void ReportProperty()
         {
-            ApplicationEnvironments.DefaultScheduler = CurrentThreadScheduler.Instance;
+            ReactivePropertyScheduler.SetDefault(CurrentThreadScheduler.Instance);
             var navigationService = new Mock<INavigationService>();
             var referReport = new Mock<IReferReport>();
             var reports = new ObservableCollection<Report>();

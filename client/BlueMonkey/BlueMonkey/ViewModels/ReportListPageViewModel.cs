@@ -32,7 +32,7 @@ namespace BlueMonkey.ViewModels
         {
             _navigationService = navigationService;
             _referReport = referReport;
-            Reports = _referReport.Reports.ToReadOnlyReactiveCollection(ApplicationEnvironments.DefaultScheduler);
+            Reports = _referReport.Reports.ToReadOnlyReactiveCollection();
         }
 
         /// <summary>
