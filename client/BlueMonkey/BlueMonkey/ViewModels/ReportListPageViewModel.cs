@@ -23,6 +23,8 @@ namespace BlueMonkey.ViewModels
         /// </summary>
         public DelegateCommand AddReportCommand => new DelegateCommand(AddReport);
 
+        public DelegateCommand<Report> UpdateReportCommand => new DelegateCommand<Report>(UpdateReport);
+
         /// <summary>
         /// Initialize Instance
         /// </summary>
@@ -36,12 +38,28 @@ namespace BlueMonkey.ViewModels
         }
 
         /// <summary>
-        /// Navigation ReportPage.
+        /// Navigation ReportPage when create Report.
         /// </summary>
         private void AddReport()
         {
+            NavigateReportPage(null);
+        }
+        /// <summary>
+        /// Navigation ReportPage when update Report.
+        /// </summary>
+        /// <param name="selectedReport"></param>
+        private void UpdateReport(Report selectedReport)
+        {
+            NavigateReportPage(selectedReport.Id);
+        }
+
+        /// <summary>
+        /// Navigation ReportPage.
+        /// </summary>
+        private void NavigateReportPage(string reportId)
+        {
             var navigationParameter = new NavigationParameters();
-            navigationParameter[ReportPageViewModel.ReportIdKey] = null;
+            navigationParameter[ReportPageViewModel.ReportIdKey] = reportId;
             _navigationService.NavigateAsync("ReportPage", navigationParameter);
         }
 
