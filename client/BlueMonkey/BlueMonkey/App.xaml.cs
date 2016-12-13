@@ -35,6 +35,7 @@ namespace BlueMonkey
             Container.RegisterTypeForNavigation<AddReportPage>();
             Container.RegisterTypeForNavigation<ReportListPage>();
             Container.RegisterTypeForNavigation<ExpenseSelectionPage>();
+            Container.RegisterTypeForNavigation<LoginPage>();
         }
     }
 }
