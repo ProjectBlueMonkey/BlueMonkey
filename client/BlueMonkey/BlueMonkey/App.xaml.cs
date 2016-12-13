@@ -16,7 +16,7 @@ namespace BlueMonkey
         {
             InitializeComponent();
 
-            NavigationService.NavigateAsync("NavigationPage/MainPage");
+            NavigationService.NavigateAsync("LoginPage");
         }
 
         protected override void RegisterTypes()
