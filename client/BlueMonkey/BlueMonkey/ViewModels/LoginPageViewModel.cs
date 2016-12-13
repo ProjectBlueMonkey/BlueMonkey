@@ -10,9 +10,9 @@ namespace BlueMonkey.ViewModels
 {
     public class LoginPageViewModel : BindableBase
     {
-        private INavigationService _navigationService;
-        private ILoginService _loginService;
-        private IPageDialogService _pageDialogService;
+        private readonly INavigationService _navigationService;
+        private readonly ILoginService _loginService;
+        private readonly IPageDialogService _pageDialogService;
 
         public DelegateCommand LoginCommand { get; }
 
