@@ -158,6 +158,10 @@
       <Project>{d96104f1-5356-4cdc-8655-26576aa8322b}</Project>
       <Name>BlueMonkey.Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BlueMonkey.LoginService.Droid\BlueMonkey.LoginService.Droid.csproj">
+      <Project>{8e113118-1e6e-4bd5-bd38-33de1d6ee786}</Project>
+      <Name>BlueMonkey.LoginService.Droid</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlueMonkey\BlueMonkey.csproj">
       <Name>BlueMonkey</Name>
     </ProjectReference>

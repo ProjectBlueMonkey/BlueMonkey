@@ -98,6 +98,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BlueMonkey.LoginService.iOS\BlueMonkey.LoginService.iOS.csproj">
+      <Project>{a2d44efe-2d2d-4d64-b118-8c60a472886e}</Project>
+      <Name>BlueMonkey.LoginService.iOS</Name>
+      <IsAppExtension>false</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
+    </ProjectReference>
     <ProjectReference Include="..\BlueMonkey\BlueMonkey.csproj">
       <Name>BlueMonkey</Name>
     </ProjectReference>
