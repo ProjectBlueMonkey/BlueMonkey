@@ -48,6 +48,11 @@ namespace BlueMonkey.ExpenceServices.Local
             return Task.FromResult(_reports.AsEnumerable());
         }
 
+        public Task<Report> GetReportAsync(string reportId)
+        {
+            return Task.FromResult(_reports.SingleOrDefault(x => x.Id == reportId));
+        }
+
         public Task RegisterReport(Report report, IEnumerable<Expense> expenses)
         {
             return Task.Run(() =>
