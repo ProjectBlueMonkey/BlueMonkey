@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using Prism.Unity;
 using Microsoft.Practices.Unity;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace BlueMonkey.Droid
 {
@@ -20,7 +21,7 @@ namespace BlueMonkey.Droid
             ToolbarResource = Resource.Layout.toolbar;
 
             base.OnCreate(bundle);
-
+            CurrentPlatform.Init();
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App(new AndroidInitializer()));
         }

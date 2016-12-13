@@ -6,6 +6,7 @@ using Foundation;
 using UIKit;
 using Prism.Unity;
 using Microsoft.Practices.Unity;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace BlueMonkey.iOS
 {
@@ -25,6 +26,7 @@ namespace BlueMonkey.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            CurrentPlatform.Init();
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);
