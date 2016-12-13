@@ -4,5 +4,17 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BlueMonkey.Views.LoginPage">
-
+  <ContentPage.Padding>
+    <OnPlatform x:TypeArguments="Thickness"
+                iOS="0,20,0,0" />
+  </ContentPage.Padding>
+  <StackLayout Spacing="10"
+               VerticalOptions="Center"
+               HorizontalOptions="Center">
+    <Label Text="Project BlueMonkey" 
+           FontSize="24"
+           FontAttributes="Bold"/>
+    <Button Text="Login"
+            Command="{Binding LoginCommand}" />
+  </StackLayout>
 </ContentPage>
