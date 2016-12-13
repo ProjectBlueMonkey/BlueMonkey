@@ -7,6 +7,8 @@ using UIKit;
 using Prism.Unity;
 using Microsoft.Practices.Unity;
 using Microsoft.WindowsAzure.MobileServices;
+using BlueMonkey.LoginService;
+using BlueMonkey.LoginService.iOS;
 
 namespace BlueMonkey.iOS
 {
@@ -37,7 +39,7 @@ namespace BlueMonkey.iOS
     {
         public void RegisterTypes(IUnityContainer container)
         {
-
+            container.RegisterType<ILoginService, AzureLoginService>(new ContainerControlledLifetimeManager());
         }
     }
 

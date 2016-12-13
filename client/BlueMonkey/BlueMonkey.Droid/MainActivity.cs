@@ -9,6 +9,8 @@ using Android.OS;
 using Prism.Unity;
 using Microsoft.Practices.Unity;
 using Microsoft.WindowsAzure.MobileServices;
+using BlueMonkey.LoginService;
+using BlueMonkey.LoginService.Droid;
 
 namespace BlueMonkey.Droid
 {
@@ -31,7 +33,7 @@ namespace BlueMonkey.Droid
     {
         public void RegisterTypes(IUnityContainer container)
         {
-            
+            container.RegisterType<ILoginService, AzureLoginService>(new ContainerControlledLifetimeManager());
         }
     }
 }

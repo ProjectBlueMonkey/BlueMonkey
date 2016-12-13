@@ -27,7 +27,6 @@ namespace BlueMonkey
             Container.RegisterInstance<IMobileServiceClient>(new MobileServiceClient(Secrets.ServerUri));
 
             Container.RegisterType<IExpenseService, ExpenseService>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<ILoginService, LoginService.Local.LoginService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IDateTimeService, DateTimeService>(new ContainerControlledLifetimeManager());
 
             Container.RegisterType<IEditReport, EditReport>(new ContainerControlledLifetimeManager());
