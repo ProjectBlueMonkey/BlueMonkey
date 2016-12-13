@@ -38,8 +38,7 @@ namespace BlueMonkey.ViewModels
             try
             {
                 IsBusy = true;
-                var authUser = await _loginServic.LoginAsync();
-                if (authUser == null)
+                if (!(await _loginServic.LoginAsync()))
                 {
                     await _pageDialogService.DisplayAlertAsync(
                         "Information",

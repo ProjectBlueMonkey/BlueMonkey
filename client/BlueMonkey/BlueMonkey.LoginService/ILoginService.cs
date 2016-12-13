@@ -1,10 +1,9 @@
-﻿using BlueMonkey.Business;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace BlueMonkey.LoginService
 {
     public interface ILoginService
     {
-        Task<AuthUser> LoginAsync();
+        Task<bool> LoginAsync();
     }
 }

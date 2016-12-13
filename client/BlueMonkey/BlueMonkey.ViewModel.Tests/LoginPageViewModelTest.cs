@@ -22,7 +22,7 @@ namespace BlueMonkey.ViewModel.Tests
             var actual = new LoginPageViewModel(navigationService.Object, loginService.Object, pageDialogService.Object);
 
             loginService.Setup(x => x.LoginAsync())
-                .Returns(() => Task.FromResult(new AuthUser { Identity = "12345" }));
+                .Returns(() => Task.FromResult(true));
 
             Assert.False(actual.IsBusy);
             Assert.PropertyChanged(actual, nameof(LoginPageViewModel.IsBusy), () => 
@@ -45,7 +45,7 @@ namespace BlueMonkey.ViewModel.Tests
             var actual = new LoginPageViewModel(navigationService.Object, loginService.Object, pageDialogService.Object);
 
             loginService.Setup(x => x.LoginAsync())
-                .Returns(() => Task.FromResult<AuthUser>(null));
+                .Returns(() => Task.FromResult(false));
 
             Assert.False(actual.IsBusy);
             Assert.PropertyChanged(actual, nameof(LoginPageViewModel.IsBusy), () =>
