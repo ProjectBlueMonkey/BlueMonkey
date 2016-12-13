@@ -11,7 +11,7 @@ namespace BlueMonkey.ViewModels
     public class LoginPageViewModel : BindableBase
     {
         private INavigationService _navigationService;
-        private ILoginService _loginServic;
+        private ILoginService _loginService;
         private IPageDialogService _pageDialogService;
 
         public DelegateCommand LoginCommand { get; }
@@ -26,7 +26,7 @@ namespace BlueMonkey.ViewModels
         public LoginPageViewModel(INavigationService navigationService, ILoginService loginService, IPageDialogService pageDialogService)
         {
             _navigationService = navigationService;
-            _loginServic = loginService;
+            _loginService = loginService;
             _pageDialogService = pageDialogService;
 
             this.LoginCommand = new DelegateCommand(async () => await LoginAsync(), () => !IsBusy)
@@ -38,7 +38,7 @@ namespace BlueMonkey.ViewModels
             try
             {
                 IsBusy = true;
-                if (!(await _loginServic.LoginAsync()))
+                if (!(await _loginService.LoginAsync()))
                 {
                     await _pageDialogService.DisplayAlertAsync(
                         "Information",
