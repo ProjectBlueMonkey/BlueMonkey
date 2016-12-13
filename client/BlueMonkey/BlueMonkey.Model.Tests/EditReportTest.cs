@@ -91,7 +91,7 @@ namespace BlueMonkey.Model.Tests
         }
 
         [Fact]
-        public async Task Save()
+        public async Task SaveAsync()
         {
             var expenseService = new Mock<IExpenseService>();
             var expense01 = new Expense();
@@ -121,7 +121,7 @@ namespace BlueMonkey.Model.Tests
                 })
                 .Returns(Task.CompletedTask);
             
-            await editReport.Save();
+            await editReport.SaveAsync();
 
             Assert.NotNull(savedReport);
             Assert.Equal("InputName", editReport.Name);

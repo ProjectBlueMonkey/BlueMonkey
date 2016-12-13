@@ -72,7 +72,7 @@ namespace BlueMonkey.Model
         /// Register or Update Report.
         /// </summary>
         /// <returns></returns>
-        public async Task Save()
+        public async Task SaveAsync()
         {
             await _expenseService.RegisterReport(
                 new Report
