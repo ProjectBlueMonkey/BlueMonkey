@@ -47,8 +47,6 @@ namespace BlueMonkey.ViewModels
             set { SetProperty(ref _expenses, value); }
         }
 
-        public DelegateCommand InitializeCommand { get; }
-
         /// <summary>
         /// Navigate to ExpenseSelectionPage Command.
         /// </summary>
@@ -70,11 +68,6 @@ namespace BlueMonkey.ViewModels
             _editReport = editReport;
             Name = editReport.ToReactivePropertyAsSynchronized(x => x.Name);
             Date = editReport.ToReactivePropertyAsSynchronized(x => x.Date);
-
-            InitializeCommand = new DelegateCommand(() =>
-            {
-                Expenses = editReport.SelectableExpenses.Where(x => x.IsSelected);
-            });
 
             NavigateExpenseSelectionCommand = new DelegateCommand(() =>
             {
@@ -108,6 +101,7 @@ namespace BlueMonkey.ViewModels
                     await _editReport.InitializeForUpdateReportAsync(reportId);
                 }
             }
+            Expenses = _editReport.SelectableExpenses.Where(x => x.IsSelected);
         }
     }
 }

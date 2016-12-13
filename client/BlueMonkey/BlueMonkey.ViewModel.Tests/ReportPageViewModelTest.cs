@@ -34,9 +34,6 @@ namespace BlueMonkey.ViewModel.Tests
 
             Assert.Null(actual.Expenses);
 
-            Assert.NotNull(actual.InitializeCommand);
-            Assert.True(actual.InitializeCommand.CanExecute());
-
             Assert.NotNull(actual.NavigateExpenseSelectionCommand);
             Assert.True(actual.NavigateExpenseSelectionCommand.CanExecute());
 
@@ -107,30 +104,6 @@ namespace BlueMonkey.ViewModel.Tests
         }
 
         [Fact]
-        public void InitializeCommand()
-        {
-            var navigationService = new Mock<INavigationService>();
-            var editReport = new Mock<IEditReport>();
-
-            var expense01 = new SelectableExpense(new Expense()) { IsSelected = false };
-            var expense02 = new SelectableExpense(new Expense()) { IsSelected = true };
-            var expenses = new ObservableCollection<SelectableExpense>(new[] { expense01, expense02 });
-            editReport
-                .Setup(m => m.SelectableExpenses)
-                .Returns(new ReadOnlyObservableCollection<SelectableExpense>(expenses));
-
-            var actual = new ReportPageViewModel(navigationService.Object, editReport.Object);
-
-            Assert.Null(actual.Expenses);
-
-            actual.InitializeCommand.Execute();
-
-            Assert.NotNull(actual.Expenses);
-            Assert.Equal(1, actual.Expenses.Count());
-            Assert.Equal(expense02, actual.Expenses.First());
-        }
-
-        [Fact]
         public void NavigateExpenseSelectionCommand()
         {
             var navigationService = new Mock<INavigationService>();
@@ -173,6 +146,14 @@ namespace BlueMonkey.ViewModel.Tests
         {
             var navigationService = new Mock<INavigationService>();
             var editReport = new Mock<IEditReport>();
+            var expense01 = new SelectableExpense(new Expense()) { IsSelected = false };
+            var expense02 = new SelectableExpense(new Expense()) { IsSelected = true };
+            var expenses = new ObservableCollection<SelectableExpense>(new[] { expense01, expense02 });
+            editReport
+                .Setup(m => m.SelectableExpenses)
+                .Returns(new ReadOnlyObservableCollection<SelectableExpense>(expenses));
+
+
 
             var actual = new ReportPageViewModel(navigationService.Object, editReport.Object);
 
@@ -181,6 +162,13 @@ namespace BlueMonkey.ViewModel.Tests
             actual.OnNavigatedTo(navigationParameter);
 
             editReport.Verify(m => m.InitializeForNewReportAsync(), Times.Once);
+
+            // Actually, it is not necessary when starting new registration.
+            // It is to simplify the implementation.
+            // Therefore, we have acquired Expense every time.
+            Assert.NotNull(actual.Expenses);
+            Assert.Equal(1, actual.Expenses.Count());
+            Assert.Equal(expense02, actual.Expenses.First());
         }
 
         [Fact]
@@ -188,6 +176,14 @@ namespace BlueMonkey.ViewModel.Tests
         {
             var navigationService = new Mock<INavigationService>();
             var editReport = new Mock<IEditReport>();
+            var expense01 = new SelectableExpense(new Expense()) { IsSelected = false };
+            var expense02 = new SelectableExpense(new Expense()) { IsSelected = true };
+            var expenses = new ObservableCollection<SelectableExpense>(new[] { expense01, expense02 });
+            editReport
+                .Setup(m => m.SelectableExpenses)
+                .Returns(new ReadOnlyObservableCollection<SelectableExpense>(expenses));
+
+
 
             var actual = new ReportPageViewModel(navigationService.Object, editReport.Object);
 
@@ -196,6 +192,10 @@ namespace BlueMonkey.ViewModel.Tests
             actual.OnNavigatedTo(navigationParameter);
 
             editReport.Verify(m => m.InitializeForUpdateReportAsync("reportId"), Times.Once);
+
+            Assert.NotNull(actual.Expenses);
+            Assert.Equal(1, actual.Expenses.Count());
+            Assert.Equal(expense02, actual.Expenses.First());
         }
     }
 }

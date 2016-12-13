@@ -2,12 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:blueMonkey="clr-namespace:BlueMonkey;assembly=BlueMonkey"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BlueMonkey.Views.ReportPage" Title="Report">
-  <ContentPage.Behaviors>
-    <blueMonkey:EventToCommandBehavior EventName="Appearing" Command="{Binding InitializeCommand}"/>
-  </ContentPage.Behaviors>
   <ContentPage.ToolbarItems>
     <ToolbarItem Text="Save" Command="{Binding SaveReportCommand}"/>
   </ContentPage.ToolbarItems>

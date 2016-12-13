@@ -69,7 +69,6 @@ namespace BlueMonkey.Model
         {
             Name = null;
             Date = _dateTimeService.Today;
-            _selectableExpenses.Clear();
             await Initialize(null);
         }
 
@@ -96,6 +95,7 @@ namespace BlueMonkey.Model
         /// <returns></returns>
         private async Task Initialize(string reportId)
         {
+            _selectableExpenses.Clear();
             var expenses = await _expenseService.GetExpensesAsync();
             foreach (var expense in expenses.Where(x => x.ReportId == null || x.ReportId == reportId).OrderBy(x => x.Date))
             {
