@@ -192,10 +192,10 @@ namespace BlueMonkey.ViewModel.Tests
             var actual = new ReportPageViewModel(navigationService.Object, editReport.Object);
 
             var navigationParameter = new NavigationParameters();
-            navigationParameter[ReportPageViewModel.ReportIdKey] = "T.B.D";
+            navigationParameter[ReportPageViewModel.ReportIdKey] = "reportId";
             actual.OnNavigatedTo(navigationParameter);
 
-            // TODO:
+            editReport.Verify(m => m.InitializeForUpdateReportAsync("reportId"), Times.Once);
         }
     }
 }

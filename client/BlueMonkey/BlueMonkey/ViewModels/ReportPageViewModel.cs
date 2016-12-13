@@ -105,7 +105,7 @@ namespace BlueMonkey.ViewModels
                 else
                 {
                     // Case : Update Report.
-
+                    await _editReport.InitializeForUpdateReportAsync(reportId);
                 }
             }
         }
