@@ -43,6 +43,7 @@
     <Compile Include="ViewModels\ExpenseListPageViewModel.cs" />
     <Compile Include="ViewModels\AddExpensePageViewModel.cs" />
     <Compile Include="ViewModels\ExpenseSelectionPageViewModel.cs" />
+    <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\ReceiptPageViewModel.cs" />
     <Compile Include="ViewModels\ReportListPageViewModel.cs" />
@@ -58,6 +59,9 @@
     </Compile>
     <Compile Include="Views\ExpenseSelectionPage.xaml.cs">
       <DependentUpon>ExpenseSelectionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ReceiptPage.xaml.cs">
       <DependentUpon>ReceiptPage.xaml</DependentUpon>
@@ -209,6 +213,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\ExpenseSelectionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
