@@ -56,13 +56,27 @@ namespace BlueMonkey.Model
             SelectableExpenses = new ReadOnlyObservableCollection<SelectableExpense>(_selectableExpenses);
         }
 
+        /// <summary>
+        /// Initialize for new registration.
+        /// </summary>
+        /// <returns></returns>
         public async Task InitializeForNewReportAsync()
         {
             Name = null;
             Date = _dateTimeService.Today;
             _selectableExpenses.Clear();
+            await Initialize(null);
+        }
+
+        /// <summary>
+        /// Initialization of common parts.
+        /// </summary>
+        /// <param name="reportId"></param>
+        /// <returns></returns>
+        private async Task Initialize(string reportId)
+        {
             var expenses = await _expenseService.GetExpensesAsync();
-            foreach (var expense in expenses.Where(x => x.ReportId == null))
+            foreach (var expense in expenses.Where(x => x.ReportId == reportId))
             {
                 _selectableExpenses.Add(new SelectableExpense(expense));
             }
