@@ -20,6 +20,7 @@ namespace BlueMonkey.LoginService.Droid
         public async Task<bool> LoginAsync()
         {
             var user = await _client.LoginAsync(Forms.Context, MobileServiceAuthenticationProvider.MicrosoftAccount);
+            // https://github.com/jamesmontemagno/MediaPlugin/issues/136
             await Task.Delay(100); // need... small delay
             return user != null;
         }
