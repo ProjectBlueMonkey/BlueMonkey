@@ -5,6 +5,7 @@ using Prism.Unity;
 using BlueMonkey.Views;
 using Xamarin.Forms;
 using Microsoft.Practices.Unity;
+using BlueMonkey.LoginService;
 
 namespace BlueMonkey
 {
@@ -22,6 +23,7 @@ namespace BlueMonkey
         protected override void RegisterTypes()
         {
             Container.RegisterType<IExpenseService, ExpenseService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ILoginService, LoginService.Local.LoginService>(new ContainerControlledLifetimeManager());
 
             Container.RegisterType<IEditReport, EditReport>(new ContainerControlledLifetimeManager());
 
