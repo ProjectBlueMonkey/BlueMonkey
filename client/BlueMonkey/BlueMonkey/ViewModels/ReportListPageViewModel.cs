@@ -4,17 +4,20 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using BlueMonkey.Business;
 using BlueMonkey.ExpenceServices;
+using BlueMonkey.Model;
 using Prism.Navigation;
+using Reactive.Bindings;
 
 namespace BlueMonkey.ViewModels
 {
     public class ReportListPageViewModel : BindableBase, INavigationAware
     {
         private readonly INavigationService _navigationService;
-        private readonly IExpenseService _expenseService;
-        public ObservableCollection<Report> Reports { get; } = new ObservableCollection<Report>();
+        private readonly IReferReport _referReport;
+        public ReadOnlyReactiveCollection<Report> Reports { get; }
         /// <summary>
         /// Add New Report Navigation Command.
         /// </summary>
@@ -24,11 +27,12 @@ namespace BlueMonkey.ViewModels
         /// Initialize Instance
         /// </summary>
         /// <param name="navigationService"></param>
-        /// <param name="expenseService"></param>
-        public ReportListPageViewModel(INavigationService navigationService, IExpenseService expenseService)
+        /// <param name="referReport"></param>
+        public ReportListPageViewModel(INavigationService navigationService, IReferReport referReport)
         {
             _navigationService = navigationService;
-            _expenseService = expenseService;
+            _referReport = referReport;
+            Reports = _referReport.Reports.ToReadOnlyReactiveCollection();
         }
 
         /// <summary>
@@ -45,13 +49,9 @@ namespace BlueMonkey.ViewModels
         {
         }
 
-        public async void OnNavigatedTo(NavigationParameters parameters)
+        public void OnNavigatedTo(NavigationParameters parameters)
         {
-            Reports.Clear();
-            foreach (var report in await _expenseService.GetReportsAsync())
-            {
-                Reports.Add(report);
-            }
+            _referReport.SearchAsync();
         }
     }
 }

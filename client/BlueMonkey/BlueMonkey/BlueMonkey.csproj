@@ -155,6 +155,10 @@
       <Project>{be7e48de-526b-4bfa-a8bb-1699fdad1cd1}</Project>
       <Name>BlueMonkey.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BlueMonkey.TimeService\BlueMonkey.TimeService.csproj">
+      <Project>{0c6dfdb3-febe-4d22-a0cb-5e3b599a9342}</Project>
+      <Name>BlueMonkey.TimeService</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\ReportListPage.xaml">
