@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using BlueMonkey.Business;
+using System.Threading.Tasks;
 
 namespace BlueMonkey.LoginService
 {
-    public class Class1
+    public interface ILoginService
     {
+        Task<AuthUser> LoginAsync();
     }
 }
