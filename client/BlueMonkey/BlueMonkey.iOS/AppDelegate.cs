@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
+﻿
+using BlueMonkey.LoginService;
+using BlueMonkey.LoginService.Azure.iOS;
 using Foundation;
-using UIKit;
-using Prism.Unity;
 using Microsoft.Practices.Unity;
 using Microsoft.WindowsAzure.MobileServices;
-using BlueMonkey.LoginService;
-using BlueMonkey.LoginService.iOS;
+using Prism.Unity;
+using UIKit;
 
 namespace BlueMonkey.iOS
 {

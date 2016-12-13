@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("BlueMonkey.LoginService.Droid.Resource", IsApplication=false)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("BlueMonkey.LoginService.Azure.Droid.Resource", IsApplication=false)]
 
-namespace BlueMonkey.LoginService.Droid
+namespace BlueMonkey.LoginService.Azure.Droid
 {
 	
 	

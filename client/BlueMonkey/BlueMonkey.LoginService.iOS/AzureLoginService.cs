@@ -8,7 +8,7 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-namespace BlueMonkey.LoginService.iOS
+namespace BlueMonkey.LoginService.Azure.iOS
 {
     public class AzureLoginService : ILoginService
     {

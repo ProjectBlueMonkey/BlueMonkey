@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace BlueMonkey.LoginService.Droid
+namespace BlueMonkey.LoginService.Azure.Droid
 {
     public class AzureLoginService : ILoginService
     {
