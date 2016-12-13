@@ -105,6 +105,10 @@
       <IsAppExtension>false</IsAppExtension>
       <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
+    <ProjectReference Include="..\BlueMonkey.LoginService\BlueMonkey.LoginService.csproj">
+      <Project>{31D77FDC-1919-42A3-8035-78767C87E4A7}</Project>
+      <Name>BlueMonkey.LoginService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlueMonkey\BlueMonkey.csproj">
       <Name>BlueMonkey</Name>
     </ProjectReference>
