@@ -6,6 +6,7 @@ using Prism.Unity;
 using BlueMonkey.Views;
 using Xamarin.Forms;
 using Microsoft.Practices.Unity;
+using BlueMonkey.LoginService;
 
 namespace BlueMonkey
 {
@@ -17,12 +18,13 @@ namespace BlueMonkey
         {
             InitializeComponent();
 
-            NavigationService.NavigateAsync("NavigationPage/MainPage");
+            NavigationService.NavigateAsync("LoginPage");
         }
 
         protected override void RegisterTypes()
         {
             Container.RegisterType<IExpenseService, ExpenseService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ILoginService, LoginService.Local.LoginService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IDateTimeService, DateTimeService>(new ContainerControlledLifetimeManager());
 
             Container.RegisterType<IEditReport, EditReport>(new ContainerControlledLifetimeManager());
@@ -38,6 +40,7 @@ namespace BlueMonkey
             Container.RegisterTypeForNavigation<AddReportPage>();
             Container.RegisterTypeForNavigation<ReportListPage>();
             Container.RegisterTypeForNavigation<ExpenseSelectionPage>();
+            Container.RegisterTypeForNavigation<LoginPage>();
         }
     }
 }
