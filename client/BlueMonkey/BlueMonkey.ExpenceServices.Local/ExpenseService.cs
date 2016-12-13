@@ -17,24 +17,38 @@ namespace BlueMonkey.ExpenceServices.Local
             var random = new Random();
             for (int i = 0; i < 10; i++)
             {
+                // Free expenses.
                 _expenses.Add(
                     new Expense()
                     {
-                        Id = $"ExpenseId{i}",
-                        Name = $"Expense{i}",
+                        Id = $"ExpenseId_x_{i}",
+                        Name = $"Expense_x_{i}",
                         Amount = random.Next(1000, 20000)
                     });
             }
 
             for (int i = 0; i < 10; i++)
             {
-                _reports.Add(
-                    new Report
-                    {
-                        Id = $"ReportId{i}",
-                        Name = $"Report{i}",
-                        Date = DateTime.Today - TimeSpan.FromDays(20 - i)
-                    });
+                var report = new Report
+                {
+                    Id = $"ReportId{i}",
+                    Name = $"Report{i}",
+                    Date = DateTime.Today - TimeSpan.FromDays(20 - i)
+                };
+                _reports.Add(report);
+                for (int j = 0; j < 3; j++)
+                {
+                    // registerd expenses.
+                    _expenses.Add(
+                        new Expense()
+                        {
+                            Id = $"ExpenseId_{i}_{j}",
+                            Name = $"Expense_{i}_{j}",
+                            Amount = random.Next(1000, 20000),
+                            ReportId = report.Id
+                        });
+
+                }
             }
         }
 

@@ -58,9 +58,11 @@ namespace BlueMonkey.Model.Tests
         public async Task InitializeForNewReportAsync()
         {
             var expenseService = new Mock<IExpenseService>();
-            var expense01 = new Expense();
-            var expense02 = new Expense();
-            var expenses = new [] { expense01, expense02 };
+            var expense01 = new Expense { Id = "Expense01", Date = DateTime.MinValue + TimeSpan.FromDays(1) };
+            var expense02 = new Expense { Id = "Expense02", Date = DateTime.MinValue + TimeSpan.FromDays(2) };
+            var expense03 = new Expense { Id = "Expense03", Date = DateTime.MinValue + TimeSpan.FromDays(3), ReportId = "report01" };
+            var expense04 = new Expense { Id = "Expense04", Date = DateTime.MinValue + TimeSpan.FromDays(4), ReportId = "report02" };
+            var expenses = new [] { expense01, expense02, expense03, expense04 };
             expenseService
                 .Setup(m => m.GetExpensesAsync())
                 .ReturnsAsync(expenses);
@@ -89,6 +91,65 @@ namespace BlueMonkey.Model.Tests
             Assert.False(actual.SelectableExpenses[1].IsSelected);
             Assert.Equal(expense02.Id, actual.SelectableExpenses[1].Id);
         }
+
+        [Fact]
+        public async Task InitializeForNewReportAsyncWhenReportIdIsNull()
+        {
+            var expenseService = new Mock<IExpenseService>();
+            var dateTimeService = new Mock<IDateTimeService>();
+            var editReport = new EditReport(expenseService.Object, dateTimeService.Object);
+            var actuial = await Assert.ThrowsAsync<ArgumentNullException>(() => editReport.InitializeForUpdateReportAsync(null));
+
+            Assert.Equal("reportId", actuial.ParamName);
+        }
+
+        [Fact]
+        public async Task InitializeForUpdateAsync()
+        {
+            var expenseService = new Mock<IExpenseService>();
+            var expense01 = new Expense { Id = "Expense01", Date = DateTime.MinValue + TimeSpan.FromDays(4) };
+            var expense02 = new Expense { Id = "Expense02", Date = DateTime.MinValue + TimeSpan.FromDays(3) };
+            var expense03 = new Expense { Id = "Expense03", Date = DateTime.MinValue + TimeSpan.FromDays(2), ReportId = "report01" };
+            var expense04 = new Expense { Id = "Expense04", Date = DateTime.MinValue + TimeSpan.FromDays(1), ReportId = "report02" };
+            var expenses = new[] { expense01, expense02, expense03, expense04 };
+            expenseService
+                .Setup(m => m.GetExpensesAsync())
+                .ReturnsAsync(expenses);
+
+            var reportDate = DateTime.Parse("2100/01/01");
+            var report = new Report { Id = "report01", Name = "reportName", Date = reportDate };
+            expenseService
+                .Setup(m => m.GetReportAsync("report01"))
+                .ReturnsAsync(report);
+
+            var dateTimeService = new Mock<IDateTimeService>();
+            dateTimeService
+                .Setup(m => m.Today)
+                .Returns(DateTime.MaxValue);
+
+            var actual = new EditReport(expenseService.Object, dateTimeService.Object);
+
+            await actual.InitializeForUpdateReportAsync("report01");
+
+            Assert.Equal("reportName", actual.Name);
+
+            // The initial value is today.
+            // Consider the case when it is the next day at the time of execution.
+            Assert.Equal(reportDate, actual.Date);
+
+            Assert.NotNull(actual.SelectableExpenses);
+            Assert.Equal(3, actual.SelectableExpenses.Count);
+
+            Assert.True(actual.SelectableExpenses[0].IsSelected);
+            Assert.Equal(expense03.Id, actual.SelectableExpenses[0].Id);
+
+            Assert.False(actual.SelectableExpenses[1].IsSelected);
+            Assert.Equal(expense02.Id, actual.SelectableExpenses[1].Id);
+
+            Assert.False(actual.SelectableExpenses[2].IsSelected);
+            Assert.Equal(expense01.Id, actual.SelectableExpenses[2].Id);
+        }
+
 
         [Fact]
         public async Task SaveAsync()

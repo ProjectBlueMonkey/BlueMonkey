@@ -23,6 +23,11 @@ namespace BlueMonkey.Model
         /// </summary>
         private readonly IDateTimeService _dateTimeService;
 
+        /// <summary>
+        /// Original Report get from service
+        /// </summary>
+        private Report _originalReport;
+
         private string _name;
         public string Name
         {
@@ -69,6 +74,22 @@ namespace BlueMonkey.Model
         }
 
         /// <summary>
+        /// Initialize for update report.
+        /// </summary>
+        /// <param name="reportId"></param>
+        /// <returns></returns>
+        public async Task InitializeForUpdateReportAsync(string reportId)
+        {
+            if(reportId == null) throw new ArgumentNullException(nameof(reportId));
+
+            // Since Report is not deleted, null check is not performed.
+            _originalReport = await _expenseService.GetReportAsync(reportId);
+            Name = _originalReport.Name;
+            Date = _originalReport.Date;
+            await Initialize(reportId);
+        }
+
+        /// <summary>
         /// Initialization of common parts.
         /// </summary>
         /// <param name="reportId"></param>
@@ -76,9 +97,12 @@ namespace BlueMonkey.Model
         private async Task Initialize(string reportId)
         {
             var expenses = await _expenseService.GetExpensesAsync();
-            foreach (var expense in expenses.Where(x => x.ReportId == reportId))
+            foreach (var expense in expenses.Where(x => x.ReportId == null || x.ReportId == reportId).OrderBy(x => x.Date))
             {
-                _selectableExpenses.Add(new SelectableExpense(expense));
+                var isSelected =
+                    reportId != null
+                    && expense.ReportId == reportId;
+                _selectableExpenses.Add(new SelectableExpense(expense) { IsSelected = isSelected });
             }
         }
 
