@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BlueMonkey.LoginService.Droid
 {
-    public class Class1
+    public class AzureLoginService
     {
     }
 }
