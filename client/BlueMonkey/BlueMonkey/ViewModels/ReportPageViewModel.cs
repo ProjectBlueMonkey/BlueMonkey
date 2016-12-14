@@ -85,11 +85,7 @@ namespace BlueMonkey.ViewModels
         {
         }
 
-        public void OnNavigatedTo(NavigationParameters parameters)
-        {
-        }
-
-        public async void OnNavigatingTo(NavigationParameters parameters)
+        public async void OnNavigatedTo(NavigationParameters parameters)
         {
             if (parameters.ContainsKey(ReportIdKey))
             {
@@ -106,6 +102,10 @@ namespace BlueMonkey.ViewModels
                 }
             }
             Expenses = _editReport.SelectableExpenses.Where(x => x.IsSelected);
+        }
+
+        public void OnNavigatingTo(NavigationParameters parameters)
+        {
         }
     }
 }
