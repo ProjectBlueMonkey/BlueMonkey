@@ -147,5 +147,19 @@ namespace BlueMonkey.ViewModel.Tests
 
             referReport.Verify(m => m.SearchAsync(), Times.Once);
         }
+
+        [Fact]
+        public void OnNavigatingTo()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var referReport = new Mock<IReferReport>();
+            referReport
+                .Setup(m => m.Reports)
+                .Returns(new ReadOnlyObservableCollection<Report>(new ObservableCollection<Report>()));
+
+            var actual = new ReportListPageViewModel(navigationService.Object, referReport.Object);
+
+            actual.OnNavigatingTo(null);
+        }
     }
 }
