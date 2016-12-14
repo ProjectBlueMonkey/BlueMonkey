@@ -38,7 +38,6 @@
     <Compile Include="BehaviorBase.cs" />
     <Compile Include="EventToCommandBehavior.cs" />
     <Compile Include="ItemSelectedToCommandBehavior.cs" />
-    <Compile Include="NotSelectableListViewBehavior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AddReportPageViewModel.cs" />
     <Compile Include="ViewModels\ChartPageViewModel.cs" />
