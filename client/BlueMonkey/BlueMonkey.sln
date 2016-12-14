@@ -31,9 +31,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.LoginService", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.LoginService.Local", "BlueMonkey.LoginService.Local\BlueMonkey.LoginService.Local.csproj", "{FC6A6595-48D8-41A0-91C6-36E02FA667B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.LoginService.Azure.Droid", "BlueMonkey.LoginService.Droid\BlueMonkey.LoginService.Azure.Droid.csproj", "{8E113118-1E6E-4BD5-BD38-33DE1D6EE786}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.LoginService.Azure.Droid", "BlueMonkey.LoginService.Azure.Droid\BlueMonkey.LoginService.Azure.Droid.csproj", "{8E113118-1E6E-4BD5-BD38-33DE1D6EE786}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.LoginService.Azure.iOS", "BlueMonkey.LoginService.iOS\BlueMonkey.LoginService.Azure.iOS.csproj", "{A2D44EFE-2D2D-4D64-B118-8C60A472886E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.LoginService.Azure.iOS", "BlueMonkey.LoginService.Azure.iOS\BlueMonkey.LoginService.Azure.iOS.csproj", "{A2D44EFE-2D2D-4D64-B118-8C60A472886E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
