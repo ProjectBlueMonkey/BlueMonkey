@@ -51,7 +51,6 @@ namespace BlueMonkey.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
                 await _pageDialogService.DisplayAlertAsync(
                     "Information",
                     "Login failed.",
