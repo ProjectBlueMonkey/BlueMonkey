@@ -103,5 +103,9 @@ namespace BlueMonkey.ViewModels
             }
             Expenses = _editReport.SelectableExpenses.Where(x => x.IsSelected);
         }
+
+        public void OnNavigatingTo(NavigationParameters parameters)
+        {
+        }
     }
 }
