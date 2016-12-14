@@ -6,19 +6,12 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BlueMonkey.Views.ReportListPage"
              Title="Report List">
-  <ContentPage.Resources>
-    <ResourceDictionary>
-      <blueMonkey:ItemTappedEventArgsToItemConverter x:Key="ItemTappedEventArgsToItemConverter"/>
-    </ResourceDictionary>
-  </ContentPage.Resources>
   <ContentPage.ToolbarItems>
     <ToolbarItem Text="+" Command="{Binding AddReportCommand}"/>
   </ContentPage.ToolbarItems>
   <ListView ItemsSource="{Binding Reports}">
     <ListView.Behaviors>
-      <blueMonkey:EventToCommandBehavior EventName="ItemTapped" 
-                                         Command="{Binding UpdateReportCommand}"
-                                         Converter="{StaticResource ItemTappedEventArgsToItemConverter}"/>
+      <blueMonkey:ItemSelectedToCommandBehavior Command="{Binding UpdateReportCommand}"/>
     </ListView.Behaviors>
     <ListView.ItemTemplate>
       <DataTemplate>

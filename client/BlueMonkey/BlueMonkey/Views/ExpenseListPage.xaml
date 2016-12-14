@@ -5,11 +5,6 @@
              xmlns:blueMonkey="clr-namespace:BlueMonkey;assembly=BlueMonkey"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BlueMonkey.Views.ExpenseListPage" Title="Expense List">
-  <ContentPage.Resources>
-    <ResourceDictionary>
-      <blueMonkey:ItemTappedEventArgsToItemConverter x:Key="ItemTappedEventArgsToItemConverter"/>
-    </ResourceDictionary>
-  </ContentPage.Resources>
   <ContentPage.ToolbarItems>
     <ToolbarItem Text="+" Command="{Binding AddExpenseCommand}"/>
   </ContentPage.ToolbarItems>
@@ -17,9 +12,7 @@
   <StackLayout>
     <ListView ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedExpense}">
       <ListView.Behaviors>
-        <blueMonkey:EventToCommandBehavior EventName="ItemTapped" 
-                                           Command="{Binding AddExpenseCommand}" 
-                                           Converter="{StaticResource ItemTappedEventArgsToItemConverter}"/>
+        <blueMonkey:ItemSelectedToCommandBehavior Command="{Binding AddExpenseCommand}"/>
       </ListView.Behaviors>
       <ListView.ItemTemplate>
         <DataTemplate>
