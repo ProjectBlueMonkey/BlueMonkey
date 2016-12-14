@@ -49,7 +49,7 @@ namespace BlueMonkey.ViewModels
                 }
                 await _navigationService.NavigateAsync("/NavigationPage/MainPage");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 await _pageDialogService.DisplayAlertAsync(
                     "Information",
