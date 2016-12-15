@@ -51,7 +51,7 @@ namespace BlueMonkey.Model
         /// </summary>
         public ReadOnlyObservableCollection<SelectableExpense> SelectableExpenses { get; }
         /// <summary>
-        /// Initialize Instance.
+        /// InitializeAsync Instance.
         /// </summary>
         /// <param name="expenseService"></param>
         public EditReport(IExpenseService expenseService, IDateTimeService dateTimeService)
@@ -62,18 +62,18 @@ namespace BlueMonkey.Model
         }
 
         /// <summary>
-        /// Initialize for new registration.
+        /// InitializeAsync for new registration.
         /// </summary>
         /// <returns></returns>
         public async Task InitializeForNewReportAsync()
         {
             Name = null;
             Date = _dateTimeService.Today;
-            await Initialize(null);
+            await InitializeAsync(null);
         }
 
         /// <summary>
-        /// Initialize for update report.
+        /// InitializeAsync for update report.
         /// </summary>
         /// <param name="reportId"></param>
         /// <returns></returns>
@@ -85,7 +85,7 @@ namespace BlueMonkey.Model
             _originalReport = await _expenseService.GetReportAsync(reportId);
             Name = _originalReport.Name;
             Date = _originalReport.Date;
-            await Initialize(reportId);
+            await InitializeAsync(reportId);
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace BlueMonkey.Model
         /// </summary>
         /// <param name="reportId"></param>
         /// <returns></returns>
-        private async Task Initialize(string reportId)
+        private async Task InitializeAsync(string reportId)
         {
             _selectableExpenses.Clear();
             var expenses = await _expenseService.GetExpensesAsync();
