@@ -115,6 +115,7 @@ namespace BlueMonkey.Model
             await _expenseService.RegisterReport(
                 new Report
                 {
+                    Id = _originalReport?.Id,
                     Name = Name,
                     Date = Date
                 },

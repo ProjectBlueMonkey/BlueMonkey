@@ -192,5 +192,63 @@ namespace BlueMonkey.Model.Tests
             Assert.Equal(1, savedExpenses.Count());
             Assert.Equal(expense02.Id, savedExpenses.First().Id);
         }
+
+        [Fact]
+        public async Task SaceForUpdateAsync()
+        {
+            var expenseService = new Mock<IExpenseService>();
+            var expense01 = new Expense { Id = "Expense01", Date = DateTime.MinValue + TimeSpan.FromDays(4) };
+            var expense02 = new Expense { Id = "Expense02", Date = DateTime.MinValue + TimeSpan.FromDays(3) };
+            var expenses = new[] { expense01, expense02 };
+            expenseService
+                .Setup(m => m.GetUnregisteredExpensesAsync())
+                .ReturnsAsync(expenses);
+
+            var expense03 = new Expense { Id = "Expense03", Date = DateTime.MinValue + TimeSpan.FromDays(2), ReportId = "report01" };
+            expenseService
+                .Setup(m => m.GetExpensesFromReportIdAsync("report01"))
+                .ReturnsAsync(new[] { expense03 });
+
+            var report = new Report { Id = "report01", Name = "reportName", Date = DateTime.MinValue };
+            expenseService
+                .Setup(m => m.GetReportAsync("report01"))
+                .ReturnsAsync(report);
+
+            var dateTimeService = new Mock<IDateTimeService>();
+
+            var editReport = new EditReport(expenseService.Object, dateTimeService.Object);
+
+            await editReport.InitializeForUpdateReportAsync("report01");
+
+            editReport.Name = "UpdatedName";
+            editReport.Date = DateTime.MaxValue;
+            editReport.SelectableExpenses[0].IsSelected = !editReport.SelectableExpenses[0].IsSelected;
+            editReport.SelectableExpenses[1].IsSelected = !editReport.SelectableExpenses[1].IsSelected;
+            editReport.SelectableExpenses[2].IsSelected = !editReport.SelectableExpenses[2].IsSelected;
+
+            Report savedReport = null;
+            List<Expense> savedExpenses = null;
+            expenseService
+                .Setup(m => m.RegisterReport(It.IsAny<Report>(), It.IsAny<IEnumerable<Expense>>()))
+                .Callback<Report, IEnumerable<Expense>>((argReport, argExpenses) =>
+                {
+                    savedReport = argReport;
+                    savedExpenses = argExpenses.ToList();
+                })
+                .Returns(Task.CompletedTask);
+
+            await editReport.SaveAsync();
+
+            Assert.NotNull(savedReport);
+            Assert.Equal("report01", savedReport.Id);
+            Assert.Equal("UpdatedName", savedReport.Name);
+            Assert.Equal(DateTime.MaxValue, savedReport.Date);
+
+            Assert.NotNull(savedExpenses);
+            Assert.Equal(2, savedExpenses.Count);
+            Assert.Equal(expense02.Id, savedExpenses[0].Id);
+            Assert.Equal(expense01.Id, savedExpenses[1].Id);
+        }
+
     }
 }
