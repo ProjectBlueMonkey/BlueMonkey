@@ -60,12 +60,10 @@ namespace BlueMonkey.Model.Tests
             var expenseService = new Mock<IExpenseService>();
             var expense01 = new Expense { Id = "Expense01", Date = DateTime.MinValue + TimeSpan.FromDays(1) };
             var expense02 = new Expense { Id = "Expense02", Date = DateTime.MinValue + TimeSpan.FromDays(2) };
-            var expense03 = new Expense { Id = "Expense03", Date = DateTime.MinValue + TimeSpan.FromDays(3), ReportId = "report01" };
-            var expense04 = new Expense { Id = "Expense04", Date = DateTime.MinValue + TimeSpan.FromDays(4), ReportId = "report02" };
-            var expenses = new [] { expense01, expense02, expense03, expense04 };
+            var unregisteredExpenses = new [] { expense01, expense02 };
             expenseService
-                .Setup(m => m.GetExpensesAsync())
-                .ReturnsAsync(expenses);
+                .Setup(m => m.GetUnregisteredExpensesAsync())
+                .ReturnsAsync(unregisteredExpenses);
 
             var dateTimeService = new Mock<IDateTimeService>();
             dateTimeService
@@ -110,11 +108,13 @@ namespace BlueMonkey.Model.Tests
             var expense01 = new Expense { Id = "Expense01", Date = DateTime.MinValue + TimeSpan.FromDays(4) };
             var expense02 = new Expense { Id = "Expense02", Date = DateTime.MinValue + TimeSpan.FromDays(3) };
             var expense03 = new Expense { Id = "Expense03", Date = DateTime.MinValue + TimeSpan.FromDays(2), ReportId = "report01" };
-            var expense04 = new Expense { Id = "Expense04", Date = DateTime.MinValue + TimeSpan.FromDays(1), ReportId = "report02" };
-            var expenses = new[] { expense01, expense02, expense03, expense04 };
+            var expenses = new[] { expense01, expense02 };
             expenseService
-                .Setup(m => m.GetExpensesAsync())
+                .Setup(m => m.GetUnregisteredExpensesAsync())
                 .ReturnsAsync(expenses);
+            expenseService
+                .Setup(m => m.GetExpensesFromReportIdAsync("report01"))
+                .ReturnsAsync(new[] { expense03 });
 
             var reportDate = DateTime.Parse("2100/01/01");
             var report = new Report { Id = "report01", Name = "reportName", Date = reportDate };
@@ -159,7 +159,7 @@ namespace BlueMonkey.Model.Tests
             var expense02 = new Expense();
             var expenses = new[] { expense01, expense02 };
             expenseService
-                .Setup(m => m.GetExpensesAsync())
+                .Setup(m => m.GetUnregisteredExpensesAsync())
                 .ReturnsAsync(expenses);
 
             var dateTimeService = new Mock<IDateTimeService>();

@@ -69,7 +69,8 @@ namespace BlueMonkey.Model
         {
             Name = null;
             Date = _dateTimeService.Today;
-            await InitializeAsync(null);
+
+            await InitializeAsync(new Expense[] { });
         }
 
         /// <summary>
@@ -85,24 +86,23 @@ namespace BlueMonkey.Model
             _originalReport = await _expenseService.GetReportAsync(reportId);
             Name = _originalReport.Name;
             Date = _originalReport.Date;
-            await InitializeAsync(reportId);
+
+            await InitializeAsync(await _expenseService.GetExpensesFromReportIdAsync(reportId));
         }
 
         /// <summary>
         /// Initialization of common parts.
         /// </summary>
-        /// <param name="reportId"></param>
+        /// <param name="expensesForReport"></param>
         /// <returns></returns>
-        private async Task InitializeAsync(string reportId)
+        private async Task InitializeAsync(IEnumerable<Expense> expensesForReport)
         {
+            var expenses = expensesForReport.Concat(await _expenseService.GetUnregisteredExpensesAsync());
+
             _selectableExpenses.Clear();
-            var expenses = await _expenseService.GetExpensesAsync();
-            foreach (var expense in expenses.Where(x => x.ReportId == null || x.ReportId == reportId).OrderBy(x => x.Date))
+            foreach (var expense in expenses.OrderBy(x => x.Date))
             {
-                var isSelected =
-                    reportId != null
-                    && expense.ReportId == reportId;
-                _selectableExpenses.Add(new SelectableExpense(expense) { IsSelected = isSelected });
+                _selectableExpenses.Add(new SelectableExpense(expense) { IsSelected = expense.ReportId != null });
             }
         }
 

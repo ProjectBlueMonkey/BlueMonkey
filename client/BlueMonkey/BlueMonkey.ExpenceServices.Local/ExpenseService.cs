@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,6 +56,16 @@ namespace BlueMonkey.ExpenceServices.Local
         public Task<IEnumerable<Expense>> GetExpensesAsync()
         {
             return Task.FromResult(_expenses.AsEnumerable());
+        }
+
+        public Task<IEnumerable<Expense>> GetExpensesFromReportIdAsync(string reportId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Expense>> GetUnregisteredExpensesAsync()
+        {
+            throw new NotImplementedException();
         }
 
         public Task<IEnumerable<Report>> GetReportsAsync()
