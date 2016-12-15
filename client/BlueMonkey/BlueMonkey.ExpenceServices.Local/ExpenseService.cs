@@ -82,8 +82,23 @@ namespace BlueMonkey.ExpenceServices.Local
         {
             return Task.Run(() =>
             {
-                report.Id = $"ReportId{_reports.Count}";
-                _reports.Add(report);
+                if (report.Id == null)
+                {
+                    // Create new report.
+                    report.Id = $"ReportId{_reports.Count}";
+                    _reports.Add(report);
+                }
+                else
+                {
+                    // Update report.
+                    var originalReport = _reports.Single(x => x.Id == report.Id);
+                    originalReport.Name = report.Name;
+                    originalReport.Date = report.Date;
+                    foreach (var expense in _expenses.Where(x => x.ReportId == report.Id))
+                    {
+                        expense.ReportId = null;
+                    }
+                }
                 foreach (var expense in expenses)
                 {
                     _expenses.Single(x => x.Id == expense.Id).ReportId = report.Id;
