@@ -51,7 +51,7 @@ namespace BlueMonkey.Model
         /// </summary>
         public ReadOnlyObservableCollection<SelectableExpense> SelectableExpenses { get; }
         /// <summary>
-        /// InitializeAsync Instance.
+        /// Initialize Instance.
         /// </summary>
         /// <param name="expenseService"></param>
         public EditReport(IExpenseService expenseService, IDateTimeService dateTimeService)
@@ -62,7 +62,7 @@ namespace BlueMonkey.Model
         }
 
         /// <summary>
-        /// InitializeAsync for new registration.
+        /// Initialize for new registration.
         /// </summary>
         /// <returns></returns>
         public async Task InitializeForNewReportAsync()
@@ -74,7 +74,7 @@ namespace BlueMonkey.Model
         }
 
         /// <summary>
-        /// InitializeAsync for update report.
+        /// Initialize for update report.
         /// </summary>
         /// <param name="reportId"></param>
         /// <returns></returns>
