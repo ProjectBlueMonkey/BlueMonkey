@@ -60,7 +60,7 @@ namespace BlueMonkey.ExpenceServices.Local
 
         public Task<IEnumerable<Expense>> GetExpensesFromReportIdAsync(string reportId)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(_expenses.Where(expense => expense.ReportId == reportId));
         }
 
         public Task<IEnumerable<Expense>> GetUnregisteredExpensesAsync()
