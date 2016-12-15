@@ -185,8 +185,9 @@ namespace BlueMonkey.Model.Tests
             await editReport.SaveAsync();
 
             Assert.NotNull(savedReport);
-            Assert.Equal("InputName", editReport.Name);
-            Assert.Equal(DateTime.MinValue, editReport.Date);
+            Assert.Null(savedReport.Id);
+            Assert.Equal("InputName", savedReport.Name);
+            Assert.Equal(DateTime.MinValue, savedReport.Date);
 
             Assert.NotNull(savedExpenses);
             Assert.Equal(1, savedExpenses.Count());

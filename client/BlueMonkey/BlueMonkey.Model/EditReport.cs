@@ -67,6 +67,7 @@ namespace BlueMonkey.Model
         /// <returns></returns>
         public async Task InitializeForNewReportAsync()
         {
+            _originalReport = null;
             Name = null;
             Date = _dateTimeService.Today;
 
