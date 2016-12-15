@@ -7,6 +7,7 @@ using BlueMonkey.Views;
 using Xamarin.Forms;
 using Microsoft.Practices.Unity;
 using BlueMonkey.LoginService;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace BlueMonkey
 {
@@ -23,8 +24,9 @@ namespace BlueMonkey
 
         protected override void RegisterTypes()
         {
+            Container.RegisterInstance<IMobileServiceClient>(new MobileServiceClient(Secrets.ServerUri));
+
             Container.RegisterType<IExpenseService, ExpenseService>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<ILoginService, LoginService.Local.LoginService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IDateTimeService, DateTimeService>(new ContainerControlledLifetimeManager());
 
             Container.RegisterType<IEditReport, EditReport>(new ContainerControlledLifetimeManager());
