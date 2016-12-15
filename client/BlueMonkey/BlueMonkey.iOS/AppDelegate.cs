@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
+﻿
+using BlueMonkey.LoginService;
+using BlueMonkey.LoginService.Azure.iOS;
 using Foundation;
-using UIKit;
-using Prism.Unity;
 using Microsoft.Practices.Unity;
+using Microsoft.WindowsAzure.MobileServices;
+using Prism.Unity;
+using UIKit;
 
 namespace BlueMonkey.iOS
 {
@@ -25,6 +25,7 @@ namespace BlueMonkey.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            CurrentPlatform.Init();
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);
@@ -35,7 +36,7 @@ namespace BlueMonkey.iOS
     {
         public void RegisterTypes(IUnityContainer container)
         {
-
+            container.RegisterType<ILoginService, AzureLoginService>(new ContainerControlledLifetimeManager());
         }
     }
 

@@ -4,6 +4,7 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace BlueMonkey.ViewModels
@@ -46,7 +47,6 @@ namespace BlueMonkey.ViewModels
                         "OK");
                     return;
                 }
-
                 await _navigationService.NavigateAsync("/NavigationPage/MainPage");
             }
             catch (Exception)
