@@ -57,5 +57,9 @@ namespace BlueMonkey.ViewModels
                 }
             }
         }
+
+        public void OnNavigatingTo(NavigationParameters parameters)
+        {
+        }
     }
 }

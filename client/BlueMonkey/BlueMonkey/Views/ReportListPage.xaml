@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:blueMonkey="clr-namespace:BlueMonkey;assembly=BlueMonkey"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BlueMonkey.Views.ReportListPage"
              Title="Report List">
@@ -9,6 +10,9 @@
     <ToolbarItem Text="+" Command="{Binding AddReportCommand}"/>
   </ContentPage.ToolbarItems>
   <ListView ItemsSource="{Binding Reports}">
+    <ListView.Behaviors>
+      <blueMonkey:ItemSelectedToCommandBehavior Command="{Binding UpdateReportCommand}"/>
+    </ListView.Behaviors>
     <ListView.ItemTemplate>
       <DataTemplate>
         <TextCell Text="{Binding Name}"/>

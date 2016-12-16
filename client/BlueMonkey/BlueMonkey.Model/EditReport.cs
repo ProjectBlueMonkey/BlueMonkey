@@ -23,6 +23,11 @@ namespace BlueMonkey.Model
         /// </summary>
         private readonly IDateTimeService _dateTimeService;
 
+        /// <summary>
+        /// Original Report get from service
+        /// </summary>
+        private Report _originalReport;
+
         private string _name;
         public string Name
         {
@@ -56,15 +61,49 @@ namespace BlueMonkey.Model
             SelectableExpenses = new ReadOnlyObservableCollection<SelectableExpense>(_selectableExpenses);
         }
 
+        /// <summary>
+        /// Initialize for new registration.
+        /// </summary>
+        /// <returns></returns>
         public async Task InitializeForNewReportAsync()
         {
+            _originalReport = null;
             Name = null;
             Date = _dateTimeService.Today;
+
+            await InitializeAsync(new Expense[] { });
+        }
+
+        /// <summary>
+        /// Initialize for update report.
+        /// </summary>
+        /// <param name="reportId"></param>
+        /// <returns></returns>
+        public async Task InitializeForUpdateReportAsync(string reportId)
+        {
+            if(reportId == null) throw new ArgumentNullException(nameof(reportId));
+
+            // Since Report is not deleted, null check is not performed.
+            _originalReport = await _expenseService.GetReportAsync(reportId);
+            Name = _originalReport.Name;
+            Date = _originalReport.Date;
+
+            await InitializeAsync(await _expenseService.GetExpensesFromReportIdAsync(reportId));
+        }
+
+        /// <summary>
+        /// Initialization of common parts.
+        /// </summary>
+        /// <param name="expensesForReport"></param>
+        /// <returns></returns>
+        private async Task InitializeAsync(IEnumerable<Expense> expensesForReport)
+        {
+            var expenses = expensesForReport.Concat(await _expenseService.GetUnregisteredExpensesAsync());
+
             _selectableExpenses.Clear();
-            var expenses = await _expenseService.GetExpensesAsync();
-            foreach (var expense in expenses.Where(x => x.ReportId == null))
+            foreach (var expense in expenses.OrderBy(x => x.Date))
             {
-                _selectableExpenses.Add(new SelectableExpense(expense));
+                _selectableExpenses.Add(new SelectableExpense(expense) { IsSelected = expense.ReportId != null });
             }
         }
 
@@ -77,6 +116,7 @@ namespace BlueMonkey.Model
             await _expenseService.RegisterReport(
                 new Report
                 {
+                    Id = _originalReport?.Id,
                     Name = Name,
                     Date = Date
                 },

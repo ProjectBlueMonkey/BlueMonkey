@@ -2,18 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:blueMonkey="clr-namespace:BlueMonkey;assembly=BlueMonkey"
              prism:ViewModelLocator.AutowireViewModel="True"
-             xmlns:b="clr-namespace:BlueMonkey;assembly=BlueMonkey"
              x:Class="BlueMonkey.Views.ExpenseListPage" Title="Expense List">
-
   <ContentPage.ToolbarItems>
     <ToolbarItem Text="+" Command="{Binding AddExpenseCommand}"/>
   </ContentPage.ToolbarItems>
 
   <StackLayout>
-    <ListView x:Name="_listView" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedExpense}">
+    <ListView ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedExpense}">
       <ListView.Behaviors>
-        <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding AddExpenseCommand}" CommandParameter="{Binding SelectedItem, Source={x:Reference _listView}}" />        
+        <blueMonkey:ItemSelectedToCommandBehavior Command="{Binding AddExpenseCommand}"/>
       </ListView.Behaviors>
       <ListView.ItemTemplate>
         <DataTemplate>

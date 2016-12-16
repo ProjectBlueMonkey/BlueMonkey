@@ -90,6 +90,34 @@ namespace BlueMonkey.ViewModel.Tests
         }
 
         [Fact]
+        public void UpdateReportCommand()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var referReport = new Mock<IReferReport>();
+            referReport
+                .Setup(m => m.Reports)
+                .Returns(new ReadOnlyObservableCollection<Report>(new ObservableCollection<Report>()));
+
+            var actual = new ReportListPageViewModel(navigationService.Object, referReport.Object);
+
+            bool calledNavigationAsync = false;
+            navigationService
+                .Setup(m => m.NavigateAsync("ReportPage", It.IsAny<NavigationParameters>(), null, true))
+                .Callback<string, NavigationParameters, bool?, bool>((name, parameter, useModalNavigation, animated) =>
+                {
+                    calledNavigationAsync = true;
+                    Assert.NotNull(parameter);
+                    Assert.Equal(1, parameter.Count);
+                    Assert.True(parameter.ContainsKey(ReportPageViewModel.ReportIdKey));
+                    Assert.Equal("reportId", parameter[ReportPageViewModel.ReportIdKey]);
+                });
+            actual.UpdateReportCommand.Execute(new Report { Id = "reportId" });
+
+            Assert.True(calledNavigationAsync);
+
+        }
+
+        [Fact]
         public void OnNavigatedFrom()
         {
             var navigationService = new Mock<INavigationService>();
@@ -118,6 +146,20 @@ namespace BlueMonkey.ViewModel.Tests
             actual.OnNavigatedTo(null);
 
             referReport.Verify(m => m.SearchAsync(), Times.Once);
+        }
+
+        [Fact]
+        public void OnNavigatingTo()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var referReport = new Mock<IReferReport>();
+            referReport
+                .Setup(m => m.Reports)
+                .Returns(new ReadOnlyObservableCollection<Report>(new ObservableCollection<Report>()));
+
+            var actual = new ReportListPageViewModel(navigationService.Object, referReport.Object);
+
+            actual.OnNavigatingTo(null);
         }
     }
 }

@@ -29,6 +29,12 @@ namespace BlueMonkey.Model
         /// <returns></returns>
         Task InitializeForNewReportAsync();
         /// <summary>
+        /// Initialize for update report.
+        /// </summary>
+        /// <param name="reportId"></param>
+        /// <returns></returns>
+        Task InitializeForUpdateReportAsync(string reportId);
+        /// <summary>
         /// Register or Update Report.
         /// </summary>
         /// <returns></returns>
