@@ -1,11 +1,11 @@
-﻿// if connect azure then uncomment this line.
+// if connect azure then uncomment this line.
 #define AZURE
 
 using BlueMonkey.ExpenceServices;
 #if AZURE
 using BlueMonkey.ExpenceServices.Azure;
 #else
-using BlueMonkey.ExpenceServices.Local;
+using BlueMonkey.ExpenseServices.Local;
 #endif
 using BlueMonkey.Model;
 using BlueMonkey.TimeService;

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BlueMonkey.Business;
 
-namespace BlueMonkey.ExpenceServices
+namespace BlueMonkey.ExpenseServices
 {
     public interface IExpenseService
     {

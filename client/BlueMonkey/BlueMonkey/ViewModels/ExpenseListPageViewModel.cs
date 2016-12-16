@@ -3,7 +3,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System.Collections.Generic;
-using BlueMonkey.ExpenceServices;
+using BlueMonkey.ExpenseServices;
 
 namespace BlueMonkey.ViewModels
 {
