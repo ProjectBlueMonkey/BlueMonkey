@@ -173,7 +173,7 @@
     </ProjectReference>
     <ProjectReference Include="..\BlueMonkey.ExpenceServices\BlueMonkey.ExpenceServices.csproj">
       <Project>{4a7f6cfb-dd26-477a-b4f9-6bc8d2d5be62}</Project>
-      <Name>BlueMonkey.ExpenceServices</Name>
+      <Name>BlueMonkey.ExpenseServices</Name>
     </ProjectReference>
     <ProjectReference Include="..\BlueMonkey.LoginService\BlueMonkey.LoginService.csproj">
       <Project>{31D77FDC-1919-42A3-8035-78767C87E4A7}</Project>

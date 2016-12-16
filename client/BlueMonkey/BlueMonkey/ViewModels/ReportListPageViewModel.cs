@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using BlueMonkey.Business;
-using BlueMonkey.ExpenceServices;
+using BlueMonkey.ExpenseServices;
 using BlueMonkey.Model;
 using Prism.Navigation;
 using Reactive.Bindings;

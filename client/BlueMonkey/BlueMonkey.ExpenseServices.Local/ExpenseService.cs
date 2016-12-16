@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BlueMonkey.Business;
 
-namespace BlueMonkey.ExpenceServices.Local
+namespace BlueMonkey.ExpenseServices.Local
 {
     public class ExpenseService : IExpenseService
     {
