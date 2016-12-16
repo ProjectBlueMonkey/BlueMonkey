@@ -55,6 +55,10 @@ namespace BlueMonkey.ExpenceServices.Azure
             {
                 await _reportTable.InsertAsync(report);
             }
+            else
+            {
+                await _reportTable.UpdateAsync(report);
+            }
 
             List<Task> updateExpenseTasks = new List<Task>();
             foreach (var expense in expenses)
