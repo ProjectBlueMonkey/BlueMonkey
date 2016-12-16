@@ -3,7 +3,7 @@ using Microsoft.WindowsAzure.MobileServices;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BlueMonkey.ExpenceServices.Azure
+namespace BlueMonkey.ExpenseServices.Azure
 {
     public class AzureExpenseService : IExpenseService
     {

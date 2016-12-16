@@ -1,9 +1,9 @@
 // if connect azure then uncomment this line.
 #define AZURE
 
-using BlueMonkey.ExpenceServices;
+using BlueMonkey.ExpenseServices;
 #if AZURE
-using BlueMonkey.ExpenceServices.Azure;
+using BlueMonkey.ExpenseServices.Azure;
 #else
 using BlueMonkey.ExpenseServices.Local;
 #endif
