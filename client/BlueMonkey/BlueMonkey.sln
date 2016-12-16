@@ -13,9 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.Business", "Blue
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xamarin.Forms", "Xamarin.Forms", "{AA777C4E-6848-48EF-91B6-0D7887D37A52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.ExpenceServices", "BlueMonkey.ExpenceServices\BlueMonkey.ExpenceServices.csproj", "{4A7F6CFB-DD26-477A-B4F9-6BC8D2D5BE62}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.ExpenseServices", "BlueMonkey.ExpenseServices\BlueMonkey.ExpenseServices.csproj", "{4A7F6CFB-DD26-477A-B4F9-6BC8D2D5BE62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.ExpenceServices.Local", "BlueMonkey.ExpenceServices.Local\BlueMonkey.ExpenceServices.Local.csproj", "{4BAEE00A-3F14-4CDB-A4F1-2E25EB85620B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.ExpenseServices.Local", "BlueMonkey.ExpenseServices.Local\BlueMonkey.ExpenseServices.Local.csproj", "{4BAEE00A-3F14-4CDB-A4F1-2E25EB85620B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.Model", "BlueMonkey.Model\BlueMonkey.Model.csproj", "{BE7E48DE-526B-4BFA-A8BB-1699FDAD1CD1}"
 EndProject

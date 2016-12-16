@@ -1,5 +1,5 @@
-﻿using BlueMonkey.ExpenceServices;
-using BlueMonkey.ExpenceServices.Local;
+﻿using BlueMonkey.ExpenseServices;
+using BlueMonkey.ExpenseServices.Local;
 using BlueMonkey.Model;
 using BlueMonkey.TimeService;
 using Prism.Unity;

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BlueMonkey.Business;
-using BlueMonkey.ExpenceServices;
+using BlueMonkey.ExpenseServices;
 
 namespace BlueMonkey.Model
 {

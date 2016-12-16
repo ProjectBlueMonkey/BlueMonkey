@@ -137,13 +137,13 @@
       <Project>{d96104f1-5356-4cdc-8655-26576aa8322b}</Project>
       <Name>BlueMonkey.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BlueMonkey.ExpenceServices.Local\BlueMonkey.ExpenceServices.Local.csproj">
+    <ProjectReference Include="..\BlueMonkey.ExpenseServices.Local\BlueMonkey.ExpenseServices.Local.csproj">
       <Project>{4baee00a-3f14-4cdb-a4f1-2e25eb85620b}</Project>
-      <Name>BlueMonkey.ExpenceServices.Local</Name>
+      <Name>BlueMonkey.ExpenseServices.Local</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BlueMonkey.ExpenceServices\BlueMonkey.ExpenceServices.csproj">
+    <ProjectReference Include="..\BlueMonkey.ExpenseServices\BlueMonkey.ExpenseServices.csproj">
       <Project>{4a7f6cfb-dd26-477a-b4f9-6bc8d2d5be62}</Project>
-      <Name>BlueMonkey.ExpenceServices</Name>
+      <Name>BlueMonkey.ExpenseServices</Name>
     </ProjectReference>
     <ProjectReference Include="..\BlueMonkey.LoginService.Local\BlueMonkey.LoginService.Local.csproj">
       <Project>{fc6a6595-48d8-41a0-91c6-36e02fa667b1}</Project>
