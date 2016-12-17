@@ -43,6 +43,7 @@ namespace BlueMonkey
 
             Container.RegisterType<IEditReport, EditReport>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IReferReport, ReferReport>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IEditExpense, EditExpense>(new ContainerControlledLifetimeManager());
 
             Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();
