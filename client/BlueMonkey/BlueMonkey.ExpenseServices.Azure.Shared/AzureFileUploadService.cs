@@ -2,7 +2,6 @@
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace BlueMonkey.ExpenseServices.Azure
@@ -25,7 +24,7 @@ namespace BlueMonkey.ExpenseServices.Azure
             await _container.CreateIfNotExistsAsync();
             await _container.SetPermissionsAsync(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });
 
-            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(mediaFile.Path)}";
+            var fileName = $"{Guid.NewGuid()}{mediaFile.Extension}";
             var blockBlob = _container.GetBlockBlobReference(fileName);
 
             using (var stream = mediaFile.GetStream())
