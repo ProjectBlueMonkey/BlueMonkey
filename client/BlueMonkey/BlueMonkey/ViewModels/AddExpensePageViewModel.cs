@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BlueMonkey.Model;
+using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
 
 namespace BlueMonkey.ViewModels
 {
@@ -14,6 +16,8 @@ namespace BlueMonkey.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IEditExpense _editExpense;
 
+        public ReadOnlyReactiveProperty<Expense> Expense { get; }
+
         public DelegateCommand SaveCommand => new DelegateCommand(Save);
         public DelegateCommand NavigateCommand => new DelegateCommand(Navigate);
 
@@ -21,6 +25,8 @@ namespace BlueMonkey.ViewModels
         {
             _navigationService = navigationService;
             _editExpense = editExpense;
+
+            Expense = _editExpense.ObserveProperty(x => x.Expense).ToReadOnlyReactiveProperty();
         }
 
         private void Navigate()

@@ -1,5 +1,5 @@
 // if connect azure then uncomment this line.
-#define AZURE
+#define DEBUG
 
 using BlueMonkey.ExpenseServices;
 using BlueMonkey.MediaServices;
