@@ -12,13 +12,6 @@ namespace BlueMonkey.ViewModels
     {
         INavigationService _navigationService;
 
-        private string _text;
-        public string Text
-        {
-            get { return _text; }
-            set { SetProperty(ref _text, value); }
-        }
-
         public DelegateCommand SaveCommand => new DelegateCommand(Save);
         public DelegateCommand NavigateCommand => new DelegateCommand(Navigate);
 
@@ -44,18 +37,6 @@ namespace BlueMonkey.ViewModels
 
         public void OnNavigatedTo(NavigationParameters parameters)
         {
-            if (parameters.ContainsKey("expense"))
-            {
-                var exsp = parameters["expense"] as Expense;
-                if (exsp != null)
-                {
-                    Text = exsp.Name;
-                }
-                else
-                {
-                    Text = "You're adding a new one";
-                }
-            }
         }
 
         public void OnNavigatingTo(NavigationParameters parameters)
