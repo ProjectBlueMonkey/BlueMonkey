@@ -174,7 +174,7 @@ namespace BlueMonkey.Model.Tests
             Report savedReport = null;
             IEnumerable<Expense> savedExpenses = null;
             expenseService
-                .Setup(m => m.RegisterReport(It.IsAny<Report>(), It.IsAny<IEnumerable<Expense>>()))
+                .Setup(m => m.RegisterReportAsync(It.IsAny<Report>(), It.IsAny<IEnumerable<Expense>>()))
                 .Callback<Report, IEnumerable<Expense>>((argReport, argExpenses) =>
                 {
                     savedReport = argReport;
@@ -230,7 +230,7 @@ namespace BlueMonkey.Model.Tests
             Report savedReport = null;
             List<Expense> savedExpenses = null;
             expenseService
-                .Setup(m => m.RegisterReport(It.IsAny<Report>(), It.IsAny<IEnumerable<Expense>>()))
+                .Setup(m => m.RegisterReportAsync(It.IsAny<Report>(), It.IsAny<IEnumerable<Expense>>()))
                 .Callback<Report, IEnumerable<Expense>>((argReport, argExpenses) =>
                 {
                     savedReport = argReport;

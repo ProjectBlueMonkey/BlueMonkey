@@ -78,7 +78,7 @@ namespace BlueMonkey.ExpenseServices.Local
             return Task.FromResult(_reports.SingleOrDefault(x => x.Id == reportId));
         }
 
-        public Task RegisterReport(Report report, IEnumerable<Expense> expenses)
+        public Task RegisterReportAsync(Report report, IEnumerable<Expense> expenses)
         {
             return Task.Run(() =>
             {

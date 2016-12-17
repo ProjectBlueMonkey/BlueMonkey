@@ -50,7 +50,7 @@ namespace BlueMonkey.ExpenseServices.Azure
                 .ToEnumerableAsync();
         }
 
-        public async Task RegisterReport(Report report, IEnumerable<Expense> expenses)
+        public async Task RegisterReportAsync(Report report, IEnumerable<Expense> expenses)
         {
             if (string.IsNullOrEmpty(report.Id))
             {
