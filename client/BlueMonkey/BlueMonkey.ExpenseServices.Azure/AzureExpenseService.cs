@@ -1,6 +1,7 @@
 ﻿using BlueMonkey.Business;
 using Microsoft.WindowsAzure.MobileServices;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BlueMonkey.ExpenseServices.Azure
@@ -58,16 +59,25 @@ namespace BlueMonkey.ExpenseServices.Azure
             else
             {
                 await _reportTable.UpdateAsync(report);
+                // disconnect current expense
+                var currentExpenses = await _expenseTable.CreateQuery()
+                    .Where(x => x.ReportId == report.Id)
+                    .ToEnumerableAsync();
+                foreach (var expense in currentExpenses)
+                {
+                    expense.ReportId = null;
+                }
+                await Task.WhenAll(currentExpenses
+                    .Select(x => _expenseTable.UpdateAsync(x)));
             }
 
-            List<Task> updateExpenseTasks = new List<Task>();
             foreach (var expense in expenses)
             {
                 expense.ReportId = report.Id;
-                updateExpenseTasks.Add(_expenseTable.UpdateAsync(expense));
             }
 
-            await Task.WhenAll(updateExpenseTasks);
+            await Task.WhenAll(expenses
+                .Select(x => _expenseTable.UpdateAsync(x)));
         }
     }
 }
