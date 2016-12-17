@@ -11,12 +11,14 @@ namespace BlueMonkey.ExpenseServices.Azure
         private readonly IMobileServiceClient _client;
         private readonly IMobileServiceTable<Expense> _expenseTable;
         private readonly IMobileServiceTable<Report> _reportTable;
+        private readonly IMobileServiceTable<ExpenseReceipt> _expenseReceiptTable;
 
         public AzureExpenseService(IMobileServiceClient client)
         {
             _client = client;
             _expenseTable = _client.GetTable<Expense>();
             _reportTable = _client.GetTable<Report>();
+            _expenseReceiptTable = _client.GetTable<ExpenseReceipt>();
         }
 
         public Task<IEnumerable<Expense>> GetExpensesAsync()
@@ -85,9 +87,32 @@ namespace BlueMonkey.ExpenseServices.Azure
                 .Select(x => _expenseTable.UpdateAsync(x)));
         }
 
-        public Task RegisterExpensesAsync(Expense expense, IEnumerable<ExpenseReceipt> expenseReceipts)
+        public async Task RegisterExpensesAsync(Expense expense, IEnumerable<ExpenseReceipt> expenseReceipts)
         {
-            throw new System.NotImplementedException();
+            if (string.IsNullOrEmpty(expense.Id))
+            {
+                await _expenseTable.InsertAsync(expense);
+            }
+            else
+            {
+                await _expenseTable.UpdateAsync(expense);
+                // disconnect current expenseReceipt
+                var currentExpenseReceipts = await _expenseReceiptTable.CreateQuery()
+                    .Where(x => x.ExpenseId == expense.Id)
+                    .ToEnumerableAsync();
+                foreach (var expenseReceipt in currentExpenseReceipts)
+                {
+                    expenseReceipt.ExpenseId = null;
+                }
+                await Task.WhenAll(currentExpenseReceipts.Select(x => _expenseReceiptTable.UpdateAsync(x)));
+            }
+
+            foreach (var expenseReceipt in expenseReceipts)
+            {
+                expenseReceipt.ExpenseId = expense.Id;
+            }
+
+            await Task.WhenAll(expenseReceipts.Select(x => _expenseReceiptTable.UpdateAsync(x)));
         }
     }
 }
