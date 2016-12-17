@@ -2,6 +2,8 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using BlueMonkey.ExpenseServices;
+using BlueMonkey.ExpenseServices.Azure;
 using BlueMonkey.LoginService;
 using BlueMonkey.LoginService.Azure.Droid;
 using Microsoft.Practices.Unity;
@@ -30,6 +32,7 @@ namespace BlueMonkey.Droid
         public void RegisterTypes(IUnityContainer container)
         {
             container.RegisterType<ILoginService, AzureLoginService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IFileUploadService, AzureFileUploadService>(new ContainerControlledLifetimeManager());
         }
     }
 }

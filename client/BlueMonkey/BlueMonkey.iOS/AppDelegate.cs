@@ -1,4 +1,6 @@
 ﻿
+using BlueMonkey.ExpenseServices;
+using BlueMonkey.ExpenseServices.Azure;
 using BlueMonkey.LoginService;
 using BlueMonkey.LoginService.Azure.iOS;
 using Foundation;
@@ -37,6 +39,7 @@ namespace BlueMonkey.iOS
         public void RegisterTypes(IUnityContainer container)
         {
             container.RegisterType<ILoginService, AzureLoginService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IFileUploadService, AzureFileUploadService>(new ContainerControlledLifetimeManager());
         }
     }
 
