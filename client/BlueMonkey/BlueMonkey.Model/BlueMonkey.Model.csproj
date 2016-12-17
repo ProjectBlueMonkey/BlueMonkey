@@ -54,6 +54,10 @@
       <Project>{4a7f6cfb-dd26-477a-b4f9-6bc8d2d5be62}</Project>
       <Name>BlueMonkey.ExpenseServices</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BlueMonkey.MediaServices\BlueMonkey.MediaServices.csproj">
+      <Project>{fb4e448d-e4d9-4839-928b-09ae414c5640}</Project>
+      <Name>BlueMonkey.MediaServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlueMonkey.TimeService\BlueMonkey.TimeService.csproj">
       <Project>{0c6dfdb3-febe-4d22-a0cb-5e3b599a9342}</Project>
       <Name>BlueMonkey.TimeService</Name>

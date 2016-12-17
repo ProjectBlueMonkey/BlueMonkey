@@ -5,7 +5,9 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BlueMonkey.Views.ReceiptPage" Title="Receipt">
   <ContentPage.ToolbarItems>
-    <ToolbarItem Text="Save" Command="{Binding SaveCommand}"/>
+    <ToolbarItem Text="Update" Command="{Binding TakeMediaCommand}"/>
   </ContentPage.ToolbarItems>
-  
+  <Grid>
+    <Image Source="{Binding Receipt.Value}"/>
+  </Grid>
 </ContentPage>
