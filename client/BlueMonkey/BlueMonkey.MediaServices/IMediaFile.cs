@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlueMonkey.MediaServices
 {
-    public interface IMediaFile : IDisposable
+    public interface IMediaFile
     {
         /// <summary>
         /// Path to file.

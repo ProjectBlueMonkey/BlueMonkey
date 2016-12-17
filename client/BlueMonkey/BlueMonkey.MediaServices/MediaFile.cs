@@ -9,15 +9,22 @@ namespace BlueMonkey.MediaServices
 {
     public class MediaFile : IMediaFile
     {
+        private readonly byte[] _image;
         public string Path { get; }
-        public Stream GetStream()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="image"></param>
+        public MediaFile(string path, byte[] image)
         {
-            throw new NotImplementedException();
+            Path = path;
+            _image = image;
         }
 
-        public void Dispose()
+        public Stream GetStream()
         {
-            throw new NotImplementedException();
+            return new MemoryStream(_image);
         }
     }
 }
