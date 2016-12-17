@@ -37,6 +37,11 @@ namespace BlueMonkey.ExpenseServices.Azure
             return _reportTable.LookupAsync(reportId);
         }
 
+        public Task<Category> GetCategoryAsync()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Task<IEnumerable<Report>> GetReportsAsync()
         {
             return _reportTable.CreateQuery()

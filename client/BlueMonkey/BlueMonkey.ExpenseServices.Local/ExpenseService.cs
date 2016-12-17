@@ -78,6 +78,11 @@ namespace BlueMonkey.ExpenseServices.Local
             return Task.FromResult(_reports.SingleOrDefault(x => x.Id == reportId));
         }
 
+        public Task<Category> GetCategoryAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task RegisterReportAsync(Report report, IEnumerable<Expense> expenses)
         {
             return Task.Run(() =>
