@@ -118,7 +118,8 @@ namespace BlueMonkey.Model
                 {
                     Id = _originalReport?.Id,
                     Name = Name,
-                    Date = Date
+                    Date = Date,
+                    UserId = _originalReport?.UserId
                 },
                 SelectableExpenses.Where(x => x.IsSelected));
         }

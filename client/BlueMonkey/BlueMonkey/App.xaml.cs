@@ -1,12 +1,18 @@
-﻿using BlueMonkey.ExpenseServices;
+// if connect azure then uncomment this line.
+#define AZURE
+
+using BlueMonkey.ExpenseServices;
+#if AZURE
+using BlueMonkey.ExpenseServices.Azure;
+#else
 using BlueMonkey.ExpenseServices.Local;
+#endif
 using BlueMonkey.Model;
 using BlueMonkey.TimeService;
 using Prism.Unity;
 using BlueMonkey.Views;
 using Xamarin.Forms;
 using Microsoft.Practices.Unity;
-using BlueMonkey.LoginService;
 using Microsoft.WindowsAzure.MobileServices;
 
 namespace BlueMonkey
@@ -26,7 +32,11 @@ namespace BlueMonkey
         {
             Container.RegisterInstance<IMobileServiceClient>(new MobileServiceClient(Secrets.ServerUri));
 
+#if AZURE
+            Container.RegisterType<IExpenseService, AzureExpenseService>(new ContainerControlledLifetimeManager());
+#else
             Container.RegisterType<IExpenseService, ExpenseService>(new ContainerControlledLifetimeManager());
+#endif
             Container.RegisterType<IDateTimeService, DateTimeService>(new ContainerControlledLifetimeManager());
 
             Container.RegisterType<IEditReport, EditReport>(new ContainerControlledLifetimeManager());

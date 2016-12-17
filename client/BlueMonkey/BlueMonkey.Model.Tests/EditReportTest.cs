@@ -210,7 +210,7 @@ namespace BlueMonkey.Model.Tests
                 .Setup(m => m.GetExpensesFromReportIdAsync("report01"))
                 .ReturnsAsync(new[] { expense03 });
 
-            var report = new Report { Id = "report01", Name = "reportName", Date = DateTime.MinValue };
+            var report = new Report { Id = "report01", Name = "reportName", Date = DateTime.MinValue, UserId = "user01" };
             expenseService
                 .Setup(m => m.GetReportAsync("report01"))
                 .ReturnsAsync(report);
@@ -244,6 +244,7 @@ namespace BlueMonkey.Model.Tests
             Assert.Equal("report01", savedReport.Id);
             Assert.Equal("UpdatedName", savedReport.Name);
             Assert.Equal(DateTime.MaxValue, savedReport.Date);
+            Assert.Equal("user01", savedReport.UserId);
 
             Assert.NotNull(savedExpenses);
             Assert.Equal(2, savedExpenses.Count);
