@@ -10,15 +10,15 @@ namespace BlueMonkey.MediaServices
     public class MediaFile : IMediaFile
     {
         private readonly byte[] _image;
-        public string Path { get; }
+        public string Extension { get; }
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="extension"></param>
         /// <param name="image"></param>
-        public MediaFile(string path, byte[] image)
+        public MediaFile(string extension, byte[] image)
         {
-            Path = path;
+            Extension = extension;
             _image = image;
         }
 
