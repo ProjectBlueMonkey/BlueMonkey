@@ -12,6 +12,7 @@ namespace BlueMonkey.ExpenseServices.Azure
         private readonly IMobileServiceTable<Expense> _expenseTable;
         private readonly IMobileServiceTable<Report> _reportTable;
         private readonly IMobileServiceTable<ExpenseReceipt> _expenseReceiptTable;
+        private readonly IMobileServiceTable<Category> _categoryTable;
 
         public AzureExpenseService(IMobileServiceClient client)
         {
@@ -19,6 +20,7 @@ namespace BlueMonkey.ExpenseServices.Azure
             _expenseTable = _client.GetTable<Expense>();
             _reportTable = _client.GetTable<Report>();
             _expenseReceiptTable = _client.GetTable<ExpenseReceipt>();
+            _categoryTable = _client.GetTable<Category>();
         }
 
         public Task<IEnumerable<Expense>> GetExpensesAsync()
@@ -41,7 +43,7 @@ namespace BlueMonkey.ExpenseServices.Azure
 
         public Task<IEnumerable<Category>> GetCategoriesAsync()
         {
-            throw new System.NotImplementedException();
+            return _categoryTable.CreateQuery().ToEnumerableAsync();
         }
 
         public Task<IEnumerable<Report>> GetReportsAsync()
