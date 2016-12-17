@@ -157,6 +157,10 @@
       <Project>{31D77FDC-1919-42A3-8035-78767C87E4A7}</Project>
       <Name>BlueMonkey.LoginService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BlueMonkey.MediaServices\BlueMonkey.MediaServices.csproj">
+      <Project>{fb4e448d-e4d9-4839-928b-09ae414c5640}</Project>
+      <Name>BlueMonkey.MediaServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlueMonkey.Model\BlueMonkey.Model.csproj">
       <Project>{be7e48de-526b-4bfa-a8bb-1699fdad1cd1}</Project>
       <Name>BlueMonkey.Model</Name>

@@ -2,6 +2,7 @@
 #define AZURE
 
 using BlueMonkey.ExpenseServices;
+using BlueMonkey.MediaServices;
 #if AZURE
 using BlueMonkey.ExpenseServices.Azure;
 #else
@@ -38,6 +39,7 @@ namespace BlueMonkey
             Container.RegisterType<IExpenseService, ExpenseService>(new ContainerControlledLifetimeManager());
 #endif
             Container.RegisterType<IDateTimeService, DateTimeService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IMediaService, MediaService>(new ContainerControlledLifetimeManager());
 
             Container.RegisterType<IEditReport, EditReport>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IReferReport, ReferReport>(new ContainerControlledLifetimeManager());
