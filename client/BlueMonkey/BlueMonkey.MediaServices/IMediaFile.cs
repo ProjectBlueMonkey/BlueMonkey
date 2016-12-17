@@ -10,9 +10,9 @@ namespace BlueMonkey.MediaServices
     public interface IMediaFile
     {
         /// <summary>
-        /// Path to file.
+        /// Extension of media file. Start with a period.
         /// </summary>
-        string Path { get; }
+        string Extension { get; }
         /// <summary>
         /// Get stream if available
         /// </summary>
