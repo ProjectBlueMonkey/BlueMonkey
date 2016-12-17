@@ -37,6 +37,11 @@ namespace BlueMonkey.ExpenseServices.Azure
             return _reportTable.LookupAsync(reportId);
         }
 
+        public Task<IEnumerable<Category>> GetCategoriesAsync()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Task<IEnumerable<Report>> GetReportsAsync()
         {
             return _reportTable.CreateQuery()
@@ -50,7 +55,7 @@ namespace BlueMonkey.ExpenseServices.Azure
                 .ToEnumerableAsync();
         }
 
-        public async Task RegisterReport(Report report, IEnumerable<Expense> expenses)
+        public async Task RegisterReportAsync(Report report, IEnumerable<Expense> expenses)
         {
             if (string.IsNullOrEmpty(report.Id))
             {
@@ -78,6 +83,11 @@ namespace BlueMonkey.ExpenseServices.Azure
 
             await Task.WhenAll(expenses
                 .Select(x => _expenseTable.UpdateAsync(x)));
+        }
+
+        public Task RegisterExpensesAsync(Expense expense, IEnumerable<ExpenseReceipt> expenseReceipts)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

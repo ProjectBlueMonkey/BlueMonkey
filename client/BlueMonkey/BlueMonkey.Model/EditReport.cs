@@ -113,7 +113,7 @@ namespace BlueMonkey.Model
         /// <returns></returns>
         public async Task SaveAsync()
         {
-            await _expenseService.RegisterReport(
+            await _expenseService.RegisterReportAsync(
                 new Report
                 {
                     Id = _originalReport?.Id,

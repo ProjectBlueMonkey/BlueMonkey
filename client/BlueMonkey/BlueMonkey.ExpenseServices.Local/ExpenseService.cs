@@ -78,7 +78,12 @@ namespace BlueMonkey.ExpenseServices.Local
             return Task.FromResult(_reports.SingleOrDefault(x => x.Id == reportId));
         }
 
-        public Task RegisterReport(Report report, IEnumerable<Expense> expenses)
+        public Task<IEnumerable<Category>> GetCategoriesAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task RegisterReportAsync(Report report, IEnumerable<Expense> expenses)
         {
             return Task.Run(() =>
             {
@@ -104,6 +109,11 @@ namespace BlueMonkey.ExpenseServices.Local
                     _expenses.Single(x => x.Id == expense.Id).ReportId = report.Id;
                 }
             });
+        }
+
+        public Task RegisterExpensesAsync(Expense expense, IEnumerable<ExpenseReceipt> expenseReceipts)
+        {
+            throw new NotImplementedException();
         }
     }
 }

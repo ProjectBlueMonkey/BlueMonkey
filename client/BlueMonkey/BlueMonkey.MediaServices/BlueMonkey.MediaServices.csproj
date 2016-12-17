@@ -5,18 +5,16 @@
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4A7F6CFB-DD26-477A-B4F9-6BC8D2D5BE62}</ProjectGuid>
+    <ProjectGuid>{FB4E448D-E4D9-4839-928B-09AE414C5640}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BlueMonkey.ExpenseServices</RootNamespace>
-    <AssemblyName>BlueMonkey.ExpenseServices</AssemblyName>
+    <RootNamespace>BlueMonkey.MediaServices</RootNamespace>
+    <AssemblyName>BlueMonkey.MediaServices</AssemblyName>
     <DefaultLanguage>ja-JP</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,28 +35,16 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <ProjectReference Include="..\BlueMonkey.Business\BlueMonkey.Business.csproj">
-      <Project>{D96104F1-5356-4CDC-8655-26576AA8322B}</Project>
-      <Name>BlueMonkey.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BlueMonkey.MediaServices\BlueMonkey.MediaServices.csproj">
-      <Project>{fb4e448d-e4d9-4839-928b-09ae414c5640}</Project>
-      <Name>BlueMonkey.MediaServices</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IExpenseService.cs" />
-    <Compile Include="IFileUploadService.cs" />
+    <Compile Include="CameraDevice.cs" />
+    <Compile Include="IMediaFile.cs" />
+    <Compile Include="IMediaService.cs" />
+    <Compile Include="PhotoSize.cs" />
+    <Compile Include="PickMediaOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
-      <HintPath>..\packages\Prism.Core.6.3.0-pre1\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Prism.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <Compile Include="StoreCameraMediaOptions.cs" />
+    <Compile Include="StoreMediaOptions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
