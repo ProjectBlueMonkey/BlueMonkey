@@ -34,17 +34,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="CameraDevice.cs" />
     <Compile Include="IMediaFile.cs" />
     <Compile Include="IMediaService.cs" />
+    <Compile Include="MediaFile.cs" />
     <Compile Include="PhotoSize.cs" />
     <Compile Include="PickMediaOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoreCameraMediaOptions.cs" />
     <Compile Include="StoreMediaOptions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Plugin.Media, Version=2.6.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xam.Plugin.Media.2.6.1\lib\portable-net45+wp80+win8+wpa81\Plugin.Media.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Media.Abstractions, Version=2.6.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xam.Plugin.Media.2.6.1\lib\portable-net45+wp80+win8+wpa81\Plugin.Media.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
