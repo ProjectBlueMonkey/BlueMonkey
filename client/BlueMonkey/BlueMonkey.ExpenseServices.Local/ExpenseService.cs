@@ -105,5 +105,10 @@ namespace BlueMonkey.ExpenseServices.Local
                 }
             });
         }
+
+        public Task RegisterExpensesAsync(Expense expense, IEnumerable<ExpenseReceipt> expenseReceipts)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

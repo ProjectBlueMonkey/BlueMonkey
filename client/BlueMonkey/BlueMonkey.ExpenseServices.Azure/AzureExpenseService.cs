@@ -79,5 +79,10 @@ namespace BlueMonkey.ExpenseServices.Azure
             await Task.WhenAll(expenses
                 .Select(x => _expenseTable.UpdateAsync(x)));
         }
+
+        public Task RegisterExpensesAsync(Expense expense, IEnumerable<ExpenseReceipt> expenseReceipts)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
