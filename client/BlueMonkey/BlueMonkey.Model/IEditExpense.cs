@@ -12,5 +12,7 @@ namespace BlueMonkey.Model
     {
         Expense Expense { get; }
         IEnumerable<Category> Categories { get; }
+
+        Task InitializeAsync();
     }
 }
