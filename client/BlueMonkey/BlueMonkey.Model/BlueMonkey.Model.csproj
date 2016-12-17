@@ -36,7 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="EditExpense.cs" />
     <Compile Include="EditReport.cs" />
+    <Compile Include="IEditExpense.cs" />
     <Compile Include="IEditReport.cs" />
     <Compile Include="IReferReport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
