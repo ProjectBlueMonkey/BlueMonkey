@@ -1,17 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BlueMonkey.MediaServices;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using System;
+using System.IO;
 using System.Threading.Tasks;
-using BlueMonkey.ExpenseServices;
-using BlueMonkey.MediaServices;
 
 namespace BlueMonkey.ExpenseServices.Azure
 {
     public class AzureFileUploadService : IFileUploadService
     {
-        public Task<Uri> UploadMediaFileAsync(IMediaFile mediaFile)
+        private static readonly string ContainerName = "pictures";
+
+        private readonly CloudBlobContainer _container;
+
+        public AzureFileUploadService()
         {
-            throw new NotImplementedException();
+            var account = CloudStorageAccount.Parse(Secrets.FileUploadStorageConnectionString);
+            var client = account.CreateCloudBlobClient();
+            _container = client.GetContainerReference(ContainerName);
+        }
+
+        public async Task<Uri> UploadMediaFileAsync(IMediaFile mediaFile)
+        {
+            await _container.CreateIfNotExistsAsync();
+            await _container.SetPermissionsAsync(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });
+
+            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(mediaFile.Path)}";
+            var blockBlob = _container.GetBlockBlobReference(fileName);
+
+            using (var stream = mediaFile.GetStream())
+            {
+                await blockBlob.UploadFromStreamAsync(stream);
+            }
+
+            return blockBlob.Uri;
         }
     }
 }
