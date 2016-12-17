@@ -12,6 +12,7 @@ namespace BlueMonkey.ExpenseServices.Local
     {
         private readonly List<Expense> _expenses = new List<Expense>();
         private readonly List<Report> _reports = new List<Report>();
+        private readonly List<Category> _categories = new List<Category>();
 
         public ExpenseService()
         {
@@ -50,6 +51,13 @@ namespace BlueMonkey.ExpenseServices.Local
                         });
 
                 }
+                _categories.Add(
+                    new Category
+                    {
+                        Id = $"CategoryId_{i}",
+                        Name = $"Category{i}",
+                        SortOrder = i
+                    });
             }
         }
 
@@ -80,7 +88,7 @@ namespace BlueMonkey.ExpenseServices.Local
 
         public Task<IEnumerable<Category>> GetCategoriesAsync()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(_categories.AsEnumerable());
         }
 
         public Task RegisterReportAsync(Report report, IEnumerable<Expense> expenses)
