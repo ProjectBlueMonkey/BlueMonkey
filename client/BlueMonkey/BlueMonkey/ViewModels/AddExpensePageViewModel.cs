@@ -20,6 +20,8 @@ namespace BlueMonkey.ViewModels
         public ReadOnlyReactiveProperty<Expense> Expense { get; }
         public ReadOnlyReactiveProperty<IEnumerable<string>> Categories { get; }
 
+        public ReactiveProperty<string> SelectedCategory { get; }
+
         public DelegateCommand SaveCommand => new DelegateCommand(Save);
         public DelegateCommand NavigateCommand => new DelegateCommand(Navigate);
 
@@ -30,7 +32,22 @@ namespace BlueMonkey.ViewModels
 
             Expense = _editExpense.ObserveProperty(x => x.Expense).ToReadOnlyReactiveProperty();
             Categories = _editExpense.ObserveProperty(x => x.Categories)
+                .Where(x => x != null)
                 .Select(x => x.Select(category => category.Name)).ToReadOnlyReactiveProperty();
+            SelectedCategory = _editExpense.ObserveProperty(x => x.SelectedCategory)
+                .Where(x => x != null)
+                .Select(x => x.Name).ToReactiveProperty();
+            SelectedCategory.Subscribe(x =>
+            {
+                if (x == null)
+                {
+                    _editExpense.SelectedCategory = null;
+                }
+                else
+                {
+                    _editExpense.SelectedCategory = _editExpense.Categories.Single(category => category.Name == x);
+                }
+            });
         }
 
         private void Navigate()

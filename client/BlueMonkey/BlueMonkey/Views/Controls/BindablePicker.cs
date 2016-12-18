@@ -12,15 +12,32 @@ namespace BlueMonkey.Views.Controls
     public class BindablePicker : Picker
     {
         public static readonly BindableProperty ItemsSourceProperty = 
-            BindableProperty.Create("ItemsSource", typeof(IEnumerable), typeof(BindablePicker), null, propertyChanged: OnItemsSourceChanged);
+            BindableProperty.Create(nameof(ItemsSource), typeof(IEnumerable), typeof(BindablePicker), null, propertyChanged: OnItemsSourceChanged);
+
+        public static readonly BindableProperty SelectedItemsProperty =
+            BindableProperty.Create(nameof(SelectedItem), typeof(string), typeof(BindablePicker), null, propertyChanged: OnSelectedItemsChanged);
 
         /// <summary>
-        /// ItemsSource の CLR プロパティ
+        /// 
         /// </summary>
         public IEnumerable ItemsSource
         {
-            get { return (IEnumerable)this.GetValue(ItemsSourceProperty); }
-            set { this.SetValue(ItemsSourceProperty, value); }
+            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+            set { SetValue(ItemsSourceProperty, value); }
+        }
+
+        public string SelectedItem
+        {
+            get { return (string)GetValue(SelectedItemsProperty); }
+            set { SetValue(SelectedItemsProperty, value); }
+        }
+
+        public BindablePicker()
+        {
+            SelectedIndexChanged += (sender, args) =>
+            {
+                SelectedItem = Items[SelectedIndex];
+            };
         }
 
         private static void OnItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
@@ -35,7 +52,12 @@ namespace BlueMonkey.Views.Controls
                     picker.Items.Add(item.ToString());
                 }
             }
+        }
 
+        private static void OnSelectedItemsChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var picker = bindable as BindablePicker;
+            picker.SelectedIndex = picker.Items.IndexOf((string)newValue);
         }
     }
 }

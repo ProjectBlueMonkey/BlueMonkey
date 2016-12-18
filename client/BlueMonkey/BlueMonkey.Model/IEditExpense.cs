@@ -14,7 +14,7 @@ namespace BlueMonkey.Model
         Expense Expense { get; }
         IMediaFile Receipt { get; }
         IEnumerable<Category> Categories { get; }
-
+        Category SelectedCategory { get; set; }
         Task InitializeAsync();
 
         Task PickPhotoAsync();

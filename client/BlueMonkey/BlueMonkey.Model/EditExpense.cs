@@ -40,6 +40,14 @@ namespace BlueMonkey.Model
             set { SetProperty(ref _categories, value); }
         }
 
+        private Category _selectedCategory;
+
+        public Category SelectedCategory
+        {
+            get { return _selectedCategory; }
+            set { SetProperty(ref _selectedCategory, value); }
+        }
+
         /// <summary>
         /// Initialize Instance.
         /// </summary>
