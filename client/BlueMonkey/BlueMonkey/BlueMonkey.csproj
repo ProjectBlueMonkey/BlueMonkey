@@ -53,6 +53,7 @@
     <Compile Include="Views\AddReportPage.xaml.cs">
       <DependentUpon>AddReportPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\BindablePicker.cs" />
     <Compile Include="Views\ExpenseListPage.xaml.cs">
       <DependentUpon>ExpenseListPage.xaml</DependentUpon>
     </Compile>

@@ -17,6 +17,7 @@ namespace BlueMonkey.ViewModels
         private readonly IEditExpense _editExpense;
 
         public ReadOnlyReactiveProperty<Expense> Expense { get; }
+        public ReadOnlyReactiveProperty<IEnumerable<Category>> Categories { get; }
 
         public DelegateCommand SaveCommand => new DelegateCommand(Save);
         public DelegateCommand NavigateCommand => new DelegateCommand(Navigate);
@@ -27,6 +28,7 @@ namespace BlueMonkey.ViewModels
             _editExpense = editExpense;
 
             Expense = _editExpense.ObserveProperty(x => x.Expense).ToReadOnlyReactiveProperty();
+            Categories = _editExpense.ObserveProperty(x => x.Categories).ToReadOnlyReactiveProperty();
         }
 
         private void Navigate()
