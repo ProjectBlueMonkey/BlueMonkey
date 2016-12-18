@@ -13,6 +13,7 @@ namespace BlueMonkey.ExpenseServices.Local
         private readonly List<Expense> _expenses = new List<Expense>();
         private readonly List<Report> _reports = new List<Report>();
         private readonly List<Category> _categories = new List<Category>();
+        private readonly List<ExpenseReceipt> _expenseReceipts = new List<ExpenseReceipt>();
 
         public ExpenseService()
         {
@@ -121,7 +122,23 @@ namespace BlueMonkey.ExpenseServices.Local
 
         public Task RegisterExpensesAsync(Expense expense, IEnumerable<ExpenseReceipt> expenseReceipts)
         {
-            throw new NotImplementedException();
+            return Task.Run(() =>
+            {
+                if (expense.Id == null)
+                {
+                    expense.Id = $"ExpenseId_x_{_expenses.Count}";
+                    _expenses.Add(expense);
+                    foreach (var expenseReceipt in expenseReceipts)
+                    {
+                        expenseReceipt.ExpenseId = expense.Id;
+                        _expenseReceipts.Add(expenseReceipt);
+                    }
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            });
         }
     }
 }

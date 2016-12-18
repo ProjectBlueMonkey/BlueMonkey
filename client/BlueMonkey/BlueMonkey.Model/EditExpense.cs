@@ -14,6 +14,7 @@ namespace BlueMonkey.Model
     public class EditExpense : BindableBase, IEditExpense
     {
         private readonly IExpenseService _expenseService;
+        private readonly IFileUploadService _fileUploadService;
         private readonly IDateTimeService _dateTimeService;
         private readonly IMediaService _mediaService;
 
@@ -43,10 +44,17 @@ namespace BlueMonkey.Model
         /// Initialize Instance.
         /// </summary>
         /// <param name="expenseService"></param>
+        /// <param name="fileUploadService"></param>
         /// <param name="dateTimeService"></param>
-        public EditExpense(IExpenseService expenseService, IDateTimeService dateTimeService, IMediaService mediaService)
+        /// <param name="mediaService"></param>
+        public EditExpense(
+            IExpenseService expenseService,
+            IFileUploadService fileUploadService,
+            IDateTimeService dateTimeService, 
+            IMediaService mediaService)
         {
             _expenseService = expenseService;
+            _fileUploadService = fileUploadService;
             _dateTimeService = dateTimeService;
             _mediaService = mediaService;
         }
@@ -63,6 +71,12 @@ namespace BlueMonkey.Model
         public async Task PickPhotoAsync()
         {
             Receipt = await _mediaService.PickPhotoAsync();
+        }
+
+        public async Task SaveAsync()
+        {
+            var uri = await _fileUploadService.UploadMediaFileAsync(Receipt);
+            await _expenseService.RegisterExpensesAsync(Expense, new[] {new ExpenseReceipt {ReceiptUri = uri.ToString()}});
         }
     }
 }

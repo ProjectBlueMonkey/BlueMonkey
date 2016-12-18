@@ -34,9 +34,10 @@ namespace BlueMonkey.ViewModels
             _navigationService.NavigateAsync("ReceiptPage");
         }
 
-        private void Save()
+        private async void Save()
         {
-
+            await _editExpense.SaveAsync();
+            await _navigationService.GoBackAsync();
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
