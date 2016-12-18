@@ -162,6 +162,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddExpensePageViewModelTest.cs" />
     <Compile Include="ExpenseSelectionPageViewModelTest.cs" />
     <Compile Include="LoginPageViewModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
