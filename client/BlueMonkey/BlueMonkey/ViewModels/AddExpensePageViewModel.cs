@@ -5,6 +5,7 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Linq;
 using BlueMonkey.Model;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
@@ -17,7 +18,7 @@ namespace BlueMonkey.ViewModels
         private readonly IEditExpense _editExpense;
 
         public ReadOnlyReactiveProperty<Expense> Expense { get; }
-        public ReadOnlyReactiveProperty<IEnumerable<Category>> Categories { get; }
+        public ReadOnlyReactiveProperty<IEnumerable<string>> Categories { get; }
 
         public DelegateCommand SaveCommand => new DelegateCommand(Save);
         public DelegateCommand NavigateCommand => new DelegateCommand(Navigate);
@@ -28,7 +29,8 @@ namespace BlueMonkey.ViewModels
             _editExpense = editExpense;
 
             Expense = _editExpense.ObserveProperty(x => x.Expense).ToReadOnlyReactiveProperty();
-            Categories = _editExpense.ObserveProperty(x => x.Categories).ToReadOnlyReactiveProperty();
+            Categories = _editExpense.ObserveProperty(x => x.Categories)
+                .Select(x => x.Select(category => category.Name)).ToReadOnlyReactiveProperty();
         }
 
         private void Navigate()
