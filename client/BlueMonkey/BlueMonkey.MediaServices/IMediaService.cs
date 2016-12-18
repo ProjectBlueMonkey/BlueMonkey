@@ -37,6 +37,6 @@ namespace BlueMonkey.MediaServices
         /// </summary>
         /// <param name="options">Camera Media Options</param>
         /// <returns>Media file of photo or null if canceled</returns>
-        Task<IMediaFile> TakePhotoAsync(StoreCameraMediaOptions options);
+        Task<IMediaFile> TakePhotoAsync();
     }
 }

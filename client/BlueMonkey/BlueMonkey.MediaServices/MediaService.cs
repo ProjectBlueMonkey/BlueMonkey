@@ -22,17 +22,31 @@ namespace BlueMonkey.MediaServices
         public async Task<IMediaFile> PickPhotoAsync()
         {
             var mediaFile = await CrossMedia.Current.PickPhotoAsync();
-            using (var mediaStream = mediaFile.GetStream())
-            using (var memoryStream = new MemoryStream())
-            {
-                await mediaStream.CopyToAsync(memoryStream);
-                return new MediaFile(mediaFile.Path, memoryStream.ToArray());
-            }
+            return await CreateMediaFile(mediaFile);
         }
 
-        public Task<IMediaFile> TakePhotoAsync(StoreCameraMediaOptions options)
+        public async Task<IMediaFile> TakePhotoAsync()
         {
-            throw new NotImplementedException();
+            var option = new StoreCameraMediaOptions();
+            var mediaFile = await CrossMedia.Current.TakePhotoAsync(option);
+            return await CreateMediaFile(mediaFile);
+        }
+
+        private static async Task<IMediaFile> CreateMediaFile(Plugin.Media.Abstractions.MediaFile mediaFile)
+        {
+            if (mediaFile != null)
+            {
+                using (var mediaStream = mediaFile.GetStream())
+                using (var memoryStream = new MemoryStream())
+                {
+                    await mediaStream.CopyToAsync(memoryStream);
+                    return new MediaFile(mediaFile.Path, memoryStream.ToArray());
+                }
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

@@ -73,6 +73,11 @@ namespace BlueMonkey.Model
             Receipt = await _mediaService.PickPhotoAsync();
         }
 
+        public async Task TakePhotoAsync()
+        {
+            Receipt = await _mediaService.TakePhotoAsync();
+        }
+
         public async Task SaveAsync()
         {
             var uri = await _fileUploadService.UploadMediaFileAsync(Receipt);

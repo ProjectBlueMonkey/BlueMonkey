@@ -16,7 +16,8 @@ namespace BlueMonkey.ViewModels
     {
         private readonly IEditExpense _editExpense;
         public ReadOnlyReactiveProperty<ImageSource> Receipt { get; }
-        public ReactiveCommand TakeMediaCommand { get; }
+        public AsyncReactiveCommand PickPhotoAsyncCommand { get; }
+        public AsyncReactiveCommand TakePhotoAsyncCommand { get; }
 
         public ReceiptPageViewModel(IEditExpense editExpense)
         {
@@ -27,16 +28,11 @@ namespace BlueMonkey.ViewModels
                 .Select(x => ImageSource.FromStream(x.GetStream))
                 .ToReadOnlyReactiveProperty();
 
-            TakeMediaCommand = new ReactiveCommand();
-            TakeMediaCommand.Subscribe(async (x) =>
-            {
-                await TakeMediaAsync();
-            });
-        }
+            PickPhotoAsyncCommand = new AsyncReactiveCommand();
+            PickPhotoAsyncCommand.Subscribe(async _ => await _editExpense.PickPhotoAsync());
 
-        private Task TakeMediaAsync()
-        {
-            return _editExpense.PickPhotoAsync();
+            TakePhotoAsyncCommand = new AsyncReactiveCommand();
+            TakePhotoAsyncCommand.Subscribe(async _ => await _editExpense.TakePhotoAsync());
         }
     }
 }

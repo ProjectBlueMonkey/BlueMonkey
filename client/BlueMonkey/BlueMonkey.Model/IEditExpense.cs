@@ -19,6 +19,8 @@ namespace BlueMonkey.Model
 
         Task PickPhotoAsync();
 
+        Task TakePhotoAsync();
+
         Task SaveAsync();
     }
 }

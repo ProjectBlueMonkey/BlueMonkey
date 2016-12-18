@@ -26,7 +26,11 @@ namespace BlueMonkey
         {
             InitializeComponent();
 
+#if AZURE
             NavigationService.NavigateAsync("LoginPage");
+#else
+            NavigationService.NavigateAsync("MainPage");
+#endif
         }
 
         protected override void RegisterTypes()
