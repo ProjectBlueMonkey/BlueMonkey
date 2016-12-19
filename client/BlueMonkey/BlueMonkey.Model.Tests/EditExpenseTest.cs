@@ -113,5 +113,20 @@ namespace BlueMonkey.Model.Tests
             Assert.PropertyChanged(actual, "Categories", () => actual.Categories = categories);
             Assert.Equal(categories, actual.Categories);
         }
+
+        [Fact]
+        public void SelectedCategoryProperty()
+        {
+            var expenseService = new Mock<IExpenseService>();
+            var fileUploadService = new Mock<IFileUploadService>();
+            var dateTimeService = new Mock<IDateTimeService>();
+            var mediaService = new Mock<IMediaService>();
+            var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
+
+            Assert.Null(actual.SelectedCategory);
+            var category = new Category();
+            Assert.PropertyChanged(actual, "SelectedCategory", () => actual.SelectedCategory = category);
+            Assert.Equal(category, actual.SelectedCategory);
+        }
     }
 }
