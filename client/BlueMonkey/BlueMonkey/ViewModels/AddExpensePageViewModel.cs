@@ -31,7 +31,15 @@ namespace BlueMonkey.ViewModels
         /// <summary>
         /// Target Expense
         /// </summary>
-        public ReadOnlyReactiveProperty<Expense> Expense { get; }
+        public ReactiveProperty<string> Name { get; }
+
+        public ReactiveProperty<long> Amount { get; }
+
+        public ReactiveProperty<DateTime> Date { get; }
+
+        public ReactiveProperty<string> Location { get; }
+
+        public ReactiveProperty<string> Note { get; }
 
         /// <summary>
         /// Selectable categories.
@@ -41,7 +49,7 @@ namespace BlueMonkey.ViewModels
         /// <summary>
         /// Selected Category.
         /// </summary>
-        public ReactiveProperty<string> SelectedCategory { get; }
+        public ReactiveProperty<int> SelectedCategoryIndex { get; }
 
         /// <summary>
         /// command to save the expense.
@@ -63,29 +71,32 @@ namespace BlueMonkey.ViewModels
             _navigationService = navigationService;
             _editExpense = editExpense;
 
-            Expense = _editExpense.ObserveProperty(x => x.Expense).ToReadOnlyReactiveProperty();
+            Name = _editExpense.ToReactivePropertyAsSynchronized(x => x.Name);
+            Amount = _editExpense.ToReactivePropertyAsSynchronized(x => x.Amount);
+            Date = _editExpense.ToReactivePropertyAsSynchronized(x => x.Date);
+            Location = _editExpense.ToReactivePropertyAsSynchronized(x => x.Location);
+            Note = _editExpense.ToReactivePropertyAsSynchronized(x => x.Note);
+
             // Convert, because picker supports only string.
             Categories = _editExpense.ObserveProperty(x => x.Categories)
                 .Where(x => x != null)
                 .Select(x => x.Select(category => category.Name)).ToReadOnlyReactiveProperty();
             // Convert, because picker supports only string.
-            SelectedCategory = _editExpense.ObserveProperty(x => x.SelectedCategory)
-                .Where(x => x != null)
-                .Select(x => x.Name).ToReactiveProperty();
+            SelectedCategoryIndex = _editExpense.ObserveProperty(x => x.SelectedCategory)
+                .Select(x => (x == null) ? -1 : _editExpense.Categories.ToList().IndexOf(x))
+                .ToReactiveProperty();
             // When you select into the Category name.
-            SelectedCategory.Subscribe(x =>
+            SelectedCategoryIndex.Subscribe(x =>
             {
-                if (x == null)
+                if (0 <= x)
                 {
-                    _editExpense.SelectedCategory = null;
-                }
-                else
-                {
-                    _editExpense.SelectedCategory = _editExpense.Categories.Single(category => category.Name == x);
+                    _editExpense.SelectedCategory = _editExpense.Categories.ToList()[x];
                 }
             });
 
-            SaveAsyncCommand = new AsyncReactiveCommand();
+            SaveAsyncCommand =
+                Name.Select(x => !string.IsNullOrWhiteSpace(x))
+                .ToAsyncReactiveCommand();
             SaveAsyncCommand.Subscribe(SaveAsync);
         }
 

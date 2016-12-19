@@ -18,12 +18,44 @@ namespace BlueMonkey.Model
         private readonly IDateTimeService _dateTimeService;
         private readonly IMediaService _mediaService;
 
-        private Expense _expense;
-        public Expense Expense
+        private string _name;
+        public string Name
         {
-            get { return _expense; }
-            set { SetProperty(ref _expense, value); }
+            get { return _name; }
+            set { SetProperty(ref _name, value); }
         }
+
+        private long _amount;
+        public long Amount
+        {
+            get { return _amount; }
+            set { SetProperty(ref _amount, value); }
+        }
+
+        private DateTime _date;
+        public DateTime Date
+        {
+            get { return _date; }
+            set { SetProperty(ref _date, value); }
+        }
+
+        private string _location;
+
+        public string Location
+        {
+            get { return _location; }
+            set { SetProperty(ref _location, value); }
+        }
+
+        private string _note;
+
+        public string Note
+        {
+            get { return _note; }
+            set { SetProperty(ref _note, value); }
+        }
+
+        private string _reportId;
 
         private IMediaFile _receipt;
         public IMediaFile Receipt
@@ -69,11 +101,9 @@ namespace BlueMonkey.Model
 
         public async Task InitializeAsync()
         {
-            Expense = new Expense
-            {
-                Date = _dateTimeService.Today
-            };
+            Date = _dateTimeService.Today;
             Categories = await _expenseService.GetCategoriesAsync();
+            SelectedCategory = Categories.FirstOrDefault();
         }
 
         public async Task PickPhotoAsync()
@@ -89,7 +119,15 @@ namespace BlueMonkey.Model
         public async Task SaveAsync()
         {
             var uri = await _fileUploadService.UploadMediaFileAsync(Receipt);
-            await _expenseService.RegisterExpensesAsync(Expense, new[] {new ExpenseReceipt {ReceiptUri = uri.ToString()}});
+            var expense = new Expense
+            {
+                Name = Name,
+                Amount = Amount,
+                Date = Date,
+                Location = Location,
+                Note = Note
+            };
+            await _expenseService.RegisterExpensesAsync(expense, new[] {new ExpenseReceipt {ReceiptUri = uri.ToString()}});
         }
     }
 }

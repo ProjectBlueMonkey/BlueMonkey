@@ -11,7 +11,11 @@ namespace BlueMonkey.Model
 {
     public interface IEditExpense : INotifyPropertyChanged
     {
-        Expense Expense { get; }
+        string Name { get; set; }
+        long Amount { get; set; }
+        DateTime Date { get; set; }
+        string Location { get; set; }
+        string Note { get; set; }
         IMediaFile Receipt { get; }
         IEnumerable<Category> Categories { get; }
         Category SelectedCategory { get; set; }
