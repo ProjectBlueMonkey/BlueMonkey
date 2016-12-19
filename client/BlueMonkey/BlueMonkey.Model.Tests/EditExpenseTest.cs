@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BlueMonkey.Business;
 using BlueMonkey.ExpenseServices;
 using BlueMonkey.MediaServices;
 using BlueMonkey.TimeService;
@@ -96,6 +97,21 @@ namespace BlueMonkey.Model.Tests
             var mediaFile = new Mock<IMediaFile>();
             Assert.PropertyChanged(actual, "Receipt", () => actual.Receipt = mediaFile.Object);
             Assert.Equal(mediaFile.Object, actual.Receipt);
+        }
+
+        [Fact]
+        public void CategoriesProperty()
+        {
+            var expenseService = new Mock<IExpenseService>();
+            var fileUploadService = new Mock<IFileUploadService>();
+            var dateTimeService = new Mock<IDateTimeService>();
+            var mediaService = new Mock<IMediaService>();
+            var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
+
+            Assert.Null(actual.Categories);
+            var categories = new Category[] { };
+            Assert.PropertyChanged(actual, "Categories", () => actual.Categories = categories);
+            Assert.Equal(categories, actual.Categories);
         }
     }
 }
