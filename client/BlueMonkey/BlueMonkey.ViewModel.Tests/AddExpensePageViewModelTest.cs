@@ -230,5 +230,15 @@ namespace BlueMonkey.ViewModel.Tests
 
             editExpense.Verify(m => m.InitializeAsync(), Times.Once);
         }
+
+        [Fact]
+        public void Destroy()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var editExpense = new Mock<IEditExpense>();
+            var actual = new AddExpensePageViewModel(navigationService.Object, editExpense.Object);
+            actual.Destroy();
+            // It is impossible to test for code review.
+        }
     }
 }

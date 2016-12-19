@@ -5,6 +5,7 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -18,7 +19,7 @@ namespace BlueMonkey.ViewModels
     /// <summary>
     /// ViewModel for AddExpensePage.
     /// </summary>
-    public class AddExpensePageViewModel : BindableBase, INavigationAware
+    public class AddExpensePageViewModel : BindableBase, INavigationAware, IDestructible
     {
         /// <summary>
         /// INavigationService.
@@ -30,6 +31,10 @@ namespace BlueMonkey.ViewModels
         /// </summary>
         private readonly IEditExpense _editExpense;
 
+        /// <summary>
+        /// Resource disposer.
+        /// </summary>
+        private CompositeDisposable Disposable { get; } = new CompositeDisposable();
         /// <summary>
         /// Target Expense
         /// </summary>
@@ -73,20 +78,20 @@ namespace BlueMonkey.ViewModels
             _navigationService = navigationService;
             _editExpense = editExpense;
 
-            Name = _editExpense.ToReactivePropertyAsSynchronized(x => x.Name);
-            Amount = _editExpense.ToReactivePropertyAsSynchronized(x => x.Amount);
-            Date = _editExpense.ToReactivePropertyAsSynchronized(x => x.Date);
-            Location = _editExpense.ToReactivePropertyAsSynchronized(x => x.Location);
-            Note = _editExpense.ToReactivePropertyAsSynchronized(x => x.Note);
+            Name = _editExpense.ToReactivePropertyAsSynchronized(x => x.Name).AddTo(Disposable);
+            Amount = _editExpense.ToReactivePropertyAsSynchronized(x => x.Amount).AddTo(Disposable);
+            Date = _editExpense.ToReactivePropertyAsSynchronized(x => x.Date).AddTo(Disposable);
+            Location = _editExpense.ToReactivePropertyAsSynchronized(x => x.Location).AddTo(Disposable);
+            Note = _editExpense.ToReactivePropertyAsSynchronized(x => x.Note).AddTo(Disposable);
 
             // Convert, because picker supports only string.
             Categories = _editExpense.ObserveProperty(x => x.Categories)
                 .Where(x => x != null)
-                .Select(x => x.Select(category => category.Name)).ToReadOnlyReactiveProperty();
+                .Select(x => x.Select(category => category.Name)).ToReadOnlyReactiveProperty().AddTo(Disposable);
             // Convert, because picker supports only string.
             SelectedCategoryIndex = _editExpense.ObserveProperty(x => x.SelectedCategory)
                 .Select(x => (x == null) ? -1 : _editExpense.Categories.ToList().IndexOf(x))
-                .ToReactiveProperty();
+                .ToReactiveProperty().AddTo(Disposable);
             // When you select into the Category name.
             SelectedCategoryIndex.Subscribe(x =>
             {
@@ -98,7 +103,7 @@ namespace BlueMonkey.ViewModels
 
             SaveAsyncCommand =
                 Name.Select(x => !string.IsNullOrWhiteSpace(x))
-                .ToAsyncReactiveCommand();
+                .ToAsyncReactiveCommand().AddTo(Disposable);
             SaveAsyncCommand.Subscribe(SaveAsync);
 
             NavigateReceiptPageCommand = new Command(() => _navigationService.NavigateAsync("ReceiptPage"));
@@ -139,6 +144,14 @@ namespace BlueMonkey.ViewModels
         public async void OnNavigatingTo(NavigationParameters parameters)
         {
             await _editExpense.InitializeAsync();
+        }
+
+        /// <summary>
+        /// Free resources.
+        /// </summary>
+        public void Destroy()
+        {
+            Disposable.Dispose();
         }
     }
 }
