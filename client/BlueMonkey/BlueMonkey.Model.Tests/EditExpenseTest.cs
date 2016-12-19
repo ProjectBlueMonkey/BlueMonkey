@@ -40,5 +40,19 @@ namespace BlueMonkey.Model.Tests
             Assert.PropertyChanged(actual, "Amount", () => actual.Amount = 1);
             Assert.Equal(1, actual.Amount);
         }
+
+        [Fact]
+        public void DateProperty()
+        {
+            var expenseService = new Mock<IExpenseService>();
+            var fileUploadService = new Mock<IFileUploadService>();
+            var dateTimeService = new Mock<IDateTimeService>();
+            var mediaService = new Mock<IMediaService>();
+            var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
+
+            Assert.Equal(default(DateTime), actual.Date);
+            Assert.PropertyChanged(actual, "Date", () => actual.Date = DateTime.MaxValue);
+            Assert.Equal(DateTime.MaxValue, actual.Date);
+        }
     }
 }
