@@ -259,5 +259,31 @@ namespace BlueMonkey.Model.Tests
             await actual.SaveAsync();
 
         }
+
+        [Fact]
+        public void IsTakePhotoSupported()
+        {
+            var expenseService = new Mock<IExpenseService>();
+            var fileUploadService = new Mock<IFileUploadService>();
+            var dateTimeService = new Mock<IDateTimeService>();
+            var mediaService = new Mock<IMediaService>();
+            var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
+
+            mediaService.Setup(m => m.IsTakePhotoSupported).Returns(true);
+            mediaService.Setup(m => m.IsCameraAvailable).Returns(true);
+            Assert.True(actual.IsTakePhotoSupported);
+
+            mediaService.Setup(m => m.IsTakePhotoSupported).Returns(false);
+            mediaService.Setup(m => m.IsCameraAvailable).Returns(true);
+            Assert.False(actual.IsTakePhotoSupported);
+
+            mediaService.Setup(m => m.IsTakePhotoSupported).Returns(true);
+            mediaService.Setup(m => m.IsCameraAvailable).Returns(false);
+            Assert.False(actual.IsTakePhotoSupported);
+
+            mediaService.Setup(m => m.IsTakePhotoSupported).Returns(false);
+            mediaService.Setup(m => m.IsCameraAvailable).Returns(false);
+            Assert.False(actual.IsTakePhotoSupported);
+        }
     }
 }

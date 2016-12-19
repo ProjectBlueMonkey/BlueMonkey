@@ -176,6 +176,16 @@ namespace BlueMonkey.Model
         }
 
         /// <summary>
+        /// Gets if ability to take photos supported on the device
+        /// </summary>
+        public bool IsTakePhotoSupported => _mediaService.IsCameraAvailable && _mediaService.IsTakePhotoSupported;
+
+        /// <summary>
+        /// Gets if the ability to pick photo is supported on the device
+        /// </summary>
+        public bool IsPickPhotoSupported { get; }
+
+        /// <summary>
         /// Pick phote.
         /// </summary>
         /// <returns></returns>

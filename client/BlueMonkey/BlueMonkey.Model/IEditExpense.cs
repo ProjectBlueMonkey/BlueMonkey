@@ -61,6 +61,16 @@ namespace BlueMonkey.Model
         Task InitializeAsync();
 
         /// <summary>
+        /// Gets if ability to take photos supported on the device
+        /// </summary>
+        bool IsTakePhotoSupported { get; }
+
+        /// <summary>
+        /// Gets if the ability to pick photo is supported on the device
+        /// </summary>
+        bool IsPickPhotoSupported { get; }
+
+        /// <summary>
         /// Pick photo.
         /// </summary>
         /// <returns></returns>
