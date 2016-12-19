@@ -4,9 +4,6 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BlueMonkey.Views.ReceiptPage" Title="Receipt">
-  <ContentPage.ToolbarItems>
-    <ToolbarItem Text="Update" Command="{Binding TakeMediaCommand}"/>
-  </ContentPage.ToolbarItems>
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="*"/>
