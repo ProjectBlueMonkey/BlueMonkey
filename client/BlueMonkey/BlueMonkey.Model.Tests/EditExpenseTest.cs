@@ -82,5 +82,20 @@ namespace BlueMonkey.Model.Tests
             Assert.PropertyChanged(actual, "Note", () => actual.Note = "update");
             Assert.Equal("update", actual.Note);
         }
+
+        [Fact]
+        public void ReceiptProperty()
+        {
+            var expenseService = new Mock<IExpenseService>();
+            var fileUploadService = new Mock<IFileUploadService>();
+            var dateTimeService = new Mock<IDateTimeService>();
+            var mediaService = new Mock<IMediaService>();
+            var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
+
+            Assert.Null(actual.Receipt);
+            var mediaFile = new Mock<IMediaFile>();
+            Assert.PropertyChanged(actual, "Receipt", () => actual.Receipt = mediaFile.Object);
+            Assert.Equal(mediaFile.Object, actual.Receipt);
+        }
     }
 }
