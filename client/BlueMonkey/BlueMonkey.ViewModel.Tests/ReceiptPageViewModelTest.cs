@@ -56,5 +56,14 @@ namespace BlueMonkey.ViewModel.Tests
 
             editExpense.Verify(m => m.TakePhotoAsync(), Times.Once);
         }
+
+        [Fact]
+        public void Destroy()
+        {
+            var editExpense = new Mock<IEditExpense>();
+            var actual = new ReceiptPageViewModel(editExpense.Object);
+            actual.Destroy();
+            // It is impossible to test for code review.
+        }
     }
 }
