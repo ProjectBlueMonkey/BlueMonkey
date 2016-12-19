@@ -172,5 +172,18 @@ namespace BlueMonkey.Model.Tests
             Assert.Equal(categories, actual.Categories);
             Assert.Null(actual.SelectedCategory);
         }
+
+        [Fact]
+        public async Task PickPhotoAsync()
+        {
+            var expenseService = new Mock<IExpenseService>();
+            var fileUploadService = new Mock<IFileUploadService>();
+            var dateTimeService = new Mock<IDateTimeService>();
+            var mediaService = new Mock<IMediaService>();
+            var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
+
+            await actual.PickPhotoAsync();
+            mediaService.Verify(m => m.PickPhotoAsync(), Times.Once);
+        }
     }
 }
