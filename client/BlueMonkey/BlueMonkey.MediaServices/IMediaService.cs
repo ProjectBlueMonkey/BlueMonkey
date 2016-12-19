@@ -33,9 +33,8 @@ namespace BlueMonkey.MediaServices
         Task<IMediaFile> PickPhotoAsync();
 
         /// <summary>
-        /// Take a photo async with specified options
+        /// Take a photo async.
         /// </summary>
-        /// <param name="options">Camera Media Options</param>
         /// <returns>Media file of photo or null if canceled</returns>
         Task<IMediaFile> TakePhotoAsync();
     }

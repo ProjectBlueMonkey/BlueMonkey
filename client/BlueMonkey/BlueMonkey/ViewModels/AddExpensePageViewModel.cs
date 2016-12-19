@@ -36,16 +36,28 @@ namespace BlueMonkey.ViewModels
         /// </summary>
         private CompositeDisposable Disposable { get; } = new CompositeDisposable();
         /// <summary>
-        /// Target Expense
+        /// Name of Expense
         /// </summary>
         public ReactiveProperty<string> Name { get; }
 
+        /// <summary>
+        /// Amount of Expense
+        /// </summary>
         public ReactiveProperty<long> Amount { get; }
 
+        /// <summary>
+        /// Date of Expense
+        /// </summary>
         public ReactiveProperty<DateTime> Date { get; }
 
+        /// <summary>
+        /// Location of Expense
+        /// </summary>
         public ReactiveProperty<string> Location { get; }
 
+        /// <summary>
+        /// Note of Expense
+        /// </summary>
         public ReactiveProperty<string> Note { get; }
 
         /// <summary>
