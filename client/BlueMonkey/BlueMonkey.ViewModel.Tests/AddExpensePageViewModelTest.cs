@@ -201,5 +201,34 @@ namespace BlueMonkey.ViewModel.Tests
 
             navigationService.Verify(m => m.NavigateAsync("ReceiptPage", null, null, true), Times.Once);
         }
+
+        [Fact]
+        public void OnNavigatedFrom()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var editExpense = new Mock<IEditExpense>();
+            var actual = new AddExpensePageViewModel(navigationService.Object, editExpense.Object);
+            actual.OnNavigatedFrom(null);
+        }
+
+        [Fact]
+        public void OnNavigatedTo()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var editExpense = new Mock<IEditExpense>();
+            var actual = new AddExpensePageViewModel(navigationService.Object, editExpense.Object);
+            actual.OnNavigatedTo(null);
+        }
+
+        [Fact]
+        public void OnNavigatingTo()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var editExpense = new Mock<IEditExpense>();
+            var actual = new AddExpensePageViewModel(navigationService.Object, editExpense.Object);
+            actual.OnNavigatingTo(null);
+
+            editExpense.Verify(m => m.InitializeAsync(), Times.Once);
+        }
     }
 }
