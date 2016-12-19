@@ -28,5 +28,19 @@ namespace BlueMonkey.ViewModel.Tests
             // ImageSource doesn't expose any mechanism to retrieve the original byte array.
             // For this reason, the test will give up by ImageSource.
         }
+
+        [Fact]
+        public void PickPhotoAsyncCommand()
+        {
+            var editExpense = new Mock<IEditExpense>();
+            var actual = new ReceiptPageViewModel(editExpense.Object);
+
+            Assert.NotNull(actual.PickPhotoAsyncCommand);
+            Assert.True(actual.PickPhotoAsyncCommand.CanExecute());
+
+            actual.PickPhotoAsyncCommand.Execute();
+
+            editExpense.Verify(m => m.PickPhotoAsync(), Times.Once);
+        }
     }
 }
