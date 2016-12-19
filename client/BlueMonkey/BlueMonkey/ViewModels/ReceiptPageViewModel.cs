@@ -57,10 +57,10 @@ namespace BlueMonkey.ViewModels
                 .Select(x => ImageSource.FromStream(x.GetStream))
                 .ToReadOnlyReactiveProperty().AddTo(Disposable);
 
-            PickPhotoAsyncCommand = new AsyncReactiveCommand().AddTo(Disposable);
+            PickPhotoAsyncCommand = _editExpense.ObserveProperty(m => m.IsPickPhotoSupported).ToAsyncReactiveCommand().AddTo(Disposable);
             PickPhotoAsyncCommand.Subscribe(async _ => await _editExpense.PickPhotoAsync());
 
-            TakePhotoAsyncCommand = new AsyncReactiveCommand().AddTo(Disposable);
+            TakePhotoAsyncCommand = _editExpense.ObserveProperty(m => m.IsTakePhotoSupported).ToAsyncReactiveCommand().AddTo(Disposable);
             TakePhotoAsyncCommand.Subscribe(async _ => await _editExpense.TakePhotoAsync());
         }
 

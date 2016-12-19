@@ -33,6 +33,8 @@ namespace BlueMonkey.ViewModel.Tests
         public void PickPhotoAsyncCommand()
         {
             var editExpense = new Mock<IEditExpense>();
+            editExpense.Setup(m => m.IsPickPhotoSupported).Returns(true);
+
             var actual = new ReceiptPageViewModel(editExpense.Object);
 
             Assert.NotNull(actual.PickPhotoAsyncCommand);
@@ -44,9 +46,23 @@ namespace BlueMonkey.ViewModel.Tests
         }
 
         [Fact]
+        public void PickPhotoAsyncCommandWhenIsPickPhotoSupportedFalse()
+        {
+            var editExpense = new Mock<IEditExpense>();
+            editExpense.Setup(m => m.IsPickPhotoSupported).Returns(false);
+
+            var actual = new ReceiptPageViewModel(editExpense.Object);
+
+            Assert.NotNull(actual.PickPhotoAsyncCommand);
+            Assert.False(actual.PickPhotoAsyncCommand.CanExecute());
+        }
+
+        [Fact]
         public void TakePhotoAsyncCommand()
         {
             var editExpense = new Mock<IEditExpense>();
+            editExpense.Setup(m => m.IsTakePhotoSupported).Returns(true);
+
             var actual = new ReceiptPageViewModel(editExpense.Object);
 
             Assert.NotNull(actual.TakePhotoAsyncCommand);
@@ -56,6 +72,19 @@ namespace BlueMonkey.ViewModel.Tests
 
             editExpense.Verify(m => m.TakePhotoAsync(), Times.Once);
         }
+
+        [Fact]
+        public void TakePhotoAsyncCommandWhenIsTakePhotoSupportedFalse()
+        {
+            var editExpense = new Mock<IEditExpense>();
+            editExpense.Setup(m => m.IsTakePhotoSupported).Returns(false);
+
+            var actual = new ReceiptPageViewModel(editExpense.Object);
+
+            Assert.NotNull(actual.TakePhotoAsyncCommand);
+            Assert.False(actual.TakePhotoAsyncCommand.CanExecute());
+        }
+
 
         [Fact]
         public void Destroy()
