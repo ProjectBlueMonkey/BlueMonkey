@@ -185,5 +185,18 @@ namespace BlueMonkey.Model.Tests
             await actual.PickPhotoAsync();
             mediaService.Verify(m => m.PickPhotoAsync(), Times.Once);
         }
+
+        [Fact]
+        public async Task TakePhotoAsync()
+        {
+            var expenseService = new Mock<IExpenseService>();
+            var fileUploadService = new Mock<IFileUploadService>();
+            var dateTimeService = new Mock<IDateTimeService>();
+            var mediaService = new Mock<IMediaService>();
+            var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
+
+            await actual.TakePhotoAsync();
+            mediaService.Verify(m => m.TakePhotoAsync(), Times.Once);
+        }
     }
 }
