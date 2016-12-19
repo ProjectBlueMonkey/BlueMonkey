@@ -145,9 +145,23 @@ namespace BlueMonkey.Model.Tests
             var mediaService = new Mock<IMediaService>();
 
             var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
+            actual.Name = "name";
+            actual.Amount = 1;
+            actual.Date = DateTime.MaxValue;
+            actual.Location = "location";
+            actual.Note = "note";
+            actual.Receipt = new Mock<IMediaFile>().Object;
+            actual.Categories = new Category[] { };
+            actual.SelectedCategory = new Category();
+
 
             await actual.InitializeAsync();
+            Assert.Null(actual.Name);
+            Assert.Equal(0, actual.Amount);
             Assert.Equal(DateTime.MaxValue, actual.Date);
+            Assert.Null(actual.Location);
+            Assert.Null(actual.Note);
+            Assert.Null(actual.Receipt);
             Assert.Equal(categories, actual.Categories);
             Assert.Equal(category1, actual.SelectedCategory);
         }

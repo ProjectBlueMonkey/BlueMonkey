@@ -165,7 +165,12 @@ namespace BlueMonkey.Model
         /// <returns></returns>
         public async Task InitializeAsync()
         {
+            Name = null;
+            Amount = 0;
             Date = _dateTimeService.Today;
+            Location = null;
+            Note = null;
+            Receipt = null;
             Categories = await _expenseService.GetCategoriesAsync();
             SelectedCategory = Categories.FirstOrDefault();
         }
