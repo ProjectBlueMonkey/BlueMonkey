@@ -56,5 +56,26 @@ namespace BlueMonkey.ViewModel.Tests
             Assert.Equal("category1", actualCategory[0]);
             Assert.Equal("category2", actualCategory[1]);
         }
+
+        [Fact]
+        public void SelectedCategory()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var editExpense = new Mock<IEditExpense>();
+
+            var actual = new AddExpensePageViewModel(navigationService.Object, editExpense.Object);
+
+            Assert.NotNull(actual.SelectedCategory);
+            Assert.Null(actual.SelectedCategory.Value);
+
+            var category = new Category { Name = "category1" };
+            var categories = new[] { new Category { Name = "category1" }, new Category { Name = "category2" } };
+            editExpense.Setup(x => x.Categories).Returns(categories);
+            editExpense.Setup(x => x.SelectedCategory).Returns(category);
+            editExpense.Raise(m => m.PropertyChanged += null, new PropertyChangedEventArgs("SelectedCategory"));
+
+            Assert.Equal("category1", actual.SelectedCategory.Value);
+            editExpense.VerifySet(m => m.SelectedCategory = categories[0], Times.Once);
+        }
     }
 }
