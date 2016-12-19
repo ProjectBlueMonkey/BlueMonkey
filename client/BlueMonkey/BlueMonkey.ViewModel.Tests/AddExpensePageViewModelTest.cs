@@ -186,5 +186,20 @@ namespace BlueMonkey.ViewModel.Tests
             editExpense.Raise(m => m.PropertyChanged += null, new PropertyChangedEventArgs("Name"));
             Assert.False(actual.SaveAsyncCommand.CanExecute());
         }
+
+        [Fact]
+        public void NavigateReceiptPageCommand()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var editExpense = new Mock<IEditExpense>();
+            var actual = new AddExpensePageViewModel(navigationService.Object, editExpense.Object);
+
+            Assert.NotNull(actual.NavigateReceiptPageCommand);
+            Assert.True(actual.NavigateReceiptPageCommand.CanExecute(null));
+
+            actual.NavigateReceiptPageCommand.Execute(null);
+
+            navigationService.Verify(m => m.NavigateAsync("ReceiptPage", null, null, true), Times.Once);
+        }
     }
 }

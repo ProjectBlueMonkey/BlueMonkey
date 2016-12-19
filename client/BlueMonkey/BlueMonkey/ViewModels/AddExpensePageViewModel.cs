@@ -7,9 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using BlueMonkey.Model;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
+using Xamarin.Forms;
 
 namespace BlueMonkey.ViewModels
 {
@@ -59,7 +61,7 @@ namespace BlueMonkey.ViewModels
         /// <summary>
         /// Command to navigate receipt page.
         /// </summary>
-        public DelegateCommand NavigateReceiptPageCommand => new DelegateCommand(NavigateReceiptPage);
+        public ICommand NavigateReceiptPageCommand { get; }
 
         /// <summary>
         /// Initialize instance.
@@ -98,14 +100,8 @@ namespace BlueMonkey.ViewModels
                 Name.Select(x => !string.IsNullOrWhiteSpace(x))
                 .ToAsyncReactiveCommand();
             SaveAsyncCommand.Subscribe(SaveAsync);
-        }
 
-        /// <summary>
-        /// Navigation receipt page.
-        /// </summary>
-        private void NavigateReceiptPage()
-        {
-            _navigationService.NavigateAsync("ReceiptPage");
+            NavigateReceiptPageCommand = new Command(() => _navigationService.NavigateAsync("ReceiptPage"));
         }
 
         /// <summary>
