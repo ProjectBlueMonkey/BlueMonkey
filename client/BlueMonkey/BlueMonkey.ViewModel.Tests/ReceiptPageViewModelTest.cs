@@ -42,5 +42,19 @@ namespace BlueMonkey.ViewModel.Tests
 
             editExpense.Verify(m => m.PickPhotoAsync(), Times.Once);
         }
+
+        [Fact]
+        public void TakePhotoAsyncCommand()
+        {
+            var editExpense = new Mock<IEditExpense>();
+            var actual = new ReceiptPageViewModel(editExpense.Object);
+
+            Assert.NotNull(actual.TakePhotoAsyncCommand);
+            Assert.True(actual.TakePhotoAsyncCommand.CanExecute());
+
+            actual.TakePhotoAsyncCommand.Execute();
+
+            editExpense.Verify(m => m.TakePhotoAsync(), Times.Once);
+        }
     }
 }
