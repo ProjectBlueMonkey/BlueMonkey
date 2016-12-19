@@ -151,5 +151,26 @@ namespace BlueMonkey.Model.Tests
             Assert.Equal(categories, actual.Categories);
             Assert.Equal(category1, actual.SelectedCategory);
         }
+
+        [Fact]
+        public async Task InitializeAsyncWhenNotExistCategories()
+        {
+            var expenseService = new Mock<IExpenseService>();
+            var categories = new Category[] { };
+            expenseService.Setup(m => m.GetCategoriesAsync()).ReturnsAsync(categories);
+
+            var fileUploadService = new Mock<IFileUploadService>();
+            var dateTimeService = new Mock<IDateTimeService>();
+            dateTimeService.Setup(m => m.Today).Returns(DateTime.MaxValue);
+
+            var mediaService = new Mock<IMediaService>();
+
+            var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
+
+            await actual.InitializeAsync();
+            Assert.Equal(DateTime.MaxValue, actual.Date);
+            Assert.Equal(categories, actual.Categories);
+            Assert.Null(actual.SelectedCategory);
+        }
     }
 }
