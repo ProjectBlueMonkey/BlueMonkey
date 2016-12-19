@@ -14,14 +14,40 @@ using Xamarin.Forms;
 
 namespace BlueMonkey.ViewModels
 {
+    /// <summary>
+    /// View Model for ReceiptPage
+    /// </summary>
     public class ReceiptPageViewModel : BindableBase, IDestructible
     {
+        /// <summary>
+        /// IEditExpense use case model.
+        /// </summary>
         private readonly IEditExpense _editExpense;
+
+        /// <summary>
+        /// Resource disposer.
+        /// </summary>
         private CompositeDisposable Disposable { get; } = new CompositeDisposable();
+
+        /// <summary>
+        /// Receipt image for Expense.
+        /// </summary>
         public ReadOnlyReactiveProperty<ImageSource> Receipt { get; }
+
+        /// <summary>
+        /// PickPhotoAsyncCommand.
+        /// </summary>
         public AsyncReactiveCommand PickPhotoAsyncCommand { get; }
+
+        /// <summary>
+        /// TakePhotoAsyncCommand
+        /// </summary>
         public AsyncReactiveCommand TakePhotoAsyncCommand { get; }
 
+        /// <summary>
+        /// Initialize Instance.
+        /// </summary>
+        /// <param name="editExpense"></param>
         public ReceiptPageViewModel(IEditExpense editExpense)
         {
             _editExpense = editExpense;
@@ -38,6 +64,9 @@ namespace BlueMonkey.ViewModels
             TakePhotoAsyncCommand.Subscribe(async _ => await _editExpense.TakePhotoAsync());
         }
 
+        /// <summary>
+        /// Free resources.
+        /// </summary>
         public void Destroy()
         {
             Disposable.Dispose();
