@@ -11,69 +11,129 @@ using Prism.Mvvm;
 
 namespace BlueMonkey.Model
 {
+    /// <summary>
+    /// Use cases to register and update expense.
+    /// </summary>
     public class EditExpense : BindableBase, IEditExpense
     {
+        /// <summary>
+        /// IExpenseService field.
+        /// </summary>
         private readonly IExpenseService _expenseService;
+
+        /// <summary>
+        /// IFileUploadService field.
+        /// </summary>
         private readonly IFileUploadService _fileUploadService;
+
+        /// <summary>
+        /// IDateTimeService field.
+        /// </summary>
         private readonly IDateTimeService _dateTimeService;
+
+        /// <summary>
+        /// IMediaService field.
+        /// </summary>
         private readonly IMediaService _mediaService;
 
+        /// <summary>
+        /// Backing field of Name property.
+        /// </summary>
         private string _name;
+        /// <summary>
+        /// Name of expense.
+        /// </summary>
         public string Name
         {
             get { return _name; }
             set { SetProperty(ref _name, value); }
         }
 
+        /// <summary>
+        /// Backing field of Amount property.
+        /// </summary>
         private long _amount;
+        /// <summary>
+        /// Amount of expense.
+        /// </summary>
         public long Amount
         {
             get { return _amount; }
             set { SetProperty(ref _amount, value); }
         }
 
+        /// <summary>
+        /// Backing field of Date property.
+        /// </summary>
         private DateTime _date;
+        /// <summary>
+        /// Date of expense.
+        /// </summary>
         public DateTime Date
         {
             get { return _date; }
             set { SetProperty(ref _date, value); }
         }
 
+        /// <summary>
+        /// Backing field of Location property.
+        /// </summary>
         private string _location;
-
+        /// <summary>
+        /// Location of expense.
+        /// </summary>
         public string Location
         {
             get { return _location; }
             set { SetProperty(ref _location, value); }
         }
 
+        /// <summary>
+        /// Backing field of Note property.
+        /// </summary>
         private string _note;
-
+        /// <summary>
+        /// Note of expense.
+        /// </summary>
         public string Note
         {
             get { return _note; }
             set { SetProperty(ref _note, value); }
         }
 
-        private string _reportId;
-
+        /// <summary>
+        /// Backing field of Receipt property.
+        /// </summary>
         private IMediaFile _receipt;
+        /// <summary>
+        /// Receipt of expense.
+        /// </summary>
         public IMediaFile Receipt
         {
             get { return _receipt; }
             set { SetProperty(ref _receipt, value); }
         }
 
+        /// <summary>
+        /// Backing field of Categories property.
+        /// </summary>
         private IEnumerable<Category> _categories;
-
+        /// <summary>
+        /// Categories of expense.
+        /// </summary>
         public IEnumerable<Category> Categories
         {
             get { return _categories; }
             set { SetProperty(ref _categories, value); }
         }
 
+        /// <summary>
+        /// Backing field of SelectedCategory property.
+        /// </summary>
         private Category _selectedCategory;
-
+        /// <summary>
+        /// SelectedCategory of expense.
+        /// </summary>
         public Category SelectedCategory
         {
             get { return _selectedCategory; }
@@ -99,6 +159,10 @@ namespace BlueMonkey.Model
             _mediaService = mediaService;
         }
 
+        /// <summary>
+        /// Initialize use case.
+        /// </summary>
+        /// <returns></returns>
         public async Task InitializeAsync()
         {
             Date = _dateTimeService.Today;
@@ -106,16 +170,28 @@ namespace BlueMonkey.Model
             SelectedCategory = Categories.FirstOrDefault();
         }
 
+        /// <summary>
+        /// Pick phote.
+        /// </summary>
+        /// <returns></returns>
         public async Task PickPhotoAsync()
         {
             Receipt = await _mediaService.PickPhotoAsync();
         }
 
+        /// <summary>
+        /// Take phote.
+        /// </summary>
+        /// <returns></returns>
         public async Task TakePhotoAsync()
         {
             Receipt = await _mediaService.TakePhotoAsync();
         }
 
+        /// <summary>
+        /// Register or update expense.
+        /// </summary>
+        /// <returns></returns>
         public async Task SaveAsync()
         {
             var uri = await _fileUploadService.UploadMediaFileAsync(Receipt);
