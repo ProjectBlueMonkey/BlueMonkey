@@ -12,7 +12,7 @@ namespace BlueMonkey.Model
     /// <summary>
     /// Use cases to register and update expense.
     /// </summary>
-    public interface IEditExpense : INotifyPropertyChanged
+    public interface IEditExpense : INotifyPropertyChanged, ITransactionPolicy
     {
         /// <summary>
         /// Name of expense.

@@ -164,6 +164,7 @@ namespace BlueMonkey.ViewModels
         public void Destroy()
         {
             Disposable.Dispose();
+            _editExpense.Close();
         }
     }
 }

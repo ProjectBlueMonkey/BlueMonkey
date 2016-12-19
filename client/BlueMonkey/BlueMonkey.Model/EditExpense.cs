@@ -14,7 +14,7 @@ namespace BlueMonkey.Model
     /// <summary>
     /// Use cases to register and update expense.
     /// </summary>
-    public class EditExpense : BindableBase, IEditExpense
+    public class EditExpense : ModelBase, IEditExpense
     {
         /// <summary>
         /// IExpenseService field.

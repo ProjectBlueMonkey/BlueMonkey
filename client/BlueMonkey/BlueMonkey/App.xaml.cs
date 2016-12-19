@@ -1,5 +1,5 @@
 // if connect azure then uncomment this line.
-#define AZURE
+#define DEBUG
 
 using BlueMonkey.ExpenseServices;
 using BlueMonkey.MediaServices;
@@ -48,7 +48,7 @@ namespace BlueMonkey
 
             Container.RegisterType<IEditReport, EditReport>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IReferReport, ReferReport>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<IEditExpense, EditExpense>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IEditExpense, EditExpense>(new TransactionLifetimeManager());
 
             Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();

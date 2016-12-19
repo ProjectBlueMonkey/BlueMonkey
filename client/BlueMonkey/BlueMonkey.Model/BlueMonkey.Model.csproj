@@ -41,6 +41,8 @@
     <Compile Include="IEditExpense.cs" />
     <Compile Include="IEditReport.cs" />
     <Compile Include="IReferReport.cs" />
+    <Compile Include="ITransactionPolicy.cs" />
+    <Compile Include="ModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferReport.cs" />
     <Compile Include="SelectableExpense.cs" />
