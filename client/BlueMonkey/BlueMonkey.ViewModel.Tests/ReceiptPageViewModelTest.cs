@@ -20,13 +20,21 @@ namespace BlueMonkey.ViewModel.Tests
             Assert.NotNull(actual.Receipt);
             Assert.Null(actual.Receipt.Value);
 
+            // First time.
             var image = File.ReadAllBytes("lena.jpg");
-            editExpense.Setup(m => m.Receipt).Returns(new MediaFile(".jpg", image));
-            editExpense.Raise(m => m.PropertyChanged += null, new PropertyChangedEventArgs("Receipt"));
-
+            editExpense.NotifyPropertyChanged(m => m.Receipt, new MediaFile(".jpg", image));
             Assert.NotNull(actual.Receipt.Value);
-            // ImageSource doesn't expose any mechanism to retrieve the original byte array.
-            // For this reason, the test will give up by ImageSource.
+
+            var first = actual.Receipt.Value;
+            // Second time.
+            editExpense.NotifyPropertyChanged(m => m.Receipt, new MediaFile(".jpg", image));
+            var second = actual.Receipt.Value;
+            Assert.NotEqual(first, second);
+
+            // Destory
+            actual.Destroy();
+            editExpense.NotifyPropertyChanged(m => m.Receipt, new MediaFile(".jpg", image));
+            Assert.Equal(second, actual.Receipt.Value);
         }
 
         [Fact]
@@ -41,7 +49,6 @@ namespace BlueMonkey.ViewModel.Tests
             Assert.True(actual.PickPhotoAsyncCommand.CanExecute());
 
             actual.PickPhotoAsyncCommand.Execute();
-
             editExpense.Verify(m => m.PickPhotoAsync(), Times.Once);
         }
 
@@ -83,16 +90,6 @@ namespace BlueMonkey.ViewModel.Tests
 
             Assert.NotNull(actual.TakePhotoAsyncCommand);
             Assert.False(actual.TakePhotoAsyncCommand.CanExecute());
-        }
-
-
-        [Fact]
-        public void Destroy()
-        {
-            var editExpense = new Mock<IEditExpense>();
-            var actual = new ReceiptPageViewModel(editExpense.Object);
-            actual.Destroy();
-            // It is impossible to test for code review.
         }
     }
 }
