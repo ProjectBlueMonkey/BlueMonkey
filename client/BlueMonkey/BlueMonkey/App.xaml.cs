@@ -1,7 +1,8 @@
 // if connect azure then uncomment this line.
-#define AZURE
+#define DEBUG
 
 using BlueMonkey.ExpenseServices;
+using BlueMonkey.MediaServices;
 #if AZURE
 using BlueMonkey.ExpenseServices.Azure;
 #else
@@ -25,7 +26,11 @@ namespace BlueMonkey
         {
             InitializeComponent();
 
+#if AZURE
             NavigationService.NavigateAsync("LoginPage");
+#else
+            NavigationService.NavigateAsync("NavigationPage/MainPage");
+#endif
         }
 
         protected override void RegisterTypes()
@@ -36,11 +41,14 @@ namespace BlueMonkey
             Container.RegisterType<IExpenseService, AzureExpenseService>(new ContainerControlledLifetimeManager());
 #else
             Container.RegisterType<IExpenseService, ExpenseService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IFileUploadService, FileUploadService>(new ContainerControlledLifetimeManager());
 #endif
             Container.RegisterType<IDateTimeService, DateTimeService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IMediaService, MediaService>(new ContainerControlledLifetimeManager());
 
             Container.RegisterType<IEditReport, EditReport>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IReferReport, ReferReport>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IEditExpense, EditExpense>(new TransactionLifetimeManager());
 
             Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();

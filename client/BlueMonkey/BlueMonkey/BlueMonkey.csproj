@@ -40,6 +40,8 @@
     <Compile Include="ItemSelectedToCommandBehavior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Secrets.cs" />
+    <Compile Include="TransactionLifetimeManager.cs" />
+    <Compile Include="TransactionPolicyExtensions.cs" />
     <Compile Include="ViewModels\AddReportPageViewModel.cs" />
     <Compile Include="ViewModels\ChartPageViewModel.cs" />
     <Compile Include="ViewModels\ExpenseListPageViewModel.cs" />
@@ -53,6 +55,7 @@
     <Compile Include="Views\AddReportPage.xaml.cs">
       <DependentUpon>AddReportPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\BindablePicker.cs" />
     <Compile Include="Views\ExpenseListPage.xaml.cs">
       <DependentUpon>ExpenseListPage.xaml</DependentUpon>
     </Compile>
@@ -157,6 +160,10 @@
       <Project>{31D77FDC-1919-42A3-8035-78767C87E4A7}</Project>
       <Name>BlueMonkey.LoginService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BlueMonkey.MediaServices\BlueMonkey.MediaServices.csproj">
+      <Project>{fb4e448d-e4d9-4839-928b-09ae414c5640}</Project>
+      <Name>BlueMonkey.MediaServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlueMonkey.Model\BlueMonkey.Model.csproj">
       <Project>{be7e48de-526b-4bfa-a8bb-1699fdad1cd1}</Project>
       <Name>BlueMonkey.Model</Name>
@@ -191,6 +198,14 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Media, Version=2.6.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xam.Plugin.Media.2.6.1\lib\portable-net45+wp80+win8+wpa81\Plugin.Media.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Media.Abstractions, Version=2.6.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xam.Plugin.Media.2.6.1\lib\portable-net45+wp80+win8+wpa81\Plugin.Media.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
