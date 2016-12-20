@@ -9,11 +9,11 @@ namespace BlueMonkey.Model
 {
     public class ModelBase : BindableBase, ITransactionPolicy
     {
-        public event EventHandler Closed;
+        public event EventHandler Completed;
 
-        public void Close()
+        public void Complete()
         {
-            Closed?.Invoke(this, EventArgs.Empty);
+            Completed?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace BlueMonkey.Tests
             var model2 = container.Resolve<ManagedModel>();
             Assert.Equal(model1, model2);
 
-            model1.Close();
+            model1.Complete();
 
             var model3 = container.Resolve<ManagedModel>();
             Assert.NotEqual(model1, model3);
@@ -41,7 +41,7 @@ namespace BlueMonkey.Tests
             var model = container.Resolve<DisposableModel>();
 
             Assert.NotNull(model);
-            model.Close();
+            model.Complete();
 
             Assert.True(model.IsDisposed);
         }
@@ -49,21 +49,20 @@ namespace BlueMonkey.Tests
 
     public class ManagedModel : ITransactionPolicy
     {
-        public event EventHandler Closed;
-
-        public void Close()
+        public event EventHandler Completed;
+        public void Complete()
         {
-            Closed?.Invoke(this, EventArgs.Empty);
+            Completed?.Invoke(this, EventArgs.Empty);
         }
     }
 
     public class DisposableModel : ITransactionPolicy, IDisposable
     {
-        public event EventHandler Closed;
+        public event EventHandler Completed;
         public bool IsDisposed { get; private set; }
-        public void Close()
+        public void Complete()
         {
-            Closed?.Invoke(this, EventArgs.Empty);
+            Completed?.Invoke(this, EventArgs.Empty);
         }
 
         public void Dispose()

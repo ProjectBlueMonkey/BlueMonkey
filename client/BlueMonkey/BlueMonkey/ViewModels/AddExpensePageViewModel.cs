@@ -89,6 +89,7 @@ namespace BlueMonkey.ViewModels
         {
             _navigationService = navigationService;
             _editExpense = editExpense;
+            _editExpense.AddTo(Disposable);
 
             Name = _editExpense.ToReactivePropertyAsSynchronized(x => x.Name).AddTo(Disposable);
             Amount = _editExpense.ToReactivePropertyAsSynchronized(x => x.Amount).AddTo(Disposable);
@@ -164,7 +165,6 @@ namespace BlueMonkey.ViewModels
         public void Destroy()
         {
             Disposable.Dispose();
-            _editExpense.Close();
         }
     }
 }

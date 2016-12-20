@@ -4,8 +4,8 @@ namespace BlueMonkey.Model
 {
     public interface ITransactionPolicy
     {
-        event EventHandler Closed;
+        event EventHandler Completed;
 
-        void Close();
+        void Complete();
     }
 }

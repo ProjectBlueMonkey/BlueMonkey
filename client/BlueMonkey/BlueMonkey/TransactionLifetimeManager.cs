@@ -22,14 +22,14 @@ namespace BlueMonkey
             var transactionObject = _value as ITransactionPolicy;
             if (transactionObject != null)
             {
-                transactionObject.Closed += TransactionOnClosed;
+                transactionObject.Completed += TransactionOnCompleted;
             }
         }
 
-        private void TransactionOnClosed(object sender, EventArgs eventArgs)
+        private void TransactionOnCompleted(object sender, EventArgs eventArgs)
         {
             var transactionObject = (ITransactionPolicy) sender;
-            transactionObject.Closed -= TransactionOnClosed;
+            transactionObject.Completed -= TransactionOnCompleted;
             RemoveValue();
         }
 
