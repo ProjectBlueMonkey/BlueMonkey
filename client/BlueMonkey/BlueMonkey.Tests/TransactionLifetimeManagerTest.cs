@@ -14,24 +14,31 @@ namespace BlueMonkey.Tests
         [Fact]
         public void LifetimeManagement()
         {
+            // Setup container.
             var container = new UnityContainer();
             container.RegisterType<ManagedModel>(new TransactionLifetimeManager());
 
+            // The same instance will be retrieved until complete is called.
             var model1 = container.Resolve<ManagedModel>();
             Assert.NotNull(model1);
 
             var model2 = container.Resolve<ManagedModel>();
-            Assert.Equal(model1, model2);
+            Assert.Same(model1, model2); // Assert#Same is the same meaning as ReferenceEquals.
 
+            // Transaction complete.
             model1.Complete();
 
+            // The new instance will be retrieved.
             var model3 = container.Resolve<ManagedModel>();
             Assert.NotEqual(model1, model3);
 
             var model4 = container.Resolve<ManagedModel>();
-            Assert.Equal(model3, model4);
+            Assert.Same(model3, model4);
         }
 
+        /// <summary>
+        /// In the case of a class that implements IDisposable, confirm that the Dispose method is called when deleting from the container.
+        /// </summary>
         [Fact]
         public void Disposable()
         {
