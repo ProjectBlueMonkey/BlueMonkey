@@ -30,13 +30,12 @@ namespace BlueMonkey.MediaServices
         /// Picks a photo from the default gallery
         /// </summary>
         /// <returns>Media file or null if canceled</returns>
-        Task<IMediaFile> PickPhotoAsync(PickMediaOptions options = null);
+        Task<IMediaFile> PickPhotoAsync();
 
         /// <summary>
-        /// Take a photo async with specified options
+        /// Take a photo async.
         /// </summary>
-        /// <param name="options">Camera Media Options</param>
         /// <returns>Media file of photo or null if canceled</returns>
-        Task<IMediaFile> TakePhotoAsync(StoreCameraMediaOptions options);
+        Task<IMediaFile> TakePhotoAsync();
     }
 }

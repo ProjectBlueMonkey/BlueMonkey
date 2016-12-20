@@ -26,7 +26,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType></DebugType>
+    <DebugType>
+    </DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -35,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ExpenseService.cs" />
+    <Compile Include="FileUploadService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -45,6 +47,10 @@
     <ProjectReference Include="..\BlueMonkey.ExpenseServices\BlueMonkey.ExpenseServices.csproj">
       <Project>{4A7F6CFB-DD26-477A-B4F9-6BC8D2D5BE62}</Project>
       <Name>BlueMonkey.ExpenseServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlueMonkey.MediaServices\BlueMonkey.MediaServices.csproj">
+      <Project>{FB4E448D-E4D9-4839-928B-09AE414C5640}</Project>
+      <Name>BlueMonkey.MediaServices</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
