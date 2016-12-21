@@ -7,10 +7,19 @@ using BlueMonkey.ExpenseServices;
 
 namespace BlueMonkey.ViewModels
 {
+    /// <summary>
+    /// ViewModel for expense list page.
+    /// </summary>
     public class ExpenseListPageViewModel : BindableBase, INavigationAware
     {
-        INavigationService _navigationService;
-        IExpenseService _expenseService;
+        /// <summary>
+        /// Navigation service.
+        /// </summary>
+        private readonly INavigationService _navigationService;
+        /// <summary>
+        /// Expense service.
+        /// </summary>
+        private readonly IExpenseService _expenseService;
 
         private IEnumerable<Expense> _items;
         public IEnumerable<Expense> Items

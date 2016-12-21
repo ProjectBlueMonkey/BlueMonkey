@@ -164,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddExpensePageViewModelTest.cs" />
+    <Compile Include="ExpenseListPageViewModelTest.cs" />
     <Compile Include="ExpenseSelectionPageViewModelTest.cs" />
     <Compile Include="LoginPageViewModelTest.cs" />
     <Compile Include="MockExtensions.cs" />
