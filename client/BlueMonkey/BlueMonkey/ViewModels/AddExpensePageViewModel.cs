@@ -100,10 +100,28 @@ namespace BlueMonkey.ViewModels
             // Convert, because picker supports only string.
             Categories = _editExpense.ObserveProperty(x => x.Categories)
                 .Where(x => x != null)
-                .Select(x => x.Select(category => category.Name)).ToReadOnlyReactiveProperty().AddTo(Disposable);
+                .Select(x => x.OrderBy(category => category.SortOrder).Select(category => category.Name))
+                .ToReadOnlyReactiveProperty().AddTo(Disposable);
             // Convert, because picker supports only string.
             SelectedCategoryIndex = _editExpense.ObserveProperty(x => x.SelectedCategory)
-                .Select(x => (x == null) ? -1 : _editExpense.Categories.ToList().IndexOf(x))
+                .Select(x =>
+                {
+                    if (x == null)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        foreach (var item in _editExpense.Categories.Select((value, index) => new {value, index}))
+                        {
+                            if (item.value.Id == x.Id)
+                            {
+                                return item.index;
+                            }
+                        }
+                        return -1;
+                    }
+                })
                 .ToReactiveProperty().AddTo(Disposable);
             // When you select into the Category name.
             SelectedCategoryIndex.Subscribe(x =>
