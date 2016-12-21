@@ -23,17 +23,19 @@ namespace BlueMonkey.ExpenseServices.Azure
             _categoryTable = _client.GetTable<Category>();
         }
 
-        public Task<IEnumerable<Expense>> GetExpensesAsync()
+        public async Task<IEnumerable<Expense>> GetExpensesAsync()
         {
-            return _expenseTable.CreateQuery()
-                .ToEnumerableAsync();
+            return (await _expenseTable.CreateQuery()
+                .ToEnumerableAsync())
+                .ToArray();
         }
 
-        public Task<IEnumerable<Expense>> GetExpensesFromReportIdAsync(string reportId)
+        public async Task<IEnumerable<Expense>> GetExpensesFromReportIdAsync(string reportId)
         {
-            return _expenseTable.CreateQuery()
+            return (await _expenseTable.CreateQuery()
                 .Where(x => x.ReportId == reportId)
-                .ToEnumerableAsync();
+                .ToEnumerableAsync())
+                .ToArray();
         }
 
         public Task<Report> GetReportAsync(string reportId)
@@ -41,15 +43,16 @@ namespace BlueMonkey.ExpenseServices.Azure
             return _reportTable.LookupAsync(reportId);
         }
 
-        public Task<IEnumerable<Category>> GetCategoriesAsync()
+        public async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
-            return _categoryTable.CreateQuery().ToEnumerableAsync();
+            return (await _categoryTable.CreateQuery().ToEnumerableAsync()).ToArray();
         }
 
-        public Task<IEnumerable<Report>> GetReportsAsync()
+        public async Task<IEnumerable<Report>> GetReportsAsync()
         {
-            return _reportTable.CreateQuery()
-                .ToEnumerableAsync();
+            return (await _reportTable.CreateQuery()
+                .ToEnumerableAsync())
+                .ToArray();
         }
 
         public Task<IEnumerable<Expense>> GetUnregisteredExpensesAsync()
