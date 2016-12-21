@@ -13,29 +13,21 @@ namespace BlueMonkey.MediaServices
         {
             if (source != null)
             {
+                string extension;
+                if (source.Path == null)
+                {
+                    extension = null;
+                }
+                else
+                {
+                    var index = source.Path.LastIndexOf('.');
+                    extension = index < 0 ? null : source.Path.Substring(index, source.Path.Length - index);
+                }
+
                 using (var mediaStream = source.GetStream())
                 using (var memoryStream = new MemoryStream())
                 {
                     await mediaStream.CopyToAsync(memoryStream);
-
-                    string extension;
-                    if (source.Path == null)
-                    {
-                        extension = null;
-                    }
-                    else
-                    {
-                        int index = source.Path.LastIndexOf('.');
-                        if (index < 0)
-                        {
-                            extension = null;
-                        }
-                        else
-                        {
-                            extension = source.Path.Substring(index, source.Path.Length - index);
-                        }
-                    }
-
                     return new MediaFile(extension, memoryStream.ToArray());
                 }
             }
