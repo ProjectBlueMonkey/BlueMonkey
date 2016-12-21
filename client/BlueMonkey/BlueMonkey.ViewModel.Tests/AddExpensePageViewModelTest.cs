@@ -149,15 +149,20 @@ namespace BlueMonkey.ViewModel.Tests
             Assert.NotNull(actual.Categories.Value);
             Assert.Equal(0, actual.Categories.Value.Count());
 
-            var categories = new [] { new Category {Name = "category1"}, new Category { Name = "category2" } };
+            var categories = 
+                new []
+                {
+                    new Category { Name = "category1", SortOrder = 1},
+                    new Category { Name = "category2", SortOrder = 0}
+                };
             editExpense.NotifyPropertyChanged(m => m.Categories, categories);
 
             // Model -> ViewModel
             var actualCategory = actual.Categories.Value?.ToList();
             Assert.NotNull(actualCategory);
             Assert.Equal(2, actualCategory.Count);
-            Assert.Equal("category1", actualCategory[0]);
-            Assert.Equal("category2", actualCategory[1]);
+            Assert.Equal("category2", actualCategory[0]);
+            Assert.Equal("category1", actualCategory[1]);
 
             // Destroy
             actual.Destroy();
@@ -177,8 +182,8 @@ namespace BlueMonkey.ViewModel.Tests
             Assert.Equal(-1, actual.SelectedCategoryIndex.Value);
 
             // Model -> ViewModel
-            var category1 = new Category();
-            var category2 = new Category();
+            var category1 = new Category { Id = "category1"};
+            var category2 = new Category { Id = "category2" };
             var categories = new[] { category1, category2 };
             editExpense.NotifyPropertyChanged(m => m.Categories, categories);
             editExpense.NotifyPropertyChanged(m => m.SelectedCategory, category2);
