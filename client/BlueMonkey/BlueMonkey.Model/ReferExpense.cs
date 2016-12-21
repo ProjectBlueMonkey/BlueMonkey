@@ -33,9 +33,17 @@ namespace BlueMonkey.Model
             Expenses = new ReadOnlyObservableCollection<Expense>(_expenses);
         }
 
-        public Task SearchAsync()
+        /// <summary>
+        /// Search expenses.
+        /// </summary>
+        /// <returns></returns>
+        public async Task SearchAsync()
         {
-            throw new NotImplementedException();
+            _expenses.Clear();
+            foreach (var expense in await _expenseService.GetExpensesAsync())
+            {
+                _expenses.Add(expense);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BlueMonkey.Business;
 using BlueMonkey.ExpenseServices;
 using Moq;
 using Xunit;
@@ -20,5 +21,24 @@ namespace BlueMonkey.Model.Tests
             Assert.NotNull(actual.Expenses);
             Assert.Equal(0, actual.Expenses.Count);
         }
+
+        [Fact]
+        public async Task SearchAsync()
+        {
+            var expenseService = new Mock<IExpenseService>();
+            var expense = new Expense();
+            var expenses = new[] { expense };
+            expenseService
+                .Setup(m => m.GetExpensesAsync())
+                .ReturnsAsync(expenses);
+
+            var actual = new ReferExpense(expenseService.Object);
+            await actual.SearchAsync();
+
+            Assert.NotNull(actual.Expenses);
+            Assert.Equal(1, actual.Expenses.Count);
+            Assert.Equal(expense, actual.Expenses[0]);
+        }
+
     }
 }
