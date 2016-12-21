@@ -36,10 +36,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ReferExpense.cs" />
     <Compile Include="EditExpense.cs" />
     <Compile Include="EditReport.cs" />
     <Compile Include="IEditExpense.cs" />
     <Compile Include="IEditReport.cs" />
+    <Compile Include="IReferExpense.cs" />
     <Compile Include="IReferReport.cs" />
     <Compile Include="ITransactionPolicy.cs" />
     <Compile Include="ModelBase.cs" />
