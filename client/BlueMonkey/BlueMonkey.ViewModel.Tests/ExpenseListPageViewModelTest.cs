@@ -57,6 +57,23 @@ namespace BlueMonkey.ViewModel.Tests
         }
 
         [Fact]
+        public void AddExpenseCommand()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var referExpense = new Mock<IReferExpense>();
+            var expenses = new ObservableCollection<Expense>();
+            referExpense.Setup(m => m.Expenses).Returns(new ReadOnlyObservableCollection<Expense>(expenses));
+            var actual = new ExpenseListPageViewModel(navigationService.Object, referExpense.Object);
+
+            Assert.NotNull(actual.AddExpenseCommand);
+            Assert.True(actual.AddExpenseCommand.CanExecute(null));
+
+            actual.AddExpenseCommand.Execute(null);
+
+            navigationService.Verify(m => m.NavigateAsync("AddExpensePage", null, null, true), Times.Once);
+        }
+
+        [Fact]
         public void OnNavigatedFrom()
         {
             var navigationService = new Mock<INavigationService>();
