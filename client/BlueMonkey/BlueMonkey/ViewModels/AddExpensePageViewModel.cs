@@ -112,6 +112,8 @@ namespace BlueMonkey.ViewModels
                     }
                     else
                     {
+                        // Elements obtained from Azure's IEnumerable return different instances each time.
+                        // For this reason we compare by ID.
                         foreach (var item in _editExpense.Categories.Select((value, index) => new {value, index}))
                         {
                             if (item.value.Id == x.Id)
