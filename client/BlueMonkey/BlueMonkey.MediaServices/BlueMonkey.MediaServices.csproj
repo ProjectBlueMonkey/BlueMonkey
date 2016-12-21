@@ -38,6 +38,7 @@
     <Compile Include="IMediaService.cs" />
     <Compile Include="MediaFile.cs" />
     <Compile Include="MediaService.cs" />
+    <Compile Include="MediaServiceExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
