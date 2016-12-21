@@ -4,6 +4,8 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using System.Collections.Generic;
 using BlueMonkey.ExpenseServices;
+using BlueMonkey.Model;
+using Reactive.Bindings;
 
 namespace BlueMonkey.ViewModels
 {
@@ -16,42 +18,27 @@ namespace BlueMonkey.ViewModels
         /// Navigation service.
         /// </summary>
         private readonly INavigationService _navigationService;
+
         /// <summary>
-        /// Expense service.
+        /// ReferExpense usecase model 
         /// </summary>
-        private readonly IExpenseService _expenseService;
+        private readonly IReferExpense _referExpense;
 
-        private IEnumerable<Expense> _items;
-        public IEnumerable<Expense> Items
-        {
-            get { return _items; }
-            set { SetProperty(ref _items, value); }
-        }
-
-        private Expense _selectedExpense;
-        public Expense SelectedExpense
-        {
-            get { return _selectedExpense; }
-            set
-            {
-                SetProperty(ref _selectedExpense, value);
-            }
-        }
+        public ReadOnlyReactiveCollection<Expense> Expenses { get; }
 
         public DelegateCommand<Expense> AddExpenseCommand => new DelegateCommand<Expense>(AddExpense);
 
-        public ExpenseListPageViewModel(INavigationService navigationService, IExpenseService expenseService)
+        public ExpenseListPageViewModel(INavigationService navigationService, IReferExpense referExpense)
         {
             _navigationService = navigationService;
-            _expenseService = expenseService;          
+            _referExpense = referExpense;
+
+            Expenses = _referExpense.Expenses.ToReadOnlyReactiveCollection();
         }
 
         private void AddExpense(Expense expense)
         {
-            var p = new NavigationParameters();
-            p.Add("expense", expense);
-
-            _navigationService.NavigateAsync("AddExpensePage", p);
+            _navigationService.NavigateAsync("AddExpensePage");
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
@@ -61,7 +48,6 @@ namespace BlueMonkey.ViewModels
 
         public async void OnNavigatedTo(NavigationParameters parameters)
         {
-            Items = await _expenseService.GetExpensesAsync();
         }
 
         public void OnNavigatingTo(NavigationParameters parameters)

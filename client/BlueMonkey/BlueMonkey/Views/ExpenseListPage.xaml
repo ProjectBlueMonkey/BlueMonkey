@@ -10,7 +10,7 @@
   </ContentPage.ToolbarItems>
 
   <StackLayout>
-    <ListView ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedExpense}">
+    <ListView ItemsSource="{Binding Expenses}" SelectedItem="{Binding SelectedExpense}">
       <ListView.Behaviors>
         <blueMonkey:ItemSelectedToCommandBehavior Command="{Binding AddExpenseCommand}"/>
       </ListView.Behaviors>
