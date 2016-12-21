@@ -55,11 +55,12 @@ namespace BlueMonkey.ExpenseServices.Azure
                 .ToArray();
         }
 
-        public Task<IEnumerable<Expense>> GetUnregisteredExpensesAsync()
+        public async Task<IEnumerable<Expense>> GetUnregisteredExpensesAsync()
         {
-            return _expenseTable.CreateQuery()
+            return (await _expenseTable.CreateQuery()
                 .Where(x => x.ReportId == null)
-                .ToEnumerableAsync();
+                .ToEnumerableAsync())
+                .ToArray();
         }
 
         public async Task RegisterReportAsync(Report report, IEnumerable<Expense> expenses)
@@ -117,7 +118,17 @@ namespace BlueMonkey.ExpenseServices.Azure
                 expenseReceipt.ExpenseId = expense.Id;
             }
 
-            await Task.WhenAll(expenseReceipts.Select(x => _expenseReceiptTable.UpdateAsync(x)));
+            await Task.WhenAll(expenseReceipts.Select(x =>
+            {
+                if (string.IsNullOrEmpty(x.Id))
+                {
+                    return _expenseReceiptTable.InsertAsync(x);
+                }
+                else
+                {
+                    return _expenseReceiptTable.UpdateAsync(x);
+                }
+            }));
         }
     }
 }
