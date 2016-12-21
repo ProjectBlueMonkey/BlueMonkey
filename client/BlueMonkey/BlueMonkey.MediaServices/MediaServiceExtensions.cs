@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Threading.Tasks;
 
 namespace BlueMonkey.MediaServices
@@ -13,16 +9,8 @@ namespace BlueMonkey.MediaServices
         {
             if (source != null)
             {
-                string extension;
-                if (source.Path == null)
-                {
-                    extension = null;
-                }
-                else
-                {
-                    var index = source.Path.LastIndexOf('.');
-                    extension = index < 0 ? null : source.Path.Substring(index, source.Path.Length - index);
-                }
+                var extension = Path.GetExtension(source.Path);
+                extension = string.IsNullOrEmpty(extension) ? null : extension;
 
                 using (var mediaStream = source.GetStream())
                 using (var memoryStream = new MemoryStream())
