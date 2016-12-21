@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:blueMonkey="clr-namespace:BlueMonkey;assembly=BlueMonkey"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BlueMonkey.Views.ExpenseListPage" Title="Expense List">
   <ContentPage.ToolbarItems>
@@ -10,10 +9,7 @@
   </ContentPage.ToolbarItems>
 
   <StackLayout>
-    <ListView ItemsSource="{Binding Expenses}" SelectedItem="{Binding SelectedExpense}">
-      <ListView.Behaviors>
-        <blueMonkey:ItemSelectedToCommandBehavior Command="{Binding AddExpenseCommand}"/>
-      </ListView.Behaviors>
+    <ListView ItemsSource="{Binding Expenses}">
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
