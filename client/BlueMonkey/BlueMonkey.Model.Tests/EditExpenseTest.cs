@@ -131,11 +131,7 @@ namespace BlueMonkey.Model.Tests
             var mediaService = new Mock<IMediaService>();
 
             var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
-            actual.Amount = 1;
             actual.Date = DateTime.MaxValue;
-            actual.Location = "location";
-            actual.Note = "note";
-            actual.Receipt = new Mock<IMediaFile>().Object;
             actual.Categories = new Category[] { };
             actual.SelectedCategory = new Category();
 
