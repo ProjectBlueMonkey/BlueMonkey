@@ -58,7 +58,6 @@ namespace BlueMonkey
             Container.RegisterTypeForNavigation<ChartPage>();
             Container.RegisterTypeForNavigation<ReportPage>();
             Container.RegisterTypeForNavigation<ReceiptPage>();
-            Container.RegisterTypeForNavigation<AddReportPage>();
             Container.RegisterTypeForNavigation<ReportListPage>();
             Container.RegisterTypeForNavigation<ExpenseSelectionPage>();
             Container.RegisterTypeForNavigation<LoginPage>();
