@@ -7,7 +7,7 @@ using BlueMonkey.MediaServices;
 
 namespace BlueMonkey.ExpenseServices.Local
 {
-    public class FileUploadService : IFileUploadService
+    public class FileStorageService : IFileStorageService
     {
         public Task<Uri> UploadMediaFileAsync(IMediaFile mediaFile)
         {

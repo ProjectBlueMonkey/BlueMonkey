@@ -41,7 +41,7 @@ namespace BlueMonkey
             Container.RegisterType<IExpenseService, AzureExpenseService>(new ContainerControlledLifetimeManager());
 #else
             Container.RegisterType<IExpenseService, ExpenseService>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<IFileUploadService, FileUploadService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IFileStorageService, FileStorageService>(new ContainerControlledLifetimeManager());
 #endif
             Container.RegisterType<IDateTimeService, DateTimeService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IMediaService, MediaService>(new ContainerControlledLifetimeManager());

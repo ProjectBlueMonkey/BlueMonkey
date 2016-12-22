@@ -18,7 +18,7 @@ namespace BlueMonkey.Model.Tests
         public void AmountProperty()
         {
             var expenseService = new Mock<IExpenseService>();
-            var fileUploadService = new Mock<IFileUploadService>();
+            var fileUploadService = new Mock<IFileStorageService>();
             var dateTimeService = new Mock<IDateTimeService>();
             var mediaService = new Mock<IMediaService>();
             var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
@@ -32,7 +32,7 @@ namespace BlueMonkey.Model.Tests
         public void DateProperty()
         {
             var expenseService = new Mock<IExpenseService>();
-            var fileUploadService = new Mock<IFileUploadService>();
+            var fileUploadService = new Mock<IFileStorageService>();
             var dateTimeService = new Mock<IDateTimeService>();
             var mediaService = new Mock<IMediaService>();
             var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
@@ -46,7 +46,7 @@ namespace BlueMonkey.Model.Tests
         public void LocationProperty()
         {
             var expenseService = new Mock<IExpenseService>();
-            var fileUploadService = new Mock<IFileUploadService>();
+            var fileUploadService = new Mock<IFileStorageService>();
             var dateTimeService = new Mock<IDateTimeService>();
             var mediaService = new Mock<IMediaService>();
             var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
@@ -60,7 +60,7 @@ namespace BlueMonkey.Model.Tests
         public void NoteProperty()
         {
             var expenseService = new Mock<IExpenseService>();
-            var fileUploadService = new Mock<IFileUploadService>();
+            var fileUploadService = new Mock<IFileStorageService>();
             var dateTimeService = new Mock<IDateTimeService>();
             var mediaService = new Mock<IMediaService>();
             var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
@@ -74,7 +74,7 @@ namespace BlueMonkey.Model.Tests
         public void ReceiptProperty()
         {
             var expenseService = new Mock<IExpenseService>();
-            var fileUploadService = new Mock<IFileUploadService>();
+            var fileUploadService = new Mock<IFileStorageService>();
             var dateTimeService = new Mock<IDateTimeService>();
             var mediaService = new Mock<IMediaService>();
             var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
@@ -89,7 +89,7 @@ namespace BlueMonkey.Model.Tests
         public void CategoriesProperty()
         {
             var expenseService = new Mock<IExpenseService>();
-            var fileUploadService = new Mock<IFileUploadService>();
+            var fileUploadService = new Mock<IFileStorageService>();
             var dateTimeService = new Mock<IDateTimeService>();
             var mediaService = new Mock<IMediaService>();
             var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
@@ -104,7 +104,7 @@ namespace BlueMonkey.Model.Tests
         public void SelectedCategoryProperty()
         {
             var expenseService = new Mock<IExpenseService>();
-            var fileUploadService = new Mock<IFileUploadService>();
+            var fileUploadService = new Mock<IFileStorageService>();
             var dateTimeService = new Mock<IDateTimeService>();
             var mediaService = new Mock<IMediaService>();
             var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
@@ -124,7 +124,7 @@ namespace BlueMonkey.Model.Tests
             var categories = new[] { category1, category2 };
             expenseService.Setup(m => m.GetCategoriesAsync()).ReturnsAsync(categories);
 
-            var fileUploadService = new Mock<IFileUploadService>();
+            var fileUploadService = new Mock<IFileStorageService>();
             var dateTimeService = new Mock<IDateTimeService>();
             dateTimeService.Setup(m => m.Today).Returns(DateTime.MaxValue);
 
@@ -157,7 +157,7 @@ namespace BlueMonkey.Model.Tests
             var categories = new Category[] { };
             expenseService.Setup(m => m.GetCategoriesAsync()).ReturnsAsync(categories);
 
-            var fileUploadService = new Mock<IFileUploadService>();
+            var fileUploadService = new Mock<IFileStorageService>();
             var dateTimeService = new Mock<IDateTimeService>();
             dateTimeService.Setup(m => m.Today).Returns(DateTime.MaxValue);
 
@@ -175,7 +175,7 @@ namespace BlueMonkey.Model.Tests
         public async Task PickPhotoAsync()
         {
             var expenseService = new Mock<IExpenseService>();
-            var fileUploadService = new Mock<IFileUploadService>();
+            var fileUploadService = new Mock<IFileStorageService>();
             var dateTimeService = new Mock<IDateTimeService>();
             var mediaService = new Mock<IMediaService>();
             var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
@@ -188,7 +188,7 @@ namespace BlueMonkey.Model.Tests
         public async Task TakePhotoAsync()
         {
             var expenseService = new Mock<IExpenseService>();
-            var fileUploadService = new Mock<IFileUploadService>();
+            var fileUploadService = new Mock<IFileStorageService>();
             var dateTimeService = new Mock<IDateTimeService>();
             var mediaService = new Mock<IMediaService>();
             var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
@@ -201,7 +201,7 @@ namespace BlueMonkey.Model.Tests
         public async Task SaveAsyncWhenRegister()
         {
             var expenseService = new Mock<IExpenseService>();
-            var fileUploadService = new Mock<IFileUploadService>();
+            var fileUploadService = new Mock<IFileStorageService>();
 
             var dateTimeService = new Mock<IDateTimeService>();
             var mediaService = new Mock<IMediaService>();
@@ -245,7 +245,7 @@ namespace BlueMonkey.Model.Tests
         public void IsTakePhotoSupported()
         {
             var expenseService = new Mock<IExpenseService>();
-            var fileUploadService = new Mock<IFileUploadService>();
+            var fileUploadService = new Mock<IFileStorageService>();
             var dateTimeService = new Mock<IDateTimeService>();
             var mediaService = new Mock<IMediaService>();
             var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
@@ -271,7 +271,7 @@ namespace BlueMonkey.Model.Tests
         public void IsPickPhotoSupported()
         {
             var expenseService = new Mock<IExpenseService>();
-            var fileUploadService = new Mock<IFileUploadService>();
+            var fileUploadService = new Mock<IFileStorageService>();
             var dateTimeService = new Mock<IDateTimeService>();
             var mediaService = new Mock<IMediaService>();
             var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);

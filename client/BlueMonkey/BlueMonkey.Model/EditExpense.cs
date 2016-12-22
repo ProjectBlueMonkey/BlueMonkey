@@ -22,9 +22,9 @@ namespace BlueMonkey.Model
         private readonly IExpenseService _expenseService;
 
         /// <summary>
-        /// IFileUploadService field.
+        /// IFileStorageService field.
         /// </summary>
-        private readonly IFileUploadService _fileUploadService;
+        private readonly IFileStorageService _fileStorageService;
 
         /// <summary>
         /// IDateTimeService field.
@@ -131,17 +131,17 @@ namespace BlueMonkey.Model
         /// Initialize Instance.
         /// </summary>
         /// <param name="expenseService"></param>
-        /// <param name="fileUploadService"></param>
+        /// <param name="fileStorageService"></param>
         /// <param name="dateTimeService"></param>
         /// <param name="mediaService"></param>
         public EditExpense(
             IExpenseService expenseService,
-            IFileUploadService fileUploadService,
+            IFileStorageService fileStorageService,
             IDateTimeService dateTimeService, 
             IMediaService mediaService)
         {
             _expenseService = expenseService;
-            _fileUploadService = fileUploadService;
+            _fileStorageService = fileStorageService;
             _dateTimeService = dateTimeService;
             _mediaService = mediaService;
         }
@@ -195,7 +195,7 @@ namespace BlueMonkey.Model
         /// <returns></returns>
         public async Task SaveAsync()
         {
-            var uri = await _fileUploadService.UploadMediaFileAsync(Receipt);
+            var uri = await _fileStorageService.UploadMediaFileAsync(Receipt);
             var expense = new Expense
             {
                 Amount = Amount,
