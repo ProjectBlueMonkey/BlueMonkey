@@ -89,12 +89,21 @@ namespace BlueMonkey.ExpenseServices.Local
 
         public Task<Expense> GetExpenseAsync(string expenseId)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(_expenses.SingleOrDefault(x => x.Id == expenseId));
         }
 
         public Task<IEnumerable<ExpenseReceipt>> GetExpenseReceiptsAsync(string expenseId)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(
+                new []
+                {
+                    new ExpenseReceipt
+                    {
+                        Id = "ExpenseReceiptId",
+                        ExpenseId = expenseId,
+                        ReceiptUri = $"{expenseId}.jpg"
+                    }
+                }.AsEnumerable());
         }
 
         public Task<IEnumerable<Category>> GetCategoriesAsync()
