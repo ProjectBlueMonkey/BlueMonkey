@@ -8,7 +8,6 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using BlueMonkey.Model;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
@@ -78,7 +77,7 @@ namespace BlueMonkey.ViewModels
         /// <summary>
         /// Command to navigate receipt page.
         /// </summary>
-        public ICommand NavigateReceiptPageCommand { get; }
+        public ReactiveCommand NavigateReceiptPageCommand { get; }
 
         /// <summary>
         /// Initialize instance.
@@ -119,7 +118,8 @@ namespace BlueMonkey.ViewModels
                 .ToAsyncReactiveCommand().AddTo(Disposable);
             SaveAsyncCommand.Subscribe(SaveAsync);
 
-            NavigateReceiptPageCommand = new Command(() => _navigationService.NavigateAsync("ReceiptPage"));
+            NavigateReceiptPageCommand = new ReactiveCommand();
+            NavigateReceiptPageCommand.Subscribe(_ => _navigationService.NavigateAsync("ReceiptPage"));
         }
 
         /// <summary>

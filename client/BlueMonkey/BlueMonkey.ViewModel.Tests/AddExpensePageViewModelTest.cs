@@ -229,7 +229,7 @@ namespace BlueMonkey.ViewModel.Tests
             var actual = new AddExpensePageViewModel(navigationService.Object, editExpense.Object);
 
             Assert.NotNull(actual.NavigateReceiptPageCommand);
-            Assert.True(actual.NavigateReceiptPageCommand.CanExecute(null));
+            Assert.True(actual.NavigateReceiptPageCommand.CanExecute());
 
             actual.NavigateReceiptPageCommand.Execute(null);
 
