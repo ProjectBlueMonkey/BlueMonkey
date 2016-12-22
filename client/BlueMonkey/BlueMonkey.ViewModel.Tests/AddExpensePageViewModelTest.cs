@@ -244,5 +244,19 @@ namespace BlueMonkey.ViewModel.Tests
 
             editExpense.Verify(m => m.InitializeAsync(), Times.Once);
         }
+
+        [Fact]
+        public void OnNavigatingToForUpdate()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var editExpense = new Mock<IEditExpense>();
+            var actual = new AddExpensePageViewModel(navigationService.Object, editExpense.Object);
+
+            var navigationParameters = new NavigationParameters();
+            navigationParameters[AddExpensePageViewModel.ExpenseIdKey] = "expenseId";
+            actual.OnNavigatingTo(navigationParameters);
+
+            editExpense.Verify(m => m.InitializeAsync("expenseId"), Times.Once);
+        }
     }
 }

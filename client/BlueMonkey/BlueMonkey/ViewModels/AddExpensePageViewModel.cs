@@ -175,7 +175,14 @@ namespace BlueMonkey.ViewModels
         /// <param name="parameters"></param>
         public async void OnNavigatingTo(NavigationParameters parameters)
         {
-            await _editExpense.InitializeAsync();
+            if (parameters != null && parameters.ContainsKey(ExpenseIdKey))
+            {
+                await _editExpense.InitializeAsync((string)parameters[ExpenseIdKey]);
+            }
+            else
+            {
+                await _editExpense.InitializeAsync();
+            }
         }
 
         /// <summary>
