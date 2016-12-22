@@ -33,6 +33,8 @@ namespace BlueMonkey.ViewModels
 
         public ReactiveCommand AddExpenseCommand { get; }
 
+        public ReactiveCommand<Expense> UpdateExpenseCommand { get; }
+
         public ExpenseListPageViewModel(INavigationService navigationService, IReferExpense referExpense)
         {
             _navigationService = navigationService;
@@ -41,11 +43,21 @@ namespace BlueMonkey.ViewModels
             Expenses = _referExpense.Expenses.ToReadOnlyReactiveCollection().AddTo(Disposable);
             AddExpenseCommand = new ReactiveCommand();
             AddExpenseCommand.Subscribe(_ => AddExpense());
+
+            UpdateExpenseCommand = new ReactiveCommand<Expense>();
+            UpdateExpenseCommand.Subscribe(UpdateExpense);
         }
 
         private void AddExpense()
         {
             _navigationService.NavigateAsync("AddExpensePage");
+        }
+
+        private void UpdateExpense(Expense expense)
+        {
+            var navigationParameters = new NavigationParameters();
+            navigationParameters[AddExpensePageViewModel.ExpenseIdKey] = expense.Id;
+            _navigationService.NavigateAsync("AddExpensePage", navigationParameters);
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)

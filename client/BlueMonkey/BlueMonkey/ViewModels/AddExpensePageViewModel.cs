@@ -21,6 +21,10 @@ namespace BlueMonkey.ViewModels
     public class AddExpensePageViewModel : BindableBase, INavigationAware, IDestructible
     {
         /// <summary>
+        /// Key of expense id.
+        /// </summary>
+        public const string ExpenseIdKey = "id";
+        /// <summary>
         /// INavigationService.
         /// </summary>
         private readonly INavigationService _navigationService;
