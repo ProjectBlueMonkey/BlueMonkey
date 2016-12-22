@@ -101,7 +101,7 @@ namespace BlueMonkey.ExpenseServices.Local
                     {
                         Id = "ExpenseReceiptId",
                         ExpenseId = expenseId,
-                        ReceiptUri = $"{expenseId}.jpg"
+                        ReceiptUri = "https://www.bing.com/test.jpg"
                     }
                 }.AsEnumerable());
         }
