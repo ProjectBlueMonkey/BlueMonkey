@@ -155,7 +155,23 @@ namespace BlueMonkey.ExpenseServices.Local
                 }
                 else
                 {
-                    throw new NotImplementedException();
+                    var original = _expenses.Single(x => x.Id == expense.Id);
+                    original.Amount = expense.Amount;
+                    original.CategoryId = expense.CategoryId;
+                    original.Date = expense.Date;
+                    original.Location = expense.Location;
+                    original.Note = expense.Note;
+
+                    var originalExpenseReceipt = _expenseReceipts.SingleOrDefault(x => x.ExpenseId == expense.Id);
+                    if (originalExpenseReceipt != null)
+                    {
+                        _expenseReceipts.Remove(originalExpenseReceipt);
+                    }
+                    foreach (var expenseReceipt in expenseReceipts)
+                    {
+                        expenseReceipt.ExpenseId = expense.Id;
+                        _expenseReceipts.Add(expenseReceipt);
+                    }
                 }
             });
         }
