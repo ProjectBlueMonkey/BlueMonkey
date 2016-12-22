@@ -9,6 +9,7 @@ using BlueMonkey.Business;
 using BlueMonkey.Model;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
+using Xamarin.Forms;
 
 namespace BlueMonkey.ViewModels
 {
@@ -50,12 +51,12 @@ namespace BlueMonkey.ViewModels
         /// <summary>
         /// Navigate to ExpenseSelectionPage Command.
         /// </summary>
-        public DelegateCommand NavigateExpenseSelectionCommand { get; }
+        public ReactiveCommand NavigateExpenseSelectionCommand { get; }
 
         /// <summary>
         /// Save Report Command.
         /// </summary>
-        public DelegateCommand SaveReportCommand { get; }
+        public AsyncReactiveCommand SaveReportCommand { get; }
 
         /// <summary>
         /// Initialize Instance.
@@ -69,12 +70,14 @@ namespace BlueMonkey.ViewModels
             Name = editReport.ToReactivePropertyAsSynchronized(x => x.Name);
             Date = editReport.ToReactivePropertyAsSynchronized(x => x.Date);
 
-            NavigateExpenseSelectionCommand = new DelegateCommand(() =>
+            NavigateExpenseSelectionCommand = new ReactiveCommand();
+            NavigateExpenseSelectionCommand.Subscribe(_ =>
             {
                 _navigationService.NavigateAsync("ExpenseSelectionPage");
             });
 
-            SaveReportCommand = DelegateCommand.FromAsyncHandler(async () =>
+            SaveReportCommand = new AsyncReactiveCommand();
+            SaveReportCommand.Subscribe(async _ =>
             {
                 await _editReport.SaveAsync();
                 await _navigationService.GoBackAsync();

@@ -1,12 +1,6 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 using BlueMonkey.Business;
-using BlueMonkey.ExpenseServices;
 using BlueMonkey.Model;
 using Prism.Navigation;
 using Reactive.Bindings;
@@ -21,9 +15,9 @@ namespace BlueMonkey.ViewModels
         /// <summary>
         /// Add New Report Navigation Command.
         /// </summary>
-        public DelegateCommand AddReportCommand => new DelegateCommand(AddReport);
+        public ReactiveCommand AddReportCommand { get; }
 
-        public DelegateCommand<Report> UpdateReportCommand => new DelegateCommand<Report>(UpdateReport);
+        public ReactiveCommand<Report> UpdateReportCommand { get; }
 
         /// <summary>
         /// Initialize Instance
@@ -35,6 +29,12 @@ namespace BlueMonkey.ViewModels
             _navigationService = navigationService;
             _referReport = referReport;
             Reports = _referReport.Reports.ToReadOnlyReactiveCollection();
+
+            AddReportCommand = new ReactiveCommand();
+            AddReportCommand.Subscribe(_ => AddReport());
+
+            UpdateReportCommand = new ReactiveCommand<Report>();
+            UpdateReportCommand.Subscribe(UpdateReport);
         }
 
         /// <summary>

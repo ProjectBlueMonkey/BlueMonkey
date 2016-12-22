@@ -111,7 +111,7 @@ namespace BlueMonkey.ViewModel.Tests
 
             var actual = new ReportPageViewModel(navigationService.Object, editReport.Object);
 
-            actual.NavigateExpenseSelectionCommand.Execute();
+            actual.NavigateExpenseSelectionCommand.Execute(null);
 
             navigationService.Verify(m => m.NavigateAsync("ExpenseSelectionPage", null, null, true), Times.Once);
         }
