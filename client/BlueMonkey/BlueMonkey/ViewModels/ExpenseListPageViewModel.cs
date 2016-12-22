@@ -1,15 +1,11 @@
-﻿using BlueMonkey.Business;
-using Prism.Commands;
+﻿using System;
+using BlueMonkey.Business;
 using Prism.Mvvm;
 using Prism.Navigation;
-using System.Collections.Generic;
 using System.Reactive.Disposables;
-using System.Windows.Input;
-using BlueMonkey.ExpenseServices;
 using BlueMonkey.Model;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
-using Xamarin.Forms;
 
 namespace BlueMonkey.ViewModels
 {
@@ -35,7 +31,7 @@ namespace BlueMonkey.ViewModels
 
         public ReadOnlyReactiveCollection<Expense> Expenses { get; }
 
-        public ICommand AddExpenseCommand { get; }
+        public ReactiveCommand AddExpenseCommand { get; }
 
         public ExpenseListPageViewModel(INavigationService navigationService, IReferExpense referExpense)
         {
@@ -43,7 +39,8 @@ namespace BlueMonkey.ViewModels
             _referExpense = referExpense;
 
             Expenses = _referExpense.Expenses.ToReadOnlyReactiveCollection().AddTo(Disposable);
-            AddExpenseCommand = new Command(AddExpense);
+            AddExpenseCommand = new ReactiveCommand();
+            AddExpenseCommand.Subscribe(_ => AddExpense());
         }
 
         private void AddExpense()

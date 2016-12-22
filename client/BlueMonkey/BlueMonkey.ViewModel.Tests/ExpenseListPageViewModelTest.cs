@@ -66,7 +66,7 @@ namespace BlueMonkey.ViewModel.Tests
             var actual = new ExpenseListPageViewModel(navigationService.Object, referExpense.Object);
 
             Assert.NotNull(actual.AddExpenseCommand);
-            Assert.True(actual.AddExpenseCommand.CanExecute(null));
+            Assert.True(actual.AddExpenseCommand.CanExecute());
 
             actual.AddExpenseCommand.Execute(null);
 
