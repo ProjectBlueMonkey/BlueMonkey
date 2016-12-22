@@ -15,11 +15,6 @@ namespace BlueMonkey.Model
     public interface IEditExpense : INotifyPropertyChanged, ITransactionPolicy
     {
         /// <summary>
-        /// Name of expense.
-        /// </summary>
-        string Name { get; set; }
-
-        /// <summary>
         /// Amount of expense.
         /// </summary>
         long Amount { get; set; }

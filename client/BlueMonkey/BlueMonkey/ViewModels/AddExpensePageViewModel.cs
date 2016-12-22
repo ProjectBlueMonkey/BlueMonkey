@@ -35,10 +35,6 @@ namespace BlueMonkey.ViewModels
         /// Resource disposer.
         /// </summary>
         private CompositeDisposable Disposable { get; } = new CompositeDisposable();
-        /// <summary>
-        /// Name of Expense
-        /// </summary>
-        public ReactiveProperty<string> Name { get; }
 
         /// <summary>
         /// Amount of Expense
@@ -91,7 +87,6 @@ namespace BlueMonkey.ViewModels
             _editExpense = editExpense;
             _editExpense.AddTo(Disposable);
 
-            Name = _editExpense.ToReactivePropertyAsSynchronized(x => x.Name).AddTo(Disposable);
             Amount = _editExpense.ToReactivePropertyAsSynchronized(x => x.Amount).AddTo(Disposable);
             Date = _editExpense.ToReactivePropertyAsSynchronized(x => x.Date).AddTo(Disposable);
             Location = _editExpense.ToReactivePropertyAsSynchronized(x => x.Location).AddTo(Disposable);
@@ -115,7 +110,7 @@ namespace BlueMonkey.ViewModels
             });
 
             SaveAsyncCommand =
-                Name.Select(x => !string.IsNullOrWhiteSpace(x))
+                Location.Select(x => !string.IsNullOrWhiteSpace(x))
                 .ToAsyncReactiveCommand().AddTo(Disposable);
             SaveAsyncCommand.Subscribe(SaveAsync);
 

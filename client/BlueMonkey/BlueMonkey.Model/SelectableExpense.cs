@@ -16,7 +16,6 @@ namespace BlueMonkey.Model
         {
             Id = expense.Id;
             CategoryId = expense.CategoryId;
-            Name = expense.Name;
             Amount = expense.Amount;
             Date = expense.Date;
             Location = expense.Location;

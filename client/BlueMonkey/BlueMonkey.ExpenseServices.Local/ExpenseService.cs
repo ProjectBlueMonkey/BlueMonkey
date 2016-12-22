@@ -25,7 +25,7 @@ namespace BlueMonkey.ExpenseServices.Local
                     new Expense()
                     {
                         Id = $"ExpenseId_x_{i}",
-                        Name = $"Expense_x_{i}",
+                        Location = $"Expense_x_{i}",
                         Amount = random.Next(1000, 20000)
                     });
             }
@@ -46,7 +46,7 @@ namespace BlueMonkey.ExpenseServices.Local
                         new Expense()
                         {
                             Id = $"ExpenseId_{i}_{j}",
-                            Name = $"Expense_{i}_{j}",
+                            Location = $"Expense_{i}_{j}",
                             Amount = random.Next(1000, 20000),
                             ReportId = report.Id
                         });

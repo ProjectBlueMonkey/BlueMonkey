@@ -17,13 +17,6 @@ namespace BlueMonkey.Business
             set { SetProperty(ref _id, value); }
         }
 
-        private string _name;
-        public string Name
-        {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
-        }
-
         private string _categoryId;
 
         public string CategoryId
