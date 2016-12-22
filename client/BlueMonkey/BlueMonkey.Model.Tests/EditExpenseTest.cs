@@ -168,6 +168,38 @@ namespace BlueMonkey.Model.Tests
         }
 
         [Fact]
+        public async Task InitializeAsyncForUpdate()
+        {
+            var expenseService = new Mock<IExpenseService>();
+            var category1 = new Category();
+            var category2 = new Category();
+            var categories = new[] { category1, category2 };
+            expenseService.Setup(m => m.GetCategoriesAsync()).ReturnsAsync(categories);
+
+            var fileUploadService = new Mock<IFileStorageService>();
+            var dateTimeService = new Mock<IDateTimeService>();
+            dateTimeService.Setup(m => m.Today).Returns(DateTime.MaxValue);
+
+            var mediaService = new Mock<IMediaService>();
+
+            var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
+            actual.Date = DateTime.MaxValue;
+            actual.Categories = new Category[] { };
+            actual.SelectedCategory = new Category();
+
+
+            await actual.InitializeAsync("expenseId");
+            Assert.Equal(0, actual.Amount);
+            Assert.Equal(DateTime.MaxValue, actual.Date);
+            Assert.Null(actual.Location);
+            Assert.Null(actual.Note);
+            Assert.Null(actual.Receipt);
+            Assert.Equal(categories, actual.Categories);
+            Assert.Equal(category1, actual.SelectedCategory);
+        }
+
+
+        [Fact]
         public async Task PickPhotoAsync()
         {
             var expenseService = new Mock<IExpenseService>();

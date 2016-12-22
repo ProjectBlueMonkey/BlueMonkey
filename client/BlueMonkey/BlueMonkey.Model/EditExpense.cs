@@ -158,6 +158,16 @@ namespace BlueMonkey.Model
         }
 
         /// <summary>
+        /// Initialize use case for update expense.
+        /// </summary>
+        /// <param name="expenseId"></param>
+        /// <returns></returns>
+        public Task InitializeAsync(string expenseId)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Gets if ability to take photos supported on the device
         /// </summary>
         public bool IsTakePhotoSupported => _mediaService.IsCameraAvailable && _mediaService.IsTakePhotoSupported;

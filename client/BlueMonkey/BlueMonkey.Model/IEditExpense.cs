@@ -56,6 +56,13 @@ namespace BlueMonkey.Model
         Task InitializeAsync();
 
         /// <summary>
+        /// Initialize use case for update expense.
+        /// </summary>
+        /// <param name="expenseId"></param>
+        /// <returns></returns>
+        Task InitializeAsync(string expenseId);
+
+        /// <summary>
         /// Gets if ability to take photos supported on the device
         /// </summary>
         bool IsTakePhotoSupported { get; }
