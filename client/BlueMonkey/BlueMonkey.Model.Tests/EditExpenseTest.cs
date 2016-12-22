@@ -273,7 +273,7 @@ namespace BlueMonkey.Model.Tests
             var receipt = new Mock<IMediaFile>().Object;
             actual.Receipt = receipt;
 
-            var uri = new Uri("https://googole.co.jp");
+            var uri = new Uri("https://www.bing.com/");
             fileUploadService.Setup(m => m.UploadMediaFileAsync(receipt)).ReturnsAsync(uri);
 
             expenseService
@@ -298,6 +298,63 @@ namespace BlueMonkey.Model.Tests
 
             await actual.SaveAsync();
 
+        }
+
+        [Fact]
+        public async Task SaveAsyncWhenUpdate()
+        {
+            var expenseService = new Mock<IExpenseService>();
+            expenseService
+                .Setup(m => m.GetExpenseAsync("expenseId"))
+                .ReturnsAsync(new Expense
+                {
+                    Amount = 2,
+                    Date = DateTime.MinValue,
+                    CategoryId = "category2",
+                    Id = "expenseId",
+                    Location = "Location",
+                    Note = "Note"
+                });
+
+            var fileUploadService = new Mock<IFileStorageService>();
+
+            var dateTimeService = new Mock<IDateTimeService>();
+            var mediaService = new Mock<IMediaService>();
+            var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
+            await actual.InitializeAsync("expenseId");
+
+            actual.Amount = 1;
+            actual.Date = DateTime.MaxValue;
+            actual.Location = "location";
+            actual.Note = "note";
+            var receipt = new Mock<IMediaFile>().Object;
+            actual.Receipt = receipt;
+
+            var uri = new Uri("https://www.bing.com/");
+            fileUploadService.Setup(m => m.UploadMediaFileAsync(receipt)).ReturnsAsync(uri);
+
+            expenseService
+                .Setup(m => m.RegisterExpensesAsync(It.IsAny<Expense>(), It.IsAny<IEnumerable<ExpenseReceipt>>()))
+                .Returns(Task.CompletedTask)
+                .Callback<Expense, IEnumerable<ExpenseReceipt>>((expense, expenseReceipts) =>
+                {
+                    Assert.NotNull(expense);
+                    Assert.Equal("expenseId", expense.Id);
+                    Assert.Equal(1, expense.Amount);
+                    Assert.Equal(DateTime.MaxValue, expense.Date);
+                    Assert.Equal("location", expense.Location);
+                    Assert.Equal("note", expense.Note);
+
+                    Assert.NotNull(expenseReceipts);
+                    Assert.Equal(1, expenseReceipts.Count());
+                    var expenseReceipt = expenseReceipts.First();
+                    Assert.Null(expenseReceipt.Id);
+                    Assert.Null(expenseReceipt.ExpenseId);
+                    Assert.Equal(uri.ToString(), expenseReceipt.ReceiptUri);
+                    Assert.Null(expenseReceipt.UserId);
+                });
+
+            await actual.SaveAsync();
         }
 
         [Fact]
