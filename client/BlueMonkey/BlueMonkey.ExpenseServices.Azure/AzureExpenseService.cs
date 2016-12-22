@@ -42,6 +42,11 @@ namespace BlueMonkey.ExpenseServices.Azure
             throw new System.NotImplementedException();
         }
 
+        public Task<IEnumerable<ExpenseReceipt>> GetExpenseReceiptsAsync(string expenseId)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Task<IEnumerable<Category>> GetCategoriesAsync()
         {
             throw new System.NotImplementedException();

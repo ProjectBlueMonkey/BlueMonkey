@@ -92,6 +92,11 @@ namespace BlueMonkey.ExpenseServices.Local
             throw new NotImplementedException();
         }
 
+        public Task<IEnumerable<ExpenseReceipt>> GetExpenseReceiptsAsync(string expenseId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<IEnumerable<Category>> GetCategoriesAsync()
         {
             return Task.FromResult(_categories.AsEnumerable());
