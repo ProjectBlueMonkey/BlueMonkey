@@ -171,31 +171,62 @@ namespace BlueMonkey.Model.Tests
         public async Task InitializeAsyncForUpdate()
         {
             var expenseService = new Mock<IExpenseService>();
-            var category1 = new Category();
-            var category2 = new Category();
+
+            expenseService
+                .Setup(m => m.GetExpenseAsync("expenseId"))
+                .ReturnsAsync(new Expense
+                {
+                    Amount = 1,
+                    Date = DateTime.MaxValue,
+                    CategoryId = "category2",
+                    Id = "expenseId",
+                    Location = "location",
+                    Note = "note"
+                });
+
+            var category1 = new Category { Id = "category1" };
+            var category2 = new Category { Id = "category2" };
             var categories = new[] { category1, category2 };
             expenseService.Setup(m => m.GetCategoriesAsync()).ReturnsAsync(categories);
 
-            var fileUploadService = new Mock<IFileStorageService>();
+            var expenseReceipts =
+                new[]
+                {
+                    new ExpenseReceipt
+                    {
+                        ExpenseId = "expenseId",
+                        ReceiptUri = "https://www.bing.com/"
+                    }
+                };
+            expenseService
+                .Setup(m => m.GetExpenseReceiptsAsync("expenseId"))
+                .ReturnsAsync(expenseReceipts.AsEnumerable());
+
+            var fileStorageService = new Mock<IFileStorageService>();
+            var mediaFile = new MediaFile(".jpg", new byte[] {});
+            fileStorageService
+                .Setup(m => m.DownloadMediaFileAsync(new Uri("https://www.bing.com/")))
+                .ReturnsAsync(mediaFile);
+
+
             var dateTimeService = new Mock<IDateTimeService>();
-            dateTimeService.Setup(m => m.Today).Returns(DateTime.MaxValue);
 
             var mediaService = new Mock<IMediaService>();
 
-            var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
+            var actual = new EditExpense(expenseService.Object, fileStorageService.Object, dateTimeService.Object, mediaService.Object);
             actual.Date = DateTime.MaxValue;
             actual.Categories = new Category[] { };
             actual.SelectedCategory = new Category();
 
 
             await actual.InitializeAsync("expenseId");
-            Assert.Equal(0, actual.Amount);
+            Assert.Equal(1, actual.Amount);
             Assert.Equal(DateTime.MaxValue, actual.Date);
-            Assert.Null(actual.Location);
-            Assert.Null(actual.Note);
-            Assert.Null(actual.Receipt);
+            Assert.Equal("location", actual.Location);
+            Assert.Equal("note", actual.Note);
+            Assert.Equal(mediaFile, actual.Receipt);
             Assert.Equal(categories, actual.Categories);
-            Assert.Equal(category1, actual.SelectedCategory);
+            Assert.Equal(category2, actual.SelectedCategory);
         }
 
 

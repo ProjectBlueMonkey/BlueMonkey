@@ -162,9 +162,22 @@ namespace BlueMonkey.Model
         /// </summary>
         /// <param name="expenseId"></param>
         /// <returns></returns>
-        public Task InitializeAsync(string expenseId)
+        public async Task InitializeAsync(string expenseId)
         {
-            throw new NotImplementedException();
+            var expense = await _expenseService.GetExpenseAsync(expenseId);
+            Amount = expense.Amount;
+            Date = expense.Date;
+            Location = expense.Location;
+            Note = expense.Note;
+            Categories = await _expenseService.GetCategoriesAsync();
+            SelectedCategory = Categories.SingleOrDefault(x => x.Id == expense.CategoryId);
+
+            var expenseReceipts = await _expenseService.GetExpenseReceiptsAsync(expenseId);
+            var expenseReceipt = expenseReceipts.SingleOrDefault();
+            if (expenseReceipt != null)
+            {
+                Receipt = await _fileStorageService.DownloadMediaFileAsync(new Uri(expenseReceipt.ReceiptUri));
+            }
         }
 
         /// <summary>
