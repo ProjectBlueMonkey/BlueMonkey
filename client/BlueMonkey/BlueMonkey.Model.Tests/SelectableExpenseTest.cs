@@ -18,7 +18,6 @@ namespace BlueMonkey.Model.Tests
                 {
                     Id = "Id",
                     CategoryId = "CategoryId",
-                    Name = "Name",
                     Amount = 123456789012345,
                     Date = DateTime.MinValue,
                     Location = "Location",
@@ -31,7 +30,6 @@ namespace BlueMonkey.Model.Tests
 
             Assert.Equal(expected.Id, actual.Id);
             Assert.Equal(expected.CategoryId, actual.CategoryId);
-            Assert.Equal(expected.Name, actual.Name);
             Assert.Equal(expected.Amount, actual.Amount);
             Assert.Equal(expected.Date, actual.Date);
             Assert.Equal(expected.Location, actual.Location);

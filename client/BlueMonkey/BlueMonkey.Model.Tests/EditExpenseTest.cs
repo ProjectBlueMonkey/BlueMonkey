@@ -15,20 +15,6 @@ namespace BlueMonkey.Model.Tests
     public class EditExpenseTest
     {
         [Fact]
-        public void NameProperty()
-        {
-            var expenseService = new Mock<IExpenseService>();
-            var fileUploadService = new Mock<IFileUploadService>();
-            var dateTimeService = new Mock<IDateTimeService>();
-            var mediaService = new Mock<IMediaService>();
-            var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
-
-            Assert.Null(actual.Name);
-            Assert.PropertyChanged(actual, "Name", () => actual.Name = "update");
-            Assert.Equal("update", actual.Name);
-        }
-
-        [Fact]
         public void AmountProperty()
         {
             var expenseService = new Mock<IExpenseService>();
@@ -145,7 +131,6 @@ namespace BlueMonkey.Model.Tests
             var mediaService = new Mock<IMediaService>();
 
             var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
-            actual.Name = "name";
             actual.Amount = 1;
             actual.Date = DateTime.MaxValue;
             actual.Location = "location";
@@ -156,7 +141,6 @@ namespace BlueMonkey.Model.Tests
 
 
             await actual.InitializeAsync();
-            Assert.Null(actual.Name);
             Assert.Equal(0, actual.Amount);
             Assert.Equal(DateTime.MaxValue, actual.Date);
             Assert.Null(actual.Location);
@@ -223,7 +207,6 @@ namespace BlueMonkey.Model.Tests
             var mediaService = new Mock<IMediaService>();
             var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
 
-            actual.Name = "name";
             actual.Amount = 1;
             actual.Date = DateTime.MaxValue;
             actual.Location = "location";
@@ -240,12 +223,10 @@ namespace BlueMonkey.Model.Tests
                 .Callback<Expense, IEnumerable<ExpenseReceipt>>((expense, expenseReceipts) =>
                 {
                     Assert.NotNull(expense);
-                    Assert.Equal("name", actual.Name);
                     Assert.Equal(1, actual.Amount);
                     Assert.Equal(DateTime.MaxValue, actual.Date);
                     Assert.Equal("location", actual.Location);
                     Assert.Equal("note", actual.Note);
-                    Assert.Equal("name", actual.Name);
 
                     Assert.NotNull(expenseReceipts);
                     Assert.Equal(1, expenseReceipts.Count());

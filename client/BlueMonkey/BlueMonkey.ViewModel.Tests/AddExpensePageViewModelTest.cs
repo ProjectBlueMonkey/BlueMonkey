@@ -12,31 +12,6 @@ namespace BlueMonkey.ViewModel.Tests
     public class AddExpensePageViewModelTest
     {
         [Fact]
-        public void NameProperty()
-        {
-            var navigationService = new Mock<INavigationService>();
-            var editExpense = new Mock<IEditExpense>();
-
-            var actual = new AddExpensePageViewModel(navigationService.Object, editExpense.Object);
-
-            Assert.NotNull(actual.Name);
-            Assert.Null(actual.Name.Value);
-
-            // ViewMode -> Model
-            actual.Name.Value = "SetValue";
-            editExpense.VerifySet(x => x.Name = "SetValue", Times.Once);
-
-            // Model -> ViewModel
-            editExpense.NotifyPropertyChanged(m => m.Name, "UpdateValue");
-            Assert.Equal("UpdateValue", actual.Name.Value);
-
-            // Destroy
-            actual.Destroy();
-            editExpense.NotifyPropertyChanged(m => m.Name, "Destroy");
-            Assert.NotEqual("Destroy", actual.Name.Value);
-        }
-
-        [Fact]
         public void AmountProperty()
         {
             var navigationService = new Mock<INavigationService>();
@@ -206,7 +181,7 @@ namespace BlueMonkey.ViewModel.Tests
             var navigationService = new Mock<INavigationService>();
             var editExpense = new Mock<IEditExpense>();
 
-            editExpense.Setup(m => m.Name).Returns("Name");
+            editExpense.Setup(m => m.Location).Returns("Location");
 
             var actual = new AddExpensePageViewModel(navigationService.Object, editExpense.Object);
 
@@ -217,12 +192,12 @@ namespace BlueMonkey.ViewModel.Tests
             editExpense.Verify(m => m.SaveAsync(), Times.Once);
             navigationService.Verify(m => m.GoBackAsync(null, null, true), Times.Once);
 
-            editExpense.NotifyPropertyChanged(m => m.Name, null);
+            editExpense.NotifyPropertyChanged(m => m.Location, null);
             Assert.False(actual.SaveAsyncCommand.CanExecute());
 
             // Destroy
             actual.Destroy();
-            editExpense.NotifyPropertyChanged(m => m.Name, "Name");
+            editExpense.NotifyPropertyChanged(m => m.Location, "Location");
             Assert.False(actual.SaveAsyncCommand.CanExecute());
         }
 

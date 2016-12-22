@@ -37,19 +37,6 @@ namespace BlueMonkey.Model
         private readonly IMediaService _mediaService;
 
         /// <summary>
-        /// Backing field of Name property.
-        /// </summary>
-        private string _name;
-        /// <summary>
-        /// Name of expense.
-        /// </summary>
-        public string Name
-        {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
-        }
-
-        /// <summary>
         /// Backing field of Amount property.
         /// </summary>
         private long _amount;
@@ -165,7 +152,6 @@ namespace BlueMonkey.Model
         /// <returns></returns>
         public async Task InitializeAsync()
         {
-            Name = null;
             Amount = 0;
             Date = _dateTimeService.Today;
             Location = null;
@@ -212,7 +198,6 @@ namespace BlueMonkey.Model
             var uri = await _fileUploadService.UploadMediaFileAsync(Receipt);
             var expense = new Expense
             {
-                Name = Name,
                 Amount = Amount,
                 Date = Date,
                 Location = Location,

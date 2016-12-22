@@ -19,7 +19,7 @@
           <ViewCell>
             <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" Padding="15,5,0,0">
               <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
-                <Label Text="{Binding Name}"  />
+                <Label Text="{Binding Location}"  />
               </StackLayout>
             </StackLayout>
           </ViewCell>
