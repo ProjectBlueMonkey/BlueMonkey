@@ -21,6 +21,10 @@ namespace BlueMonkey.ViewModels
     public class AddExpensePageViewModel : BindableBase, INavigationAware, IDestructible
     {
         /// <summary>
+        /// Key of expense id.
+        /// </summary>
+        public const string ExpenseIdKey = "id";
+        /// <summary>
         /// INavigationService.
         /// </summary>
         private readonly INavigationService _navigationService;
@@ -171,7 +175,14 @@ namespace BlueMonkey.ViewModels
         /// <param name="parameters"></param>
         public async void OnNavigatingTo(NavigationParameters parameters)
         {
-            await _editExpense.InitializeAsync();
+            if (parameters != null && parameters.ContainsKey(ExpenseIdKey))
+            {
+                await _editExpense.InitializeAsync((string)parameters[ExpenseIdKey]);
+            }
+            else
+            {
+                await _editExpense.InitializeAsync();
+            }
         }
 
         /// <summary>

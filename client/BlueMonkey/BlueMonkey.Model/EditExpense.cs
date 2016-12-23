@@ -22,9 +22,9 @@ namespace BlueMonkey.Model
         private readonly IExpenseService _expenseService;
 
         /// <summary>
-        /// IFileUploadService field.
+        /// IFileStorageService field.
         /// </summary>
-        private readonly IFileUploadService _fileUploadService;
+        private readonly IFileStorageService _fileStorageService;
 
         /// <summary>
         /// IDateTimeService field.
@@ -36,6 +36,10 @@ namespace BlueMonkey.Model
         /// </summary>
         private readonly IMediaService _mediaService;
 
+        /// <summary>
+        /// Id of expense.
+        /// </summary>
+        private string _expenseId;
         /// <summary>
         /// Backing field of Amount property.
         /// </summary>
@@ -131,17 +135,17 @@ namespace BlueMonkey.Model
         /// Initialize Instance.
         /// </summary>
         /// <param name="expenseService"></param>
-        /// <param name="fileUploadService"></param>
+        /// <param name="fileStorageService"></param>
         /// <param name="dateTimeService"></param>
         /// <param name="mediaService"></param>
         public EditExpense(
             IExpenseService expenseService,
-            IFileUploadService fileUploadService,
+            IFileStorageService fileStorageService,
             IDateTimeService dateTimeService, 
             IMediaService mediaService)
         {
             _expenseService = expenseService;
-            _fileUploadService = fileUploadService;
+            _fileStorageService = fileStorageService;
             _dateTimeService = dateTimeService;
             _mediaService = mediaService;
         }
@@ -152,13 +156,33 @@ namespace BlueMonkey.Model
         /// <returns></returns>
         public async Task InitializeAsync()
         {
-            Amount = 0;
             Date = _dateTimeService.Today;
-            Location = null;
-            Note = null;
-            Receipt = null;
             Categories = await _expenseService.GetCategoriesAsync();
             SelectedCategory = Categories.FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Initialize use case for update expense.
+        /// </summary>
+        /// <param name="expenseId"></param>
+        /// <returns></returns>
+        public async Task InitializeAsync(string expenseId)
+        {
+            _expenseId = expenseId;
+            var expense = await _expenseService.GetExpenseAsync(expenseId);
+            Amount = expense.Amount;
+            Date = expense.Date;
+            Location = expense.Location;
+            Note = expense.Note;
+            Categories = await _expenseService.GetCategoriesAsync();
+            SelectedCategory = Categories.SingleOrDefault(x => x.Id == expense.CategoryId);
+
+            var expenseReceipts = await _expenseService.GetExpenseReceiptsAsync(expenseId);
+            var expenseReceipt = expenseReceipts.SingleOrDefault();
+            if (expenseReceipt != null)
+            {
+                Receipt = await _fileStorageService.DownloadMediaFileAsync(new Uri(expenseReceipt.ReceiptUri));
+            }
         }
 
         /// <summary>
@@ -195,9 +219,10 @@ namespace BlueMonkey.Model
         /// <returns></returns>
         public async Task SaveAsync()
         {
-            var uri = await _fileUploadService.UploadMediaFileAsync(Receipt);
+            var uri = await _fileStorageService.UploadMediaFileAsync(Receipt);
             var expense = new Expense
             {
+                Id = _expenseId,
                 Amount = Amount,
                 Date = Date,
                 Location = Location,

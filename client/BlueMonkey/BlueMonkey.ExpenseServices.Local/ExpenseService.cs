@@ -87,6 +87,25 @@ namespace BlueMonkey.ExpenseServices.Local
             return Task.FromResult(_reports.SingleOrDefault(x => x.Id == reportId));
         }
 
+        public Task<Expense> GetExpenseAsync(string expenseId)
+        {
+            return Task.FromResult(_expenses.SingleOrDefault(x => x.Id == expenseId));
+        }
+
+        public Task<IEnumerable<ExpenseReceipt>> GetExpenseReceiptsAsync(string expenseId)
+        {
+            return Task.FromResult(
+                new []
+                {
+                    new ExpenseReceipt
+                    {
+                        Id = "ExpenseReceiptId",
+                        ExpenseId = expenseId,
+                        ReceiptUri = "https://www.bing.com/test.jpg"
+                    }
+                }.AsEnumerable());
+        }
+
         public Task<IEnumerable<Category>> GetCategoriesAsync()
         {
             return Task.FromResult(_categories.AsEnumerable());
@@ -136,7 +155,23 @@ namespace BlueMonkey.ExpenseServices.Local
                 }
                 else
                 {
-                    throw new NotImplementedException();
+                    var original = _expenses.Single(x => x.Id == expense.Id);
+                    original.Amount = expense.Amount;
+                    original.CategoryId = expense.CategoryId;
+                    original.Date = expense.Date;
+                    original.Location = expense.Location;
+                    original.Note = expense.Note;
+
+                    var originalExpenseReceipt = _expenseReceipts.SingleOrDefault(x => x.ExpenseId == expense.Id);
+                    if (originalExpenseReceipt != null)
+                    {
+                        _expenseReceipts.Remove(originalExpenseReceipt);
+                    }
+                    foreach (var expenseReceipt in expenseReceipts)
+                    {
+                        expenseReceipt.ExpenseId = expense.Id;
+                        _expenseReceipts.Add(expenseReceipt);
+                    }
                 }
             });
         }
