@@ -272,6 +272,7 @@ namespace BlueMonkey.Model.Tests
             actual.Note = "note";
             var receipt = new Mock<IMediaFile>().Object;
             actual.Receipt = receipt;
+            actual.SelectedCategory = new Category { Id = "categoryId" };
 
             var uri = new Uri("https://www.bing.com/");
             fileUploadService.Setup(m => m.UploadMediaFileAsync(receipt)).ReturnsAsync(uri);
@@ -282,10 +283,11 @@ namespace BlueMonkey.Model.Tests
                 .Callback<Expense, IEnumerable<ExpenseReceipt>>((expense, expenseReceipts) =>
                 {
                     Assert.NotNull(expense);
-                    Assert.Equal(1, actual.Amount);
-                    Assert.Equal(DateTime.MaxValue, actual.Date);
-                    Assert.Equal("location", actual.Location);
-                    Assert.Equal("note", actual.Note);
+                    Assert.Equal(1, expense.Amount);
+                    Assert.Equal(DateTime.MaxValue, expense.Date);
+                    Assert.Equal("location", expense.Location);
+                    Assert.Equal("note", expense.Note);
+                    Assert.Equal("categoryId", expense.CategoryId);
 
                     Assert.NotNull(expenseReceipts);
                     Assert.Equal(1, expenseReceipts.Count());
@@ -298,6 +300,34 @@ namespace BlueMonkey.Model.Tests
 
             await actual.SaveAsync();
 
+        }
+
+        [Fact]
+        public async Task SaveAsyncWhenRegisterWhenNotSelectedCategory()
+        {
+            var expenseService = new Mock<IExpenseService>();
+            var fileUploadService = new Mock<IFileUploadService>();
+
+            var dateTimeService = new Mock<IDateTimeService>();
+            var mediaService = new Mock<IMediaService>();
+            var actual = new EditExpense(expenseService.Object, fileUploadService.Object, dateTimeService.Object, mediaService.Object);
+
+            var receipt = new Mock<IMediaFile>().Object;
+            actual.Receipt = receipt;
+            actual.SelectedCategory = null;
+
+            var uri = new Uri("https://googole.co.jp");
+            fileUploadService.Setup(m => m.UploadMediaFileAsync(receipt)).ReturnsAsync(uri);
+
+            expenseService
+                .Setup(m => m.RegisterExpensesAsync(It.IsAny<Expense>(), It.IsAny<IEnumerable<ExpenseReceipt>>()))
+                .Returns(Task.CompletedTask)
+                .Callback<Expense, IEnumerable<ExpenseReceipt>>((expense, expenseReceipts) =>
+                {
+                    Assert.Null(expense.CategoryId);
+                });
+
+            await actual.SaveAsync();
         }
 
         [Fact]

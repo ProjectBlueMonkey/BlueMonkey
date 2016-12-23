@@ -226,7 +226,8 @@ namespace BlueMonkey.Model
                 Amount = Amount,
                 Date = Date,
                 Location = Location,
-                Note = Note
+                Note = Note,
+                CategoryId = SelectedCategory?.Id
             };
             await _expenseService.RegisterExpensesAsync(expense, new[] {new ExpenseReceipt {ReceiptUri = uri.ToString()}});
         }
