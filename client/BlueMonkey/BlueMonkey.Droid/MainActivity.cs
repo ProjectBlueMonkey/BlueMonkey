@@ -6,6 +6,8 @@ using BlueMonkey.LoginService;
 using BlueMonkey.LoginService.Azure.Droid;
 using Microsoft.Practices.Unity;
 using Microsoft.WindowsAzure.MobileServices;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using Prism.Unity;
 
 namespace BlueMonkey.Droid
@@ -22,6 +24,11 @@ namespace BlueMonkey.Droid
             CurrentPlatform.Init();
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App(new AndroidInitializer()));
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
+        {
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 
