@@ -306,7 +306,7 @@ namespace BlueMonkey.Model.Tests
         public async Task SaveAsyncWhenRegisterWhenNotSelectedCategory()
         {
             var expenseService = new Mock<IExpenseService>();
-            var fileUploadService = new Mock<IFileUploadService>();
+            var fileUploadService = new Mock<IFileStorageService>();
 
             var dateTimeService = new Mock<IDateTimeService>();
             var mediaService = new Mock<IMediaService>();
