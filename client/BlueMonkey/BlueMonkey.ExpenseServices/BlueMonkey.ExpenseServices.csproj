@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IExpenseService.cs" />
-    <Compile Include="IFileUploadService.cs" />
+    <Compile Include="IFileStorageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

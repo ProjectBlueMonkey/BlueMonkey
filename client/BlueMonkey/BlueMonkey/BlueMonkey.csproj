@@ -42,7 +42,6 @@
     <Compile Include="Secrets.cs" />
     <Compile Include="TransactionLifetimeManager.cs" />
     <Compile Include="TransactionPolicyExtensions.cs" />
-    <Compile Include="ViewModels\AddReportPageViewModel.cs" />
     <Compile Include="ViewModels\ChartPageViewModel.cs" />
     <Compile Include="ViewModels\ExpenseListPageViewModel.cs" />
     <Compile Include="ViewModels\AddExpensePageViewModel.cs" />
@@ -52,9 +51,6 @@
     <Compile Include="ViewModels\ReceiptPageViewModel.cs" />
     <Compile Include="ViewModels\ReportListPageViewModel.cs" />
     <Compile Include="ViewModels\ReportPageViewModel.cs" />
-    <Compile Include="Views\AddReportPage.xaml.cs">
-      <DependentUpon>AddReportPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Controls\BindablePicker.cs" />
     <Compile Include="Views\ExpenseListPage.xaml.cs">
       <DependentUpon>ExpenseListPage.xaml</DependentUpon>
@@ -125,12 +121,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\ReceiptPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\AddReportPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

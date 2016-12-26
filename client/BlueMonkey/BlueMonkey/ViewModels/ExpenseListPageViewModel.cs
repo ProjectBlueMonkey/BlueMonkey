@@ -1,48 +1,63 @@
-﻿using BlueMonkey.Business;
-using Prism.Commands;
+﻿using System;
+using BlueMonkey.Business;
 using Prism.Mvvm;
 using Prism.Navigation;
-using System.Collections.Generic;
-using BlueMonkey.ExpenseServices;
+using System.Reactive.Disposables;
+using BlueMonkey.Model;
+using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
 
 namespace BlueMonkey.ViewModels
 {
-    public class ExpenseListPageViewModel : BindableBase, INavigationAware
+    /// <summary>
+    /// ViewModel for expense list page.
+    /// </summary>
+    public class ExpenseListPageViewModel : BindableBase, INavigationAware, IDestructible
     {
-        INavigationService _navigationService;
-        IExpenseService _expenseService;
+        /// <summary>
+        /// Navigation service.
+        /// </summary>
+        private readonly INavigationService _navigationService;
 
-        private IEnumerable<Expense> _items;
-        public IEnumerable<Expense> Items
-        {
-            get { return _items; }
-            set { SetProperty(ref _items, value); }
-        }
+        /// <summary>
+        /// ReferExpense usecase model 
+        /// </summary>
+        private readonly IReferExpense _referExpense;
 
-        private Expense _selectedExpense;
-        public Expense SelectedExpense
-        {
-            get { return _selectedExpense; }
-            set
-            {
-                SetProperty(ref _selectedExpense, value);
-            }
-        }
+        /// <summary>
+        /// Resource disposer.
+        /// </summary>
+        private CompositeDisposable Disposable { get; } = new CompositeDisposable();
 
-        public DelegateCommand<Expense> AddExpenseCommand => new DelegateCommand<Expense>(AddExpense);
+        public ReadOnlyReactiveCollection<Expense> Expenses { get; }
 
-        public ExpenseListPageViewModel(INavigationService navigationService, IExpenseService expenseService)
+        public ReactiveCommand AddExpenseCommand { get; }
+
+        public ReactiveCommand<Expense> UpdateExpenseCommand { get; }
+
+        public ExpenseListPageViewModel(INavigationService navigationService, IReferExpense referExpense)
         {
             _navigationService = navigationService;
-            _expenseService = expenseService;          
+            _referExpense = referExpense;
+
+            Expenses = _referExpense.Expenses.ToReadOnlyReactiveCollection().AddTo(Disposable);
+            AddExpenseCommand = new ReactiveCommand();
+            AddExpenseCommand.Subscribe(_ => AddExpense());
+
+            UpdateExpenseCommand = new ReactiveCommand<Expense>();
+            UpdateExpenseCommand.Subscribe(UpdateExpense);
         }
 
-        private void AddExpense(Expense expense)
+        private void AddExpense()
         {
-            var p = new NavigationParameters();
-            p.Add("expense", expense);
+            _navigationService.NavigateAsync("AddExpensePage");
+        }
 
-            _navigationService.NavigateAsync("AddExpensePage", p);
+        private void UpdateExpense(Expense expense)
+        {
+            var navigationParameters = new NavigationParameters();
+            navigationParameters[AddExpensePageViewModel.ExpenseIdKey] = expense.Id;
+            _navigationService.NavigateAsync("AddExpensePage", navigationParameters);
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
@@ -52,11 +67,16 @@ namespace BlueMonkey.ViewModels
 
         public async void OnNavigatedTo(NavigationParameters parameters)
         {
-            Items = await _expenseService.GetExpensesAsync();
+            await _referExpense.SearchAsync();
         }
 
         public void OnNavigatingTo(NavigationParameters parameters)
         {
+        }
+
+        public void Destroy()
+        {
+            Disposable.Dispose();
         }
     }
 }

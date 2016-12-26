@@ -41,7 +41,7 @@ namespace BlueMonkey
             Container.RegisterType<IExpenseService, AzureExpenseService>(new ContainerControlledLifetimeManager());
 #else
             Container.RegisterType<IExpenseService, ExpenseService>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<IFileUploadService, FileUploadService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IFileStorageService, FileStorageService>(new ContainerControlledLifetimeManager());
 #endif
             Container.RegisterType<IDateTimeService, DateTimeService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IMediaService, MediaService>(new ContainerControlledLifetimeManager());
@@ -49,6 +49,7 @@ namespace BlueMonkey
             Container.RegisterType<IEditReport, EditReport>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IReferReport, ReferReport>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IEditExpense, EditExpense>(new TransactionLifetimeManager());
+            Container.RegisterType<IReferExpense, ReferExpense>(new TransactionLifetimeManager());
 
             Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();
@@ -57,7 +58,6 @@ namespace BlueMonkey
             Container.RegisterTypeForNavigation<ChartPage>();
             Container.RegisterTypeForNavigation<ReportPage>();
             Container.RegisterTypeForNavigation<ReceiptPage>();
-            Container.RegisterTypeForNavigation<AddReportPage>();
             Container.RegisterTypeForNavigation<ReportListPage>();
             Container.RegisterTypeForNavigation<ExpenseSelectionPage>();
             Container.RegisterTypeForNavigation<LoginPage>();
