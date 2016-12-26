@@ -9,6 +9,6 @@
     <Import_RootNamespace>BlueMonkey.ExpenseServices.Azure.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)AzureFileUploadService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AzureFileStorageService.cs" />
   </ItemGroup>
 </Project>
