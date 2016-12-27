@@ -12,6 +12,6 @@ In this model, createAt, updateAt, version is omitted.
 
 ## BlueMonkey powered by company and community
 
-- Microsoft
-- [JXUG](http://jxug.org/)
+- [Japan Xamarin User Group](http://jxug.org/)
 - Infragistics
+- Microsoft
