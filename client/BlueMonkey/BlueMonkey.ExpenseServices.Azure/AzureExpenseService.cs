@@ -45,12 +45,13 @@ namespace BlueMonkey.ExpenseServices.Azure
 
         public Task<Expense> GetExpenseAsync(string expenseId)
         {
-            throw new System.NotImplementedException();
+            return _expenseTable.LookupAsync(expenseId);
         }
 
-        public Task<IEnumerable<ExpenseReceipt>> GetExpenseReceiptsAsync(string expenseId)
+        public async Task<IEnumerable<ExpenseReceipt>> GetExpenseReceiptsAsync(string expenseId)
         {
-            throw new System.NotImplementedException();
+            return (await _expenseReceiptTable.CreateQuery().Where(x => x.ExpenseId == expenseId).ToEnumerableAsync())
+                .ToArray();
         }
 
         public async Task<IEnumerable<Category>> GetCategoriesAsync()
@@ -75,32 +76,42 @@ namespace BlueMonkey.ExpenseServices.Azure
 
         public async Task RegisterReportAsync(Report report, IEnumerable<Expense> expenses)
         {
-            if (string.IsNullOrEmpty(report.Id))
+            try
             {
-                await _reportTable.InsertAsync(report);
-            }
-            else
-            {
-                await _reportTable.UpdateAsync(report);
-                // disconnect current expense
-                var currentExpenses = await _expenseTable.CreateQuery()
-                    .Where(x => x.ReportId == report.Id)
-                    .ToEnumerableAsync();
-                foreach (var expense in currentExpenses)
+                if (string.IsNullOrEmpty(report.Id))
                 {
-                    expense.ReportId = null;
+                    await _reportTable.InsertAsync(report);
                 }
-                await Task.WhenAll(currentExpenses
+                else
+                {
+                    // disconnect current expense
+                    var currentExpenses = await _expenseTable.CreateQuery()
+                        .Where(x => x.ReportId == report.Id)
+                        .ToEnumerableAsync();
+                    foreach (var expense in currentExpenses)
+                    {
+                        expense.ReportId = null;
+                        await _expenseTable.UpdateAsync(expense);
+                    }
+                    await _reportTable.UpdateAsync(report);
+                }
+
+                foreach (var expense in expenses)
+                {
+                    expense.ReportId = report.Id;
+                }
+
+                await Task.WhenAll(expenses
                     .Select(x => _expenseTable.UpdateAsync(x)));
             }
-
-            foreach (var expense in expenses)
+            catch (MobileServiceInvalidOperationException ex)
             {
-                expense.ReportId = report.Id;
+                System.Diagnostics.Debug.WriteLine(ex);
+                var buff = await ex.Response.Content.ReadAsByteArrayAsync();
+                System.Diagnostics.Debug.WriteLine(
+                    System.Text.Encoding.UTF8.GetString(buff, 0, buff.Length));
+                throw;
             }
-
-            await Task.WhenAll(expenses
-                .Select(x => _expenseTable.UpdateAsync(x)));
         }
 
         public async Task RegisterExpensesAsync(Expense expense, IEnumerable<ExpenseReceipt> expenseReceipts)
