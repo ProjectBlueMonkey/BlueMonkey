@@ -39,7 +39,7 @@ namespace BlueMonkey.iOS
         public void RegisterTypes(IUnityContainer container)
         {
             container.RegisterType<ILoginService, AzureLoginService>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IFileUploadService, AzureFileUploadService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IFileStorageService, AzureFileStorageService>(new ContainerControlledLifetimeManager());
         }
     }
 

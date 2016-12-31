@@ -53,7 +53,7 @@ namespace BlueMonkey.ExpenseServices.Azure
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<Category>> GetCategoriesAsync()
+        public async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
             return (await _categoryTable.CreateQuery().ToEnumerableAsync()).ToArray();
         }
