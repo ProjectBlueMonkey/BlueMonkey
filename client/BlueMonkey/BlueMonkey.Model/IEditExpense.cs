@@ -15,11 +15,6 @@ namespace BlueMonkey.Model
     public interface IEditExpense : INotifyPropertyChanged, ITransactionPolicy
     {
         /// <summary>
-        /// Name of expense.
-        /// </summary>
-        string Name { get; set; }
-
-        /// <summary>
         /// Amount of expense.
         /// </summary>
         long Amount { get; set; }
@@ -59,6 +54,13 @@ namespace BlueMonkey.Model
         /// </summary>
         /// <returns></returns>
         Task InitializeAsync();
+
+        /// <summary>
+        /// Initialize use case for update expense.
+        /// </summary>
+        /// <param name="expenseId"></param>
+        /// <returns></returns>
+        Task InitializeAsync(string expenseId);
 
         /// <summary>
         /// Gets if ability to take photos supported on the device

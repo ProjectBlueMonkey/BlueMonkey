@@ -25,7 +25,7 @@ namespace BlueMonkey.ExpenseServices.Local
                     new Expense()
                     {
                         Id = $"ExpenseId_x_{i}",
-                        Name = $"Expense_x_{i}",
+                        Location = $"Expense_x_{i}",
                         Amount = random.Next(1000, 20000)
                     });
             }
@@ -46,7 +46,7 @@ namespace BlueMonkey.ExpenseServices.Local
                         new Expense()
                         {
                             Id = $"ExpenseId_{i}_{j}",
-                            Name = $"Expense_{i}_{j}",
+                            Location = $"Expense_{i}_{j}",
                             Amount = random.Next(1000, 20000),
                             ReportId = report.Id
                         });
@@ -85,6 +85,25 @@ namespace BlueMonkey.ExpenseServices.Local
         public Task<Report> GetReportAsync(string reportId)
         {
             return Task.FromResult(_reports.SingleOrDefault(x => x.Id == reportId));
+        }
+
+        public Task<Expense> GetExpenseAsync(string expenseId)
+        {
+            return Task.FromResult(_expenses.SingleOrDefault(x => x.Id == expenseId));
+        }
+
+        public Task<IEnumerable<ExpenseReceipt>> GetExpenseReceiptsAsync(string expenseId)
+        {
+            return Task.FromResult(
+                new []
+                {
+                    new ExpenseReceipt
+                    {
+                        Id = "ExpenseReceiptId",
+                        ExpenseId = expenseId,
+                        ReceiptUri = "https://www.bing.com/test.jpg"
+                    }
+                }.AsEnumerable());
         }
 
         public Task<IEnumerable<Category>> GetCategoriesAsync()
@@ -136,7 +155,23 @@ namespace BlueMonkey.ExpenseServices.Local
                 }
                 else
                 {
-                    throw new NotImplementedException();
+                    var original = _expenses.Single(x => x.Id == expense.Id);
+                    original.Amount = expense.Amount;
+                    original.CategoryId = expense.CategoryId;
+                    original.Date = expense.Date;
+                    original.Location = expense.Location;
+                    original.Note = expense.Note;
+
+                    var originalExpenseReceipt = _expenseReceipts.SingleOrDefault(x => x.ExpenseId == expense.Id);
+                    if (originalExpenseReceipt != null)
+                    {
+                        _expenseReceipts.Remove(originalExpenseReceipt);
+                    }
+                    foreach (var expenseReceipt in expenseReceipts)
+                    {
+                        expenseReceipt.ExpenseId = expense.Id;
+                        _expenseReceipts.Add(expenseReceipt);
+                    }
                 }
             });
         }

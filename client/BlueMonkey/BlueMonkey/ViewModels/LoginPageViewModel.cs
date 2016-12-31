@@ -5,7 +5,10 @@ using Prism.Navigation;
 using Prism.Services;
 using System;
 using System.Diagnostics;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
+using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
 
 namespace BlueMonkey.ViewModels
 {
@@ -15,7 +18,7 @@ namespace BlueMonkey.ViewModels
         private readonly ILoginService _loginService;
         private readonly IPageDialogService _pageDialogService;
 
-        public DelegateCommand LoginCommand { get; }
+        public AsyncReactiveCommand LoginCommand { get; }
 
         private bool _isBusy;
         public bool IsBusy
@@ -30,8 +33,8 @@ namespace BlueMonkey.ViewModels
             _loginService = loginService;
             _pageDialogService = pageDialogService;
 
-            this.LoginCommand = new DelegateCommand(async () => await LoginAsync(), () => !IsBusy)
-                .ObservesProperty(() => IsBusy);
+            LoginCommand = this.ObserveProperty(m => m.IsBusy).Select(x => !x).ToAsyncReactiveCommand();
+            LoginCommand.Subscribe(async _ => await LoginAsync());
         }
 
         private async Task LoginAsync()

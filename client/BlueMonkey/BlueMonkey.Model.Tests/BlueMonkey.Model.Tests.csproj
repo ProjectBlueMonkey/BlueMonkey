@@ -97,6 +97,7 @@
     <Compile Include="EditExpenseTest.cs" />
     <Compile Include="EditReportTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReferExpenseTest.cs" />
     <Compile Include="ReferReportTest.cs" />
     <Compile Include="SelectableExpenseTest.cs" />
   </ItemGroup>

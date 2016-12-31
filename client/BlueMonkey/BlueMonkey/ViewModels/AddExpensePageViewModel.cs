@@ -8,7 +8,6 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using BlueMonkey.Model;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
@@ -21,6 +20,10 @@ namespace BlueMonkey.ViewModels
     /// </summary>
     public class AddExpensePageViewModel : BindableBase, INavigationAware, IDestructible
     {
+        /// <summary>
+        /// Key of expense id.
+        /// </summary>
+        public const string ExpenseIdKey = "id";
         /// <summary>
         /// INavigationService.
         /// </summary>
@@ -35,10 +38,6 @@ namespace BlueMonkey.ViewModels
         /// Resource disposer.
         /// </summary>
         private CompositeDisposable Disposable { get; } = new CompositeDisposable();
-        /// <summary>
-        /// Name of Expense
-        /// </summary>
-        public ReactiveProperty<string> Name { get; }
 
         /// <summary>
         /// Amount of Expense
@@ -78,7 +77,7 @@ namespace BlueMonkey.ViewModels
         /// <summary>
         /// Command to navigate receipt page.
         /// </summary>
-        public ICommand NavigateReceiptPageCommand { get; }
+        public ReactiveCommand NavigateReceiptPageCommand { get; }
 
         /// <summary>
         /// Initialize instance.
@@ -91,7 +90,6 @@ namespace BlueMonkey.ViewModels
             _editExpense = editExpense;
             _editExpense.AddTo(Disposable);
 
-            Name = _editExpense.ToReactivePropertyAsSynchronized(x => x.Name).AddTo(Disposable);
             Amount = _editExpense.ToReactivePropertyAsSynchronized(x => x.Amount).AddTo(Disposable);
             Date = _editExpense.ToReactivePropertyAsSynchronized(x => x.Date).AddTo(Disposable);
             Location = _editExpense.ToReactivePropertyAsSynchronized(x => x.Location).AddTo(Disposable);
@@ -135,11 +133,12 @@ namespace BlueMonkey.ViewModels
             });
 
             SaveAsyncCommand =
-                Name.Select(x => !string.IsNullOrWhiteSpace(x))
+                Location.Select(x => !string.IsNullOrWhiteSpace(x))
                 .ToAsyncReactiveCommand().AddTo(Disposable);
             SaveAsyncCommand.Subscribe(SaveAsync);
 
-            NavigateReceiptPageCommand = new Command(() => _navigationService.NavigateAsync("ReceiptPage"));
+            NavigateReceiptPageCommand = new ReactiveCommand();
+            NavigateReceiptPageCommand.Subscribe(_ => _navigationService.NavigateAsync("ReceiptPage"));
         }
 
         /// <summary>
@@ -176,7 +175,14 @@ namespace BlueMonkey.ViewModels
         /// <param name="parameters"></param>
         public async void OnNavigatingTo(NavigationParameters parameters)
         {
-            await _editExpense.InitializeAsync();
+            if (parameters != null && parameters.ContainsKey(ExpenseIdKey))
+            {
+                await _editExpense.InitializeAsync((string)parameters[ExpenseIdKey]);
+            }
+            else
+            {
+                await _editExpense.InitializeAsync();
+            }
         }
 
         /// <summary>

@@ -44,7 +44,7 @@ namespace BlueMonkey.MediaServices
         public async Task<IMediaFile> PickPhotoAsync()
         {
             var mediaFile = await CrossMedia.Current.PickPhotoAsync();
-            return await CreateMediaFile(mediaFile);
+            return await mediaFile.Convert();
         }
 
         /// <summary>
@@ -55,29 +55,7 @@ namespace BlueMonkey.MediaServices
         {
             var option = new StoreCameraMediaOptions();
             var mediaFile = await CrossMedia.Current.TakePhotoAsync(option);
-            return await CreateMediaFile(mediaFile);
-        }
-
-        /// <summary>
-        /// Create IMediaFile from Plugin.Media.Abstractions.MediaFile.
-        /// </summary>
-        /// <param name="mediaFile"></param>
-        /// <returns></returns>
-        private static async Task<IMediaFile> CreateMediaFile(Plugin.Media.Abstractions.MediaFile mediaFile)
-        {
-            if (mediaFile != null)
-            {
-                using (var mediaStream = mediaFile.GetStream())
-                using (var memoryStream = new MemoryStream())
-                {
-                    await mediaStream.CopyToAsync(memoryStream);
-                    return new MediaFile(mediaFile.Path, memoryStream.ToArray());
-                }
-            }
-            else
-            {
-                return null;
-            }
+            return await mediaFile.Convert();
         }
     }
 }

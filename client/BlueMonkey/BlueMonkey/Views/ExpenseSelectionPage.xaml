@@ -20,7 +20,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
               </Grid.RowDefinitions>
-              <Label Grid.Row="0" Text="{Binding Name}"/>
+              <Label Grid.Row="0" Text="{Binding Location}"/>
               <Label Grid.Row="1" Text="{Binding Amount}"/>
             </Grid>
             <Switch Grid.Column="1" IsToggled="{Binding IsSelected}" HorizontalOptions="Center"/>
