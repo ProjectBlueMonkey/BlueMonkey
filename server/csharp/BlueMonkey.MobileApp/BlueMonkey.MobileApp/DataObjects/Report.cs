@@ -11,6 +11,5 @@ namespace BlueMonkey.MobileApp.DataObjects
         public string Name { get; set; }
         public DateTimeOffset Date { get; set; }
         public string UserId { get; set; }
-        public virtual ICollection<Expense> Expenses { get; set; }
     }
 }

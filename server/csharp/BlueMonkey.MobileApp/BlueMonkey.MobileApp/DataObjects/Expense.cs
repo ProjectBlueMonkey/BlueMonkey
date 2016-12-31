@@ -17,6 +17,5 @@ namespace BlueMonkey.MobileApp.DataObjects
         public string ReportId { get; set; }
         public Report Report { get; set; }
         public string UserId { get; set; }
-        public virtual ICollection<ExpenseReceipt> ExpenseReceipts { get; set; }
     }
 }
