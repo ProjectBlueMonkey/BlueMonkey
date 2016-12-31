@@ -76,42 +76,33 @@ namespace BlueMonkey.ExpenseServices.Azure
 
         public async Task RegisterReportAsync(Report report, IEnumerable<Expense> expenses)
         {
-            try
+            if (string.IsNullOrEmpty(report.Id))
             {
-                if (string.IsNullOrEmpty(report.Id))
+                await _reportTable.InsertAsync(report);
+            }
+            else
+            {
+                // disconnect current expense
+                var currentExpenses = await _expenseTable.CreateQuery()
+                    .Where(x => x.ReportId == report.Id)
+                    .ToEnumerableAsync();
+                foreach (var expense in currentExpenses)
                 {
-                    await _reportTable.InsertAsync(report);
+                    expense.ReportId = null;
                 }
-                else
-                {
-                    // disconnect current expense
-                    var currentExpenses = await _expenseTable.CreateQuery()
-                        .Where(x => x.ReportId == report.Id)
-                        .ToEnumerableAsync();
-                    foreach (var expense in currentExpenses)
-                    {
-                        expense.ReportId = null;
-                        await _expenseTable.UpdateAsync(expense);
-                    }
-                    await _reportTable.UpdateAsync(report);
-                }
-
-                foreach (var expense in expenses)
-                {
-                    expense.ReportId = report.Id;
-                }
-
-                await Task.WhenAll(expenses
+                await Task.WhenAll(currentExpenses
                     .Select(x => _expenseTable.UpdateAsync(x)));
+
+                await _reportTable.UpdateAsync(report);
             }
-            catch (MobileServiceInvalidOperationException ex)
+
+            foreach (var expense in expenses)
             {
-                System.Diagnostics.Debug.WriteLine(ex);
-                var buff = await ex.Response.Content.ReadAsByteArrayAsync();
-                System.Diagnostics.Debug.WriteLine(
-                    System.Text.Encoding.UTF8.GetString(buff, 0, buff.Length));
-                throw;
+                expense.ReportId = report.Id;
             }
+
+            await Task.WhenAll(expenses
+                .Select(x => _expenseTable.UpdateAsync(x)));
         }
 
         public async Task RegisterExpensesAsync(Expense expense, IEnumerable<ExpenseReceipt> expenseReceipts)
