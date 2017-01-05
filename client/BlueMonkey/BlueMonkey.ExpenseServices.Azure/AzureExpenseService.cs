@@ -11,25 +11,31 @@ namespace BlueMonkey.ExpenseServices.Azure
         private readonly IMobileServiceClient _client;
         private readonly IMobileServiceTable<Expense> _expenseTable;
         private readonly IMobileServiceTable<Report> _reportTable;
+        private readonly IMobileServiceTable<ExpenseReceipt> _expenseReceiptTable;
+        private readonly IMobileServiceTable<Category> _categoryTable;
 
         public AzureExpenseService(IMobileServiceClient client)
         {
             _client = client;
             _expenseTable = _client.GetTable<Expense>();
             _reportTable = _client.GetTable<Report>();
+            _expenseReceiptTable = _client.GetTable<ExpenseReceipt>();
+            _categoryTable = _client.GetTable<Category>();
         }
 
-        public Task<IEnumerable<Expense>> GetExpensesAsync()
+        public async Task<IEnumerable<Expense>> GetExpensesAsync()
         {
-            return _expenseTable.CreateQuery()
-                .ToEnumerableAsync();
+            return (await _expenseTable.CreateQuery()
+                .ToEnumerableAsync())
+                .ToArray();
         }
 
-        public Task<IEnumerable<Expense>> GetExpensesFromReportIdAsync(string reportId)
+        public async Task<IEnumerable<Expense>> GetExpensesFromReportIdAsync(string reportId)
         {
-            return _expenseTable.CreateQuery()
+            return (await _expenseTable.CreateQuery()
                 .Where(x => x.ReportId == reportId)
-                .ToEnumerableAsync();
+                .ToEnumerableAsync())
+                .ToArray();
         }
 
         public Task<Report> GetReportAsync(string reportId)
@@ -39,30 +45,33 @@ namespace BlueMonkey.ExpenseServices.Azure
 
         public Task<Expense> GetExpenseAsync(string expenseId)
         {
-            throw new System.NotImplementedException();
+            return _expenseTable.LookupAsync(expenseId);
         }
 
-        public Task<IEnumerable<ExpenseReceipt>> GetExpenseReceiptsAsync(string expenseId)
+        public async Task<IEnumerable<ExpenseReceipt>> GetExpenseReceiptsAsync(string expenseId)
         {
-            throw new System.NotImplementedException();
+            return (await _expenseReceiptTable.CreateQuery().Where(x => x.ExpenseId == expenseId).ToEnumerableAsync())
+                .ToArray();
         }
 
-        public Task<IEnumerable<Category>> GetCategoriesAsync()
+        public async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
-            throw new System.NotImplementedException();
+            return (await _categoryTable.CreateQuery().ToEnumerableAsync()).ToArray();
         }
 
-        public Task<IEnumerable<Report>> GetReportsAsync()
+        public async Task<IEnumerable<Report>> GetReportsAsync()
         {
-            return _reportTable.CreateQuery()
-                .ToEnumerableAsync();
+            return (await _reportTable.CreateQuery()
+                .ToEnumerableAsync())
+                .ToArray();
         }
 
-        public Task<IEnumerable<Expense>> GetUnregisteredExpensesAsync()
+        public async Task<IEnumerable<Expense>> GetUnregisteredExpensesAsync()
         {
-            return _expenseTable.CreateQuery()
+            return (await _expenseTable.CreateQuery()
                 .Where(x => x.ReportId == null)
-                .ToEnumerableAsync();
+                .ToEnumerableAsync())
+                .ToArray();
         }
 
         public async Task RegisterReportAsync(Report report, IEnumerable<Expense> expenses)
@@ -73,7 +82,6 @@ namespace BlueMonkey.ExpenseServices.Azure
             }
             else
             {
-                await _reportTable.UpdateAsync(report);
                 // disconnect current expense
                 var currentExpenses = await _expenseTable.CreateQuery()
                     .Where(x => x.ReportId == report.Id)
@@ -84,6 +92,8 @@ namespace BlueMonkey.ExpenseServices.Azure
                 }
                 await Task.WhenAll(currentExpenses
                     .Select(x => _expenseTable.UpdateAsync(x)));
+
+                await _reportTable.UpdateAsync(report);
             }
 
             foreach (var expense in expenses)
@@ -95,9 +105,42 @@ namespace BlueMonkey.ExpenseServices.Azure
                 .Select(x => _expenseTable.UpdateAsync(x)));
         }
 
-        public Task RegisterExpensesAsync(Expense expense, IEnumerable<ExpenseReceipt> expenseReceipts)
+        public async Task RegisterExpensesAsync(Expense expense, IEnumerable<ExpenseReceipt> expenseReceipts)
         {
-            throw new System.NotImplementedException();
+            if (string.IsNullOrEmpty(expense.Id))
+            {
+                await _expenseTable.InsertAsync(expense);
+            }
+            else
+            {
+                await _expenseTable.UpdateAsync(expense);
+                // disconnect current expenseReceipt
+                var currentExpenseReceipts = await _expenseReceiptTable.CreateQuery()
+                    .Where(x => x.ExpenseId == expense.Id)
+                    .ToEnumerableAsync();
+                foreach (var expenseReceipt in currentExpenseReceipts)
+                {
+                    expenseReceipt.ExpenseId = null;
+                }
+                await Task.WhenAll(currentExpenseReceipts.Select(x => _expenseReceiptTable.UpdateAsync(x)));
+            }
+
+            foreach (var expenseReceipt in expenseReceipts)
+            {
+                expenseReceipt.ExpenseId = expense.Id;
+            }
+
+            await Task.WhenAll(expenseReceipts.Select(x =>
+            {
+                if (string.IsNullOrEmpty(x.Id))
+                {
+                    return _expenseReceiptTable.InsertAsync(x);
+                }
+                else
+                {
+                    return _expenseReceiptTable.UpdateAsync(x);
+                }
+            }));
         }
     }
 }

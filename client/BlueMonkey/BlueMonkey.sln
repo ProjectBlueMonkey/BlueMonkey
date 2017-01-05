@@ -39,11 +39,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.ExpenseServices.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.MediaServices", "BlueMonkey.MediaServices\BlueMonkey.MediaServices.csproj", "{FB4E448D-E4D9-4839-928B-09AE414C5640}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BlueMonkey.ExpenseServices.Azure.Shared", "BlueMonkey.ExpenseServices.Azure.Shared\BlueMonkey.ExpenseServices.Azure.Shared.shproj", "{DA9FA540-354C-4DEB-8896-02C11DBD6083}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.Tests", "BlueMonkey.Tests\BlueMonkey.Tests.csproj", "{8EF4B769-2298-4192-865C-8A665799A324}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMonkey.MediaServices.Tests", "BlueMonkey.MediaServices.Tests\BlueMonkey.MediaServices.Tests.csproj", "{98958E05-850F-439D-B67C-53063C800F75}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		BlueMonkey.ExpenseServices.Azure.Shared\BlueMonkey.ExpenseServices.Azure.Shared.projitems*{4a20ac8f-dfb8-43e5-9df9-edc8b22a1a22}*SharedItemsImports = 4
+		BlueMonkey.ExpenseServices.Azure.Shared\BlueMonkey.ExpenseServices.Azure.Shared.projitems*{da9fa540-354c-4deb-8896-02c11dbd6083}*SharedItemsImports = 13
+		BlueMonkey.ExpenseServices.Azure.Shared\BlueMonkey.ExpenseServices.Azure.Shared.projitems*{e5be7934-7d40-461b-992c-87fcb617cc64}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
 		Ad-Hoc|iPhone = Ad-Hoc|iPhone

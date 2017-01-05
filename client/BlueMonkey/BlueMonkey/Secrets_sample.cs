@@ -9,5 +9,6 @@ namespace BlueMonkey
     public static class Secrets
     {
         public static readonly string ServerUri = "https://your_app_name.azurewebsites.net";
+        public static readonly string FileUploadStorageConnectionString = "azure storage connection string";
     }
 }
