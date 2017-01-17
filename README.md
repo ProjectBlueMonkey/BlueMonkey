@@ -16,3 +16,4 @@ In this model, createAt, updateAt, version is omitted.
 - [Japan Xamarin User Group](http://jxug.org/)
 - Infragistics
 - Microsoft
+- [FUJITSU ADVANCED ENGINEERING LIMITED](http://www.fujitsu.com/jp/group/fae/)
