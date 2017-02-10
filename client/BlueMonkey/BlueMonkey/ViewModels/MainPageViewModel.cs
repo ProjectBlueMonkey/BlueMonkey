@@ -16,10 +16,10 @@ namespace BlueMonkey.ViewModels
         /// </summary>
         private readonly INavigationService _navigationService;
 
-		/// <summary>
-		/// The page dialog service.
-		/// </summary>
-		private readonly IPageDialogService _pageDialogService;
+        /// <summary>
+        /// The page dialog service.
+        /// </summary>
+        private readonly IPageDialogService _pageDialogService;
 
         /// <summary>
         /// Command of navigate next pages.
@@ -30,11 +30,11 @@ namespace BlueMonkey.ViewModels
         /// Initialize instance.
         /// </summary>
         /// <param name="navigationService"></param>
-		/// <param name="pageDialogService"></param>
+        /// <param name="pageDialogService"></param>
         public MainPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService)
         {
             _navigationService = navigationService;
-			_pageDialogService = pageDialogService;
+            _pageDialogService = pageDialogService;
 
             NavigateCommand = new ReactiveCommand<string>();
             NavigateCommand.Subscribe(Navigate);
@@ -44,16 +44,16 @@ namespace BlueMonkey.ViewModels
         /// Navigate next page.
         /// </summary>
         /// <param name="uri"></param>
-		private async void Navigate(string uri)
+        private async void Navigate(string uri)
         {
-			if (Secrets.ServerUri.Contains("your"))
-			{
-				await _pageDialogService.DisplayAlertAsync(
-					"Invalid Server Uri", 
-					"You should write actual ServerUri and ConnectionString to Secrets.cs",
-					"Close");
-				return;
-			}
+            if (Secrets.ServerUri.Contains("your"))
+            {
+                await _pageDialogService.DisplayAlertAsync(
+                    "Invalid Server Uri", 
+                    "You should write actual ServerUri and ConnectionString to Secrets.cs",
+                    "Close");
+                return;
+            }
 
             await _navigationService.NavigateAsync(uri);
         }
