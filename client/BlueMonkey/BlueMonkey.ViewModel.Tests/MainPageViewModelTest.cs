@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BlueMonkey.ViewModels;
 using Moq;
 using Prism.Navigation;
+using Prism.Services;
 using Xunit;
 
 namespace BlueMonkey.ViewModel.Tests
@@ -16,7 +17,8 @@ namespace BlueMonkey.ViewModel.Tests
         public void NavigateCommand()
         {
             var navigationService = new Mock<INavigationService>();
-            var actual = new MainPageViewModel(navigationService.Object);
+            var pageDialogService = new Mock<IPageDialogService>();
+            var actual = new MainPageViewModel(navigationService.Object, pageDialogService.Object);
 
             Assert.NotNull(actual.NavigateCommand);
             Assert.True(actual.NavigateCommand.CanExecute());
