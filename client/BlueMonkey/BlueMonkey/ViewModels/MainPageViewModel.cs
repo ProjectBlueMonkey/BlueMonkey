@@ -1,4 +1,5 @@
-﻿using System;
+﻿#define DEBUG
+using System;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
@@ -46,6 +47,7 @@ namespace BlueMonkey.ViewModels
         /// <param name="uri"></param>
         private async void Navigate(string uri)
         {
+#if Azure
             if (Secrets.ServerUri.Contains("your"))
             {
                 await _pageDialogService.DisplayAlertAsync(
@@ -54,6 +56,7 @@ namespace BlueMonkey.ViewModels
                     "Close");
                 return;
             }
+#endif
 
             await _navigationService.NavigateAsync(uri);
         }

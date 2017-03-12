@@ -1,8 +1,10 @@
-﻿
+﻿#define DEBUG
 using BlueMonkey.ExpenseServices;
-using BlueMonkey.ExpenseServices.Azure;
 using BlueMonkey.LoginService;
+#if Azure
+using BlueMonkey.ExpenseServices.Azure;
 using BlueMonkey.LoginService.Azure.iOS;
+#endif
 using Foundation;
 using Microsoft.Practices.Unity;
 using Microsoft.WindowsAzure.MobileServices;
@@ -38,8 +40,10 @@ namespace BlueMonkey.iOS
     {
         public void RegisterTypes(IUnityContainer container)
         {
+#if Azure
             container.RegisterType<ILoginService, AzureLoginService>(new ContainerControlledLifetimeManager());
             container.RegisterType<IFileStorageService, AzureFileStorageService>(new ContainerControlledLifetimeManager());
+#endif
         }
     }
 
