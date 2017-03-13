@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Linq;
 using BlueMonkey.Usecases;
-using BlueMonkey.ViewModels;
 using Moq;
 using Prism.Navigation;
 using Xunit;
 
-namespace BlueMonkey.ViewModel.Tests
+namespace BlueMonkey.ViewModels.Tests
 {
     public class AddExpensePageViewModelTest
     {

@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using Moq;
 
-namespace BlueMonkey.ViewModel.Tests
+namespace BlueMonkey.ViewModels.Tests
 {
     public static class MockExtensions
     {

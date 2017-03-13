@@ -1,13 +1,12 @@
-﻿using BlueMonkey.LoginService;
-using BlueMonkey.ViewModels;
+﻿using System;
+using System.Threading.Tasks;
+using BlueMonkey.LoginService;
 using Moq;
 using Prism.Navigation;
 using Prism.Services;
-using System;
-using System.Threading.Tasks;
 using Xunit;
 
-namespace BlueMonkey.ViewModel.Tests
+namespace BlueMonkey.ViewModels.Tests
 {
     public class LoginPageViewModelTest
     {

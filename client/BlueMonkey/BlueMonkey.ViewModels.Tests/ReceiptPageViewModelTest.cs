@@ -1,11 +1,10 @@
 ﻿using System.IO;
 using BlueMonkey.MediaServices;
 using BlueMonkey.Usecases;
-using BlueMonkey.ViewModels;
 using Moq;
 using Xunit;
 
-namespace BlueMonkey.ViewModel.Tests
+namespace BlueMonkey.ViewModels.Tests
 {
     public class ReceiptPageViewModelTest
     {

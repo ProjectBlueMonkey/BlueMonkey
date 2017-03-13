@@ -2,13 +2,12 @@
 using System.Reactive.Concurrency;
 using System.Threading.Tasks;
 using BlueMonkey.Usecases;
-using BlueMonkey.ViewModels;
 using Moq;
 using Prism.Navigation;
 using Reactive.Bindings;
 using Xunit;
 
-namespace BlueMonkey.ViewModel.Tests
+namespace BlueMonkey.ViewModels.Tests
 {
     public class ExpenseListPageViewModelTest
     {
