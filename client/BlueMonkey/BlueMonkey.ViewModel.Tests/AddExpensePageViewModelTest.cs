@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using BlueMonkey.Business;
 using BlueMonkey.Model;
 using BlueMonkey.ViewModels;
 using Moq;

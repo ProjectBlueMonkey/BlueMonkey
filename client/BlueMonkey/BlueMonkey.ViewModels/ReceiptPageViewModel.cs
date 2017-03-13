@@ -1,11 +1,6 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Prism.Mvvm;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
 using BlueMonkey.Model;
 using Prism.Navigation;
 using Reactive.Bindings;

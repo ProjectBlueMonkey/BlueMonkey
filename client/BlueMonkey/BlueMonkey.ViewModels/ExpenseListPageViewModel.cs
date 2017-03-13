@@ -1,5 +1,4 @@
 ﻿using System;
-using BlueMonkey.Business;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System.Reactive.Disposables;

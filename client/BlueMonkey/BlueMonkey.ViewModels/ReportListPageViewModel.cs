@@ -1,6 +1,5 @@
 ﻿using Prism.Mvvm;
 using System;
-using BlueMonkey.Business;
 using BlueMonkey.Model;
 using Prism.Navigation;
 using Reactive.Bindings;

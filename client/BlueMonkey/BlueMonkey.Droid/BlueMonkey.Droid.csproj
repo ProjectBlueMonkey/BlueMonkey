@@ -222,10 +222,6 @@
       <Project>{b5669777-4d9c-434a-97d8-7b156d87db41}</Project>
       <Name>BlueMonkey.Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BlueMonkey.Business\BlueMonkey.Business.csproj">
-      <Project>{d96104f1-5356-4cdc-8655-26576aa8322b}</Project>
-      <Name>BlueMonkey.Business</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BlueMonkey.ExpenseServices\BlueMonkey.ExpenseServices.csproj">
       <Project>{4a7f6cfb-dd26-477a-b4f9-6bc8d2d5be62}</Project>
       <Name>BlueMonkey.ExpenseServices</Name>

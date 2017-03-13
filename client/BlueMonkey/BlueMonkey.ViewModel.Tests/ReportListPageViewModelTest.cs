@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Reactive.Concurrency;
-using System.Reactive.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using BlueMonkey.Business;
-using BlueMonkey.ExpenseServices;
 using BlueMonkey.Model;
 using BlueMonkey.ViewModels;
 using Moq;

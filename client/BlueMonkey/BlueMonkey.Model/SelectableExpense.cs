@@ -1,6 +1,4 @@
-﻿using BlueMonkey.Business;
-
-namespace BlueMonkey.Model
+﻿namespace BlueMonkey.Model
 {
     public class SelectableExpense : Expense
     {

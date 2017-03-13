@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reactive.Disposables;
-using BlueMonkey.Model;
 using BlueMonkey.Transaction;
 
 namespace BlueMonkey.ViewModels

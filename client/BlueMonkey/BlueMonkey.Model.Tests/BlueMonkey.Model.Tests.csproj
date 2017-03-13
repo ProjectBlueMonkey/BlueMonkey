@@ -72,10 +72,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BlueMonkey.Business\BlueMonkey.Business.csproj">
-      <Project>{d96104f1-5356-4cdc-8655-26576aa8322b}</Project>
-      <Name>BlueMonkey.Business</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BlueMonkey.ExpenseServices\BlueMonkey.ExpenseServices.csproj">
       <Project>{4a7f6cfb-dd26-477a-b4f9-6bc8d2d5be62}</Project>
       <Name>BlueMonkey.ExpenseServices</Name>
@@ -95,6 +91,10 @@
     <ProjectReference Include="..\BlueMonkey.Transaction\BlueMonkey.Transaction.csproj">
       <Project>{db2dbcbb-c5a8-406a-95fa-942df12564ae}</Project>
       <Name>BlueMonkey.Transaction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlueMonkey\BlueMonkey.csproj">
+      <Project>{0bc35d2a-508d-481f-b3b5-b8359fa48bb8}</Project>
+      <Name>BlueMonkey</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

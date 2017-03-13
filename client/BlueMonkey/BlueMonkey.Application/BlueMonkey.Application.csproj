@@ -51,10 +51,6 @@
     <Compile Include="Secrets.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BlueMonkey.Business\BlueMonkey.Business.csproj">
-      <Project>{d96104f1-5356-4cdc-8655-26576aa8322b}</Project>
-      <Name>BlueMonkey.Business</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BlueMonkey.ExpenseServices.Local\BlueMonkey.ExpenseServices.Local.csproj">
       <Project>{4baee00a-3f14-4cdb-a4f1-2e25eb85620b}</Project>
       <Name>BlueMonkey.ExpenseServices.Local</Name>

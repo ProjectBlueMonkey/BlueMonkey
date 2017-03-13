@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Prism.Mvvm;
 
-namespace BlueMonkey.Business
+namespace BlueMonkey
 {
-    public class User : BindableBase
+    public class Report : BindableBase
     {
         private string _id;
 
@@ -22,6 +18,13 @@ namespace BlueMonkey.Business
         {
             get { return _name; }
             set { SetProperty(ref _name, value); }
+        }
+
+        private DateTime _date;
+        public DateTime Date
+        {
+            get { return _date; }
+            set { SetProperty(ref _date, value); }
         }
 
         private string _userId;

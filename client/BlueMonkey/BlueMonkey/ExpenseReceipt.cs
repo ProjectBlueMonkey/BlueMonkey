@@ -1,6 +1,6 @@
 ﻿using Prism.Mvvm;
 
-namespace BlueMonkey.Business
+namespace BlueMonkey
 {
     public class ExpenseReceipt : BindableBase
     {

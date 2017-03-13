@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.IO;
-using System.Windows.Media;
+﻿using System.IO;
 using BlueMonkey.MediaServices;
 using BlueMonkey.Model;
 using BlueMonkey.ViewModels;

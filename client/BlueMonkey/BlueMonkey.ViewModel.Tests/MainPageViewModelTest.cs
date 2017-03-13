@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BlueMonkey.ViewModels;
+﻿using BlueMonkey.ViewModels;
 using Moq;
 using Prism.Navigation;
 using Prism.Services;

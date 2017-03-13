@@ -1,15 +1,11 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reactive.Linq;
-using BlueMonkey.Business;
 using BlueMonkey.Model;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
-using Xamarin.Forms;
 
 namespace BlueMonkey.ViewModels
 {
