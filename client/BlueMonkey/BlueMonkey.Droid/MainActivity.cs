@@ -1,11 +1,15 @@
-﻿
+﻿#define DEBUG
+
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using BlueMonkey.Application;
 using BlueMonkey.ExpenseServices;
-using BlueMonkey.ExpenseServices.Azure;
 using BlueMonkey.LoginService;
+#if Azure
+using BlueMonkey.ExpenseServices.Azure;
 using BlueMonkey.LoginService.Azure.Droid;
+#endif
 using Microsoft.Practices.Unity;
 using Microsoft.WindowsAzure.MobileServices;
 using Plugin.Permissions;
@@ -38,8 +42,10 @@ namespace BlueMonkey.Droid
     {
         public void RegisterTypes(IUnityContainer container)
         {
+#if Azure
             container.RegisterType<ILoginService, AzureLoginService>(new ContainerControlledLifetimeManager());
             container.RegisterType<IFileStorageService, AzureFileStorageService>(new ContainerControlledLifetimeManager());
+#endif
         }
     }
 }
