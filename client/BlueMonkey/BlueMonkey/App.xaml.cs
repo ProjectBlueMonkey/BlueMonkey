@@ -10,11 +10,14 @@ using BlueMonkey.ExpenseServices.Local;
 #endif
 using BlueMonkey.Model;
 using BlueMonkey.TimeService;
+using BlueMonkey.Transaction.Unity;
+using BlueMonkey.ViewModels;
 using Prism.Unity;
 using BlueMonkey.Views;
 using Xamarin.Forms;
 using Microsoft.Practices.Unity;
 using Microsoft.WindowsAzure.MobileServices;
+using Prism.Mvvm;
 
 namespace BlueMonkey
 {
@@ -31,6 +34,13 @@ namespace BlueMonkey
 #else
             NavigationService.NavigateAsync("NavigationPage/MainPage");
 #endif
+        }
+
+        protected override void ConfigureContainer()
+        {
+            base.ConfigureContainer();
+            PageNavigationTypeResolver.AssignAssemblies<MainPage, MainPageViewModel>();
+            ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver(PageNavigationTypeResolver.ResolveForViewModelType);
         }
 
         protected override void RegisterTypes()

@@ -38,19 +38,9 @@
     <Compile Include="BehaviorBase.cs" />
     <Compile Include="EventToCommandBehavior.cs" />
     <Compile Include="ItemSelectedToCommandBehavior.cs" />
+    <Compile Include="PageNavigationTypeResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Secrets.cs" />
-    <Compile Include="TransactionLifetimeManager.cs" />
-    <Compile Include="TransactionPolicyExtensions.cs" />
-    <Compile Include="ViewModels\ChartPageViewModel.cs" />
-    <Compile Include="ViewModels\ExpenseListPageViewModel.cs" />
-    <Compile Include="ViewModels\AddExpensePageViewModel.cs" />
-    <Compile Include="ViewModels\ExpenseSelectionPageViewModel.cs" />
-    <Compile Include="ViewModels\LoginPageViewModel.cs" />
-    <Compile Include="ViewModels\MainPageViewModel.cs" />
-    <Compile Include="ViewModels\ReceiptPageViewModel.cs" />
-    <Compile Include="ViewModels\ReportListPageViewModel.cs" />
-    <Compile Include="ViewModels\ReportPageViewModel.cs" />
     <Compile Include="Views\Controls\BindablePicker.cs" />
     <Compile Include="Views\ExpenseListPage.xaml.cs">
       <DependentUpon>ExpenseListPage.xaml</DependentUpon>
@@ -161,6 +151,18 @@
     <ProjectReference Include="..\BlueMonkey.TimeService\BlueMonkey.TimeService.csproj">
       <Project>{0c6dfdb3-febe-4d22-a0cb-5e3b599a9342}</Project>
       <Name>BlueMonkey.TimeService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlueMonkey.Transaction.Unity\BlueMonkey.Transaction.Unity.csproj">
+      <Project>{be3548ba-87ea-4583-8f6c-daea65f10fe7}</Project>
+      <Name>BlueMonkey.Transaction.Unity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlueMonkey.Transaction\BlueMonkey.Transaction.csproj">
+      <Project>{db2dbcbb-c5a8-406a-95fa-942df12564ae}</Project>
+      <Name>BlueMonkey.Transaction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlueMonkey.ViewModels\BlueMonkey.ViewModels.csproj">
+      <Project>{314e768e-d62d-4b16-8780-5144540a0c4e}</Project>
+      <Name>BlueMonkey.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -288,11 +290,11 @@
           <CSharpFormattingPolicy IndentBlock="True" IndentBraces="False" IndentSwitchCaseSection="True" LabelPositioning="OneLess" NewLinesForBracesInTypes="True" NewLinesForBracesInMethods="True" SpaceWithinMethodDeclarationParenthesis="False" SpaceBetweenEmptyMethodDeclarationParentheses="False" SpaceWithinMethodCallParentheses="False" SpaceBetweenEmptyMethodCallParentheses="False" SpaceAfterControlFlowStatementKeyword="True" SpaceWithinExpressionParentheses="False" SpaceWithinCastParentheses="False" SpaceWithinOtherParentheses="False" SpaceAfterCast="False" SpacesIgnoreAroundVariableDeclaration="False" SpaceBetweenEmptySquareBrackets="False" SpaceWithinSquareBrackets="False" SpaceAfterColonInBaseTypeDeclaration="True" SpaceAfterComma="True" SpaceAfterDot="False" SpaceAfterSemicolonsInForStatement="True" SpaceBeforeColonInBaseTypeDeclaration="True" SpaceBeforeComma="False" SpaceBeforeDot="False" SpaceBeforeSemicolonsInForStatement="False" SpacingAroundBinaryOperator="Single" WrappingPreserveSingleLine="True" WrappingKeepStatementsOnSingleLine="True" PlaceSystemDirectiveFirst="True" IndentSwitchSection="True" NewLinesForBracesInProperties="True" NewLinesForBracesInAccessors="True" NewLinesForBracesInAnonymousMethods="True" NewLinesForBracesInControlBlocks="True" NewLinesForBracesInAnonymousTypes="True" NewLinesForBracesInObjectCollectionArrayInitializers="True" NewLinesForBracesInLambdaExpressionBody="True" NewLineForElse="True" NewLineForCatch="True" NewLineForFinally="True" NewLineForMembersInObjectInit="True" NewLineForMembersInAnonymousTypes="True" NewLineForClausesInQuery="True" SpacingAfterMethodDeclarationName="False" SpaceAfterMethodCallName="False" SpaceBeforeOpenSquareBracket="False" inheritsSet="Mono" inheritsScope="text/x-csharp" scope="text/x-csharp" />
           <TextStylePolicy FileWidth="80" TabWidth="4" TabsToSpaces="True" IndentWidth="4" RemoveTrailingWhitespace="True" NoTabsAfterNonTabs="False" EolMarker="Native" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="application/xaml+xml" />
           <XmlFormattingPolicy inheritsSet="Mono" inheritsScope="application/xml" scope="application/xaml+xml">
-            <DefaultFormat OmitXmlDeclaration="False" NewLineChars="&#xA;" IndentContent="True" ContentIndentString="&#x9;" AttributesInNewLine="False" MaxAttributesPerLine="10" AttributesIndentString="&#x9;" WrapAttributes="False" AlignAttributes="False" AlignAttributeValues="False" QuoteChar="&quot;" SpacesBeforeAssignment="0" SpacesAfterAssignment="0" EmptyLinesBeforeStart="0" EmptyLinesAfterStart="0" EmptyLinesBeforeEnd="0" EmptyLinesAfterEnd="0" />
+            <DefaultFormat OmitXmlDeclaration="False" NewLineChars="&#xA;" IndentContent="True" ContentIndentString="	" AttributesInNewLine="False" MaxAttributesPerLine="10" AttributesIndentString="	" WrapAttributes="False" AlignAttributes="False" AlignAttributeValues="False" QuoteChar="&quot;" SpacesBeforeAssignment="0" SpacesAfterAssignment="0" EmptyLinesBeforeStart="0" EmptyLinesAfterStart="0" EmptyLinesBeforeEnd="0" EmptyLinesAfterEnd="0" />
           </XmlFormattingPolicy>
           <TextStylePolicy FileWidth="80" TabWidth="4" TabsToSpaces="True" IndentWidth="4" RemoveTrailingWhitespace="True" NoTabsAfterNonTabs="False" EolMarker="Native" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="application/xml" />
           <XmlFormattingPolicy inheritsSet="Mono" inheritsScope="application/xml" scope="application/xml">
-            <DefaultFormat OmitXmlDeclaration="False" NewLineChars="&#xA;" IndentContent="True" ContentIndentString="&#x9;" AttributesInNewLine="False" MaxAttributesPerLine="10" AttributesIndentString="&#x9;" WrapAttributes="False" AlignAttributes="False" AlignAttributeValues="False" QuoteChar="&quot;" SpacesBeforeAssignment="0" SpacesAfterAssignment="0" EmptyLinesBeforeStart="0" EmptyLinesAfterStart="0" EmptyLinesBeforeEnd="0" EmptyLinesAfterEnd="0" />
+            <DefaultFormat OmitXmlDeclaration="False" NewLineChars="&#xA;" IndentContent="True" ContentIndentString="	" AttributesInNewLine="False" MaxAttributesPerLine="10" AttributesIndentString="	" WrapAttributes="False" AlignAttributes="False" AlignAttributeValues="False" QuoteChar="&quot;" SpacesBeforeAssignment="0" SpacesAfterAssignment="0" EmptyLinesBeforeStart="0" EmptyLinesAfterStart="0" EmptyLinesBeforeEnd="0" EmptyLinesAfterEnd="0" />
           </XmlFormattingPolicy>
         </Policies>
       </Properties>

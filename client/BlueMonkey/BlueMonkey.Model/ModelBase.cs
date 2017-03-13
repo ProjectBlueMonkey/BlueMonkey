@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BlueMonkey.Transaction;
 using Prism.Mvvm;
 
 namespace BlueMonkey.Model
