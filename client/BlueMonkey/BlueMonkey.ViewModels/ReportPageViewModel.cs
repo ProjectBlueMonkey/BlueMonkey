@@ -3,7 +3,7 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BlueMonkey.Model;
+using BlueMonkey.Usecases;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 

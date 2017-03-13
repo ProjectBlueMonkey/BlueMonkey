@@ -1,4 +1,4 @@
-﻿namespace BlueMonkey.Model
+﻿namespace BlueMonkey.Usecases
 {
     public class SelectableExpense : Expense
     {

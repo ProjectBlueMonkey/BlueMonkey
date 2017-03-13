@@ -45,13 +45,13 @@
       <Project>{fb4e448d-e4d9-4839-928b-09ae414c5640}</Project>
       <Name>BlueMonkey.MediaServices</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BlueMonkey.Model\BlueMonkey.Model.csproj">
-      <Project>{be7e48de-526b-4bfa-a8bb-1699fdad1cd1}</Project>
-      <Name>BlueMonkey.Model</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BlueMonkey.Transaction\BlueMonkey.Transaction.csproj">
       <Project>{db2dbcbb-c5a8-406a-95fa-942df12564ae}</Project>
       <Name>BlueMonkey.Transaction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlueMonkey.Usecases\BlueMonkey.Usecases.csproj">
+      <Project>{720c0340-2f25-4e0b-94f3-677735fe06a6}</Project>
+      <Name>BlueMonkey.Usecases</Name>
     </ProjectReference>
     <ProjectReference Include="..\BlueMonkey\BlueMonkey.csproj">
       <Project>{0bc35d2a-508d-481f-b3b5-b8359fa48bb8}</Project>

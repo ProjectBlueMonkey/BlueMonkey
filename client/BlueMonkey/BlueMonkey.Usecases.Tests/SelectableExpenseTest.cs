@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit;
 
-namespace BlueMonkey.Model.Tests
+namespace BlueMonkey.Usecases.Tests
 {
     public class SelectableExpenseTest
     {
@@ -23,14 +23,14 @@ namespace BlueMonkey.Model.Tests
 
             var actual = new SelectableExpense(expected);
 
-            Assert.Equal(expected.Id, actual.Id);
-            Assert.Equal(expected.CategoryId, actual.CategoryId);
+            Assert.Equal((string) expected.Id, actual.Id);
+            Assert.Equal((string) expected.CategoryId, actual.CategoryId);
             Assert.Equal(expected.Amount, actual.Amount);
             Assert.Equal(expected.Date, actual.Date);
-            Assert.Equal(expected.Location, actual.Location);
-            Assert.Equal(expected.Note, actual.Note);
-            Assert.Equal(expected.ReportId, actual.ReportId);
-            Assert.Equal(expected.UserId, actual.UserId);
+            Assert.Equal((string) expected.Location, actual.Location);
+            Assert.Equal((string) expected.Note, actual.Note);
+            Assert.Equal((string) expected.ReportId, actual.ReportId);
+            Assert.Equal((string) expected.UserId, actual.UserId);
             Assert.False(actual.IsSelected);
         }
     }

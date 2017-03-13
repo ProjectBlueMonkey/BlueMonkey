@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using BlueMonkey.MediaServices;
 using BlueMonkey.Transaction;
 
-namespace BlueMonkey.Model
+namespace BlueMonkey.Usecases
 {
     /// <summary>
     /// Use cases to register and update expense.

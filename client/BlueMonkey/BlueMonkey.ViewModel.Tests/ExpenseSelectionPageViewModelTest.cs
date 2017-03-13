@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using BlueMonkey.Model;
+using BlueMonkey.Usecases;
 using BlueMonkey.ViewModels;
 using Moq;
 using Xunit;

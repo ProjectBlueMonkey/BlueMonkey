@@ -2,7 +2,7 @@
 using BlueMonkey.Transaction;
 using Prism.Mvvm;
 
-namespace BlueMonkey.Model
+namespace BlueMonkey.Usecases
 {
     public class ModelBase : BindableBase, ITransactionPolicy
     {

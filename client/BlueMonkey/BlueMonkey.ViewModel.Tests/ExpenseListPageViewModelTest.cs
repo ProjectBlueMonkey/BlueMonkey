@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Reactive.Concurrency;
 using System.Threading.Tasks;
-using BlueMonkey.Model;
+using BlueMonkey.Usecases;
 using BlueMonkey.ViewModels;
 using Moq;
 using Prism.Navigation;

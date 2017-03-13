@@ -1,6 +1,6 @@
 ﻿using Prism.Mvvm;
 using System;
-using BlueMonkey.Model;
+using BlueMonkey.Usecases;
 using Prism.Navigation;
 using Reactive.Bindings;
 

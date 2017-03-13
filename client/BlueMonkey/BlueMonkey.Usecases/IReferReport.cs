@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
-namespace BlueMonkey.Model
+namespace BlueMonkey.Usecases
 {
     /// <summary>
     /// Provide use cases that reference reports.

@@ -1,14 +1,16 @@
 ﻿using System.Resources;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("BlueMonkey.Application")]
+[assembly: AssemblyTitle("BlueMonkey.Usecases")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("BlueMonkey.Application")]
+[assembly: AssemblyProduct("BlueMonkey.Usecases")]
 [assembly: AssemblyCopyright("Copyright (C) Microsoft 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

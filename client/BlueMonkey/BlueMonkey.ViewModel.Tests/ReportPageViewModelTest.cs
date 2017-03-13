@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using BlueMonkey.Model;
+using BlueMonkey.Usecases;
 using BlueMonkey.ViewModels;
 using Moq;
 using Prism.Navigation;

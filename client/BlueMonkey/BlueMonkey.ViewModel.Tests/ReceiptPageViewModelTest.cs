@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using BlueMonkey.MediaServices;
-using BlueMonkey.Model;
+using BlueMonkey.Usecases;
 using BlueMonkey.ViewModels;
 using Moq;
 using Xunit;

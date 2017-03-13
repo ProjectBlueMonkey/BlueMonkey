@@ -7,7 +7,7 @@ using BlueMonkey.TimeService;
 using Moq;
 using Xunit;
 
-namespace BlueMonkey.Model.Tests
+namespace BlueMonkey.Usecases.Tests
 {
     public class EditReportTest
     {
@@ -81,10 +81,10 @@ namespace BlueMonkey.Model.Tests
             Assert.Equal(2, actual.SelectableExpenses.Count);
 
             Assert.False(actual.SelectableExpenses[0].IsSelected);
-            Assert.Equal(expense01.Id, actual.SelectableExpenses[0].Id);
+            Assert.Equal((string) expense01.Id, actual.SelectableExpenses[0].Id);
 
             Assert.False(actual.SelectableExpenses[1].IsSelected);
-            Assert.Equal(expense02.Id, actual.SelectableExpenses[1].Id);
+            Assert.Equal((string) expense02.Id, actual.SelectableExpenses[1].Id);
         }
 
         [Fact]
@@ -138,13 +138,13 @@ namespace BlueMonkey.Model.Tests
             Assert.Equal(3, actual.SelectableExpenses.Count);
 
             Assert.True(actual.SelectableExpenses[0].IsSelected);
-            Assert.Equal(expense03.Id, actual.SelectableExpenses[0].Id);
+            Assert.Equal((string) expense03.Id, actual.SelectableExpenses[0].Id);
 
             Assert.False(actual.SelectableExpenses[1].IsSelected);
-            Assert.Equal(expense02.Id, actual.SelectableExpenses[1].Id);
+            Assert.Equal((string) expense02.Id, actual.SelectableExpenses[1].Id);
 
             Assert.False(actual.SelectableExpenses[2].IsSelected);
-            Assert.Equal(expense01.Id, actual.SelectableExpenses[2].Id);
+            Assert.Equal((string) expense01.Id, actual.SelectableExpenses[2].Id);
         }
 
 

@@ -1,32 +1,36 @@
-﻿using System.Resources;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("BlueMonkey.Model")]
+[assembly: AssemblyTitle("BlueMonkey.Usecases.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BlueMonkey.Model")]
-[assembly: AssemblyCopyright("Copyright (C)  2016")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("BlueMonkey.Usecases.Tests")]
+[assembly: AssemblyCopyright("Copyright © Microsoft 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: NeutralResourcesLanguage("ja")]
+
+// ComVisible を false に設定すると、その型はこのアセンブリ内で COM コンポーネントから 
+// 参照不可能になります。COM からこのアセンブリ内の型にアクセスする場合は、
+// その型の ComVisible 属性を true に設定してください。
+[assembly: ComVisible(false)]
+
+// このプロジェクトが COM に公開される場合、次の GUID が typelib の ID になります
+[assembly: Guid("14b59a00-0877-4dfe-aa5a-9eede0964ed7")]
 
 // アセンブリのバージョン情報は次の 4 つの値で構成されています:
 //
 //      メジャー バージョン
 //      マイナー バージョン
 //      ビルド番号
-//      リビジョン
+//      Revision
 //
 // すべての値を指定するか、下のように '*' を使ってビルドおよびリビジョン番号を 
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: InternalsVisibleTo("BlueMonkey.Model.Tests")]
-[assembly: InternalsVisibleTo("BlueMonkey.Model.Explorables")]
-

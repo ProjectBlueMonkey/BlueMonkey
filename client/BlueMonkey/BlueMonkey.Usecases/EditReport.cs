@@ -7,7 +7,7 @@ using BlueMonkey.ExpenseServices;
 using BlueMonkey.TimeService;
 using Prism.Mvvm;
 
-namespace BlueMonkey.Model
+namespace BlueMonkey.Usecases
 {
     public class EditReport : BindableBase, IEditReport
     {

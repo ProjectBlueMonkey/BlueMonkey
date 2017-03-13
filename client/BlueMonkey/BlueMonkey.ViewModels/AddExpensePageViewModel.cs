@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using BlueMonkey.Model;
+using BlueMonkey.Usecases;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 

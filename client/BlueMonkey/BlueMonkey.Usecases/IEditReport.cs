@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
 
-namespace BlueMonkey.Model
+namespace BlueMonkey.Usecases
 {
     public interface IEditReport : INotifyPropertyChanged
     {

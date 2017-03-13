@@ -3,7 +3,7 @@ using BlueMonkey.ExpenseServices;
 using Moq;
 using Xunit;
 
-namespace BlueMonkey.Model.Tests
+namespace BlueMonkey.Usecases.Tests
 {
     public class ReferReportTest
     {

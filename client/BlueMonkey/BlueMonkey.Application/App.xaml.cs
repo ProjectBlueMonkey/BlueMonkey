@@ -4,9 +4,9 @@
 using BlueMonkey.ExpenseServices;
 using BlueMonkey.ExpenseServices.Local;
 using BlueMonkey.MediaServices;
-using BlueMonkey.Model;
 using BlueMonkey.TimeService;
 using BlueMonkey.Transaction.Unity;
+using BlueMonkey.Usecases;
 using BlueMonkey.ViewModels;
 using BlueMonkey.Views;
 using Microsoft.Practices.Unity;

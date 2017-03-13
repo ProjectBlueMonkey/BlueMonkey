@@ -2,7 +2,7 @@
 using Prism.Mvvm;
 using Prism.Navigation;
 using System.Reactive.Disposables;
-using BlueMonkey.Model;
+using BlueMonkey.Usecases;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 

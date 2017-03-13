@@ -1,5 +1,5 @@
 ﻿using Prism.Mvvm;
-using BlueMonkey.Model;
+using BlueMonkey.Usecases;
 using Reactive.Bindings;
 
 namespace BlueMonkey.ViewModels

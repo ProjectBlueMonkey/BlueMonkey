@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using BlueMonkey.ExpenseServices;
 
-namespace BlueMonkey.Model
+namespace BlueMonkey.Usecases
 {
     public class ReferReport : IReferReport
     {
