@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:controls="clr-namespace:BlueMonkey.Views.Controls;assembly=BlueMonkey"
+             xmlns:controls1="clr-namespace:BlueMonkey.Views.Controls;assembly=BlueMonkey.Views"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BlueMonkey.Views.AddExpensePage" Title="Expense">
 
@@ -20,7 +20,7 @@
       <Label Text="Location"/>
       <Entry Text="{Binding Location.Value}" HorizontalOptions="Fill"/>
       <Label Text="Category" HorizontalOptions="Start"/>
-      <controls:BindablePicker Title="Category" ItemsSource="{Binding Categories.Value}" SelectedIndex="{Binding SelectedCategoryIndex.Value}"/>
+      <controls1:BindablePicker Title="Category" ItemsSource="{Binding Categories.Value}" SelectedIndex="{Binding SelectedCategoryIndex.Value}"/>
       <Label Text="Amount" HorizontalOptions="Start"/>
       <Entry Text="{Binding Amount.Value}" HorizontalOptions="Fill" HorizontalTextAlignment="End"/>
       <Label Text="Date"/>
