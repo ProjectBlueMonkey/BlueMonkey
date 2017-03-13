@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace BlueMonkey
+namespace BlueMonkey.Views.Behaviors
 {
     /// <summary>
     /// Behavior that executes Command when Item is selected in ListView.

@@ -301,4 +301,4 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-client/BlueMonkey/BlueMonkey/Secrets.cs
+client/BlueMonkey/BlueMonkey.Application/Secrets.cs

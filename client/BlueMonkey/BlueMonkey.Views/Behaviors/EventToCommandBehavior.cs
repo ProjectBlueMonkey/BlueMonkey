@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace BlueMonkey
+namespace BlueMonkey.Views.Behaviors
 {
 
     public class EventToCommandBehavior : BehaviorBase<VisualElement>
     {
-        Delegate eventHandler;
+        Delegate _eventHandler;
 
         public static readonly BindableProperty EventNameProperty = BindableProperty.Create("EventName", typeof(string), typeof(EventToCommandBehavior), null, propertyChanged: OnEventNameChanged);
         public static readonly BindableProperty CommandProperty = BindableProperty.Create("Command", typeof(ICommand), typeof(EventToCommandBehavior), null);
@@ -68,8 +64,8 @@ namespace BlueMonkey
                 throw new ArgumentException(string.Format("EventToCommandBehavior: Can't register the '{0}' event.", EventName));
             }
             MethodInfo methodInfo = typeof(EventToCommandBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
-            eventHandler = methodInfo.CreateDelegate(eventInfo.EventHandlerType, this);
-            eventInfo.AddEventHandler(AssociatedObject, eventHandler);
+            _eventHandler = methodInfo.CreateDelegate(eventInfo.EventHandlerType, this);
+            eventInfo.AddEventHandler(AssociatedObject, _eventHandler);
         }
 
         void DeregisterEvent(string name)
@@ -79,7 +75,7 @@ namespace BlueMonkey
                 return;
             }
 
-            if (eventHandler == null)
+            if (_eventHandler == null)
             {
                 return;
             }
@@ -88,8 +84,8 @@ namespace BlueMonkey
             {
                 throw new ArgumentException(string.Format("EventToCommandBehavior: Can't de-register the '{0}' event.", EventName));
             }
-            eventInfo.RemoveEventHandler(AssociatedObject, eventHandler);
-            eventHandler = null;
+            eventInfo.RemoveEventHandler(AssociatedObject, _eventHandler);
+            _eventHandler = null;
         }
 
         void OnEvent(object sender, object eventArgs)

@@ -1,4 +1,5 @@
 ﻿#define DEBUG
+using BlueMonkey.Application;
 using BlueMonkey.ExpenseServices;
 using BlueMonkey.LoginService;
 #if Azure

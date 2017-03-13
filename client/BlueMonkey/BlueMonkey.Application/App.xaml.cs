@@ -2,24 +2,24 @@
 #define DEBUG
 
 using BlueMonkey.ExpenseServices;
-using BlueMonkey.MediaServices;
-#if AZURE
-using BlueMonkey.ExpenseServices.Azure;
-#else
 using BlueMonkey.ExpenseServices.Local;
-#endif
+using BlueMonkey.MediaServices;
 using BlueMonkey.Model;
 using BlueMonkey.TimeService;
 using BlueMonkey.Transaction.Unity;
 using BlueMonkey.ViewModels;
-using Prism.Unity;
 using BlueMonkey.Views;
-using Xamarin.Forms;
 using Microsoft.Practices.Unity;
 using Microsoft.WindowsAzure.MobileServices;
 using Prism.Mvvm;
+using Prism.Unity;
+using Xamarin.Forms;
+#if AZURE
+using BlueMonkey.ExpenseServices.Azure;
+#else
+#endif
 
-namespace BlueMonkey
+namespace BlueMonkey.Application
 {
     public partial class App : PrismApplication
     {

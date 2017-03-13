@@ -78,6 +78,9 @@
     <Compile Include="AddExpensePage.xaml.cs">
       <DependentUpon>AddExpensePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Behaviors\BehaviorBase.cs" />
+    <Compile Include="Behaviors\EventToCommandBehavior.cs" />
+    <Compile Include="Behaviors\ItemSelectedToCommandBehavior.cs" />
     <Compile Include="ChartPage.xaml.cs">
       <DependentUpon>ChartPage.xaml</DependentUpon>
     </Compile>

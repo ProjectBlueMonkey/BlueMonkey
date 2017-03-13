@@ -9,7 +9,7 @@ namespace BlueMonkey.Droid
 {
 	//You can specify additional application information in this attribute
     [Application]
-    public class MainApplication : Application, Application.IActivityLifecycleCallbacks
+    public class MainApplication : Android.App.Application, Android.App.Application.IActivityLifecycleCallbacks
     {
         public MainApplication(IntPtr handle, JniHandleOwnership transer)
           :base(handle, transer)

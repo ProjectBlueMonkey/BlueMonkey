@@ -1,19 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3FD586F1-4A0F-448D-918B-5F83E1B2449C}</ProjectGuid>
+    <ProjectGuid>{B5669777-4D9C-434A-97D8-7B156D87DB41}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BlueMonkey</RootNamespace>
-    <AssemblyName>BlueMonkey</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
+    <RootNamespace>BlueMonkey.Application</RootNamespace>
+    <AssemblyName>BlueMonkey.Application</AssemblyName>
+    <DefaultLanguage>ja-JP</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -35,30 +36,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BehaviorBase.cs" />
-    <Compile Include="EventToCommandBehavior.cs" />
-    <Compile Include="ItemSelectedToCommandBehavior.cs" />
+    <!-- A reference to the entire .NET Framework is automatically included -->
+    <EmbeddedResource Include="App.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageNavigationTypeResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Secrets.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\BlueMonkey.Business\BlueMonkey.Business.csproj">
       <Project>{d96104f1-5356-4cdc-8655-26576aa8322b}</Project>
       <Name>BlueMonkey.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BlueMonkey.ExpenseServices.Azure\BlueMonkey.ExpenseServices.Azure.csproj">
-      <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
-      <Name>BlueMonkey.ExpenseServices.Azure</Name>
     </ProjectReference>
     <ProjectReference Include="..\BlueMonkey.ExpenseServices.Local\BlueMonkey.ExpenseServices.Local.csproj">
       <Project>{4baee00a-3f14-4cdb-a4f1-2e25eb85620b}</Project>
@@ -73,7 +68,7 @@
       <Name>BlueMonkey.LoginService.Local</Name>
     </ProjectReference>
     <ProjectReference Include="..\BlueMonkey.LoginService\BlueMonkey.LoginService.csproj">
-      <Project>{31D77FDC-1919-42A3-8035-78767C87E4A7}</Project>
+      <Project>{31d77fdc-1919-42a3-8035-78767c87e4a7}</Project>
       <Name>BlueMonkey.LoginService</Name>
     </ProjectReference>
     <ProjectReference Include="..\BlueMonkey.MediaServices\BlueMonkey.MediaServices.csproj">
@@ -106,10 +101,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
@@ -126,14 +117,6 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Plugin.Media, Version=2.6.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xam.Plugin.Media.2.6.1\lib\portable-net45+wp80+win8+wpa81\Plugin.Media.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Plugin.Media.Abstractions, Version=2.6.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xam.Plugin.Media.2.6.1\lib\portable-net45+wp80+win8+wpa81\Plugin.Media.Abstractions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.6.3.0-pre1\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Prism.dll</HintPath>
       <Private>True</Private>
@@ -146,10 +129,6 @@
       <HintPath>..\packages\Prism.Unity.Forms.6.3.0-pre1\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Prism.Unity.Forms.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ReactiveProperty, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ReactiveProperty.3.2.0\lib\netstandard1.1\ReactiveProperty.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net45+win8\System.Net.Http.Extensions.dll</HintPath>
       <Private>True</Private>
@@ -158,45 +137,36 @@
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net45+win8\System.Net.Http.Primitives.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Reactive.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reactive.Core.3.0.0\lib\netstandard1.1\System.Reactive.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Reactive.Interfaces, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reactive.Interfaces.3.0.0\lib\netstandard1.0\System.Reactive.Interfaces.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Reactive.Linq, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reactive.Linq.3.0.0\lib\netstandard1.1\System.Reactive.Linq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Reactive.PlatformServices, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reactive.PlatformServices.3.0.0\lib\netstandard1.0\System.Reactive.PlatformServices.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Forms.2.3.3.175\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.2.3.2.127\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Forms.2.3.3.175\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Platform.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.2.3.2.127\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Forms.2.3.3.175\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Xaml.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.2.3.2.127\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <Import Project="..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+  <Import Project="..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
   </Target>
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
-  <!--<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />-->
+  <PropertyGroup>
+    <PreBuildEvent>if not exist "$(ProjectDir)Secrets.cs" copy "$(ProjectDir)Secrets_sample.cs" "$(ProjectDir)Secrets.cs" &gt;nul</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -204,28 +174,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ProjectExtensions>
-    <MonoDevelop>
-      <Properties>
-        <Policies>
-          <TextStylePolicy FileWidth="80" TabWidth="4" TabsToSpaces="True" IndentWidth="4" RemoveTrailingWhitespace="True" NoTabsAfterNonTabs="False" EolMarker="Native" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="text/x-csharp" />
-          <CSharpFormattingPolicy IndentBlock="True" IndentBraces="False" IndentSwitchCaseSection="True" LabelPositioning="OneLess" NewLinesForBracesInTypes="True" NewLinesForBracesInMethods="True" SpaceWithinMethodDeclarationParenthesis="False" SpaceBetweenEmptyMethodDeclarationParentheses="False" SpaceWithinMethodCallParentheses="False" SpaceBetweenEmptyMethodCallParentheses="False" SpaceAfterControlFlowStatementKeyword="True" SpaceWithinExpressionParentheses="False" SpaceWithinCastParentheses="False" SpaceWithinOtherParentheses="False" SpaceAfterCast="False" SpacesIgnoreAroundVariableDeclaration="False" SpaceBetweenEmptySquareBrackets="False" SpaceWithinSquareBrackets="False" SpaceAfterColonInBaseTypeDeclaration="True" SpaceAfterComma="True" SpaceAfterDot="False" SpaceAfterSemicolonsInForStatement="True" SpaceBeforeColonInBaseTypeDeclaration="True" SpaceBeforeComma="False" SpaceBeforeDot="False" SpaceBeforeSemicolonsInForStatement="False" SpacingAroundBinaryOperator="Single" WrappingPreserveSingleLine="True" WrappingKeepStatementsOnSingleLine="True" PlaceSystemDirectiveFirst="True" IndentSwitchSection="True" NewLinesForBracesInProperties="True" NewLinesForBracesInAccessors="True" NewLinesForBracesInAnonymousMethods="True" NewLinesForBracesInControlBlocks="True" NewLinesForBracesInAnonymousTypes="True" NewLinesForBracesInObjectCollectionArrayInitializers="True" NewLinesForBracesInLambdaExpressionBody="True" NewLineForElse="True" NewLineForCatch="True" NewLineForFinally="True" NewLineForMembersInObjectInit="True" NewLineForMembersInAnonymousTypes="True" NewLineForClausesInQuery="True" SpacingAfterMethodDeclarationName="False" SpaceAfterMethodCallName="False" SpaceBeforeOpenSquareBracket="False" inheritsSet="Mono" inheritsScope="text/x-csharp" scope="text/x-csharp" />
-          <TextStylePolicy FileWidth="80" TabWidth="4" TabsToSpaces="True" IndentWidth="4" RemoveTrailingWhitespace="True" NoTabsAfterNonTabs="False" EolMarker="Native" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="application/xaml+xml" />
-          <XmlFormattingPolicy inheritsSet="Mono" inheritsScope="application/xml" scope="application/xaml+xml">
-            <DefaultFormat OmitXmlDeclaration="False" NewLineChars="&#xA;" IndentContent="True" ContentIndentString="	" AttributesInNewLine="False" MaxAttributesPerLine="10" AttributesIndentString="	" WrapAttributes="False" AlignAttributes="False" AlignAttributeValues="False" QuoteChar="&quot;" SpacesBeforeAssignment="0" SpacesAfterAssignment="0" EmptyLinesBeforeStart="0" EmptyLinesAfterStart="0" EmptyLinesBeforeEnd="0" EmptyLinesAfterEnd="0" />
-          </XmlFormattingPolicy>
-          <TextStylePolicy FileWidth="80" TabWidth="4" TabsToSpaces="True" IndentWidth="4" RemoveTrailingWhitespace="True" NoTabsAfterNonTabs="False" EolMarker="Native" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="application/xml" />
-          <XmlFormattingPolicy inheritsSet="Mono" inheritsScope="application/xml" scope="application/xml">
-            <DefaultFormat OmitXmlDeclaration="False" NewLineChars="&#xA;" IndentContent="True" ContentIndentString="	" AttributesInNewLine="False" MaxAttributesPerLine="10" AttributesIndentString="	" WrapAttributes="False" AlignAttributes="False" AlignAttributeValues="False" QuoteChar="&quot;" SpacesBeforeAssignment="0" SpacesAfterAssignment="0" EmptyLinesBeforeStart="0" EmptyLinesAfterStart="0" EmptyLinesBeforeEnd="0" EmptyLinesAfterEnd="0" />
-          </XmlFormattingPolicy>
-        </Policies>
-      </Properties>
-    </MonoDevelop>
-  </ProjectExtensions>
-  <PropertyGroup Condition=" '$(OS)' == 'Windows_NT' ">
-    <PreBuildEvent>if not exist "$(ProjectDir)Secrets.cs" copy "$(ProjectDir)Secrets_sample.cs" "$(ProjectDir)Secrets.cs" &gt;nul</PreBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(OS)' != 'Windows_NT' ">
-    <PreBuildEvent>rsync -u "$(ProjectDir)Secrets_sample.cs" "$(ProjectDir)Secrets.cs"</PreBuildEvent>
-  </PropertyGroup>
 </Project>

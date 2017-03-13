@@ -209,10 +209,6 @@
       <Project>{314e768e-d62d-4b16-8780-5144540a0c4e}</Project>
       <Name>BlueMonkey.ViewModels</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BlueMonkey\BlueMonkey.csproj">
-      <Project>{3fd586f1-4a0f-448d-918b-5f83e1b2449c}</Project>
-      <Name>BlueMonkey</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
