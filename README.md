@@ -17,3 +17,4 @@ In this model, createAt, updateAt, version is omitted.
 - Infragistics
 - Microsoft
 - [FUJITSU ADVANCED ENGINEERING LIMITED](http://www.fujitsu.com/jp/group/fae/)
+- [RICOH JAPAN Corp.](http://www.ricoh.co.jp/sales/about/)
