@@ -125,6 +125,36 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\Airplane.png" />
+    <Content Include="Images\Back.png" />
+    <Content Include="Images\book.png" />
+    <Content Include="Images\briefcase.png" />
+    <Content Include="Images\Bus.png" />
+    <Content Include="Images\Calendar_new.png" />
+    <Content Include="Images\Camera.png" />
+    <Content Include="Images\CameraOK.png" />
+    <Content Include="Images\Chart MainMenu.png" />
+    <Content Include="Images\Chart OK Copy 2.png" />
+    <Content Include="Images\Chart OK Copy 4.png" />
+    <Content Include="Images\Chart OK Copy 6.png" />
+    <Content Include="Images\Chart.png" />
+    <Content Include="Images\computer.png" />
+    <Content Include="Images\EmperorTamarin.png" />
+    <Content Include="Images\EmptyCategory Copy.png" />
+    <Content Include="Images\Entertainment.png" />
+    <Content Include="Images\Food.png" />
+    <Content Include="Images\Iris.png" />
+    <Content Include="Images\Location Copy.png" />
+    <Content Include="Images\lodging.png" />
+    <Content Include="Images\Next.png" />
+    <Content Include="Images\Note Copy.png" />
+    <Content Include="Images\Pencil Copy.png" />
+    <Content Include="Images\Plus.png" />
+    <Content Include="Images\Price Copy.png" />
+    <Content Include="Images\Subscription Copy.png" />
+    <Content Include="Images\Taxi.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
