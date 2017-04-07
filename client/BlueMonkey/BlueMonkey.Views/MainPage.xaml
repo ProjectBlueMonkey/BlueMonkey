@@ -5,11 +5,37 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BlueMonkey.Views.MainPage"
              Title="Blue Monkey">
-    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-        <Label Text="LOGO" />
-        <Button Text="Add Expense" Command="{Binding NavigateCommand}" CommandParameter="AddExpensePage" Style="{StaticResource HomeButtonStyle}"/>
-        <Button Text="Expense List" Command="{Binding NavigateCommand}" CommandParameter="ExpenseListPage" Style="{StaticResource HomeButtonStyle}"/>
-        <Button Text="Report List" Command="{Binding NavigateCommand}" CommandParameter="ReportListPage" Style="{StaticResource HomeButtonStyle}"/>
-        <Button Text="Chart" Command="{Binding NavigateCommand}" CommandParameter="ChartPage" Style="{StaticResource HomeButtonStyle}"/>
-    </StackLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!--HomeButton Style-->
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="Large" />
+                <!--<Setter Property="FontFamily" Value="{StaticResource RalewayRegular}" />-->
+                <Setter Property="TextColor" Value="{StaticResource ButtonTextColor}" />
+                <Setter Property="BackgroundColor" Value="#EEF8FF" />
+                <Setter Property="BorderColor" Value="#E1F3FF" />
+                <Setter Property="BorderWidth" Value="1" />
+                <Setter Property="BorderRadius" Value="5" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="WidthRequest" Value="250" />
+                <Setter Property="HeightRequest" Value="60" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0" Source="EmperorTamarin.png"/>
+        <Button Grid.Row="1" Text="Add Expense" Image="Plus.png" Command="{Binding NavigateCommand}" CommandParameter="AddExpensePage"/>
+        <Button Grid.Row="2" Text="Expense List" Image="PriceCopy.png" Command="{Binding NavigateCommand}" CommandParameter="ExpenseListPage"/>
+        <Button Grid.Row="3" Text="Report List" Image="ChartMainMenu.png" Command="{Binding NavigateCommand}" CommandParameter="ReportListPage"/>
+        <Button Grid.Row="4" Text="Chart" Image="Chart.png" Command="{Binding NavigateCommand}" CommandParameter="ChartPage"/>
+    </Grid>
 </ContentPage>
