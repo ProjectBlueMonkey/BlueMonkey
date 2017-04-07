@@ -57,8 +57,10 @@ namespace BlueMonkey.ViewModels
         /// </summary>
         private void NavigateReportPage(string reportId)
         {
-            var navigationParameter = new NavigationParameters();
-            navigationParameter[ReportPageViewModel.ReportIdKey] = reportId;
+            var navigationParameter = new NavigationParameters
+            {
+                { ReportPageViewModel.ReportIdKey, reportId }
+            };
             _navigationService.NavigateAsync("ReportPage", navigationParameter);
         }
 

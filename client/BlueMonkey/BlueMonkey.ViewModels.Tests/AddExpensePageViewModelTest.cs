@@ -250,8 +250,10 @@ namespace BlueMonkey.ViewModels.Tests
             var editExpense = new Mock<IEditExpense>();
             var actual = new AddExpensePageViewModel(navigationService.Object, editExpense.Object);
 
-            var navigationParameters = new NavigationParameters();
-            navigationParameters[AddExpensePageViewModel.ExpenseIdKey] = "expenseId";
+            var navigationParameters = new NavigationParameters
+            {
+                { AddExpensePageViewModel.ExpenseIdKey, "expenseId" }
+            };
             actual.OnNavigatingTo(navigationParameters);
 
             editExpense.Verify(m => m.InitializeAsync("expenseId"), Times.Once);
