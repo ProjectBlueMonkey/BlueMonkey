@@ -32,7 +32,7 @@ namespace BlueMonkey.Application
 #if AZURE
             NavigationService.NavigateAsync("LoginPage");
 #else
-            NavigationService.NavigateAsync("NavigationPage/MainPage");
+            NavigationService.NavigateAsync("MainPage");
 #endif
         }
 

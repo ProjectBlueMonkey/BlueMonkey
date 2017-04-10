@@ -32,19 +32,6 @@
         <Setter Property="FontSize" Value="Large" />
       </Style>
 
-      <!--HomeButton Style-->
-      <Style x:Key="HomeButtonStyle" TargetType="Button">
-        <Setter Property="FontSize" Value="Large" />
-        <!--<Setter Property="FontFamily" Value="{StaticResource RalewayRegular}" />-->
-        <Setter Property="TextColor" Value="{StaticResource ButtonTextColor}" />
-        <Setter Property="BackgroundColor" Value="#EEF8FF" />
-        <Setter Property="BorderColor" Value="#E1F3FF" />
-        <Setter Property="BorderWidth" Value="1" />
-        <Setter Property="BorderRadius" Value="5" />
-        <Setter Property="WidthRequest" Value="400" />
-        <Setter Property="HeightRequest" Value="70" />
-      </Style>
-
       <!--ListView Style-->
       <Style x:Key="ListViewStyle" TargetType="ListView">
         <Setter Property="BackgroundColor" Value="#FAFAFA" />
