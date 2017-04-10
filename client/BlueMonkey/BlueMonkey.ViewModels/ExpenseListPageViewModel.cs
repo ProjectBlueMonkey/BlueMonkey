@@ -54,8 +54,10 @@ namespace BlueMonkey.ViewModels
 
         private void UpdateExpense(Expense expense)
         {
-            var navigationParameters = new NavigationParameters();
-            navigationParameters[AddExpensePageViewModel.ExpenseIdKey] = expense.Id;
+            var navigationParameters = new NavigationParameters
+            {
+                { AddExpensePageViewModel.ExpenseIdKey, expense.Id }
+            };
             _navigationService.NavigateAsync("AddExpensePage", navigationParameters);
         }
 
