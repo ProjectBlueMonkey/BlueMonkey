@@ -228,6 +228,15 @@
     </Reference>
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\EmperorTamarin%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\EmperorTamarin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\EmperorTamarin%402x.png" />
+  </ItemGroup>
   <Import Project="..\BlueMonkey.ExpenseServices.Azure.Shared\BlueMonkey.ExpenseServices.Azure.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
