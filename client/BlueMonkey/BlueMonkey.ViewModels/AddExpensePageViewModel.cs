@@ -67,9 +67,14 @@ namespace BlueMonkey.ViewModels
         public ReactiveProperty<int> SelectedCategoryIndex { get; }
 
         /// <summary>
+        /// Command to Cancel.
+        /// </summary>
+        public AsyncReactiveCommand CancelCommand { get; }
+
+        /// <summary>
         /// command to save the expense.
         /// </summary>
-        public AsyncReactiveCommand SaveAsyncCommand { get; }
+        public AsyncReactiveCommand SaveCommand { get; }
 
         /// <summary>
         /// Command to navigate receipt page.
@@ -129,10 +134,16 @@ namespace BlueMonkey.ViewModels
                 }
             });
 
-            SaveAsyncCommand =
+            SaveCommand =
                 Location.Select(x => !string.IsNullOrWhiteSpace(x))
                 .ToAsyncReactiveCommand().AddTo(Disposable);
-            SaveAsyncCommand.Subscribe(SaveAsync);
+            SaveCommand.Subscribe(OnSaveAsync);
+
+            CancelCommand = new AsyncReactiveCommand();
+            CancelCommand.Subscribe(x =>
+            {
+                return _navigationService.GoBackAsync(useModalNavigation:true);
+            });
 
             NavigateReceiptPageCommand = new ReactiveCommand();
             NavigateReceiptPageCommand.Subscribe(_ => _navigationService.NavigateAsync("ReceiptPage"));
@@ -143,10 +154,10 @@ namespace BlueMonkey.ViewModels
         /// </summary>
         /// <param name="sender"></param>
         /// <returns></returns>
-        private async Task SaveAsync(object sender)
+        private async Task OnSaveAsync(object sender)
         {
             await _editExpense.SaveAsync();
-            await _navigationService.GoBackAsync();
+            await _navigationService.GoBackAsync(useModalNavigation: true);
         }
 
         /// <summary>
