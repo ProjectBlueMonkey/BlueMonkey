@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using BlueMonkey.MediaServices;
 using BlueMonkey.Usecases;
 using Moq;
 using Prism.Navigation;
@@ -9,6 +10,26 @@ namespace BlueMonkey.ViewModels.Tests
 {
     public class AddExpensePageViewModelTest
     {
+        [Fact]
+        public void HasReceiptProperty()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var editExpense = new Mock<IEditExpense>();
+
+            var actual = new AddExpensePageViewModel(navigationService.Object, editExpense.Object);
+
+            Assert.NotNull(actual.HasReceipt);
+            Assert.False(actual.HasReceipt.Value);
+
+            // Model -> ViewModel
+            var media = new Mock<IMediaFile>();
+            editExpense.NotifyPropertyChanged(m => m.Receipt, media.Object);
+            Assert.True(actual.HasReceipt.Value);
+
+            // Destroy
+            // ...
+        }
+
         [Fact]
         public void AmountProperty()
         {

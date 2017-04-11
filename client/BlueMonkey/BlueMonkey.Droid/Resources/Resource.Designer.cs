@@ -4976,6 +4976,12 @@ namespace BlueMonkey.Droid
 			// aapt resource value: 0x7f0a0174
 			public const int AppCompatDialogStyle = 2131362164;
 			
+			// aapt resource value: 0x7f0a0175
+			public const int AppEditTextStyle = 2131362165;
+			
+			// aapt resource value: 0x7f0a0176
+			public const int AppTextAppearanceStyle = 2131362166;
+			
 			// aapt resource value: 0x7f0a00a5
 			public const int Base_AlertDialog_AppCompat = 2131361957;
 			

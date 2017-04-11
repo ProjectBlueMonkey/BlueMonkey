@@ -2,35 +2,54 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:controls1="clr-namespace:BlueMonkey.Views.Controls;assembly=BlueMonkey.Views"
+             xmlns:controls="clr-namespace:BlueMonkey.Views.Controls;assembly=BlueMonkey.Views"
+             xmlns:converters="clr-namespace:BlueMonkey.Views.Converters;assembly=BlueMonkey.Views"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="BlueMonkey.Views.AddExpensePage" Title="Expense">
+             x:Class="BlueMonkey.Views.AddExpensePage" Title="Add Expense">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ReceiptStatusImageConverter x:Key="ReceiptStatusImageConverter"/>
+            <converters:ReceiptStatusLabelConverter x:Key="ReceiptStatusLabelConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="✖" Command="{Binding CancelCommand}"/>
         <ToolbarItem Text="✔" Command="{Binding SaveCommand}"/>
     </ContentPage.ToolbarItems>
 
-    <Grid>
+    <Grid Margin="20">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackLayout Grid.Row="0" HorizontalOptions="Fill" VerticalOptions="Start" Padding="10">
-            <Button Text="Receipt" Command="{Binding NavigateReceiptPageCommand}" />
-            <Label Text="Location"/>
-            <Entry Text="{Binding Location.Value}" HorizontalOptions="Fill"/>
-            <Label Text="Category" HorizontalOptions="Start"/>
-            <controls1:BindablePicker Title="Category" ItemsSource="{Binding Categories.Value}" SelectedIndex="{Binding SelectedCategoryIndex.Value}"/>
-            <Label Text="Amount" HorizontalOptions="Start"/>
-            <Entry Text="{Binding Amount.Value}" HorizontalOptions="Fill" HorizontalTextAlignment="End"/>
-            <Label Text="Date"/>
-            <DatePicker Date="{Binding Date.Value}"/>
-            <Label Text="Note"/>
-        </StackLayout>
-        <Grid Grid.Row="1" Padding="10">
-            <Editor Text="{Binding Note.Value}" HorizontalOptions="Fill"/>
-        </Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Image Grid.Row="0" Grid.Column="0" Source="{Binding HasReceipt.Value, Converter={StaticResource ReceiptStatusImageConverter}}" />
+        <controls:FlatButton 
+            Grid.Row="0" Grid.Column="2"
+            Text="{Binding HasReceipt.Value, Converter={StaticResource ReceiptStatusLabelConverter}}" Command="{Binding NavigateReceiptPageCommand}"/>
+        <Image Grid.Row="1" Grid.Column="0" Source="EmptyCategoryCopy" />
+        <controls:BindablePicker 
+            Grid.Row="1" Grid.Column="2"
+            Title="Category" 
+            ItemsSource="{Binding Categories.Value}" 
+            SelectedIndex="{Binding SelectedCategoryIndex.Value}"/>
+        <Image Grid.Row="2" Grid.Column="0" Source="PriceCopy"/>
+        <Entry Grid.Row="2" Grid.Column="2" Text="{Binding Amount.Value}" Keyboard="Numeric" HorizontalOptions="Fill" HorizontalTextAlignment="End"/>
+        <Image Grid.Row="3" Grid.Column="0" Source="Calendar_new"/>
+        <DatePicker Grid.Row="3" Grid.Column="2" Date="{Binding Date.Value}"/>
+        <Image Grid.Row="4" Grid.Column="0" Source="LocationCopy"/>
+        <Entry Grid.Row="4" Grid.Column="2" Text="{Binding Location.Value}" Placeholder="Payee" HorizontalOptions="Fill"/>
+        <Image Grid.Row="5" Grid.Column="0" VerticalOptions="Start" Source="NoteCopy"/>
+        <Editor Grid.Row="5" Grid.Column="2" Text="{Binding Note.Value}" HorizontalOptions="Fill"/>
     </Grid>
 
 </ContentPage>

@@ -37,6 +37,11 @@ namespace BlueMonkey.ViewModels
         private CompositeDisposable Disposable { get; } = new CompositeDisposable();
 
         /// <summary>
+        /// Expense has Receipt.
+        /// </summary>
+        public ReadOnlyReactiveProperty<bool> HasReceipt { get; }
+
+        /// <summary>
         /// Amount of Expense
         /// </summary>
         public ReactiveProperty<long> Amount { get; }
@@ -92,6 +97,10 @@ namespace BlueMonkey.ViewModels
             _editExpense = editExpense;
             _editExpense.AddTo(Disposable);
 
+            HasReceipt = _editExpense.ObserveProperty(x => x.Receipt)
+                .Select(x => x != null)
+                .ToReadOnlyReactiveProperty()
+                .AddTo(Disposable);
             Amount = _editExpense.ToReactivePropertyAsSynchronized(x => x.Amount).AddTo(Disposable);
             Date = _editExpense.ToReactivePropertyAsSynchronized(x => x.Date).AddTo(Disposable);
             Location = _editExpense.ToReactivePropertyAsSynchronized(x => x.Location).AddTo(Disposable);
@@ -140,10 +149,7 @@ namespace BlueMonkey.ViewModels
             SaveCommand.Subscribe(OnSaveAsync);
 
             CancelCommand = new AsyncReactiveCommand();
-            CancelCommand.Subscribe(x =>
-            {
-                return _navigationService.GoBackAsync(useModalNavigation:true);
-            });
+            CancelCommand.Subscribe(x => _navigationService.GoBackAsync(useModalNavigation:true));
 
             NavigateReceiptPageCommand = new ReactiveCommand();
             NavigateReceiptPageCommand.Subscribe(_ => _navigationService.NavigateAsync("ReceiptPage"));
