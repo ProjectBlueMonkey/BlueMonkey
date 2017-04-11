@@ -184,6 +184,7 @@
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainApplication.cs" />
+    <Compile Include="Renderers\FlatButtonRenderer.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -213,7 +214,9 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Properties\AndroidManifest.xml" />
+    <Content Include="Properties\AndroidManifest.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <AndroidResource Include="Resources\drawable\Airplane.png" />
     <AndroidResource Include="Resources\drawable\Back.png" />
     <AndroidResource Include="Resources\drawable\book.png" />
@@ -347,6 +350,10 @@
     <ProjectReference Include="..\BlueMonkey.MediaServices\BlueMonkey.MediaServices.csproj">
       <Project>{fb4e448d-e4d9-4839-928b-09ae414c5640}</Project>
       <Name>BlueMonkey.MediaServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlueMonkey.Views\BlueMonkey.Views.csproj">
+      <Project>{8b1b81ad-b948-4edb-94f5-e6c60df89e51}</Project>
+      <Name>BlueMonkey.Views</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\BlueMonkey.ExpenseServices.Azure.Shared\BlueMonkey.ExpenseServices.Azure.Shared.projitems" Label="Shared" />

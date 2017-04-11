@@ -12,7 +12,8 @@
     <item name="android:colorFocusedHighlight">@color/ListViewSelected</item>
     <item name="android:colorActivatedHighlight">@color/ListViewSelected</item>
     <item name="android:activatedBackgroundIndicator">@color/ListViewSelected</item>
-
+    <item name="android:editTextBackground">@color/window_background</item>
+    <item name="editTextBackground">@color/window_background</item>
 
     <item name="windowNoTitle">true</item>
     <!--We will be using the toolbar so no need to show ActionBar-->
@@ -30,10 +31,21 @@
     <item name="windowActionModeOverlay">true</item>
     <item name="android:windowBackground">@color/window_background</item>
     <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+    <item name="android:editTextStyle">@style/AppEditTextStyle</item>
+    <item name="android:textAppearanceButton">@style/AppTextAppearanceStyle</item>
   </style>
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">#3498db</item>
+  </style>
+
+  <style name="AppEditTextStyle" parent="Widget.AppCompat.EditText">
+    <item name="android:padding">10dp</item>
+  </style>
+
+  <style name="AppTextAppearanceStyle" parent="@android:style/TextAppearance.Material.Button">
+    <item name="textAllCaps">false</item>
+    <item name="android:textAllCaps">false</item>
   </style>
 
   <color name="primary">#3498db</color>
@@ -42,4 +54,5 @@
   <color name="window_background">#F5F5F5</color>
   <color name="ListViewSelected">#edf8ff</color>
   <color name="ListViewHighlighted">#edf8ff</color>
+
 </resources>

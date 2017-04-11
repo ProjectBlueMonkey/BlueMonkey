@@ -2,16 +2,26 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:controls="clr-namespace:BlueMonkey.Views.Controls;assembly=BlueMonkey.Views"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BlueMonkey.Views.ReceiptPage" Title="Receipt">
-  <Grid>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="*"/>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="Auto"/>
-    </Grid.RowDefinitions>
-    <Image Source="{Binding Receipt.Value}"/>
-    <Button Grid.Row="1" Text="Pick Photo" Command="{Binding PickPhotoAsyncCommand}"/>
-    <Button Grid.Row="2" Text="Take Photo" Command="{Binding TakePhotoAsyncCommand}"/>
-  </Grid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Image Source="{Binding Receipt.Value}"/>
+        <Grid Grid.Row="1" HorizontalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <controls:FlatButton Grid.Row="0" HorizontalOptions="Start"
+                                 Text="Attach via Camera" Image="Camera" 
+                                 Command="{Binding TakePhotoAsyncCommand}"/>
+            <controls:FlatButton Grid.Row="1" HorizontalOptions="Center"
+                                 Text="Attach via Photo Album" Image="Iris" 
+                                 Command="{Binding PickPhotoAsyncCommand}"/>
+        </Grid>
+    </Grid>
 </ContentPage>

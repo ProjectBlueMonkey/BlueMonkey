@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using BlueMonkey.MediaServices;
 using BlueMonkey.Usecases;
 using Moq;
 using Prism.Navigation;
@@ -9,6 +10,26 @@ namespace BlueMonkey.ViewModels.Tests
 {
     public class AddExpensePageViewModelTest
     {
+        [Fact]
+        public void HasReceiptProperty()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var editExpense = new Mock<IEditExpense>();
+
+            var actual = new AddExpensePageViewModel(navigationService.Object, editExpense.Object);
+
+            Assert.NotNull(actual.HasReceipt);
+            Assert.False(actual.HasReceipt.Value);
+
+            // Model -> ViewModel
+            var media = new Mock<IMediaFile>();
+            editExpense.NotifyPropertyChanged(m => m.Receipt, media.Object);
+            Assert.True(actual.HasReceipt.Value);
+
+            // Destroy
+            // ...
+        }
+
         [Fact]
         public void AmountProperty()
         {
@@ -174,7 +195,24 @@ namespace BlueMonkey.ViewModels.Tests
         }
 
         [Fact]
-        public void SaveAsyncCommand()
+        public void CancenCommand()
+        {
+            var navigationService = new Mock<INavigationService>();
+            var editExpense = new Mock<IEditExpense>();
+
+            var actual = new AddExpensePageViewModel(navigationService.Object, editExpense.Object);
+
+            Assert.NotNull(actual.CancelCommand);
+            Assert.True(actual.CancelCommand.CanExecute());
+
+            actual.CancelCommand.Execute();
+            editExpense.Verify(m => m.SaveAsync(), Times.Never);
+            navigationService.Verify(m => m.GoBackAsync(null, true, true), Times.Once);
+
+        }
+
+        [Fact]
+        public void SaveCommand()
         {
             var navigationService = new Mock<INavigationService>();
             var editExpense = new Mock<IEditExpense>();
@@ -183,20 +221,20 @@ namespace BlueMonkey.ViewModels.Tests
 
             var actual = new AddExpensePageViewModel(navigationService.Object, editExpense.Object);
 
-            Assert.NotNull(actual.SaveAsyncCommand);
-            Assert.True(actual.SaveAsyncCommand.CanExecute());
+            Assert.NotNull(actual.SaveCommand);
+            Assert.True(actual.SaveCommand.CanExecute());
 
-            actual.SaveAsyncCommand.Execute();
+            actual.SaveCommand.Execute();
             editExpense.Verify(m => m.SaveAsync(), Times.Once);
-            navigationService.Verify(m => m.GoBackAsync(null, null, true), Times.Once);
+            navigationService.Verify(m => m.GoBackAsync(null, true, true), Times.Once);
 
             editExpense.NotifyPropertyChanged(m => m.Location, null);
-            Assert.False(actual.SaveAsyncCommand.CanExecute());
+            Assert.False(actual.SaveCommand.CanExecute());
 
             // Destroy
             actual.Destroy();
             editExpense.NotifyPropertyChanged(m => m.Location, "Location");
-            Assert.False(actual.SaveAsyncCommand.CanExecute());
+            Assert.False(actual.SaveCommand.CanExecute());
         }
 
         [Fact]

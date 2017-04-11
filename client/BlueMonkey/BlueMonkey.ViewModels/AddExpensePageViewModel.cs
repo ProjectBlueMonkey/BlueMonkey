@@ -37,6 +37,11 @@ namespace BlueMonkey.ViewModels
         private CompositeDisposable Disposable { get; } = new CompositeDisposable();
 
         /// <summary>
+        /// Expense has Receipt.
+        /// </summary>
+        public ReadOnlyReactiveProperty<bool> HasReceipt { get; }
+
+        /// <summary>
         /// Amount of Expense
         /// </summary>
         public ReactiveProperty<long> Amount { get; }
@@ -67,9 +72,14 @@ namespace BlueMonkey.ViewModels
         public ReactiveProperty<int> SelectedCategoryIndex { get; }
 
         /// <summary>
+        /// Command to Cancel.
+        /// </summary>
+        public AsyncReactiveCommand CancelCommand { get; }
+
+        /// <summary>
         /// command to save the expense.
         /// </summary>
-        public AsyncReactiveCommand SaveAsyncCommand { get; }
+        public AsyncReactiveCommand SaveCommand { get; }
 
         /// <summary>
         /// Command to navigate receipt page.
@@ -87,6 +97,10 @@ namespace BlueMonkey.ViewModels
             _editExpense = editExpense;
             _editExpense.AddTo(Disposable);
 
+            HasReceipt = _editExpense.ObserveProperty(x => x.Receipt)
+                .Select(x => x != null)
+                .ToReadOnlyReactiveProperty()
+                .AddTo(Disposable);
             Amount = _editExpense.ToReactivePropertyAsSynchronized(x => x.Amount).AddTo(Disposable);
             Date = _editExpense.ToReactivePropertyAsSynchronized(x => x.Date).AddTo(Disposable);
             Location = _editExpense.ToReactivePropertyAsSynchronized(x => x.Location).AddTo(Disposable);
@@ -129,10 +143,13 @@ namespace BlueMonkey.ViewModels
                 }
             });
 
-            SaveAsyncCommand =
+            SaveCommand =
                 Location.Select(x => !string.IsNullOrWhiteSpace(x))
                 .ToAsyncReactiveCommand().AddTo(Disposable);
-            SaveAsyncCommand.Subscribe(SaveAsync);
+            SaveCommand.Subscribe(OnSaveAsync);
+
+            CancelCommand = new AsyncReactiveCommand();
+            CancelCommand.Subscribe(x => _navigationService.GoBackAsync(useModalNavigation:true));
 
             NavigateReceiptPageCommand = new ReactiveCommand();
             NavigateReceiptPageCommand.Subscribe(_ => _navigationService.NavigateAsync("ReceiptPage"));
@@ -143,10 +160,10 @@ namespace BlueMonkey.ViewModels
         /// </summary>
         /// <param name="sender"></param>
         /// <returns></returns>
-        private async Task SaveAsync(object sender)
+        private async Task OnSaveAsync(object sender)
         {
             await _editExpense.SaveAsync();
-            await _navigationService.GoBackAsync();
+            await _navigationService.GoBackAsync(useModalNavigation: true);
         }
 
         /// <summary>
