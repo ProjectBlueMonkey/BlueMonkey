@@ -10,7 +10,7 @@ namespace BlueMonkey.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IReferReport _referReport;
-        public ReadOnlyReactiveCollection<Report> Reports { get; }
+        public ReadOnlyReactiveCollection<ReportSummary> ReportSummaries { get; }
         /// <summary>
         /// Add New Report Navigation Command.
         /// </summary>
@@ -27,7 +27,7 @@ namespace BlueMonkey.ViewModels
         {
             _navigationService = navigationService;
             _referReport = referReport;
-            Reports = _referReport.Reports.ToReadOnlyReactiveCollection();
+            ReportSummaries = _referReport.ReportSummaries.ToReadOnlyReactiveCollection();
 
             AddReportCommand = new ReactiveCommand();
             AddReportCommand.Subscribe(_ => AddReport());

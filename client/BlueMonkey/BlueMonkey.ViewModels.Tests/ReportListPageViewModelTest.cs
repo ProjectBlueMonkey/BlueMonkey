@@ -16,13 +16,13 @@ namespace BlueMonkey.ViewModels.Tests
             var navigationService = new Mock<INavigationService>();
             var referReport = new Mock<IReferReport>();
             referReport
-                .Setup(m => m.Reports)
-                .Returns(new ReadOnlyObservableCollection<Report>(new ObservableCollection<Report>()));
+                .Setup(m => m.ReportSummaries)
+                .Returns(new ReadOnlyObservableCollection<ReportSummary>(new ObservableCollection<ReportSummary>()));
 
             var actual = new ReportListPageViewModel(navigationService.Object, referReport.Object);
 
-            Assert.NotNull(actual.Reports);
-            Assert.Equal(0, actual.Reports.Count);
+            Assert.NotNull(actual.ReportSummaries);
+            Assert.Equal(0, actual.ReportSummaries.Count);
 
             Assert.NotNull(actual.AddReportCommand);
             Assert.True(actual.AddReportCommand.CanExecute());
@@ -34,21 +34,21 @@ namespace BlueMonkey.ViewModels.Tests
             ReactivePropertyScheduler.SetDefault(CurrentThreadScheduler.Instance);
             var navigationService = new Mock<INavigationService>();
             var referReport = new Mock<IReferReport>();
-            var reports = new ObservableCollection<Report>();
-            var readOnlyReports = new ReadOnlyObservableCollection<Report>(reports);
+            var reportSummaries = new ObservableCollection<ReportSummary>();
+            var readOnlyReportSummaries = new ReadOnlyObservableCollection<ReportSummary>(reportSummaries);
             referReport
-                .Setup(m => m.Reports)
-                .Returns(readOnlyReports);
+                .Setup(m => m.ReportSummaries)
+                .Returns(readOnlyReportSummaries);
 
             var actual = new ReportListPageViewModel(navigationService.Object, referReport.Object);
 
-            Assert.Equal(0, actual.Reports.Count);
+            Assert.Equal(0, actual.ReportSummaries.Count);
 
-            var report = new Report();
-            reports.Add(report);
+            var reportSummary = new ReportSummary();
+            reportSummaries.Add(reportSummary);
 
-            Assert.Equal(1, actual.Reports.Count);
-            Assert.Equal(report, actual.Reports[0]);
+            Assert.Equal(1, actual.ReportSummaries.Count);
+            Assert.Equal(reportSummary, actual.ReportSummaries[0]);
         }
 
         [Fact]
@@ -57,8 +57,8 @@ namespace BlueMonkey.ViewModels.Tests
             var navigationService = new Mock<INavigationService>();
             var referReport = new Mock<IReferReport>();
             referReport
-                .Setup(m => m.Reports)
-                .Returns(new ReadOnlyObservableCollection<Report>(new ObservableCollection<Report>()));
+                .Setup(m => m.ReportSummaries)
+                .Returns(new ReadOnlyObservableCollection<ReportSummary>(new ObservableCollection<ReportSummary>()));
 
             var actual = new ReportListPageViewModel(navigationService.Object, referReport.Object);
 
@@ -84,8 +84,8 @@ namespace BlueMonkey.ViewModels.Tests
             var navigationService = new Mock<INavigationService>();
             var referReport = new Mock<IReferReport>();
             referReport
-                .Setup(m => m.Reports)
-                .Returns(new ReadOnlyObservableCollection<Report>(new ObservableCollection<Report>()));
+                .Setup(m => m.ReportSummaries)
+                .Returns(new ReadOnlyObservableCollection<ReportSummary>(new ObservableCollection<ReportSummary>()));
 
             var actual = new ReportListPageViewModel(navigationService.Object, referReport.Object);
 
@@ -112,8 +112,8 @@ namespace BlueMonkey.ViewModels.Tests
             var navigationService = new Mock<INavigationService>();
             var referReport = new Mock<IReferReport>();
             referReport
-                .Setup(m => m.Reports)
-                .Returns(new ReadOnlyObservableCollection<Report>(new ObservableCollection<Report>()));
+                .Setup(m => m.ReportSummaries)
+                .Returns(new ReadOnlyObservableCollection<ReportSummary>(new ObservableCollection<ReportSummary>()));
 
             var actual = new ReportListPageViewModel(navigationService.Object, referReport.Object);
 
@@ -127,8 +127,8 @@ namespace BlueMonkey.ViewModels.Tests
             var navigationService = new Mock<INavigationService>();
             var referReport = new Mock<IReferReport>();
             referReport
-                .Setup(m => m.Reports)
-                .Returns(new ReadOnlyObservableCollection<Report>(new ObservableCollection<Report>()));
+                .Setup(m => m.ReportSummaries)
+                .Returns(new ReadOnlyObservableCollection<ReportSummary>(new ObservableCollection<ReportSummary>()));
 
             var actual = new ReportListPageViewModel(navigationService.Object, referReport.Object);
 
@@ -143,8 +143,8 @@ namespace BlueMonkey.ViewModels.Tests
             var navigationService = new Mock<INavigationService>();
             var referReport = new Mock<IReferReport>();
             referReport
-                .Setup(m => m.Reports)
-                .Returns(new ReadOnlyObservableCollection<Report>(new ObservableCollection<Report>()));
+                .Setup(m => m.ReportSummaries)
+                .Returns(new ReadOnlyObservableCollection<ReportSummary>(new ObservableCollection<ReportSummary>()));
 
             var actual = new ReportListPageViewModel(navigationService.Object, referReport.Object);
 

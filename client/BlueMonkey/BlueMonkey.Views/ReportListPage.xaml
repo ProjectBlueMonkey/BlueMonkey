@@ -9,7 +9,7 @@
   <ContentPage.ToolbarItems>
     <ToolbarItem Text="+" Command="{Binding AddReportCommand}"/>
   </ContentPage.ToolbarItems>
-  <ListView ItemsSource="{Binding Reports}">
+    <ListView ItemsSource="{Binding ReportSummaries}">
     <ListView.Behaviors>
       <behaviors:ItemSelectedToCommandBehavior Command="{Binding UpdateReportCommand}"/>
     </ListView.Behaviors>
