@@ -8,7 +8,7 @@ namespace BlueMonkey.Usecases
     /// </summary>
     public interface IReferReport
     {
-        ReadOnlyObservableCollection<Report> Reports { get; }
+        ReadOnlyObservableCollection<ReportSummary> ReportSummaries { get; }
 
         Task SearchAsync();
     }
