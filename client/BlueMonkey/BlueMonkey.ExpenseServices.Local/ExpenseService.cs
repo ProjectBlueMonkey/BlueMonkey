@@ -74,9 +74,24 @@ namespace BlueMonkey.ExpenseServices.Local
             return Task.FromResult(_expenses.Where(expense => expense.ReportId == null));
         }
 
-        public Task<IEnumerable<Report>> GetReportsAsync()
+        public Task<IEnumerable<ReportSummary>> GetReportSummariesAsync()
         {
-            return Task.FromResult(_reports.AsEnumerable());
+            var reportSummaries =
+                _reports
+                    .Join(_expenses, report => report.Id, expense => expense.ReportId, (report, expense) => new {report, expense})
+                    .GroupBy(g => new
+                    {
+                        ReportId = g.report.Id,
+                    })
+                    .Select(x => new ReportSummary
+                    {
+                        Id = x.First().report.Id,
+                        Name = x.First().report.Name,
+                        Date = x.First().report.Date,
+                        UserId = x.First().report.UserId,
+                        TotalAmount = x.Sum(sum => sum.expense.Amount)
+                    });
+            return Task.FromResult(reportSummaries);
         }
 
         public Task<Report> GetReportAsync(string reportId)

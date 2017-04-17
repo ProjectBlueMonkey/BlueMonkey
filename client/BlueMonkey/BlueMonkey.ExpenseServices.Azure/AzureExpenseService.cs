@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Prism.Logging;
+using System;
 
 namespace BlueMonkey.ExpenseServices.Azure
 {
@@ -59,11 +60,12 @@ namespace BlueMonkey.ExpenseServices.Azure
             return (await _categoryTable.CreateQuery().ToEnumerableAsync()).ToArray();
         }
 
-        public async Task<IEnumerable<Report>> GetReportsAsync()
+        public async Task<IEnumerable<ReportSummary>> GetReportSummariesAsync()
         {
-            return (await _reportTable.CreateQuery()
-                .ToEnumerableAsync())
-                .ToArray();
+            throw new NotImplementedException();
+            //return (await _reportTable.CreateQuery()
+            //    .ToEnumerableAsync())
+            //    .ToArray();
         }
 
         public async Task<IEnumerable<Expense>> GetUnregisteredExpensesAsync()
