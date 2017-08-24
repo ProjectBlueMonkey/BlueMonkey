@@ -14,7 +14,7 @@ using Microsoft.WindowsAzure.MobileServices;
 using Prism.Mvvm;
 using Prism.Unity;
 using Xamarin.Forms;
-#if AZURE
+#if Azure
 using BlueMonkey.ExpenseServices.Azure;
 #else
 #endif
@@ -29,7 +29,7 @@ namespace BlueMonkey.Application
         {
             InitializeComponent();
 
-#if AZURE
+#if Azure
             NavigationService.NavigateAsync("LoginPage");
 #else
             NavigationService.NavigateAsync("MainPage");
@@ -47,7 +47,7 @@ namespace BlueMonkey.Application
         {
             Container.RegisterInstance<IMobileServiceClient>(new MobileServiceClient(Secrets.ServerUri));
 
-#if AZURE
+#if Azure
             Container.RegisterType<IExpenseService, AzureExpenseService>(new ContainerControlledLifetimeManager());
 #else
             Container.RegisterType<IExpenseService, ExpenseService>(new ContainerControlledLifetimeManager());
