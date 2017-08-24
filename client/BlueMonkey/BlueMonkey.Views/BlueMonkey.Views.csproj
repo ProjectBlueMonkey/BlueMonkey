@@ -86,7 +86,6 @@
     </Compile>
     <Compile Include="Controls\BindablePicker.cs" />
     <Compile Include="Controls\FlatButton.cs" />
-    <Compile Include="Controls\NoneBorderEntry.cs" />
     <Compile Include="Converters\ReceiptStatusImageConverter.cs" />
     <Compile Include="Converters\ReceiptStatusLabelConverter.cs" />
     <Compile Include="Effects\RemoveBorderEffect.cs" />
