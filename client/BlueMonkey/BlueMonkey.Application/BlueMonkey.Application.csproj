@@ -51,6 +51,10 @@
     <Compile Include="Secrets.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BlueMonkey.ExpenseServices.Azure\BlueMonkey.ExpenseServices.Azure.csproj">
+      <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
+      <Name>BlueMonkey.ExpenseServices.Azure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlueMonkey.ExpenseServices.Local\BlueMonkey.ExpenseServices.Local.csproj">
       <Project>{4baee00a-3f14-4cdb-a4f1-2e25eb85620b}</Project>
       <Name>BlueMonkey.ExpenseServices.Local</Name>
