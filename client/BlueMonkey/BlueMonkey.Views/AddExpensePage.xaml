@@ -4,6 +4,7 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:controls="clr-namespace:BlueMonkey.Views.Controls;assembly=BlueMonkey.Views"
              xmlns:converters="clr-namespace:BlueMonkey.Views.Converters;assembly=BlueMonkey.Views"
+             xmlns:effects="clr-namespace:BlueMonkey.Views.Effects;assembly=BlueMonkey.Views"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="BlueMonkey.Views.AddExpensePage" Title="Add Expense">
     <ContentPage.Resources>
@@ -20,11 +21,11 @@
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -32,22 +33,44 @@
             <ColumnDefinition Width="30"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <!-- Receipt -->
         <Image Grid.Row="0" Grid.Column="0" Source="{Binding HasReceipt.Value, Converter={StaticResource ReceiptStatusImageConverter}}" />
         <controls:FlatButton 
             Grid.Row="0" Grid.Column="2"
             Text="{Binding HasReceipt.Value, Converter={StaticResource ReceiptStatusLabelConverter}}" Command="{Binding NavigateReceiptPageCommand}"/>
+        <!-- Category -->
         <Image Grid.Row="1" Grid.Column="0" Source="EmptyCategoryCopy" />
         <controls:BindablePicker 
             Grid.Row="1" Grid.Column="2"
             Title="Category" 
             ItemsSource="{Binding Categories.Value}" 
-            SelectedIndex="{Binding SelectedCategoryIndex.Value}"/>
+            SelectedIndex="{Binding SelectedCategoryIndex.Value}">
+            <controls:BindablePicker.Effects>
+                <effects:RemoveBorderEffect/>
+            </controls:BindablePicker.Effects>
+        </controls:BindablePicker>
+        <!-- Amount -->
         <Image Grid.Row="2" Grid.Column="0" Source="PriceCopy"/>
-        <Entry Grid.Row="2" Grid.Column="2" Text="{Binding Amount.Value}" Keyboard="Numeric" HorizontalOptions="Fill" HorizontalTextAlignment="End"/>
+        <Entry Grid.Row="2" Grid.Column="2" Text="{Binding Amount.Value}" Keyboard="Numeric" HorizontalOptions="Fill" HorizontalTextAlignment="End">
+            <Entry.Effects>
+                <effects:RemoveBorderEffect/>
+            </Entry.Effects>
+        </Entry>
+        <!-- Date -->
         <Image Grid.Row="3" Grid.Column="0" Source="Calendar_new"/>
-        <DatePicker Grid.Row="3" Grid.Column="2" Date="{Binding Date.Value}"/>
+        <DatePicker Grid.Row="3" Grid.Column="2" Date="{Binding Date.Value}">
+            <DatePicker.Effects>
+                <effects:RemoveBorderEffect/>
+            </DatePicker.Effects>
+        </DatePicker>
+        <!-- Location -->
         <Image Grid.Row="4" Grid.Column="0" Source="LocationCopy"/>
-        <Entry Grid.Row="4" Grid.Column="2" Text="{Binding Location.Value}" Placeholder="Payee" HorizontalOptions="Fill"/>
+        <Entry Grid.Row="4" Grid.Column="2" Text="{Binding Location.Value}" Placeholder="Payee" HorizontalOptions="Fill">
+            <Entry.Effects>
+                <effects:RemoveBorderEffect/>
+            </Entry.Effects>
+        </Entry>
+        <!-- Note -->
         <Image Grid.Row="5" Grid.Column="0" VerticalOptions="Start" Source="NoteCopy"/>
         <Editor Grid.Row="5" Grid.Column="2" Text="{Binding Note.Value}" HorizontalOptions="Fill"/>
     </Grid>
