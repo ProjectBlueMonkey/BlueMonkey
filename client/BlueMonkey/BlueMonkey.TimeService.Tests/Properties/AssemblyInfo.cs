@@ -8,19 +8,19 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("BlueMonkey.TimeService.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("HP Inc.")]
 [assembly: AssemblyProduct("BlueMonkey.TimeService.Tests")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCopyright("Copyright © HP Inc. 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-// ComVisible を false に設定すると、その型はこのアセンブリ内で COM コンポーネントから 
-// 参照不可能になります。COM からこのアセンブリ内の型にアクセスする場合は、
+// ComVisible を false に設定すると、このアセンブリ内の型は COM コンポーネントから
+// 参照できなくなります。COM からこのアセンブリ内の型にアクセスする必要がある場合は、
 // その型の ComVisible 属性を true に設定してください。
 [assembly: ComVisible(false)]
 
 // このプロジェクトが COM に公開される場合、次の GUID が typelib の ID になります
-[assembly: Guid("2129c47a-3c95-4abb-b3af-a752e7d4dfee")]
+[assembly: Guid("38cd9749-54eb-4c6e-bb44-a212becaa2d0")]
 
 // アセンブリのバージョン情報は次の 4 つの値で構成されています:
 //
@@ -29,8 +29,8 @@ using System.Runtime.InteropServices;
 //      ビルド番号
 //      Revision
 //
-// すべての値を指定するか、下のように '*' を使ってビルドおよびリビジョン番号を 
-// 既定値にすることができます:
+// すべての値を指定するか、次を使用してビルド番号とリビジョン番号を既定に設定できます
+// 以下のように '*' を使用します:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

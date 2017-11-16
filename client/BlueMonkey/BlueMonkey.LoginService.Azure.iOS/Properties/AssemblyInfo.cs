@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BlueMonkey.LoginService.iOS")]
+[assembly: AssemblyTitle("BlueMonkey.LoginService.Azure.iOS")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BlueMonkey.LoginService.iOS")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCompany("HP Inc.")]
+[assembly: AssemblyProduct("BlueMonkey.LoginService.Azure.iOS")]
+[assembly: AssemblyCopyright("Copyright © HP Inc. 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a2d44efe-2d2d-4d64-b118-8c60a472886e")]
+[assembly: Guid("429d5642-b8e9-4354-8c55-d38f942084b8")]
 
 // Version information for an assembly consists of the following four values:
 //

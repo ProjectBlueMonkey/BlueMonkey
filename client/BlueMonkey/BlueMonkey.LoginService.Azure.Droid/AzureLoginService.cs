@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace BlueMonkey.LoginService.Azure.Droid
 {
@@ -19,10 +18,12 @@ namespace BlueMonkey.LoginService.Azure.Droid
 
         public async Task<bool> LoginAsync()
         {
-            var user = await _client.LoginAsync(Forms.Context, MobileServiceAuthenticationProvider.MicrosoftAccount);
+            // TODO: Comment out once and implement it later.
+            //var user = await _client.LoginAsync(Forms.Context, MobileServiceAuthenticationProvider.MicrosoftAccount);
             // https://github.com/jamesmontemagno/MediaPlugin/issues/136
-            await Task.Delay(100); // need... small delay
-            return user != null;
+            //await Task.Delay(100); // need... small delay
+            //return user != null;
+            return true;
         }
     }
 }

@@ -1,16 +1,7 @@
-﻿#define DEBUG
-using BlueMonkey.Application;
-using BlueMonkey.ExpenseServices;
-using BlueMonkey.LoginService;
-#if Azure
-using BlueMonkey.ExpenseServices.Azure;
-using BlueMonkey.LoginService.Azure.iOS;
-#endif
-using Foundation;
-using Microsoft.Practices.Unity;
-using Microsoft.WindowsAzure.MobileServices;
-using Prism.Unity;
+﻿using Foundation;
 using UIKit;
+using Microsoft.Practices.Unity;
+using Prism.Unity;
 
 namespace BlueMonkey.iOS
 {
@@ -30,7 +21,6 @@ namespace BlueMonkey.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            CurrentPlatform.Init();
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);
@@ -41,13 +31,7 @@ namespace BlueMonkey.iOS
     {
         public void RegisterTypes(IUnityContainer container)
         {
-#if Azure
-            container.RegisterType<ILoginService, AzureLoginService>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IFileStorageService, AzureFileStorageService>(new ContainerControlledLifetimeManager());
-#endif
+            
         }
     }
-
-    
-
 }
