@@ -16,14 +16,14 @@ namespace BlueMonkey.LoginService.Azure.Droid
             _client = client;
         }
 
-        public async Task<bool> LoginAsync()
+        public Task<bool> LoginAsync()
         {
             // TODO: Comment out once and implement it later.
             //var user = await _client.LoginAsync(Forms.Context, MobileServiceAuthenticationProvider.MicrosoftAccount);
             // https://github.com/jamesmontemagno/MediaPlugin/issues/136
             //await Task.Delay(100); // need... small delay
             //return user != null;
-            return true;
+            return Task.FromResult(true);
         }
     }
 }

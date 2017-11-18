@@ -17,13 +17,13 @@ namespace BlueMonkey.LoginService.Azure.iOS
             _client = client;
         }
 
-        public async Task<bool> LoginAsync()
+        public Task<bool> LoginAsync()
         {
             // TODO: Comment out once and implement it later.
             //var user = await _client.LoginAsync(UIApplication.SharedApplication.KeyWindow.RootViewController, 
             //    MobileServiceAuthenticationProvider.MicrosoftAccount);
             //return user != null;
-            return true;
+            return Task.FromResult(true);
         }
     }
 }
