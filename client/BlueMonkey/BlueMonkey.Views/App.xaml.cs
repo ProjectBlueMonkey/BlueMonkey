@@ -1,4 +1,6 @@
-﻿using BlueMonkey.Application;
+// if connect azure then uncomment this line.
+#define DEBUG
+
 using BlueMonkey.ExpenseServices;
 using BlueMonkey.ExpenseServices.Local;
 using BlueMonkey.MediaServices;
@@ -12,9 +14,11 @@ using Microsoft.WindowsAzure.MobileServices;
 using Prism.Mvvm;
 using Prism.Unity;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+#if Azure
+using BlueMonkey.ExpenseServices.Azure;
+#else
+#endif
 
-[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace BlueMonkey
 {
     public partial class App : PrismApplication

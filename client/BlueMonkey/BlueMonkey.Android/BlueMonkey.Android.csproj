@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2FF675C4-2BB5-4BE8-8234-FA3C71E87A5F}</ProjectGuid>
+    <ProjectGuid>{D8BBC9D4-77A8-428F-A77C-AE9D0CB9E748}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -97,6 +97,10 @@
     <ProjectReference Include="..\BlueMonkey.Views\BlueMonkey.Views.csproj">
       <Project>{69c02c88-ecbf-43ed-935b-cd36c60223ac}</Project>
       <Name>BlueMonkey.Views</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlueMonkey\BlueMonkey.csproj">
+      <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
+      <Name>BlueMonkey</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -436,16 +440,10 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\Taxi.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\tabs.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\toolbar.xml" />
+    <AndroidResource Include="Resources\values-v21\styles.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\colors.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\values-v21\styles.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

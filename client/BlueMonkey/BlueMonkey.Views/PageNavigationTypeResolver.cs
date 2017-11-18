@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace BlueMonkey.Application
+namespace BlueMonkey
 {
     public static class PageNavigationTypeResolver
     {
