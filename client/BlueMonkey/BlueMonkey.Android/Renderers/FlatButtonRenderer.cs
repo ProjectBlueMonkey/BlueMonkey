@@ -1,4 +1,5 @@
-﻿using Android.Graphics;
+﻿using Android.Content;
+using Android.Graphics;
 using Android.Views;
 using BlueMonkey.Droid.Renderers;
 using BlueMonkey.Views.Controls;
@@ -11,6 +12,10 @@ namespace BlueMonkey.Droid.Renderers
 {
     public class FlatButtonRenderer : ButtonRenderer
     {
+        public FlatButtonRenderer(Context context) : base(context)
+        {
+        }
+
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.Button> e)
         {
             base.OnElementChanged(e);
