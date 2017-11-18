@@ -14,7 +14,7 @@ namespace BlueMonkey.Usecases.Tests
             var actual = new ReferReport(expenseService.Object);
 
             Assert.NotNull(actual.ReportSummaries);
-            Assert.Equal(0, actual.ReportSummaries.Count);
+            Assert.Empty(actual.ReportSummaries);
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace BlueMonkey.Usecases.Tests
             await actual.SearchAsync();
 
             Assert.NotNull(actual.ReportSummaries);
-            Assert.Equal(1, actual.ReportSummaries.Count);
+            Assert.Single(actual.ReportSummaries);
             Assert.Equal(report, actual.ReportSummaries[0]);
         }
     }
