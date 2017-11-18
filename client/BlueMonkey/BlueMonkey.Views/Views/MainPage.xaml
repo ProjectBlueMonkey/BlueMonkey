@@ -34,8 +34,8 @@
         </Grid.RowDefinitions>
         <Image Grid.Row="0" Source="EmperorTamarin.png"/>
         <Button Grid.Row="1" Text="Add Expense" Image="Plus.png" Command="{Binding NavigateCommand}" CommandParameter="NavigationPage/AddExpensePage"/>
-        <Button Grid.Row="2" Text="Expense List" Image="PriceCopy.png" Command="{Binding NavigateCommand}" CommandParameter="ExpenseListPage"/>
-        <Button Grid.Row="3" Text="Report List" Image="ChartMainMenu.png" Command="{Binding NavigateCommand}" CommandParameter="ReportListPage"/>
-        <Button Grid.Row="4" Text="Chart" Image="Chart.png" Command="{Binding NavigateCommand}" CommandParameter="ChartPage"/>
+        <Button Grid.Row="2" Text="Expense List" Image="PriceCopy.png" Command="{Binding NavigateCommand}" CommandParameter="NavigationPage/ExpenseListPage"/>
+        <Button Grid.Row="3" Text="Report List" Image="ChartMainMenu.png" Command="{Binding NavigateCommand}" CommandParameter="NavigationPage/ReportListPage"/>
+        <Button Grid.Row="4" Text="Chart" Image="Chart.png" Command="{Binding NavigateCommand}" CommandParameter="NavigationPage/ChartPage"/>
     </Grid>
 </ContentPage>
