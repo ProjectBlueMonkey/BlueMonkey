@@ -2,12 +2,11 @@
 # Created by https://www.gitignore.io/api/macos,xcode,swift,windows,android,jetbrains,visualstudio,xamarinstudio,androidstudio,visualstudiocode
 
 ### Original ###
-ApiKey.cs
-ApiKeys.cs
-Secret.cs
-Secrets.csa
+[Aa]pi[Kk]ey.cs
+[Aa]pi[Kk]eys.cs
+[Ss]ecret.cs
+[Ss]ecrets.cs
 Resource.Designer.cs
-client/BlueMonkey/BlueMonkey.Application/Secrets.cs
 
 ### Android ###
 # Built application files
