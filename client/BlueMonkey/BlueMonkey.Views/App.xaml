@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms"
+                        xmlns:controls="clr-namespace:BlueMonkey.Views.Controls;assembly=BlueMonkey.Views"
+                        x:Class="BlueMonkey.App">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <!--Color Resources-->
+            <Color x:Key="PageBackgroundColor">#FAFAFA</Color>
+            <Color x:Key="ButtonTextColor">#3498DB</Color>
+            <Color x:Key="NormalTextColor">#8A000000</Color>
+
+            <!--Fonts-->
+            <!--<OnPlatform x:Key="RalewayRegular" x:TypeArguments="x:String">
+                <OnPlatform.iOS>Raleway-Regular</OnPlatform.iOS>
+                <OnPlatform.Android>Raleway-Regular.ttf#Raleway-Regular</OnPlatform.Android>
+                <OnPlatform.WinPhone>Assets/Fonts/Raleway-Regular.ttf#Raleway</OnPlatform.WinPhone>
+            </OnPlatform>-->
+
+            <!--<OnPlatform x:Key="RalewayMedium" x:TypeArguments="x:String">
+                <OnPlatform.iOS>Raleway-Medium</OnPlatform.iOS>
+                <OnPlatform.Android>Raleway-Medium.ttf#Raleway-Medium</OnPlatform.Android>
+                <OnPlatform.WinPhone>Assets/Fonts/Raleway-Medium.ttf#Raleway</OnPlatform.WinPhone>
+            </OnPlatform>-->
+
+            <!--Button Style-->
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="Large" />
+                <!--<Setter Property="FontFamily" Value="{StaticResource RalewayRegular}" />-->
+                <Setter Property="TextColor" Value="{StaticResource ButtonTextColor}" />
+                <Setter Property="BackgroundColor" Value="#EEF8FF" />
+                <Setter Property="BorderColor" Value="#E1F3FF" />
+                <Setter Property="BorderWidth" Value="1" />
+                <Setter Property="BorderRadius" Value="5" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+            <!--Button Style-->
+            <Style TargetType="controls:FlatButton">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="TextColor" Value="{StaticResource NormalTextColor}" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="BorderColor" Value="Transparent" />
+                <Setter Property="BorderWidth" Value="0" />
+                <Setter Property="BorderRadius" Value="0" />
+                <Setter Property="HorizontalOptions" Value="Fill" />
+            </Style>
+
+          <!--Label Style-->
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+                <Setter Property="TextColor" Value="{StaticResource NormalTextColor}" />
+                <!--<Setter Property="FontFamily" Value="{StaticResource RalewayRegular}" />-->
+                <Setter Property="FontSize" Value="Large" />
+            </Style>
+
+            <!--ListView Style-->
+            <Style x:Key="ListViewStyle" TargetType="ListView">
+                <Setter Property="BackgroundColor" Value="#FAFAFA" />
+                <Setter Property="SeparatorVisibility" Value="None"/>
+                <Setter Property="RowHeight" Value="80" />
+            </Style>
+
+            <!--Entry Style-->
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="#FAFAFA" />
+                <Setter Property="TextColor" Value="{StaticResource NormalTextColor}" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="HeightRequest" Value="80" />
+            </Style>
+
+            <!--DatePicker Style-->
+            <Style x:Key="DatePickerStyle" TargetType="DatePicker">
+                <Setter Property="BackgroundColor" Value="#FAFAFA" />
+                <Setter Property="TextColor" Value="{StaticResource NormalTextColor}" />
+                <Setter Property="HeightRequest" Value="80" />
+            </Style>
+
+        </ResourceDictionary>
+
+    </Application.Resources>
+
+</prism:PrismApplication>

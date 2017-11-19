@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="BlueMonkey.Views.MainPage"
+             Title="Blue Monkey">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!--HomeButton Style-->
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="Large" />
+                <!--<Setter Property="FontFamily" Value="{StaticResource RalewayRegular}" />-->
+                <Setter Property="TextColor" Value="{StaticResource ButtonTextColor}" />
+                <Setter Property="BackgroundColor" Value="#EEF8FF" />
+                <Setter Property="BorderColor" Value="#E1F3FF" />
+                <Setter Property="BorderWidth" Value="1" />
+                <Setter Property="BorderRadius" Value="5" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="WidthRequest" Value="250" />
+                <Setter Property="HeightRequest" Value="60" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0" Source="EmperorTamarin.png"/>
+        <Button Grid.Row="1" Text="Add Expense" Image="Plus.png" Command="{Binding NavigateCommand}" CommandParameter="NavigationPage/AddExpensePage"/>
+        <Button Grid.Row="2" Text="Expense List" Image="PriceCopy.png" Command="{Binding NavigateCommand}" CommandParameter="NavigationPage/ExpenseListPage"/>
+        <Button Grid.Row="3" Text="Report List" Image="ChartMainMenu.png" Command="{Binding NavigateCommand}" CommandParameter="NavigationPage/ReportListPage"/>
+        <Button Grid.Row="4" Text="Chart" Image="Chart.png" Command="{Binding NavigateCommand}" CommandParameter="NavigationPage/ChartPage"/>
+    </Grid>
+</ContentPage>

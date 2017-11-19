@@ -187,7 +187,7 @@ namespace BlueMonkey.Usecases.Tests
             Assert.Equal(DateTime.MinValue, savedReport.Date);
 
             Assert.NotNull(savedExpenses);
-            Assert.Equal(1, savedExpenses.Count());
+            Assert.Single(savedExpenses);
             Assert.Equal(expense02.Id, savedExpenses.First().Id);
         }
 

@@ -288,7 +288,7 @@ namespace BlueMonkey.Usecases.Tests
                     Assert.Equal("categoryId", expense.CategoryId);
 
                     Assert.NotNull(expenseReceipts);
-                    Assert.Equal(1, expenseReceipts.Count());
+                    Assert.Single(expenseReceipts);
                     var expenseReceipt = expenseReceipts.First();
                     Assert.Null(expenseReceipt.Id);
                     Assert.Null(expenseReceipt.ExpenseId);
@@ -374,7 +374,7 @@ namespace BlueMonkey.Usecases.Tests
                     Assert.Equal("note", expense.Note);
 
                     Assert.NotNull(expenseReceipts);
-                    Assert.Equal(1, expenseReceipts.Count());
+                    Assert.Single(expenseReceipts);
                     var expenseReceipt = expenseReceipts.First();
                     Assert.Null(expenseReceipt.Id);
                     Assert.Null(expenseReceipt.ExpenseId);

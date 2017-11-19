@@ -164,7 +164,7 @@ namespace BlueMonkey.ViewModels.Tests
             // It is to simplify the implementation.
             // Therefore, we have acquired Expense every time.
             Assert.NotNull(actual.Expenses);
-            Assert.Equal(1, actual.Expenses.Count());
+            Assert.Single(actual.Expenses);
             Assert.Equal(expense02, actual.Expenses.First());
         }
 
@@ -193,7 +193,7 @@ namespace BlueMonkey.ViewModels.Tests
             editReport.Verify(m => m.InitializeForUpdateReportAsync("reportId"), Times.Once);
 
             Assert.NotNull(actual.Expenses);
-            Assert.Equal(1, actual.Expenses.Count());
+            Assert.Single(actual.Expenses);
             Assert.Equal(expense02, actual.Expenses.First());
         }
 

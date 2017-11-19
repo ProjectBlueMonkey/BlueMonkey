@@ -5,8 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UIKit;
-using Xamarin.Forms;
-using Xamarin.Forms.Platform.iOS;
 
 namespace BlueMonkey.LoginService.Azure.iOS
 {
@@ -19,11 +17,13 @@ namespace BlueMonkey.LoginService.Azure.iOS
             _client = client;
         }
 
-        public async Task<bool> LoginAsync()
+        public Task<bool> LoginAsync()
         {
-            var user = await _client.LoginAsync(UIApplication.SharedApplication.KeyWindow.RootViewController, 
-                MobileServiceAuthenticationProvider.MicrosoftAccount);
-            return user != null;
+            // TODO: Comment out once and implement it later.
+            //var user = await _client.LoginAsync(UIApplication.SharedApplication.KeyWindow.RootViewController, 
+            //    MobileServiceAuthenticationProvider.MicrosoftAccount);
+            //return user != null;
+            return Task.FromResult(true);
         }
     }
 }

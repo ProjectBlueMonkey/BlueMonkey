@@ -1,92 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{720C0340-2F25-4E0B-94F3-677735FE06A6}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BlueMonkey.Usecases</RootNamespace>
-    <AssemblyName>BlueMonkey.Usecases</AssemblyName>
-    <DefaultLanguage>ja-JP</DefaultLanguage>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-    <ProjectReference Include="..\BlueMonkey.ExpenseServices\BlueMonkey.ExpenseServices.csproj">
-      <Project>{4a7f6cfb-dd26-477a-b4f9-6bc8d2d5be62}</Project>
-      <Name>BlueMonkey.ExpenseServices</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BlueMonkey.LoginService\BlueMonkey.LoginService.csproj">
-      <Project>{31d77fdc-1919-42a3-8035-78767c87e4a7}</Project>
-      <Name>BlueMonkey.LoginService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BlueMonkey.MediaServices\BlueMonkey.MediaServices.csproj">
-      <Project>{fb4e448d-e4d9-4839-928b-09ae414c5640}</Project>
-      <Name>BlueMonkey.MediaServices</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BlueMonkey.TimeService\BlueMonkey.TimeService.csproj">
-      <Project>{0c6dfdb3-febe-4d22-a0cb-5e3b599a9342}</Project>
-      <Name>BlueMonkey.TimeService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BlueMonkey.Transaction\BlueMonkey.Transaction.csproj">
-      <Project>{db2dbcbb-c5a8-406a-95fa-942df12564ae}</Project>
-      <Name>BlueMonkey.Transaction</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BlueMonkey\BlueMonkey.csproj">
-      <Project>{0bc35d2a-508d-481f-b3b5-b8359fa48bb8}</Project>
-      <Name>BlueMonkey</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\BlueMonkey.ExpenseServices\BlueMonkey.ExpenseServices.csproj" />
+    <ProjectReference Include="..\BlueMonkey.LoginService\BlueMonkey.LoginService.csproj" />
+    <ProjectReference Include="..\BlueMonkey.MediaServices\BlueMonkey.MediaServices.csproj" />
+    <ProjectReference Include="..\BlueMonkey.TimeService\BlueMonkey.TimeService.csproj" />
+    <ProjectReference Include="..\BlueMonkey.Transaction\BlueMonkey.Transaction.csproj" />
+    <ProjectReference Include="..\BlueMonkey\BlueMonkey.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="EditExpense.cs" />
-    <Compile Include="EditReport.cs" />
-    <Compile Include="IEditExpense.cs" />
-    <Compile Include="IEditReport.cs" />
-    <Compile Include="IReferExpense.cs" />
-    <Compile Include="IReferReport.cs" />
-    <Compile Include="ModelBase.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReferExpense.cs" />
-    <Compile Include="ReferReport.cs" />
-    <Compile Include="SelectableExpense.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
-      <HintPath>..\packages\Prism.Core.6.3.0\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Prism.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

@@ -22,7 +22,7 @@ namespace BlueMonkey.ViewModels.Tests
             var actual = new ReportListPageViewModel(navigationService.Object, referReport.Object);
 
             Assert.NotNull(actual.ReportSummaries);
-            Assert.Equal(0, actual.ReportSummaries.Count);
+            Assert.Empty(actual.ReportSummaries);
 
             Assert.NotNull(actual.AddReportCommand);
             Assert.True(actual.AddReportCommand.CanExecute());
@@ -42,12 +42,12 @@ namespace BlueMonkey.ViewModels.Tests
 
             var actual = new ReportListPageViewModel(navigationService.Object, referReport.Object);
 
-            Assert.Equal(0, actual.ReportSummaries.Count);
+            Assert.Empty(actual.ReportSummaries);
 
             var reportSummary = new ReportSummary();
             reportSummaries.Add(reportSummary);
 
-            Assert.Equal(1, actual.ReportSummaries.Count);
+            Assert.Single(actual.ReportSummaries);
             Assert.Equal(reportSummary, actual.ReportSummaries[0]);
         }
 

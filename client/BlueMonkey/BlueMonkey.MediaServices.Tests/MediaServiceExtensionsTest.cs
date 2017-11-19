@@ -27,7 +27,7 @@ namespace BlueMonkey.MediaServices.Tests
                 sourceStream.CopyTo(memoryStream);
 
                 var actualArray = memoryStream.ToArray();
-                Assert.Equal(1, actualArray.Length);
+                Assert.Single(actualArray);
                 Assert.Equal(bytes[0], actualArray[0]);
             }
         }

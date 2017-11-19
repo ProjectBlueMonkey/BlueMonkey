@@ -14,7 +14,7 @@ namespace BlueMonkey.Usecases.Tests
             var actual = new ReferExpense(expenseService.Object);
 
             Assert.NotNull(actual.Expenses);
-            Assert.Equal(0, actual.Expenses.Count);
+            Assert.Empty(actual.Expenses);
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace BlueMonkey.Usecases.Tests
             await actual.SearchAsync();
 
             Assert.NotNull(actual.Expenses);
-            Assert.Equal(1, actual.Expenses.Count);
+            Assert.Single(actual.Expenses);
             Assert.Equal(expense, actual.Expenses[0]);
         }
 
