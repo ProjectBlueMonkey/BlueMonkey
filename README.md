@@ -1,6 +1,6 @@
 # BlueMonkey
 
-## Screan Overview
+## Screen Overview
 
 Prototype: <https://indigodesigned.com/share/5p879brdx3w7>
 ![ScreenTransition.png](docs/images/ScreenTransition.png)
